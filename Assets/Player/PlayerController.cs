@@ -1,4 +1,5 @@
 using UnityEngine;
+using Photon.Pun;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,8 +12,19 @@ public class PlayerController : MonoBehaviour
     private float axisX;
     private float axisZ;
 
+    //PhotonView View;
+    //public GameObject Camera;
+    //public PlayerController scriptPlayerController;
+
     private void Awake()
     {
+        //View = GetComponent<PhotonView>();
+        //if (!View.IsMine)
+        //{
+            //Camera.SetActive(false);
+            //scriptPlayerController.enabled = false;
+        //}
+
         physicsPlayer = transform.parent.GetComponent<Rigidbody>();
     }
 
