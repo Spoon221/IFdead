@@ -6,9 +6,8 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField]private PlayerController player;
-    [SerializeField] private Text healthAmount;
+    [SerializeField] private Text healthText;
     [SerializeField] private Image healthBar;
-    
     private int maxPlayerHealth;
 
     void Start()
@@ -20,7 +19,7 @@ public class HealthBar : MonoBehaviour
 
     private void SetHealthBar(int playerHealth)
     {
-        healthAmount.text = playerHealth.ToString();
+        healthText.text = playerHealth.ToString();
         healthBar.fillAmount = (float) playerHealth / maxPlayerHealth;
     }
 }

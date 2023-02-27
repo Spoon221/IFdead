@@ -5,14 +5,14 @@ using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
-    
-
     private const float maxSpeed = 4f;
     private const float correctorIateralSpeed = 14f;
     private const float correctorFrontSpeed = 18f;
 
     [field: SerializeField] public int MaxHealth { get; private set; }
     private int currentHealth;
+    [field: SerializeField] public float MaxMana { get; private set; }
+    private float currentMana;
 
     private Rigidbody physicsPlayer;
 
@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private float axisZ;
     
     public UnityEvent<int> OnHealthChanged = new UnityEvent<int>();
+    public UnityEvent<float> OnManaChanged = new UnityEvent<float>();
 
     //PhotonView View;
     //public GameObject Camera;
