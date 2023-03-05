@@ -279,6 +279,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5578bffb6581bef4fb808b8c6cc32231, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MaxHealth>k__BackingField: 0
+  <MaxMana>k__BackingField: 0
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnManaChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &3197747136617274461 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c990a0ac691d72744947c05ecf0242dc, type: 3}
