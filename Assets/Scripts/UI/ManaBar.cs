@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ManaBar : MonoBehaviour
 {
-    [SerializeField]private PlayerController player;
+    [SerializeField]private PlayerStats player;
     [SerializeField] private Text manaText;
     [SerializeField] private Image manaBar;
     private int maxPlayerMana;
