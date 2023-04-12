@@ -1,21 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
+using Photon.Pun;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ThirdPersonCameraController : MonoBehaviour
 {
-    [Header("References")]
-    public Transform orientation;
+    [Header("References")] public Transform orientation;
     public Transform player;
     public Transform playerModel;
-    public Rigidbody rb;
-    public float rotationSpeed;
-    
+    public float rotationModelSpeed;
+    public Slider sensitivitySlider;
+    public CinemachineFreeLook cinemachineVirtualCamera;
+    public float maxXSensitivity;
+    public float maxYSensitivity;
+
+
+    [SerializeField] private PhotonView _photonView;
 
     private void Start()
     {
+        cinemachineVirtualCamera = gameObject.GetComponent<CinemachineFreeLook>();
+        sensitivitySlider.onValueChanged.AddListener(ChangeSensitivity);
+        ChangeSensitivity(sensitivitySlider.value);
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+
+
+        if (!_photonView.IsMine)
+        {
+            cinemachineVirtualCamera.enabled = false;
+        }
     }
 
     private void Update()
@@ -27,6 +42,14 @@ public class ThirdPersonCameraController : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
         Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
         if (inputDir != Vector3.zero)
-            playerModel.forward = Vector3.Slerp(playerModel.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
+            playerModel.forward =
+                Vector3.Slerp(playerModel.forward, inputDir.normalized, Time.deltaTime * rotationModelSpeed);
+    }
+
+    private void ChangeSensitivity(float sensitivity)
+    {
+        sensitivity *= 0.01f;
+        cinemachineVirtualCamera.m_XAxis.m_MaxSpeed = maxXSensitivity * sensitivity;
+        cinemachineVirtualCamera.m_YAxis.m_MaxSpeed = maxYSensitivity * sensitivity;
     }
 }

@@ -78,6 +78,6 @@ public class Connect : MonoBehaviourPunCallbacks
 
     public void JoinRandom()
     {
-        PhotonNetwork.JoinRandomRoom();
+        PhotonNetwork.JoinRandomOrCreateRoom();
     }
 }
