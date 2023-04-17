@@ -4,14 +4,16 @@ using Photon.Pun;
 public class IsMine : MonoBehaviour
 {
     public PhotonView view;
-    public PlayerMovementController scripsPlayerMovementController;
+    public PlayerMovementController scriptPlayerMovementController;
+    public ThirdPersonCameraController scriptThirdPersonCameraController;
 
     private void Awake()
     {
         view = GetComponent<PhotonView>();
         if (!view.IsMine)
         {
-            scripsPlayerMovementController.enabled = false;
+            scriptPlayerMovementController.enabled = false;
+            scriptThirdPersonCameraController.enabled = false;
         }
     }
 

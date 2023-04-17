@@ -28,8 +28,6 @@ public class ThirdPersonCameraController : MonoBehaviour
 
     private void Update()
     {
-        if (view.IsMine)
-        {
             Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
             orientation.forward = viewDir.normalized;
 
@@ -39,7 +37,6 @@ public class ThirdPersonCameraController : MonoBehaviour
             if (inputDir != Vector3.zero)
                 playerModel.forward =
                     Vector3.Slerp(playerModel.forward, inputDir.normalized, Time.deltaTime * rotationModelSpeed);
-        }
     }
 
     private void ChangeSensitivity(float sensitivity)

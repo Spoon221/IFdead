@@ -3553,8 +3553,8 @@ GameObject:
   - component: {fileID: 6132893871799605149}
   - component: {fileID: 6132893871799605146}
   - component: {fileID: 6132893871799605147}
-  - component: {fileID: 9173304420818785871}
   - component: {fileID: 869096764627675721}
+  - component: {fileID: 7301627854619512600}
   m_Layer: 0
   m_Name: test
   m_TagString: Player
@@ -3672,20 +3672,6 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
---- !u!114 &9173304420818785871
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6132893872328913182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13769ae9cd6cccb4ba76b4ff15d76418, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  view: {fileID: 6132893871799605146}
-  scripsPlayerMovementController: {fileID: 869096764627675721}
 --- !u!114 &869096764627675721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3706,6 +3692,21 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   orientation: {fileID: 6132893872649457731}
+--- !u!114 &7301627854619512600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6132893872328913182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13769ae9cd6cccb4ba76b4ff15d76418, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  view: {fileID: 6132893871799605146}
+  scriptPlayerMovementController: {fileID: 869096764627675721}
+  scriptThirdPersonCameraController: {fileID: 6132893872779753880}
 --- !u!1 &6132893872649457732
 GameObject:
   m_ObjectHideFlags: 0
