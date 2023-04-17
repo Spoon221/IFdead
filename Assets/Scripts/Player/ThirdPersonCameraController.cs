@@ -16,6 +16,8 @@ public class ThirdPersonCameraController : MonoBehaviour
     public float maxXSensitivity;
     public float maxYSensitivity;
 
+    public PhotonView view;
+
     private void Start()
     {
         cinemachineVirtualCamera = gameObject.GetComponent<CinemachineFreeLook>();
@@ -26,15 +28,18 @@ public class ThirdPersonCameraController : MonoBehaviour
 
     private void Update()
     {
-        Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
-        orientation.forward = viewDir.normalized;
+        if (view.IsMine)
+        {
+            Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
+            orientation.forward = viewDir.normalized;
 
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        if (inputDir != Vector3.zero)
-            playerModel.forward =
-                Vector3.Slerp(playerModel.forward, inputDir.normalized, Time.deltaTime * rotationModelSpeed);
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float verticalInput = Input.GetAxis("Vertical");
+            Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
+            if (inputDir != Vector3.zero)
+                playerModel.forward =
+                    Vector3.Slerp(playerModel.forward, inputDir.normalized, Time.deltaTime * rotationModelSpeed);
+        }
     }
 
     private void ChangeSensitivity(float sensitivity)

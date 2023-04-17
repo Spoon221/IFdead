@@ -3791,9 +3791,10 @@ MonoBehaviour:
   playerModel: {fileID: 2182593560481194486}
   rotationModelSpeed: 12
   sensitivitySlider: {fileID: 0}
-  cinemachineVirtualCamera: {fileID: 6132893872779753881}
+  cinemachineVirtualCamera: {fileID: 0}
   maxXSensitivity: 1000
   maxYSensitivity: 7
+  view: {fileID: 6132893871799605146}
 --- !u!114 &6132893872779753881
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,7 +1,7 @@
 using UnityEngine;
 using Photon.Pun;
 
-public class class1 : MonoBehaviour
+public class IsMine : MonoBehaviour
 {
     public PhotonView view;
     public PlayerMovementController scripsPlayerMovementController;
