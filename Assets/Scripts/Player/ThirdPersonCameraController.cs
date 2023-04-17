@@ -16,21 +16,12 @@ public class ThirdPersonCameraController : MonoBehaviour
     public float maxXSensitivity;
     public float maxYSensitivity;
 
-
-    [SerializeField] private PhotonView _photonView;
-
     private void Start()
     {
         cinemachineVirtualCamera = gameObject.GetComponent<CinemachineFreeLook>();
         sensitivitySlider.onValueChanged.AddListener(ChangeSensitivity);
         ChangeSensitivity(sensitivitySlider.value);
         Cursor.lockState = CursorLockMode.Locked;
-
-
-        if (!_photonView.IsMine)
-        {
-            cinemachineVirtualCamera.enabled = false;
-        }
     }
 
     private void Update()
