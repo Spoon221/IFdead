@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e86c5acaf00c83240a4bbd83b98f5ffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 400
-  sensY: 400
+  sensX: 350
+  sensY: 350
   orientation: {fileID: 6720464477614676291}
   maniacModel: {fileID: 529482825958493946}
 --- !u!20 &1270646669
@@ -114,6 +114,8 @@ GameObject:
   - component: {fileID: 7377211870041003379}
   - component: {fileID: 8059336578616850902}
   - component: {fileID: 1085475388915998646}
+  - component: {fileID: 8935490345591800789}
+  - component: {fileID: 6871319707691438731}
   m_Layer: 0
   m_Name: Maniac
   m_TagString: Maniac
@@ -186,8 +188,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30c143434a9d3a342b06f3ae08e9c03b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maniacHand: {fileID: 1270646667}
-  missilePrefab: {fileID: 0}
+  spawnPoint: {fileID: 4204338554639939228}
+  missilePrefab: {fileID: -6634662380005787428, guid: 798075ae47c7b8d4588c07f2b16ff47b, type: 3}
+--- !u!114 &8935490345591800789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529482825575864600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 6871319707691438731}
+  sceneViewId: 2
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &6871319707691438731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529482825575864600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PositionModel:
+    SynchronizeEnabled: 1
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 3
+    InterpolateOption: 2
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 1
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 1
+    ExtrapolateIncludingRoundTripTime: 1
+    ExtrapolateNumberOfStoredPositions: 1
+  m_RotationModel:
+    SynchronizeEnabled: 1
+    InterpolateOption: 1
+    InterpolateRotateTowardsSpeed: 180
+    InterpolateLerpSpeed: 5
+  m_ScaleModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 0
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 0
 --- !u!1 &529482825958493947
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,8 +341,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1.0571529}
-  m_Center: {x: 0, y: 0, z: 0.028578369}
+  m_Size: {x: 1, y: 1, z: 1.0356922}
+  m_Center: {x: 0, y: 0, z: 0.017848}
 --- !u!1 &4552056752374206577
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,7 +367,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4552056752374206577}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.013, z: 0.511}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

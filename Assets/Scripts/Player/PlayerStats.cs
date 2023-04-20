@@ -29,6 +29,7 @@ public class PlayerStats : MonoBehaviour
     private void GetDamage(int amountOfDamage)
     {
         currentHealth -= amountOfDamage;
+        Debug.Log("Осталось " + currentHealth + "HP");
         OnHealthChanged.Invoke(currentHealth);
     }
     

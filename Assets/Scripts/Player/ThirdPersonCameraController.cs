@@ -22,6 +22,9 @@ public class ThirdPersonCameraController : MonoBehaviour
     private void Start()
     {
         cinemachineVirtualCamera = gameObject.GetComponent<CinemachineFreeLook>();
+        var parent = gameObject.transform.parent.transform;
+        cinemachineVirtualCamera.Follow = parent;
+        cinemachineVirtualCamera.LookAt = parent;
         sensitivitySlider.onValueChanged.AddListener(ChangeSensitivity);
         ChangeSensitivity(sensitivitySlider.value);
         Cursor.lockState = CursorLockMode.Locked;
