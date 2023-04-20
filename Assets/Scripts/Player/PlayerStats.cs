@@ -12,7 +12,13 @@ public class PlayerStats : MonoBehaviour
     
     public UnityEvent<int> OnHealthChanged = new UnityEvent<int>();
     public UnityEvent<float> OnManaChanged = new UnityEvent<float>();
-    
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Missile"))
+            GetDamage(gameObject.GetComponent<Missile>().Damage);
+    }
 
     private void RestoreHealth(int amountOfHealth)
     {
