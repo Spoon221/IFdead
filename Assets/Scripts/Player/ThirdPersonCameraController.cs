@@ -20,10 +20,10 @@ public class ThirdPersonCameraController : MonoBehaviour
 
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         cinemachineVirtualCamera = gameObject.GetComponent<CinemachineFreeLook>();
         sensitivitySlider.onValueChanged.AddListener(ChangeSensitivity);
         ChangeSensitivity(sensitivitySlider.value);
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
