@@ -1886,7 +1886,7 @@ MonoBehaviour:
   Spawns:
   - {fileID: 1854923883}
   - {fileID: 985580913}
-  Player: {fileID: 6132893872328913182, guid: 21606c14b59dd964fb05ca177d5f75bc, type: 3}
+  Player: {fileID: 6132893872328913182, guid: d0e1eaa7424fff54fb862bfa780fb50a, type: 3}
 --- !u!4 &395873899
 Transform:
   m_ObjectHideFlags: 0
@@ -12314,7 +12314,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1635587820}
   m_LocalRotation: {x: 0.04491342, y: -0.33262482, z: 0.015861582, w: 0.9418556}
-  m_LocalPosition: {x: 8.822358, y: 2.848, z: -4.8855352}
+  m_LocalPosition: {x: 6.5827875, y: 1.8800004, z: -1.427362}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

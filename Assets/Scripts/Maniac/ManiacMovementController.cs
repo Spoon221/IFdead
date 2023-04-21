@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,6 +24,8 @@ public class ManiacMovementController : MonoBehaviour
     private Vector3 moveDirection;
     private Rigidbody rb;
 
+    public PhotonView view;
+
     private void Start()
     {
         groundDrag = 5;
@@ -34,14 +37,14 @@ public class ManiacMovementController : MonoBehaviour
 
     private void Update()
     {
-        isOnGround = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, groundLayer);
-        MyInput();
-        SpeedControl();
+            isOnGround = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, groundLayer);
+            MyInput();
+            SpeedControl();
 
-        if (isOnGround)
-            rb.drag = groundDrag;
-        else
-            rb.drag = 0;
+            if (isOnGround)
+                rb.drag = groundDrag;
+            else
+                rb.drag = 0;
     }
 
     private void FixedUpdate()

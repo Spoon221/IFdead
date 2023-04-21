@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 1085475388915998646}
   - component: {fileID: 8935490345591800789}
   - component: {fileID: 6871319707691438731}
+  - component: {fileID: 8054048497138105606}
   m_Layer: 0
   m_Name: Maniac
   m_TagString: Maniac
@@ -176,6 +177,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   orientation: {fileID: 6720464477614676291}
+  view: {fileID: 8935490345591800789}
 --- !u!114 &1085475388915998646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,7 +212,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 6871319707691438731}
-  sceneViewId: 2
+  sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &6871319707691438731
@@ -246,6 +248,22 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &8054048497138105606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529482825575864600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13769ae9cd6cccb4ba76b4ff15d76418, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  view: {fileID: 8935490345591800789}
+  scriptPlayerMovementController: {fileID: 6132893871799605145, guid: d0e1eaa7424fff54fb862bfa780fb50a, type: 3}
+  scriptThirdPersonCameraController: {fileID: 0}
+  scriptManiacMovementController: {fileID: 8059336578616850902}
 --- !u!1 &529482825958493947
 GameObject:
   m_ObjectHideFlags: 0

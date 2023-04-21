@@ -3,7 +3,7 @@ using Photon.Pun;
 using System.Collections;
 using Cinemachine;
 
-public class SpawnManager : MonoBehaviour
+public class SpawnManagerForPlayer : MonoBehaviour
 {
     public GameObject[] Spawns;
     public GameObject Player;
