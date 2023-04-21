@@ -18,15 +18,30 @@ public class ThirdPersonCameraController : MonoBehaviour
 
     public PhotonView view;
 
+    private void Awake()
+    {
+
+        //view = GetComponent<PhotonView>();
+        if (!view.IsMine)
+        {
+            cinemachineVirtualCamera.enabled= false;
+        }
+
+    }
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        cinemachineVirtualCamera = gameObject.GetComponent<CinemachineFreeLook>();
-        var parent = gameObject.transform.parent.transform;
-        cinemachineVirtualCamera.Follow = parent;
-        cinemachineVirtualCamera.LookAt = parent;
-        sensitivitySlider.onValueChanged.AddListener(ChangeSensitivity);
-        ChangeSensitivity(sensitivitySlider.value);
+        if (view.IsMine)
+        {
+            cinemachineVirtualCamera = gameObject.GetComponent<CinemachineFreeLook>();
+            var parent = gameObject.transform.parent.transform;
+            cinemachineVirtualCamera.Follow = parent;
+            cinemachineVirtualCamera.LookAt = parent;
+            sensitivitySlider.onValueChanged.AddListener(ChangeSensitivity);
+            ChangeSensitivity(sensitivitySlider.value);
+        }
+            
     }
 
     private void Update()
