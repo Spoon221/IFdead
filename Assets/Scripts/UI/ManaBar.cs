@@ -8,19 +8,19 @@ public class ManaBar : MonoBehaviour
     [SerializeField] private Text manaText;
     [SerializeField] private Image manaBar;
     private PlayerStats player;
-    private int maxPlayerMana;
+    private float maxPlayerMana;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
         player.OnManaChanged.AddListener(SetManaBar);
-        maxPlayerMana = player.MaxHealth;
+        maxPlayerMana = player.MaxMana;
         SetManaBar(player.MaxMana);
     }
 
     private void SetManaBar(float playerMana)
     {
         manaText.text = Mathf.Round(playerMana).ToString();
-        manaBar.fillAmount = (float) playerMana / maxPlayerMana;
+        manaBar.fillAmount = playerMana / maxPlayerMana;
     }
 }

@@ -165,19 +165,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 529482825575864600}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 262e30a1f2746094794e786f4221f929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 7
-  jumpForce: 7
-  playerHeight: 1
-  groundLayer:
+  MoveSpeed: 6
+  JumpForce: 7
+  ManiacHeight: 1
+  GroundLayer:
     serializedVersion: 2
     m_Bits: 8
-  orientation: {fileID: 6720464477614676291}
   view: {fileID: 8935490345591800789}
+  orientation: {fileID: 6720464477614676291}
 --- !u!114 &1085475388915998646
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -23,7 +23,6 @@ public class ManiacGun : MonoBehaviour
     {
         if (Input.GetButton("Fire1") && canShoot)
         {
-            Debug.Log("Fiiiire");
             Instantiate(missilePrefab, spawnPoint.position, spawnPoint.rotation);
             canShoot = false;
             StartCoroutine(StartCooldownTimer());

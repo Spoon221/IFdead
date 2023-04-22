@@ -7,26 +7,27 @@ using UnityEngine.UI;
 
 public class ThirdPersonCameraController : MonoBehaviour
 {
-    [Header("References")] public Transform orientation;
+    [Header("References")] 
+    public CinemachineFreeLook cinemachineVirtualCamera;
+    public PhotonView view;
+    public Transform orientation;
     public Transform player;
     public Transform playerModel;
+
+    [Header("Sensitivity Parameters")] 
     public float rotationModelSpeed;
     public Slider sensitivitySlider;
-    public CinemachineFreeLook cinemachineVirtualCamera;
     public float maxXSensitivity;
     public float maxYSensitivity;
 
-    public PhotonView view;
 
     private void Awake()
     {
-
         //view = GetComponent<PhotonView>();
         if (!view.IsMine)
         {
-            cinemachineVirtualCamera.enabled= false;
+            cinemachineVirtualCamera.enabled = false;
         }
-
     }
 
     private void Start()
@@ -41,20 +42,19 @@ public class ThirdPersonCameraController : MonoBehaviour
             sensitivitySlider.onValueChanged.AddListener(ChangeSensitivity);
             ChangeSensitivity(sensitivitySlider.value);
         }
-            
     }
 
     private void Update()
     {
-            Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
-            orientation.forward = viewDir.normalized;
+        Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
+        orientation.forward = viewDir.normalized;
 
-            float horizontalInput = Input.GetAxis("Horizontal");
-            float verticalInput = Input.GetAxis("Vertical");
-            Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
-            if (inputDir != Vector3.zero)
-                playerModel.forward =
-                    Vector3.Slerp(playerModel.forward, inputDir.normalized, Time.deltaTime * rotationModelSpeed);
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+        Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        if (inputDir != Vector3.zero)
+            playerModel.forward =
+                Vector3.Slerp(playerModel.forward, inputDir.normalized, Time.deltaTime * rotationModelSpeed);
     }
 
     private void ChangeSensitivity(float sensitivity)

@@ -6,25 +6,28 @@ using UnityEngine;
 
 public class ManiacMovementController : MonoBehaviour
 {
-    public float moveSpeed;
-    public float jumpForce;
+    [Header("Movement Parameters")] 
+    public float MoveSpeed;
+    public float JumpForce;
+    public float ManiacHeight;
+
+    [Header("Maniac Parameters")] 
+    public LayerMask GroundLayer;
+    public PhotonView view;
+    public Transform orientation;
+
     private float airMultiplier;
     private bool readyToJump;
-
-    public float playerHeight;
-    public LayerMask groundLayer;
     private bool isOnGround;
-
-    public Transform orientation;
 
     private float horizontalInput;
     private float verticalInput;
     private bool jumpInput;
-    private float groundDrag;
     private Vector3 moveDirection;
+
+    private float groundDrag;
     private Rigidbody rb;
 
-    public PhotonView view;
 
     private void Start()
     {
@@ -37,14 +40,14 @@ public class ManiacMovementController : MonoBehaviour
 
     private void Update()
     {
-            isOnGround = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, groundLayer);
-            MyInput();
-            SpeedControl();
+        isOnGround = Physics.Raycast(transform.position, Vector3.down, ManiacHeight * 0.5f + 0.3f, GroundLayer);
+        MyInput();
+        SpeedControl();
 
-            if (isOnGround)
-                rb.drag = groundDrag;
-            else
-                rb.drag = 0;
+        if (isOnGround)
+            rb.drag = groundDrag;
+        else
+            rb.drag = 0;
     }
 
     private void FixedUpdate()
@@ -64,18 +67,18 @@ public class ManiacMovementController : MonoBehaviour
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         if (isOnGround)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * MoveSpeed * 10f, ForceMode.Force);
         else if (!isOnGround)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            rb.AddForce(moveDirection.normalized * MoveSpeed * 10f * airMultiplier, ForceMode.Force);
     }
 
     private void SpeedControl()
     {
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-        if (flatVel.magnitude > moveSpeed)
+        if (flatVel.magnitude > MoveSpeed)
         {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            Vector3 limitedVel = flatVel.normalized * MoveSpeed;
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
     }
@@ -85,12 +88,7 @@ public class ManiacMovementController : MonoBehaviour
         if (jumpInput && isOnGround)
         {
             rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            rb.AddForce(transform.up * JumpForce, ForceMode.Impulse);
         }
-    }
-
-    private void ResetJump()
-    {
-        readyToJump = true;
     }
 }

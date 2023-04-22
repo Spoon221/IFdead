@@ -6,18 +6,32 @@ using UnityEngine.Events;
 public class PlayerStats : MonoBehaviour
 {
     [field: SerializeField] public int MaxHealth { get; private set; }
-    private int currentHealth;
-    [field: SerializeField] public float MaxMana { get; private set; }
-    private float currentMana;
-    
-    public UnityEvent<int> OnHealthChanged = new UnityEvent<int>();
-    public UnityEvent<float> OnManaChanged = new UnityEvent<float>();
 
+    [field: SerializeField] public float MaxMana { get; private set; }
+    private int currentHealth;
+    private float currentMana;
+
+    [HideInInspector] public UnityEvent<int> OnHealthChanged = new UnityEvent<int>();
+    [HideInInspector] public UnityEvent<float> OnManaChanged = new UnityEvent<float>();
+
+    private void Start()
+    {
+        currentHealth = MaxHealth;
+        currentMana = MaxMana;
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Missile"))
-            GetDamage(gameObject.GetComponent<Missile>().Damage);
+        if (collision.gameObject.TryGetComponent(out Missile missile))
+            GetDamage(missile.Damage);
+    }
+
+    private void GetDamage(int amountOfDamage)
+    {
+        currentHealth -= amountOfDamage;
+        if (currentHealth <= 0)
+            Destroy(gameObject);
+        OnHealthChanged.Invoke(currentHealth);
     }
 
     private void RestoreHealth(int amountOfHealth)
@@ -26,13 +40,7 @@ public class PlayerStats : MonoBehaviour
         OnHealthChanged.Invoke(currentHealth);
     }
 
-    private void GetDamage(int amountOfDamage)
-    {
-        currentHealth -= amountOfDamage;
-        Debug.Log("Осталось " + currentHealth + "HP");
-        OnHealthChanged.Invoke(currentHealth);
-    }
-    
+
     private void RestoreMana(float amountOfMana)
     {
         currentMana += amountOfMana;
