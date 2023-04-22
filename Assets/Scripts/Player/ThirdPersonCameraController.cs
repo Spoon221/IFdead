@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ThirdPersonCameraController : MonoBehaviour
@@ -16,10 +17,11 @@ public class ThirdPersonCameraController : MonoBehaviour
 
     [Header("Sensitivity Parameters")] 
     public float rotationModelSpeed;
-    public Slider sensitivitySlider;
     public float maxXSensitivity;
     public float maxYSensitivity;
-
+    
+    private Slider sensitivitySlider;
+    
 
     private void Awake()
     {
@@ -39,6 +41,7 @@ public class ThirdPersonCameraController : MonoBehaviour
             var parent = gameObject.transform.parent.transform;
             cinemachineVirtualCamera.Follow = parent;
             cinemachineVirtualCamera.LookAt = parent;
+            sensitivitySlider = GameObject.FindGameObjectWithTag("SensitivitySlider").GetComponent<Slider>();
             sensitivitySlider.onValueChanged.AddListener(ChangeSensitivity);
             ChangeSensitivity(sensitivitySlider.value);
         }

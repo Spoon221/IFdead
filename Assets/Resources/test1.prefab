@@ -784,15 +784,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb37671bd2955194eaf903054fb43f26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cinemachineVirtualCamera: {fileID: 6132893872779753881}
+  view: {fileID: 6132893871799605146}
   orientation: {fileID: 6132893872649457731}
   player: {fileID: 6132893871799605127}
   playerModel: {fileID: 6644354306123105438}
   rotationModelSpeed: 12
-  sensitivitySlider: {fileID: 0}
-  cinemachineVirtualCamera: {fileID: 6132893872779753881}
   maxXSensitivity: 1000
   maxYSensitivity: 7
-  view: {fileID: 6132893871799605146}
 --- !u!114 &6132893872779753881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -951,7 +950,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6132893872856189291}
-  m_LocalRotation: {x: 0.04491342, y: -0.33262482, z: 0.015861582, w: 0.9418556}
+  m_LocalRotation: {x: 0.044913433, y: -0.33262482, z: 0.015861586, w: 0.9418556}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
