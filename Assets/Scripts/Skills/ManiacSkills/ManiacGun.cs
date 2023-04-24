@@ -3,19 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using Photon.Pun;
 
 public class ManiacGun : MonoBehaviour
 {
     [SerializeField] private Transform spawnPoint;
 
     [SerializeField] private Missile missilePrefab;
+    [SerializeField] private PhotonView view;
     private bool canShoot;
     private float missileCooldown;
 
     void Start()
     {
-        canShoot = true;
-        missileCooldown = missilePrefab.CooldownTime;
+        view = GetComponent<PhotonView>();
+        if (view.IsMine)
+        {
+            canShoot = true;
+            missileCooldown = missilePrefab.CooldownTime;
+        }
     }
 
 

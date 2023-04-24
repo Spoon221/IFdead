@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using Photon.Pun;
 using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
@@ -19,11 +18,9 @@ public class PlayerController : MonoBehaviour
 
     public UnityEvent<int> OnHealthChanged = new UnityEvent<int>();
     public UnityEvent<float> OnManaChanged = new UnityEvent<float>();
-    
 
     private void Awake()
     {
-        
     }
     
 

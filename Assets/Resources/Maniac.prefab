@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 1085475388915998646}
   - component: {fileID: 8935490345591800789}
   - component: {fileID: 6871319707691438731}
-  - component: {fileID: 8054048497138105606}
+  - component: {fileID: 856852341058911971}
   m_Layer: 0
   m_Name: Maniac
   m_TagString: Maniac
@@ -192,6 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 4204338554639939228}
   missilePrefab: {fileID: -6634662380005787428, guid: 798075ae47c7b8d4588c07f2b16ff47b, type: 3}
+  view: {fileID: 8935490345591800789}
 --- !u!114 &8935490345591800789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,7 +249,7 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
---- !u!114 &8054048497138105606
+--- !u!114 &856852341058911971
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -262,7 +263,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view: {fileID: 8935490345591800789}
   scriptPlayerMovementController: {fileID: 6132893871799605145, guid: d0e1eaa7424fff54fb862bfa780fb50a, type: 3}
-  scriptThirdPersonCameraController: {fileID: 0}
+  scriptPlayerController: {fileID: 0}
+  scriptPlayerStats: {fileID: 6132893871799605149, guid: d0e1eaa7424fff54fb862bfa780fb50a, type: 3}
+  scriptManiacFisrtPersonCamera: {fileID: 1270646670}
   scriptManiacMovementController: {fileID: 8059336578616850902}
 --- !u!1 &529482825958493947
 GameObject:

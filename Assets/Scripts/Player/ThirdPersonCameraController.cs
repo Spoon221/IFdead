@@ -25,7 +25,6 @@ public class ThirdPersonCameraController : MonoBehaviour
 
     private void Awake()
     {
-        //view = GetComponent<PhotonView>();
         if (!view.IsMine)
         {
             cinemachineVirtualCamera.enabled = false;

@@ -43,7 +43,6 @@ public class PlayerMovementController : MonoBehaviour
         MyInput();
         JumpLogic();
         SpeedControl();
-
         if (IsGround(lengthPay))
             rb.drag = groundDrag;
         else
