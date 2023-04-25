@@ -602,7 +602,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6132893871974498305}
-  m_LocalRotation: {x: 0.08724046, y: -0.3315744, z: 0.030809756, w: 0.93888146}
+  m_LocalRotation: {x: 0.08724046, y: -0.3315744, z: 0.030809753, w: 0.9388814}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -752,7 +752,6 @@ MonoBehaviour:
   nameModelWithAnimator: topology
   playerHeight: 1
   orientation: {fileID: 6132893872649457731}
-  view: {fileID: 6132893871799605146}
 --- !u!114 &6132893871799605146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,6 +772,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 6132893871799605147}
+  - {fileID: 8953432370280733870}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -1176,9 +1176,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5168001820488751774, guid: 0c2317b680615324199b9c7e9fc2d061, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.37173066
+      objectReference: {fileID: 0}
+    - target: {fileID: -5168001820488751774, guid: 0c2317b680615324199b9c7e9fc2d061, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.42652634
+      objectReference: {fileID: 0}
+    - target: {fileID: -5168001820488751774, guid: 0c2317b680615324199b9c7e9fc2d061, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7953517
+      objectReference: {fileID: 0}
+    - target: {fileID: -5168001820488751774, guid: 0c2317b680615324199b9c7e9fc2d061, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.2175025
+      objectReference: {fileID: 0}
+    - target: {fileID: -4185782053506920487, guid: 0c2317b680615324199b9c7e9fc2d061, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7635403
+      objectReference: {fileID: 0}
+    - target: {fileID: -4185782053506920487, guid: 0c2317b680615324199b9c7e9fc2d061, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0984276
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0c2317b680615324199b9c7e9fc2d061, type: 3}
       propertyPath: m_Name
       value: topology
+      objectReference: {fileID: 0}
+    - target: {fileID: 4900647790027348251, guid: 0c2317b680615324199b9c7e9fc2d061, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5039922
+      objectReference: {fileID: 0}
+    - target: {fileID: 4900647790027348251, guid: 0c2317b680615324199b9c7e9fc2d061, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.09405642
+      objectReference: {fileID: 0}
+    - target: {fileID: 4900647790027348251, guid: 0c2317b680615324199b9c7e9fc2d061, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.76744103
+      objectReference: {fileID: 0}
+    - target: {fileID: 4900647790027348251, guid: 0c2317b680615324199b9c7e9fc2d061, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.38494098
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 0c2317b680615324199b9c7e9fc2d061, type: 3}
       propertyPath: m_Controller
@@ -1216,6 +1256,30 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 0.55}
   m_Center: {x: 0, y: 0.5, z: -0.02}
+--- !u!114 &8953432370280733870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6304667454039547428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 9
+    SynchronizeType: 1
+    Name: Jumping
+  - Type: 1
+    SynchronizeType: 1
+    Name: FrontMove
+  m_SynchronizeLayers:
+  - SynchronizeType: 1
+    LayerIndex: 0
 --- !u!4 &6644354306123105438 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0c2317b680615324199b9c7e9fc2d061, type: 3}

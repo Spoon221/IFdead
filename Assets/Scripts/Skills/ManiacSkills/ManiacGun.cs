@@ -17,22 +17,23 @@ public class ManiacGun : MonoBehaviour
     void Start()
     {
         view = GetComponent<PhotonView>();
-        if (view.IsMine)
-        {
-            canShoot = true;
-            missileCooldown = missilePrefab.CooldownTime;
-        }
+        canShoot = true;
+        missileCooldown = missilePrefab.CooldownTime;
     }
 
 
     void Update()
     {
-        if (Input.GetButton("Fire1") && canShoot)
+        if (view.IsMine)
         {
-            Instantiate(missilePrefab, spawnPoint.position, spawnPoint.rotation);
-            canShoot = false;
-            StartCoroutine(StartCooldownTimer());
+            if (Input.GetButton("Fire1") && canShoot)
+            {
+                Instantiate(missilePrefab, spawnPoint.position, spawnPoint.rotation);
+                canShoot = false;
+                StartCoroutine(StartCooldownTimer());
+            }
         }
+            
     }
 
     private IEnumerator StartCooldownTimer()
