@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class ThirdPersonCameraController : MonoBehaviour
+public class ThirdPersonCameraController : MonoBehaviour, IPunObservable
 {
     [Header("References")] 
     public CinemachineFreeLook cinemachineVirtualCamera;
@@ -21,7 +21,18 @@ public class ThirdPersonCameraController : MonoBehaviour
     public float maxYSensitivity;
     
     private Slider sensitivitySlider;
-    
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(playerModel.rotation);
+        }
+        else
+        {
+            playerModel.rotation = (Quaternion)stream.ReceiveNext();
+        }
+    }
 
     private void Awake()
     {
@@ -48,14 +59,12 @@ public class ThirdPersonCameraController : MonoBehaviour
 
     private void Update()
     {
-        if (!view.IsMine)
-            return;
-        else
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+        if (view.IsMine)
         {
             Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
             orientation.forward = viewDir.normalized;
-            float horizontalInput = Input.GetAxis("Horizontal");
-            float verticalInput = Input.GetAxis("Vertical");
             Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
             if (inputDir != Vector3.zero)
             {
