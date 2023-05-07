@@ -112,11 +112,13 @@ GameObject:
   m_Component:
   - component: {fileID: 529482825575864603}
   - component: {fileID: 7377211870041003379}
+  - component: {fileID: 2602679348726651294}
   - component: {fileID: 8059336578616850902}
   - component: {fileID: 1085475388915998646}
   - component: {fileID: 8935490345591800789}
   - component: {fileID: 6871319707691438731}
   - component: {fileID: 856852341058911971}
+  - component: {fileID: 2015159822}
   m_Layer: 0
   m_Name: Maniac
   m_TagString: Maniac
@@ -158,6 +160,27 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &2602679348726651294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529482825575864600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fb5ea250178f7b479ff6a91090c148a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <MaxHealth>k__BackingField: 100
+  <MaxMana>k__BackingField: 100
+  <ManaRecoveryPerSecond>k__BackingField: 2
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnManaChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8059336578616850902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,10 +286,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view: {fileID: 8935490345591800789}
   scriptPlayerMovementController: {fileID: 6132893871799605145, guid: d0e1eaa7424fff54fb862bfa780fb50a, type: 3}
-  scriptPlayerController: {fileID: 0}
   scriptPlayerStats: {fileID: 6132893871799605149, guid: d0e1eaa7424fff54fb862bfa780fb50a, type: 3}
-  scriptManiacFisrtPersonCamera: {fileID: 1270646670}
   scriptManiacMovementController: {fileID: 8059336578616850902}
+--- !u!114 &2015159822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529482825575864600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fb5ea250178f7b479ff6a91090c148a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <MaxHealth>k__BackingField: 0
+  <MaxMana>k__BackingField: 0
+  <ManaRecoveryPerSecond>k__BackingField: 0
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnManaChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &529482825958493947
 GameObject:
   m_ObjectHideFlags: 0

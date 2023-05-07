@@ -7,20 +7,21 @@ public class ManaBar : MonoBehaviour
 {
     [SerializeField] private Text manaText;
     [SerializeField] private Image manaBar;
-    private PlayerStats player;
-    private float maxPlayerMana;
+    private Stats userStats;
+    private float maxUserMana;
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
-        player.OnManaChanged.AddListener(SetManaBar);
-        maxPlayerMana = player.MaxMana;
-        SetManaBar(player.MaxMana);
+        var survivor = GameObject.FindGameObjectWithTag("Player");
+        userStats = survivor != null ? survivor.GetComponent<Stats>() : GameObject.FindGameObjectWithTag("Maniac").GetComponent<Stats>();
+        userStats.OnManaChanged.AddListener(SetManaBar);
+        maxUserMana = userStats.MaxMana;
+        SetManaBar(userStats.MaxMana);
     }
 
-    private void SetManaBar(float playerMana)
+    private void SetManaBar(float userMana)
     {
-        manaText.text = Mathf.Round(playerMana).ToString();
-        manaBar.fillAmount = playerMana / maxPlayerMana;
+        manaText.text = Mathf.Round(userMana).ToString();
+        manaBar.fillAmount = userMana / maxUserMana;
     }
 }

@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 1}
   m_SizeDelta: {x: 538.70355, y: 179.56787}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5122967745552053479
@@ -206,8 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98811533fd3f06343ad689e6cebd2dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  healthAmount: {fileID: 5122967746483405659}
+  healthText: {fileID: 5122967746483405659}
   healthBar: {fileID: 5122967745552053476}
 --- !u!222 &5122967746445840022
 CanvasRenderer:
@@ -315,11 +314,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e00995507c2406448b4c8429136104dd, type: 3}
-    m_FontSize: 50
+    m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 5
-    m_MaxSize: 50
+    m_MinSize: 0
+    m_MaxSize: 70
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1

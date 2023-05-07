@@ -68,11 +68,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: e00995507c2406448b4c8429136104dd, type: 3}
-    m_FontSize: 50
+    m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 5
-    m_MaxSize: 50
+    m_MaxSize: 70
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -133,7 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15bb965a58d7f64aaf58b736430ad71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   manaText: {fileID: 9146413715504256527}
   manaBar: {fileID: 9146413716703601072}
 --- !u!222 &9146413715602086850

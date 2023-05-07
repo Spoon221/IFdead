@@ -7,9 +7,9 @@ public abstract class Missile : MonoBehaviour
 {
     [field: SerializeField] public int Damage { get; private set; }
     [field: SerializeField] public float Speed { get; private set; }
-
     [field: SerializeField] public float Distance { get; private set; }
     [field: SerializeField] public float CooldownTime { get; private set; }
+    [field: SerializeField] public float ManaCost { get; private set; }
 
     private Rigidbody rb;
 

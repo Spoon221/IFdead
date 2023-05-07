@@ -50,7 +50,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 1
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 1339722974828901014}
   m_Layer: 0
   m_Name: lamppost
-  m_TagString: Untagged
+  m_TagString: enviroment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 163902460375063026}
   - component: {fileID: 6402234453723060929}
   - component: {fileID: 2196417842359159831}
+  - component: {fileID: 1067227511}
   m_Layer: 0
   m_Name: Cube 2
   m_TagString: Untagged
@@ -377,7 +378,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1301
+  m_VersionIndex: 1319
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -473,6 +474,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!65 &1067227511
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2434353862355597905}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.64024925, y: 1.609909, z: 0.70814514}
+  m_Center: {x: -0.32012463, y: 0.8049469, z: -0.35407257}
 --- !u!1 &2755178816624758687
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,7 +512,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2755178816624758687}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -66.497, y: -5.09, z: -0.46}
+  m_LocalPosition: {x: -66.25, y: -5.93, z: -0.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -517,7 +531,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0.7260653, b: 0, a: 0.2}
-  m_Intensity: 1
+  m_Intensity: 0.9
   m_Range: 54.49
   m_SpotAngle: 53
   m_InnerSpotAngle: 21.80208
@@ -581,6 +595,7 @@ GameObject:
   - component: {fileID: 5723818020555609457}
   - component: {fileID: 1492770849806743849}
   - component: {fileID: 9124398840790199071}
+  - component: {fileID: 310226150}
   m_Layer: 0
   m_Name: Cube 1
   m_TagString: Untagged
@@ -815,7 +830,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 1000
+  m_VersionIndex: 1018
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -911,3 +926,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!65 &310226150
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8039774247066850980}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7200775, y: 10.68338, z: 0.6680145}
+  m_Center: {x: 0.36003876, y: 5.34169, z: -0.33399963}

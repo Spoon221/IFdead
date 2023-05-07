@@ -7,20 +7,22 @@ public class HealthBar : MonoBehaviour
 {
     [SerializeField] private Text healthText;
     [SerializeField] private Image healthBar;
-    private PlayerStats player;
-    private int maxPlayerHealth;
+    private Stats userStats;
+    private int maxUserHealth;
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
-        player.OnHealthChanged.AddListener(SetHealthBar);
-        maxPlayerHealth = player.MaxHealth;
-        SetHealthBar(player.MaxHealth);
+        var survivor = GameObject.FindGameObjectWithTag("Player");
+        userStats = survivor != null ? survivor.GetComponent<Stats>() : GameObject.FindGameObjectWithTag("Maniac").GetComponent<Stats>();
+        Debug.Log(userStats);
+        userStats.OnHealthChanged.AddListener(SetHealthBar);
+        maxUserHealth = userStats.MaxHealth;
+        SetHealthBar(userStats.MaxHealth);
     }
 
-    private void SetHealthBar(int playerHealth)
+    private void SetHealthBar(int userHealth)
     {
-        healthText.text = playerHealth.ToString();
-        healthBar.fillAmount = (float) playerHealth / maxPlayerHealth;
+        healthText.text = userHealth.ToString();
+        healthBar.fillAmount = (float) userHealth / maxUserHealth;
     }
 }
