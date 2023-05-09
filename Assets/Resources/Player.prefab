@@ -728,6 +728,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <MaxHealth>k__BackingField: 100
   <MaxMana>k__BackingField: 100
+  <ManaRecoveryPerSecond>k__BackingField: 0
   OnHealthChanged:
     m_PersistentCalls:
       m_Calls: []
