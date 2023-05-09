@@ -112,7 +112,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: topology
+  m_Name: survivor
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Jumping
