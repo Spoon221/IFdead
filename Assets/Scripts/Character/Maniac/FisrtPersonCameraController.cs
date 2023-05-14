@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FisrtPersonCameraController : MonoBehaviour
+public class FisrtPersonCameraController : MonoBehaviour, IPunObservable
 {
     public float sensX;
     public float sensY;
@@ -11,6 +12,20 @@ public class FisrtPersonCameraController : MonoBehaviour
     public Transform maniacModel;
     private float xRotation;
     private float yRotation;
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(transform.rotation);
+            stream.SendNext(maniacModel.rotation);
+        }
+        else
+        {
+            transform.rotation = (Quaternion)stream.ReceiveNext();
+            maniacModel.rotation = (Quaternion)stream.ReceiveNext();
+        }
+    }
 
     void Start()
     {
