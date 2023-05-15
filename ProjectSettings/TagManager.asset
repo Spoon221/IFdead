@@ -8,6 +8,8 @@ TagManager:
   - Maniac
   - Missile
   - SensitivitySlider
+  - ManiacCamera
+  - PlayerCamera
   layers:
   - Default
   - TransparentFX

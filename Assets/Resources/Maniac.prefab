@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1270646668}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: ManiacCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -236,6 +236,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 6871319707691438731}
+  - {fileID: 1270646670}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -288,6 +289,7 @@ MonoBehaviour:
   scriptPlayerMovementController: {fileID: 6132893871799605145, guid: d0e1eaa7424fff54fb862bfa780fb50a, type: 3}
   scriptPlayerStats: {fileID: 6132893871799605149, guid: d0e1eaa7424fff54fb862bfa780fb50a, type: 3}
   scriptManiacMovementController: {fileID: 8059336578616850902}
+  camera: {fileID: 1270646669}
 --- !u!114 &2015159822
 MonoBehaviour:
   m_ObjectHideFlags: 0

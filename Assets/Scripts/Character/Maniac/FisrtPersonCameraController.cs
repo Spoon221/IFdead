@@ -1,3 +1,4 @@
+using Cinemachine;
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,9 +13,9 @@ public class FisrtPersonCameraController : MonoBehaviour, IPunObservable
     public Transform maniacModel;
     private float xRotation;
     private float yRotation;
-
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
+        //ќдно из этого возможно лишнее (все работает, но не отрицаю этот факт). –азобратьс€ после выкота спавна
         if (stream.IsWriting)
         {
             stream.SendNext(transform.rotation);
@@ -34,6 +35,7 @@ public class FisrtPersonCameraController : MonoBehaviour, IPunObservable
     
     void Update()
     {
+        
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
 

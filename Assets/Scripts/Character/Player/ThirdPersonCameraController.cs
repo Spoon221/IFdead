@@ -22,7 +22,7 @@ public class ThirdPersonCameraController : MonoBehaviour, IPunObservable
     
     private Slider sensitivitySlider;
 
-    public Camera camera;
+    public Camera ManiacCamera;
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
@@ -39,7 +39,6 @@ public class ThirdPersonCameraController : MonoBehaviour, IPunObservable
     {
         if (!view.IsMine)
         {
-            camera.enabled = false;
             cinemachineVirtualCamera.enabled = false;
         }
     }
