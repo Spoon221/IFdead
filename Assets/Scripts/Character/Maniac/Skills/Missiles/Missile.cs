@@ -18,10 +18,7 @@ public abstract class Missile : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * Speed, ForceMode.Impulse);
     }
-
-    protected virtual void FixedUpdate()
-    {
-    }
+    
 
     protected void OnCollisionEnter(Collision collision)
     {

@@ -27,7 +27,7 @@ public class ManiacGun : MonoBehaviour
     {
         if (view.IsMine)
         {
-            if (Input.GetButton("Fire1") && canShoot)
+            if (Input.GetButton("Fire1") && canShoot && maniacStats.CurrentMana >= missilePrefab.ManaCost)
             {
                 Instantiate(missilePrefab, spawnPoint.position, spawnPoint.rotation);
                 maniacStats.SpendMana(missilePrefab.ManaCost);

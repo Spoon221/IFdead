@@ -10,47 +10,47 @@ public class Stats : MonoBehaviour
 
     [field: SerializeField] public float MaxMana { get; private set; }
     [field: SerializeField] public float ManaRecoveryPerSecond { get; protected set; }
-    private int currentHealth;
-    private float currentMana;
+    [field: SerializeField] public int CurrentHealth { get; private set; }
+    [field: SerializeField] public float CurrentMana { get; private set; }
 
     [HideInInspector] public UnityEvent<int> OnHealthChanged = new UnityEvent<int>();
     [HideInInspector] public UnityEvent<float> OnManaChanged = new UnityEvent<float>();
 
     private void Start()
     {
-        currentHealth = MaxHealth;
-        currentMana = MaxMana;
+        CurrentHealth = MaxHealth;
+        CurrentMana = MaxMana;
         InvokeRepeating("RegenerateMana", 0f, 1f);
     }
 
 
     protected void GetDamage(int amountOfDamage)
     {
-        currentHealth -= amountOfDamage;
-        if (currentHealth <= 0)
+        CurrentHealth -= amountOfDamage;
+        if (CurrentHealth <= 0)
             Destroy(gameObject);
-        OnHealthChanged.Invoke(currentHealth);
+        OnHealthChanged.Invoke(CurrentHealth);
     }
 
     protected void RestoreHealth(int amountOfHealth)
     {
-        currentHealth = Mathf.Clamp(currentHealth + amountOfHealth, 0, MaxHealth);
-        OnHealthChanged.Invoke(currentHealth);
+        CurrentHealth = Mathf.Clamp(CurrentHealth + amountOfHealth, 0, MaxHealth);
+        OnHealthChanged.Invoke(CurrentHealth);
     }
 
     public void SpendMana(float amountOfMana)
     {
-        currentMana -= amountOfMana;
-        currentMana = Mathf.Clamp(currentMana, 0, MaxMana);
-        OnManaChanged.Invoke(currentMana);
+        CurrentMana -= amountOfMana;
+        CurrentMana = Mathf.Clamp(CurrentMana, 0, MaxMana);
+        OnManaChanged.Invoke(CurrentMana);
     }
 
 
     protected void RestoreMana(float amountOfMana)
     {
-        currentMana += amountOfMana;
-        currentMana = Mathf.Clamp(currentMana, 0, MaxMana);
-        OnManaChanged.Invoke(currentMana);
+        CurrentMana += amountOfMana;
+        CurrentMana = Mathf.Clamp(CurrentMana, 0, MaxMana);
+        OnManaChanged.Invoke(CurrentMana);
     }
 
 
