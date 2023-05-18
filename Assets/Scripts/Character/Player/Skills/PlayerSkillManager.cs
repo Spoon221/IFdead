@@ -20,11 +20,12 @@ public class PlayerSkillManager : MonoBehaviour
 
     void Update()
     {
+        var currentSkill = availableSkills[currentSkillIndex];
         if (Input.GetKeyDown(KeyCode.E) && skillsReady[currentSkillIndex])
         {
             StartCoroutine(StartTimer(currentSkillIndex));
-            availableSkills[currentSkillIndex].Activate();
-            playerStats.SpendMana(availableSkills[currentSkillIndex].ManaCost);
+            currentSkill.Activate();
+            playerStats.SpendMana(currentSkill.ManaCost);
         }
     }
 
