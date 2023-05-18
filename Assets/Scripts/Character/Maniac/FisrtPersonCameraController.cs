@@ -29,7 +29,7 @@ public class FisrtPersonCameraController : MonoBehaviour, IPunObservable
 
     void Start()
     {
-        view = GetComponent<PhotonView>();
+        
         Cursor.lockState = CursorLockMode.Locked;
     }
     
@@ -38,14 +38,13 @@ public class FisrtPersonCameraController : MonoBehaviour, IPunObservable
         
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
-
-        xRotation = Mathf.Clamp(xRotation - mouseY, -90f, 90f);
-        yRotation += mouseX;
-
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
         if (view.IsMine)
         {
+            xRotation = Mathf.Clamp(xRotation - mouseY, -90f, 90f);
+            yRotation += mouseX;
+        
+            transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+            orientation.rotation = Quaternion.Euler(0, yRotation, 0);
             maniacModel.rotation = Quaternion.Euler(0, yRotation, 0);
         }
     }

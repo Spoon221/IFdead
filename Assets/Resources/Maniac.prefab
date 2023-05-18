@@ -51,7 +51,7 @@ MonoBehaviour:
   sensY: 350
   orientation: {fileID: 6720464477614676291}
   maniacModel: {fileID: 529482825958493946}
-  view: {fileID: 0}
+  view: {fileID: 8935490345591800789}
 --- !u!20 &1270646669
 Camera:
   m_ObjectHideFlags: 0
