@@ -5,7 +5,6 @@ public class IsMine : MonoBehaviour
 {
     public PhotonView view;
     public PlayerMovementController scriptPlayerMovementController;
-    public PlayerStats scriptPlayerStats;
     public ManiacMovementController scriptManiacMovementController;
     public Camera camera;
 
@@ -16,9 +15,7 @@ public class IsMine : MonoBehaviour
         {
             camera.enabled = false;
             scriptPlayerMovementController.enabled = false;
-            scriptPlayerStats.enabled = false;
             scriptManiacMovementController.enabled = false;
         }
     }
-
 }

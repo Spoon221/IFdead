@@ -13,23 +13,23 @@ public class FisrtPersonCameraController : MonoBehaviour, IPunObservable
     public Transform maniacModel;
     private float xRotation;
     private float yRotation;
+
+    public PhotonView view;
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        //ќдно из этого возможно лишнее (все работает, но не отрицаю этот факт). –азобратьс€ после выкота спавна
         if (stream.IsWriting)
         {
-            stream.SendNext(transform.rotation);
             stream.SendNext(maniacModel.rotation);
         }
         else
         {
-            transform.rotation = (Quaternion)stream.ReceiveNext();
             maniacModel.rotation = (Quaternion)stream.ReceiveNext();
         }
     }
 
     void Start()
     {
+        view = GetComponent<PhotonView>();
         Cursor.lockState = CursorLockMode.Locked;
     }
     
@@ -44,6 +44,9 @@ public class FisrtPersonCameraController : MonoBehaviour, IPunObservable
 
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
-        maniacModel.rotation = Quaternion.Euler(0, yRotation, 0);
+        if (view.IsMine)
+        {
+            maniacModel.rotation = Quaternion.Euler(0, yRotation, 0);
+        }
     }
 }

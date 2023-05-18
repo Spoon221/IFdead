@@ -51,6 +51,7 @@ MonoBehaviour:
   sensY: 350
   orientation: {fileID: 6720464477614676291}
   maniacModel: {fileID: 529482825958493946}
+  view: {fileID: 0}
 --- !u!20 &1270646669
 Camera:
   m_ObjectHideFlags: 0
@@ -116,9 +117,9 @@ GameObject:
   - component: {fileID: 8059336578616850902}
   - component: {fileID: 1085475388915998646}
   - component: {fileID: 8935490345591800789}
-  - component: {fileID: 6871319707691438731}
   - component: {fileID: 856852341058911971}
   - component: {fileID: 2015159822}
+  - component: {fileID: 1817384867521719891}
   m_Layer: 0
   m_Name: Maniac
   m_TagString: Maniac
@@ -175,6 +176,8 @@ MonoBehaviour:
   <MaxHealth>k__BackingField: 100
   <MaxMana>k__BackingField: 100
   <ManaRecoveryPerSecond>k__BackingField: 2
+  <CurrentHealth>k__BackingField: 0
+  <CurrentMana>k__BackingField: 0
   OnHealthChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -235,44 +238,11 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 6871319707691438731}
+  - {fileID: 1817384867521719891}
   - {fileID: 1270646670}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &6871319707691438731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 529482825575864600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PositionModel:
-    SynchronizeEnabled: 1
-    TeleportEnabled: 1
-    TeleportIfDistanceGreaterThan: 3
-    InterpolateOption: 2
-    InterpolateMoveTowardsSpeed: 1
-    InterpolateLerpSpeed: 1
-    ExtrapolateOption: 0
-    ExtrapolateSpeed: 1
-    ExtrapolateIncludingRoundTripTime: 1
-    ExtrapolateNumberOfStoredPositions: 1
-  m_RotationModel:
-    SynchronizeEnabled: 1
-    InterpolateOption: 1
-    InterpolateRotateTowardsSpeed: 180
-    InterpolateLerpSpeed: 5
-  m_ScaleModel:
-    SynchronizeEnabled: 0
-    InterpolateOption: 0
-    InterpolateMoveTowardsSpeed: 1
-    InterpolateLerpSpeed: 0
 --- !u!114 &856852341058911971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,7 +257,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   view: {fileID: 8935490345591800789}
   scriptPlayerMovementController: {fileID: 6132893871799605145, guid: d0e1eaa7424fff54fb862bfa780fb50a, type: 3}
-  scriptPlayerStats: {fileID: 6132893871799605149, guid: d0e1eaa7424fff54fb862bfa780fb50a, type: 3}
   scriptManiacMovementController: {fileID: 8059336578616850902}
   camera: {fileID: 1270646669}
 --- !u!114 &2015159822
@@ -305,12 +274,47 @@ MonoBehaviour:
   <MaxHealth>k__BackingField: 0
   <MaxMana>k__BackingField: 0
   <ManaRecoveryPerSecond>k__BackingField: 0
+  <CurrentHealth>k__BackingField: 0
+  <CurrentMana>k__BackingField: 0
   OnHealthChanged:
     m_PersistentCalls:
       m_Calls: []
   OnManaChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1817384867521719891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529482825575864600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PositionModel:
+    SynchronizeEnabled: 1
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 0
+    InterpolateOption: 2
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 1
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 1
+    ExtrapolateIncludingRoundTripTime: 1
+    ExtrapolateNumberOfStoredPositions: 1
+  m_RotationModel:
+    SynchronizeEnabled: 1
+    InterpolateOption: 1
+    InterpolateRotateTowardsSpeed: 180
+    InterpolateLerpSpeed: 5
+  m_ScaleModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 0
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 0
 --- !u!1 &529482825958493947
 GameObject:
   m_ObjectHideFlags: 0
