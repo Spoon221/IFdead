@@ -10,6 +10,7 @@ TagManager:
   - SensitivitySlider
   - ManiacCamera
   - PlayerCamera
+  - Key
   layers:
   - Default
   - TransparentFX
