@@ -6,13 +6,12 @@ using UnityEngine;
 
 public class ItemManager : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Key"))
+        if (other.TryGetComponent(out Item item))
         {
-            var item = other.GetComponent<Item>();
-            item.PickUpItem();
+            if (!item.Collected)
+                item.PickUpItem();
         }
-        
     }
 }

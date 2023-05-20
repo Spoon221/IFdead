@@ -14,7 +14,6 @@ public class HealthBar : MonoBehaviour
     {
         var survivor = GameObject.FindGameObjectWithTag("Player");
         userStats = survivor != null ? survivor.GetComponent<Stats>() : GameObject.FindGameObjectWithTag("Maniac").GetComponent<Stats>();
-        Debug.Log(userStats);
         userStats.OnHealthChanged.AddListener(SetHealthBar);
         maxUserHealth = userStats.MaxHealth;
         SetHealthBar(userStats.MaxHealth);

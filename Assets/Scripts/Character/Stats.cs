@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -28,7 +29,7 @@ public class Stats : MonoBehaviour
     {
         CurrentHealth -= amountOfDamage;
         if (CurrentHealth <= 0)
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         OnHealthChanged.Invoke(CurrentHealth);
     }
 

@@ -17,6 +17,7 @@ public class FindKeyMission : MonoBehaviour
         keys = GameObject.FindGameObjectsWithTag("Key").ToList();
         foreach (var key in keys)
             key.GetComponent<Item>().OnItemPickUp.AddListener(UpdateNumberOfKeys);
+
         currentNumberOfKeys = 0;
         numberOfKeysToFind = keys.Count;
         startWord = "Цель: Найти ключи\nНайдено ключей";
@@ -25,7 +26,6 @@ public class FindKeyMission : MonoBehaviour
 
     private void UpdateNumberOfKeys()
     {
-        Debug.Log("Find key");
         currentNumberOfKeys += 1;
         gameObject.GetComponent<TMP_Text>().text = $"{startWord}: {currentNumberOfKeys}/{numberOfKeysToFind}";
     }
