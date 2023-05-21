@@ -4,35 +4,33 @@ using UnityEngine;
 
 public class PlayerSkillManager : MonoBehaviour
 {
-    [SerializeField] private List<Skill> availableSkills;
-    private List<bool> skillsReady;
-    private int currentSkillIndex;
+    public GameObject smokeCloudSkill;
+    private bool isSmokeReady;
+    private float smokeManaCost;
+    private float cooldownTime;
     private PlayerStats playerStats;
 
     void Start()
     {
-        currentSkillIndex = 0;
-        skillsReady = new List<bool>(availableSkills.Count);
-        foreach (var skill in availableSkills)
-            skillsReady.Add(true);
+        isSmokeReady = true;
+        smokeManaCost = smokeCloudSkill.GetComponent<SmokeCloudSkill>().ManaCost;
+        cooldownTime = smokeCloudSkill.GetComponent<SmokeCloudSkill>().CooldownTime;
         playerStats = gameObject.GetComponent<PlayerStats>();
     }
 
     void Update()
     {
-        var currentSkill = availableSkills[currentSkillIndex];
-        if (Input.GetKeyDown(KeyCode.E) && skillsReady[currentSkillIndex])
+        if (Input.GetKeyDown(KeyCode.E) && isSmokeReady)
         {
-            StartCoroutine(StartTimer(currentSkillIndex));
-            currentSkill.Activate();
-            playerStats.SpendMana(currentSkill.ManaCost);
+            isSmokeReady = false;
+            Invoke(nameof(MakeSmokeCloudSkillready), cooldownTime);
+            smokeCloudSkill.GetComponent<SmokeCloudSkill>().SpawnSmoke();
+            playerStats.SpendMana(smokeManaCost);
         }
     }
 
-    private IEnumerator StartTimer(int skillIndex)
+    private void MakeSmokeCloudSkillready()
     {
-        skillsReady[skillIndex] = false;
-        yield return new WaitForSeconds(availableSkills[skillIndex].CooldownTime);
-        skillsReady[skillIndex] = true;
+        isSmokeReady = true;
     }
 }

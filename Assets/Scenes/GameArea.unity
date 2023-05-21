@@ -26524,6 +26524,10 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0.015861588
       objectReference: {fileID: 0}
+    - target: {fileID: 3081207912094598214, guid: d0e1eaa7424fff54fb862bfa780fb50a, type: 3}
+      propertyPath: smokeCloudSkill
+      value: 
+      objectReference: {fileID: 1463433743043836997, guid: f1f51754bc75d3e42b0b7d1b2eecf197, type: 3}
     - target: {fileID: 6132893871568048782, guid: d0e1eaa7424fff54fb862bfa780fb50a, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
