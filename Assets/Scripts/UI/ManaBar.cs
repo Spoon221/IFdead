@@ -12,8 +12,7 @@ public class ManaBar : MonoBehaviour
 
     void Start()
     {
-        var survivor = GameObject.FindGameObjectWithTag("Player");
-        userStats = survivor != null ? survivor.GetComponent<Stats>() : GameObject.FindGameObjectWithTag("Maniac").GetComponent<Stats>();
+        userStats = gameObject.GetComponentInParent<Stats>();
         userStats.OnManaChanged.AddListener(SetManaBar);
         maxUserMana = userStats.MaxMana;
         SetManaBar(userStats.MaxMana);
