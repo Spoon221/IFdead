@@ -10,12 +10,11 @@ public class ManaBar : MonoBehaviour
     [SerializeField] private Image manaBar;
     private Stats userStats;
     private float maxUserMana;
-    private PhotonView view;
+    public PhotonView UserView;
 
     void Start()
     {
-        view = gameObject.GetComponentInParent<PhotonView>();
-        if (view.IsMine)
+        if (UserView.IsMine)
         {
             userStats = gameObject.GetComponentInParent<Stats>();
             userStats.OnManaChanged.AddListener(SetManaBar);
@@ -26,7 +25,7 @@ public class ManaBar : MonoBehaviour
 
     private void SetManaBar(float userMana)
     {
-        if (view.IsMine)
+        if (UserView.IsMine)
         {
             manaText.text = Mathf.Round(userMana).ToString();
             manaBar.fillAmount = userMana / maxUserMana;

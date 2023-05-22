@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
@@ -10,12 +11,11 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Image healthBar;
     private Stats userStats;
     private int maxUserHealth;
-    private PhotonView view;
+    public PhotonView UserView;
 
     void Start()
     {
-        view = gameObject.GetComponentInParent<PhotonView>();
-        if (view.IsMine)
+        if (UserView.IsMine)
         {
             userStats = gameObject.GetComponentInParent<Stats>();
             userStats.OnHealthChanged.AddListener(SetHealthBar);
@@ -26,7 +26,7 @@ public class HealthBar : MonoBehaviour
 
     private void SetHealthBar(int userHealth)
     {
-        if (view.IsMine)
+        if (UserView.IsMine)
         {
             healthText.text = userHealth.ToString();
             healthBar.fillAmount = (float) userHealth / maxUserHealth;

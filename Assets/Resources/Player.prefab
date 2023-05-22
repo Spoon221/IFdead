@@ -762,7 +762,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6132893871974498305}
-  m_LocalRotation: {x: 0.08724044, y: -0.33157444, z: 0.030809745, w: 0.93888146}
+  m_LocalRotation: {x: 0.087240435, y: -0.33157444, z: 0.03080974, w: 0.93888146}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1312,6 +1312,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 216067752}
     m_Modifications:
+    - target: {fileID: 2390712115592345856, guid: cebd83c774e0ac242a2a27c738fef157, type: 3}
+      propertyPath: UserView
+      value: 
+      objectReference: {fileID: 6132893871799605146}
     - target: {fileID: 9146413715602086848, guid: cebd83c774e0ac242a2a27c738fef157, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1526,6 +1530,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthBar
       objectReference: {fileID: 0}
+    - target: {fileID: 7430420396198409699, guid: 2b27abc814adbfd4c8eeb8e2e9238a8c, type: 3}
+      propertyPath: UserView
+      value: 
+      objectReference: {fileID: 6132893871799605146}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b27abc814adbfd4c8eeb8e2e9238a8c, type: 3}
 --- !u!224 &874389566721767593 stripped
