@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Photon.Pun;
 using UnityEngine;
 
 public abstract class Missile : MonoBehaviour
@@ -24,6 +23,6 @@ public abstract class Missile : MonoBehaviour
     protected void OnCollisionEnter(Collision collision)
     {
         if (!collision.gameObject.CompareTag("Maniac"))
-            PhotonNetwork.Destroy(gameObject);
+            Destroy(gameObject);
     }
 }

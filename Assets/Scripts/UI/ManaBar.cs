@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,18 +10,27 @@ public class ManaBar : MonoBehaviour
     [SerializeField] private Image manaBar;
     private Stats userStats;
     private float maxUserMana;
+    private PhotonView view;
 
     void Start()
     {
-        userStats = gameObject.GetComponentInParent<Stats>();
-        userStats.OnManaChanged.AddListener(SetManaBar);
-        maxUserMana = userStats.MaxMana;
-        SetManaBar(userStats.MaxMana);
+        view = gameObject.GetComponentInParent<PhotonView>();
+        if (view.IsMine)
+        {
+            userStats = gameObject.GetComponentInParent<Stats>();
+            userStats.OnManaChanged.AddListener(SetManaBar);
+            maxUserMana = userStats.MaxMana;
+            SetManaBar(userStats.MaxMana);
+        }
     }
 
     private void SetManaBar(float userMana)
     {
-        manaText.text = Mathf.Round(userMana).ToString();
-        manaBar.fillAmount = userMana / maxUserMana;
+        if (view.IsMine)
+        {
+            manaText.text = Mathf.Round(userMana).ToString();
+            manaBar.fillAmount = userMana / maxUserMana;
+        }
+        
     }
 }
