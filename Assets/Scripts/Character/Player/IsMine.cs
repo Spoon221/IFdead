@@ -6,6 +6,9 @@ public class IsMine : MonoBehaviour
     public PhotonView view;
     public PlayerMovementController scriptPlayerMovementController;
     public ManiacMovementController scriptManiacMovementController;
+    public Canvas canvase;
+    public ManaBar scriptManaBar;
+    public HealthBar scriptHealthBar;
     public Camera camera;
 
     private void Awake()
@@ -14,6 +17,9 @@ public class IsMine : MonoBehaviour
         if (!view.IsMine)
         {
             camera.enabled = false;
+            canvase.enabled = false;
+            scriptManaBar.enabled = false;
+            scriptHealthBar.enabled = false;
             scriptPlayerMovementController.enabled = false;
             scriptManiacMovementController.enabled = false;
         }
