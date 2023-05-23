@@ -11,13 +11,17 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Image healthBar;
     private Stats userStats;
     private int maxUserHealth;
+    public PhotonView view;
 
     void Start()
     {
-        userStats = gameObject.GetComponentInParent<Stats>();
-        userStats.OnHealthChanged.AddListener(SetHealthBar);
-        maxUserHealth = userStats.MaxHealth;
-        SetHealthBar(userStats.MaxHealth);
+        if (view.IsMine)
+        {
+            userStats = gameObject.GetComponentInParent<Stats>();
+            userStats.OnHealthChanged.AddListener(SetHealthBar);
+            maxUserHealth = userStats.MaxHealth;
+            SetHealthBar(userStats.MaxHealth);
+        }
     }
 
     private void SetHealthBar(int userHealth)
