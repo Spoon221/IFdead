@@ -361,9 +361,10 @@ MonoBehaviour:
   view: {fileID: 8935490345591800789}
   scriptPlayerMovementController: {fileID: 6132893871799605145, guid: d0e1eaa7424fff54fb862bfa780fb50a, type: 3}
   scriptManiacMovementController: {fileID: 8059336578616850902}
-  canvase: {fileID: 1901550418}
+  Bar: {fileID: 1901550418}
   scriptManaBar: {fileID: 2390712116217156250}
   scriptHealthBar: {fileID: 7430420395516920634}
+  scriptStats: {fileID: 2602679348726651294}
   camera: {fileID: 1270646669}
 --- !u!114 &2015159822
 MonoBehaviour:

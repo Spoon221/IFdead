@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSkillManager : MonoBehaviour
+public class PlayerSkillManager : MonoBehaviourPun
 {
     public GameObject smokeCloudSkill;
     private bool isSmokeReady;
@@ -22,15 +23,21 @@ public class PlayerSkillManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && isSmokeReady)
         {
-            isSmokeReady = false;
-            Invoke(nameof(MakeSmokeCloudSkillready), cooldownTime);
-            smokeCloudSkill.GetComponent<SmokeCloudSkill>().SpawnSmoke();
-            playerStats.SpendMana(smokeManaCost);
+            photonView.RPC("GetSmoke", RpcTarget.AllBuffered);
         }
     }
 
     private void MakeSmokeCloudSkillready()
     {
         isSmokeReady = true;
+    }
+
+    [PunRPC]
+    void GetSmoke()
+    {
+        isSmokeReady = false;
+        Invoke(nameof(MakeSmokeCloudSkillready), cooldownTime);
+        smokeCloudSkill.GetComponent<SmokeCloudSkill>().SpawnSmoke();
+        playerStats.SpendMana(smokeManaCost);
     }
 }

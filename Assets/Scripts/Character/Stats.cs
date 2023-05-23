@@ -5,7 +5,7 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Stats : MonoBehaviour
+public class Stats : MonoBehaviourPunCallbacks
 {
     [field: SerializeField] public int MaxHealth { get; private set; }
 
@@ -13,7 +13,7 @@ public class Stats : MonoBehaviour
     [field: SerializeField] public float ManaRecoveryPerSecond { get; protected set; }
     [field: SerializeField] public int CurrentHealth { get; private set; }
     [field: SerializeField] public float CurrentMana { get; private set; }
-
+    
     [HideInInspector] public UnityEvent<int> OnHealthChanged = new UnityEvent<int>();
     [HideInInspector] public UnityEvent<float> OnManaChanged = new UnityEvent<float>();
 
@@ -29,7 +29,7 @@ public class Stats : MonoBehaviour
     {
         CurrentHealth -= amountOfDamage;
         if (CurrentHealth <= 0)
-            PhotonNetwork.Destroy(gameObject);
+            PhotonNetwork.Disconnect();
         OnHealthChanged.Invoke(CurrentHealth);
     }
 
@@ -53,7 +53,6 @@ public class Stats : MonoBehaviour
         CurrentMana = Mathf.Clamp(CurrentMana, 0, MaxMana);
         OnManaChanged.Invoke(CurrentMana);
     }
-
 
     protected void RegenerateMana()
     {

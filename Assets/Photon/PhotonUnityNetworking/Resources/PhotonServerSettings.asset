@@ -40,6 +40,8 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   - ViewAll
+  - GetDamageNew
+  - GetSmoke
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
