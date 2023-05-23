@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Photon.Pun;
 
-public class ManiacGun : MonoBehaviour
+public class ManiacGun : MonoBehaviourPun
 {
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private Missile missilePrefab;
@@ -29,18 +29,23 @@ public class ManiacGun : MonoBehaviour
         {
             if (Input.GetButton("Fire1") && canShoot && maniacStats.CurrentMana >= missilePrefab.ManaCost)
             {
-                Instantiate(missilePrefab, spawnPoint.position, spawnPoint.rotation);
-                maniacStats.SpendMana(missilePrefab.ManaCost);
-                canShoot = false;
-                StartCoroutine(StartCooldownTimer());
+                view.RPC("GetHand", RpcTarget.AllBuffered);
             }
         }
-            
     }
 
     private IEnumerator StartCooldownTimer()
     {
         yield return new WaitForSeconds(missileCooldown);
         canShoot = true;
+    }
+
+    [PunRPC]
+    void GetHand()
+    {
+        Instantiate(missilePrefab, spawnPoint.position, spawnPoint.rotation);
+        maniacStats.SpendMana(missilePrefab.ManaCost);
+        canShoot = false;
+        StartCoroutine(StartCooldownTimer());
     }
 }
