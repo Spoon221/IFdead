@@ -5,14 +5,26 @@ using Unity.VisualScripting;
 using UnityEngine;
 using Photon.Pun;
 
-public class ManiacGun : MonoBehaviourPun
+public class ManiacGun : MonoBehaviourPun, IPunObservable
 {
-    [SerializeField] private Transform spawnPoint;
+    public Transform spawnPoint;
     [SerializeField] private Missile missilePrefab;
     [SerializeField] private PhotonView view;
     private ManiacStats maniacStats;
     private bool canShoot;
     private float missileCooldown;
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(spawnPoint.rotation);
+        }
+        else
+        {
+            spawnPoint.rotation = (Quaternion)stream.ReceiveNext();
+        }
+    }
 
     void Start()
     {

@@ -51,6 +51,7 @@ MonoBehaviour:
   sensY: 350
   orientation: {fileID: 6720464477614676291}
   maniacModel: {fileID: 529482825958493946}
+  Skill: {fileID: 4204338554639939228}
   view: {fileID: 8935490345591800789}
 --- !u!20 &1270646669
 Camera:
@@ -341,6 +342,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
+  - {fileID: 1085475388915998646}
   - {fileID: 1817384867521719891}
   - {fileID: 1270646670}
   sceneViewId: 0
@@ -364,7 +366,6 @@ MonoBehaviour:
   Bar: {fileID: 1901550418}
   scriptManaBar: {fileID: 2390712116217156250}
   scriptHealthBar: {fileID: 7430420395516920634}
-  scriptStats: {fileID: 2602679348726651294}
   camera: {fileID: 1270646669}
 --- !u!114 &2015159822
 MonoBehaviour:

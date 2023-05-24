@@ -11,6 +11,7 @@ public class FisrtPersonCameraController : MonoBehaviour, IPunObservable
 
     public Transform orientation;
     public Transform maniacModel;
+    public Transform Skill;
     private float xRotation;
     private float yRotation;
 
@@ -20,10 +21,12 @@ public class FisrtPersonCameraController : MonoBehaviour, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext(maniacModel.rotation);
+            stream.SendNext(Skill.rotation);
         }
         else
         {
             maniacModel.rotation = (Quaternion)stream.ReceiveNext();
+            Skill.rotation = (Quaternion)stream.ReceiveNext();
         }
     }
 

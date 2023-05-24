@@ -10,6 +10,7 @@ public class PlayerSkillManager : MonoBehaviourPun
     private float smokeManaCost;
     private float cooldownTime;
     private PlayerStats playerStats;
+    public PhotonView view;
 
     void Start()
     {
@@ -21,9 +22,12 @@ public class PlayerSkillManager : MonoBehaviourPun
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && isSmokeReady)
+        if (view.IsMine)
         {
-            photonView.RPC("GetSmoke", RpcTarget.AllBuffered);
+            if (Input.GetKeyDown(KeyCode.E) && isSmokeReady)
+            {
+                photonView.RPC("GetSmoke", RpcTarget.AllBuffered);
+            }
         }
     }
 
