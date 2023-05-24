@@ -21,6 +21,6 @@ public class Item : MonoBehaviour
     {
         Collected = true;
         OnItemPickUp.Invoke();
-        PhotonNetwork.Destroy(gameObject);
+        Destroy(gameObject);
     }
 }
