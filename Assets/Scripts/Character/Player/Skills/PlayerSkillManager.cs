@@ -41,7 +41,7 @@ public class PlayerSkillManager : MonoBehaviourPun
     {
         isSmokeReady = false;
         Invoke(nameof(MakeSmokeCloudSkillready), cooldownTime);
-        smokeCloudSkill.GetComponent<SmokeCloudSkill>().SpawnSmoke();
+        smokeCloudSkill.GetComponent<SmokeCloudSkill>().SpawnSmoke(transform.position);
         playerStats.SpendMana(smokeManaCost);
     }
 }

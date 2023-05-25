@@ -10,10 +10,9 @@ public class SmokeCloudSkill : MonoBehaviour
     [SerializeField] private float timeToDisappear;
     
 
-    public void SpawnSmoke()
+    public void SpawnSmoke(Vector3 spawnPosition)
     {
-        Transform spawnPoint = GameObject.FindGameObjectWithTag("Player").transform;
-        GameObject smoke = Instantiate(SmokeVFX, spawnPoint);
+        GameObject smoke = Instantiate(SmokeVFX, spawnPosition, Quaternion.identity);
         smoke.transform.Rotate(-90f, 0, 0);
         smoke.transform.SetParent(null);
         Destroy(smoke, timeToDisappear);
