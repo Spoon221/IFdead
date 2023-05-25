@@ -762,7 +762,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6132893871974498305}
-  m_LocalRotation: {x: 0.08724046, y: -0.3315744, z: 0.030809756, w: 0.93888146}
+  m_LocalRotation: {x: 0.08724046, y: -0.33157444, z: 0.03080976, w: 0.9388814}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -887,15 +887,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 957247e22ab7abc4c9352aa3c84c0363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MaxHealth>k__BackingField: 100
   <MaxMana>k__BackingField: 100
   <ManaRecoveryPerSecond>k__BackingField: 1
-  <CurrentHealth>k__BackingField: 0
   <CurrentMana>k__BackingField: 0
-  OnHealthChanged:
+  OnManaChanged:
     m_PersistentCalls:
       m_Calls: []
-  OnManaChanged:
+  <MaxHealth>k__BackingField: 100
+  <CurrentHealth>k__BackingField: 0
+  OnHealthChanged:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &6132893871799605145
@@ -1096,7 +1096,7 @@ MonoBehaviour:
   rotationModelSpeed: 12
   maxXSensitivity: 1000
   maxYSensitivity: 7
-  ManiacCamera: {fileID: 0}
+  sensitivitySlider: {fileID: 0}
 --- !u!114 &6132893872779753881
 MonoBehaviour:
   m_ObjectHideFlags: 0

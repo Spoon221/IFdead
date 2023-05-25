@@ -8,21 +8,18 @@ using UnityEngine.UI;
 
 public class ThirdPersonCameraController : MonoBehaviour, IPunObservable
 {
-    [Header("References")] 
-    public CinemachineFreeLook cinemachineVirtualCamera;
+    [Header("References")] public CinemachineFreeLook cinemachineVirtualCamera;
     public PhotonView view;
     public Transform orientation;
     public Transform player;
     public Transform playerModel;
 
-    [Header("Sensitivity Parameters")] 
-    public float rotationModelSpeed;
+    [Header("Sensitivity Parameters")] public float rotationModelSpeed;
     public float maxXSensitivity;
     public float maxYSensitivity;
-    
-    private Slider sensitivitySlider;
 
-    public Camera ManiacCamera;
+    private Slider sensitivitySlider;
+    
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
@@ -31,7 +28,7 @@ public class ThirdPersonCameraController : MonoBehaviour, IPunObservable
         }
         else
         {
-            playerModel.rotation = (Quaternion)stream.ReceiveNext();
+            playerModel.rotation = (Quaternion) stream.ReceiveNext();
         }
     }
 
@@ -52,9 +49,7 @@ public class ThirdPersonCameraController : MonoBehaviour, IPunObservable
             var parent = gameObject.transform.parent.transform;
             cinemachineVirtualCamera.Follow = parent;
             cinemachineVirtualCamera.LookAt = parent;
-            sensitivitySlider = GameObject.FindGameObjectWithTag("SensitivitySlider").GetComponent<Slider>();
-            sensitivitySlider.onValueChanged.AddListener(ChangeSensitivity);
-            ChangeSensitivity(sensitivitySlider.value);
+            ChangeSensitivity(50);
         }
     }
 
@@ -64,12 +59,14 @@ public class ThirdPersonCameraController : MonoBehaviour, IPunObservable
         float verticalInput = Input.GetAxis("Vertical");
         if (view.IsMine)
         {
-            Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
+            Vector3 viewDir = player.position -
+                              new Vector3(transform.position.x, player.position.y, transform.position.z);
             orientation.forward = viewDir.normalized;
             Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
             if (inputDir != Vector3.zero)
             {
-                playerModel.forward = Vector3.Slerp(playerModel.forward, inputDir.normalized, Time.deltaTime * rotationModelSpeed);
+                playerModel.forward = Vector3.Slerp(playerModel.forward, inputDir.normalized,
+                    Time.deltaTime * rotationModelSpeed);
             }
         }
     }
@@ -79,5 +76,11 @@ public class ThirdPersonCameraController : MonoBehaviour, IPunObservable
         sensitivity *= 0.01f;
         cinemachineVirtualCamera.m_XAxis.m_MaxSpeed = maxXSensitivity * sensitivity;
         cinemachineVirtualCamera.m_YAxis.m_MaxSpeed = maxYSensitivity * sensitivity;
+    }
+
+    public void SetSensitivitySlider(Slider sensitivitySlider)
+    {
+        this.sensitivitySlider = sensitivitySlider;
+        this.sensitivitySlider.onValueChanged.AddListener(ChangeSensitivity);
     }
 }

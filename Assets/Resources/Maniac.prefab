@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e86c5acaf00c83240a4bbd83b98f5ffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 350
-  sensY: 350
+  maxSensX: 700
+  maxSensY: 700
   orientation: {fileID: 6720464477614676291}
   maniacModel: {fileID: 529482825958493946}
   Skill: {fileID: 4204338554639939228}
