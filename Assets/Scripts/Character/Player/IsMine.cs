@@ -7,8 +7,6 @@ public class IsMine : MonoBehaviour
     public PlayerMovementController scriptPlayerMovementController;
     public ManiacMovementController scriptManiacMovementController;
     public Canvas Bar;
-    public ManaBar scriptManaBar;
-    public HealthBar scriptHealthBar;
     public Camera camera;
 
     private void Awake()
@@ -18,8 +16,6 @@ public class IsMine : MonoBehaviour
         {
             camera.enabled = false;
             Bar.enabled = false;
-            scriptManaBar.enabled = false;
-            scriptHealthBar.enabled = false;
             scriptPlayerMovementController.enabled = false;
             scriptManiacMovementController.enabled = false;
         }
