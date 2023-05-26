@@ -358,8 +358,6 @@ MonoBehaviour:
   scriptPlayerMovementController: {fileID: 6132893871799605145, guid: d0e1eaa7424fff54fb862bfa780fb50a, type: 3}
   scriptManiacMovementController: {fileID: 8059336578616850902}
   Bar: {fileID: 1901550418}
-  scriptManaBar: {fileID: 2390712116217156250}
-  scriptHealthBar: {fileID: 0}
   camera: {fileID: 1270646669}
 --- !u!114 &2015159822
 MonoBehaviour:
@@ -688,17 +686,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cebd83c774e0ac242a2a27c738fef157, type: 3}
---- !u!114 &2390712116217156250 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2390712115592345856, guid: cebd83c774e0ac242a2a27c738fef157, type: 3}
-  m_PrefabInstance: {fileID: 1698835354}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f15bb965a58d7f64aaf58b736430ad71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &9146413717133144154 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9146413715602086848, guid: cebd83c774e0ac242a2a27c738fef157, type: 3}
