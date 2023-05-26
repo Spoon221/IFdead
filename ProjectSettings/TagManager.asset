@@ -8,6 +8,8 @@ TagManager:
   - Maniac
   - Missile
   - SensitivitySlider
+  - ManiacCamera
+  - Points
   layers:
   - Default
   - TransparentFX
