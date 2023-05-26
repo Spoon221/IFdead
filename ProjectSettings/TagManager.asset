@@ -11,6 +11,7 @@ TagManager:
   - ManiacCamera
   - PlayerCamera
   - Key
+  - Points
   layers:
   - Default
   - TransparentFX
