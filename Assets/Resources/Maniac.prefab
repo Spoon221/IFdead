@@ -358,6 +358,7 @@ MonoBehaviour:
   scriptPlayerMovementController: {fileID: 6132893871799605145, guid: d0e1eaa7424fff54fb862bfa780fb50a, type: 3}
   scriptManiacMovementController: {fileID: 8059336578616850902}
   Bar: {fileID: 1901550418}
+  eCode: {fileID: 1901550418}
   camera: {fileID: 1270646669}
 --- !u!114 &2015159822
 MonoBehaviour:
