@@ -5,17 +5,16 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class HealthBar : MonoBehaviour
+public class HealthBar : MonoBehaviourPun
 {
     [SerializeField] private Text healthText;
     [SerializeField] private Image healthBar;
     private PlayerStats userStats;
     private int maxUserHealth;
-    public PhotonView view;
 
     void Start()
     {
-        if (view.IsMine)
+        if (photonView.IsMine)
         {
             userStats = gameObject.GetComponentInParent<PlayerStats>();
             userStats.OnHealthChanged.AddListener(SetHealthBar);
