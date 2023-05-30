@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,19 +8,21 @@ public class BotManager : MonoBehaviour
     private NavMeshAgent agent;
     private List<Transform> points = new List<Transform>();
 
-    protected enum BotStatus { idle, patrol, pursuit, attaking }
-    protected virtual BotStatus botStatus { get; set; }
-    protected virtual Transform purposePersecution { get; set; }
+    protected enum BotStatus { idle, patrol, chase, searchTarget }
+    protected static BotStatus botStatus { get; set; }
+    protected static Transform purposePersecution { get; set; }
 
+    private enum TimeEvent { idle, searchTarget }
+    private int time = 0;
     private float timer = 0f;
-    private int idleTime = 0;
 
     //private float softAnimations = 0f;
     private Animator animator;
 
     void Start()
     {
-        EventTime();
+        botStatus = BotStatus.idle;
+        DurationEvent();
 
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
@@ -39,10 +39,10 @@ public class BotManager : MonoBehaviour
         {
             timer += Time.deltaTime;
 
-            if (timer > idleTime)
+            if (timer > time)
             {
                 timer = 0f;
-                EventTime();
+                DurationEvent();
                 botStatus = BotStatus.patrol;
                 var pos = Random.Range(0, points.Count);
                 var path = new NavMeshPath();
@@ -58,15 +58,40 @@ public class BotManager : MonoBehaviour
             animator.SetFloat("motion", 0);
         }
 
-        if (botStatus == BotStatus.pursuit)
+        if (botStatus == BotStatus.chase)
         {
-            animator.SetFloat("motion", 1);
-            agent.SetDestination(purposePersecution.position);
+            if (purposePersecution == null)
+            {
+                DurationEvent(TimeEvent.searchTarget);
+
+                var lastPlaceWhereEnemyWasVisible = transform.position + 3 * transform.forward;
+                agent.SetDestination(lastPlaceWhereEnemyWasVisible);
+                botStatus = BotStatus.searchTarget;
+            }
+            else
+            {
+                animator.SetFloat("motion", 1);
+                agent.SetDestination(purposePersecution.position);
+            }
+        }
+
+        if (botStatus == BotStatus.searchTarget && agent.remainingDistance - agent.stoppingDistance < 1e-8)
+        {
+            timer = 0f;
+            botStatus = BotStatus.idle;
+            animator.SetFloat("motion", 0);
         }
     }
 
-    private void EventTime()
+    private void DurationEvent(TimeEvent name = TimeEvent.idle)
     {
-        idleTime = Random.Range(0, 12);
+        if (name == TimeEvent.idle)
+        {
+            time = Random.Range(2, 8);
+        }
+        if (name == TimeEvent.searchTarget)
+        {
+            time = Random.Range(6, 14);
+        }
     }
 }

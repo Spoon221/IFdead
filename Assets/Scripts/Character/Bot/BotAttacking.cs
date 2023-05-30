@@ -1,18 +1,15 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BotAttacking : BotManager
 {
-    protected override BotStatus botStatus { get; set; }
-    protected override Transform purposePersecution { get; set; }
-
+    //[SerializeField] private float RadiusFieldsView;
     public float RadiusFieldsView;
     [Range(0, 360)] public float AngleView;
-    public LayerMask TargetMask;
-    public LayerMask ObstacleMask;
-    private bool canSeePlayer;
+    [SerializeField] private LayerMask TargetMask;
+
+    //private bool canSeePlayer;
+    public bool canSeePlayer;
 
     private Collider[] objectsArea;
 
@@ -26,7 +23,7 @@ public class BotAttacking : BotManager
         if (canSeePlayer)
         {
             purposePersecution = objectsArea[0].transform;
-            botStatus = BotStatus.pursuit;
+            botStatus = BotStatus.chase;
         }
     }
 
@@ -39,20 +36,20 @@ public class BotAttacking : BotManager
             var target = objectsArea[0].transform;
             var directionToTarget = (target.position - transform.position).normalized;
 
-            //if (Vector3.Angle(transform.forward, directionToTarget) < AngleView / 2)
-            //{
-            //    float distanceToTarget = Vector3.Distance(transform.position, target.position);
-
-            //    if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, ObstacleMask))
-            //        canSeePlayer = true;
-
-            //    else
-            //        canSeePlayer = false;
-            //}
-            //else
-            //    canSeePlayer = false;
+            if (Vector3.Angle(transform.forward, directionToTarget) < AngleView / 2)
+            {
+                canSeePlayer = true;
+                purposePersecution = target;
+            }
+            else
+            {
+                canSeePlayer = false;
+            }
         }
         else if (canSeePlayer)
+        {
+            purposePersecution = null;
             canSeePlayer = false;
+        }
     }
 }
