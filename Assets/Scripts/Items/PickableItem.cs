@@ -5,21 +5,21 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Item : MonoBehaviour
+public class PickableItem : MonoBehaviour
 {
     [field: SerializeField] public string ItemName { get; private set; }
-    public bool Collected { get; private set; } = false;
+    public bool IsCollected { get; private set; }
     [HideInInspector] public UnityEvent OnItemPickUp = new UnityEvent();
 
 
     public void Start()
     {
-        Collected = false;
+        IsCollected = false;
     }
 
     public void PickUpItem()
     {
-        Collected = true;
+        IsCollected = true;
         OnItemPickUp.Invoke();
         Destroy(gameObject);
     }

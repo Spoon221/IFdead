@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6400205100092873118}
   - component: {fileID: 6400205100092873115}
-  - component: {fileID: 6400205100092873116}
+  - component: {fileID: 4878965524822070031}
   - component: {fileID: 6400205100092873117}
   m_Layer: 5
   m_Name: FindKeyText
@@ -47,7 +47,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6400205100092873119}
   m_CullTransparentMesh: 1
---- !u!114 &6400205100092873116
+--- !u!114 &4878965524822070031
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6400205100092873119}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7daf0ee2cf7c74146b41c55a47157b47, type: 3}
+  m_Script: {fileID: 11500000, guid: ac9e4aca48518a24e88917ef2fc0aa89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6400205100092873117
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041D\u0430\u0439\u0442\u0438 \u043A\u043B\u044E\u0447\u0438"
+  m_text: "\u0426\u0435\u043B\u0438 \u0443\u0440\u043E\u0432\u043D\u044F"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
