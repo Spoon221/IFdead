@@ -1,26 +1,35 @@
+using Photon.Pun;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-public class BotManager : MonoBehaviour
+public class AI_Manager : MonoBehaviourPun
 {
-    private NavMeshAgent agent;
+    private AI_FieldOfView fieldOfView;
+    private AI_Attack attack;
+
+    protected static NavMeshAgent agent;
     private List<Transform> points = new List<Transform>();
 
     protected enum BotStatus { idle, patrol, chase, searchTarget }
     protected static BotStatus botStatus { get; set; }
     protected static Transform purposePersecution { get; set; }
+    protected static bool canShot { get; set; }
 
     private enum TimeEvent { idle, searchTarget }
-    private int time = 0;
-    private float timer = 0f;
+    private int time;
+    private float timer;
 
     //private float softAnimations = 0f;
     private Animator animator;
 
     void Start()
     {
+        fieldOfView = gameObject.GetComponent<AI_FieldOfView>();
+        attack = gameObject.GetComponent<AI_Attack>();
+
+        canShot = true;
         botStatus = BotStatus.idle;
         DurationEvent();
 
@@ -34,6 +43,13 @@ public class BotManager : MonoBehaviour
     }
 
     void Update()
+    {
+        fieldOfView.CheckingFieldView();
+        StatusLogic();
+        attack.ÑheckingAttackCondition();
+    }
+
+    private void StatusLogic()
     {
         if (botStatus == BotStatus.idle)
         {

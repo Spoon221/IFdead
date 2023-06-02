@@ -1,12 +1,12 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(BotAttacking))]
+[CustomEditor(typeof(AI_FieldOfView))]
 public class FieldOfViewEditor : Editor
 {
     private void OnSceneGUI()
     {
-        var fov = (BotAttacking)target;
+        var fov = (AI_FieldOfView)target;
         Handles.color = Color.white;
         Handles.DrawWireArc(fov.transform.position, Vector3.up, Vector3.forward, 360, fov.RadiusFieldsView);
 

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class BotAttacking : BotManager
+public class AI_FieldOfView : AI_Manager
 {
     //[SerializeField] private float RadiusFieldsView;
     public float RadiusFieldsView;
@@ -18,11 +18,10 @@ public class BotAttacking : BotManager
         FieldView();
     }
 
-    private void Update()
+    public void CheckingFieldView()
     {
         if (canSeePlayer)
         {
-            purposePersecution = objectsArea[0].transform;
             botStatus = BotStatus.chase;
         }
     }
@@ -39,7 +38,7 @@ public class BotAttacking : BotManager
             if (Vector3.Angle(transform.forward, directionToTarget) < AngleView / 2)
             {
                 canSeePlayer = true;
-                purposePersecution = target;
+                purposePersecution = target.transform.parent.gameObject.transform;
             }
             else
             {
