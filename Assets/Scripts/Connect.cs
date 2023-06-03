@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using Photon.Realtime;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Cinemachine;
 
 public class Connect : MonoBehaviourPunCallbacks
 {
@@ -19,8 +20,10 @@ public class Connect : MonoBehaviourPunCallbacks
     public static bool GameIsPaused = false;
     public PlayerMovementController scriptPlayerMovementController;
     public ThirdPersonCameraController scriptThirdPersonCameraController;
+    [SerializeField] CinemachineVirtualCamera cameraOnTable;
     private void Start()
     {
+        cameraOnTable.enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
         Loading.SetActive(true);
         lobby.enabled=true;
@@ -51,6 +54,7 @@ public class Connect : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinLobby();
         lobby.enabled = false;
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -69,7 +73,7 @@ public class Connect : MonoBehaviourPunCallbacks
     }
     public void Resume()
     {
-        FindRoom.SetActive(false);
+        cameraOnTable.enabled = false;
         ESC.enabled = true;
         GameIsPaused = false;
         scriptPlayerMovementController.enabled = true;
@@ -78,7 +82,7 @@ public class Connect : MonoBehaviourPunCallbacks
 
     void Pause()
     {
-        FindRoom.SetActive(true);
+        cameraOnTable.enabled = true;
         ESC.enabled = false;
         GameIsPaused = true;
         scriptPlayerMovementController.enabled = false;
