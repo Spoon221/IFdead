@@ -21,7 +21,7 @@ public class PlayerSkillManager : MonoBehaviourPun
 
     void Update()
     {
-        if (photonView.IsMine && Input.GetKeyDown(KeyCode.E) && isSmokeReady)
+        if (photonView.IsMine && Input.GetKeyDown(KeyCode.F) && isSmokeReady)
         {
             photonView.RPC("GetSmoke", RpcTarget.AllBuffered);
         }
