@@ -23,7 +23,6 @@ public class Connect : MonoBehaviourPunCallbacks
     {
         Cursor.lockState = CursorLockMode.Locked;
         Loading.SetActive(true);
-        FindRoom.SetActive(false);
         lobby.enabled=true;
         PhotonNetwork.ConnectUsingSettings();
     }
