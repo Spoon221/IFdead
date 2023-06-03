@@ -43,7 +43,7 @@ public class ThirdPersonCameraController : MonoBehaviour, IPunObservable
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        if (view.Owner.IsLocal)
+        if (view.IsMine)
         {
             cinemachineVirtualCamera = gameObject.GetComponent<CinemachineFreeLook>();
             var parent = gameObject.transform.parent.transform;

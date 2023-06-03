@@ -14,11 +14,15 @@ public class Connect : MonoBehaviourPunCallbacks
     List<RoomInfo> AllRoomsInfo = new List<RoomInfo>();
     public GameObject Loading;
     public GameObject FindRoom;
-
+    public Canvas lobby;
+    public Canvas ESC;
+    public static bool GameIsPaused = false;
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         Loading.SetActive(true);
         FindRoom.SetActive(false);
+        lobby.enabled=true;
         PhotonNetwork.ConnectUsingSettings();
     }
 
@@ -42,9 +46,39 @@ public class Connect : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Loading.SetActive(false);
-        FindRoom.SetActive(true);
         Debug.Log(PhotonNetwork.CloudRegion);
         PhotonNetwork.JoinLobby();
+        lobby.enabled = false;
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (GameIsPaused)
+            {
+                Resume();
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            else
+            {
+                Pause();
+                Cursor.lockState = CursorLockMode.None;
+            }
+        }
+    }
+    public void Resume()
+    {
+        FindRoom.SetActive(false);
+        ESC.enabled = true;
+        GameIsPaused = false;
+    }
+
+    void Pause()
+    {
+        FindRoom.SetActive(true);
+        ESC.enabled = false;
+        //Time.timeScale = 0f;
+        GameIsPaused = true;
     }
 
     public void ExitButton()
