@@ -17,6 +17,8 @@ public class Connect : MonoBehaviourPunCallbacks
     public Canvas lobby;
     public Canvas ESC;
     public static bool GameIsPaused = false;
+    public PlayerMovementController scriptPlayerMovementController;
+    public ThirdPersonCameraController scriptThirdPersonCameraController;
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -71,14 +73,17 @@ public class Connect : MonoBehaviourPunCallbacks
         FindRoom.SetActive(false);
         ESC.enabled = true;
         GameIsPaused = false;
+        scriptPlayerMovementController.enabled = true;
+        scriptThirdPersonCameraController.enabled = true;
     }
 
     void Pause()
     {
         FindRoom.SetActive(true);
         ESC.enabled = false;
-        //Time.timeScale = 0f;
         GameIsPaused = true;
+        scriptPlayerMovementController.enabled = false;
+        scriptThirdPersonCameraController.enabled = false;
     }
 
     public void ExitButton()
