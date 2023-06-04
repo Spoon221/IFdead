@@ -21,6 +21,7 @@ public class Connect : MonoBehaviourPunCallbacks
     public PlayerMovementController scriptPlayerMovementController;
     public ThirdPersonCameraController scriptThirdPersonCameraController;
     [SerializeField] CinemachineVirtualCamera cameraOnTable;
+    public Text hint;
     private void Start()
     {
         cameraOnTable.enabled = false;
@@ -63,11 +64,13 @@ public class Connect : MonoBehaviourPunCallbacks
             {
                 Resume();
                 Cursor.lockState = CursorLockMode.Locked;
+                hint.enabled = true;
             }
             else
             {
                 Pause();
                 Cursor.lockState = CursorLockMode.None;
+                hint.enabled = false;
             }
         }
     }
