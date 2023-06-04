@@ -14,7 +14,7 @@ public class PlayerMovementController : MonoBehaviour
     public float groundDrag;
     public float airMultiplier;
 
-    [Header("Ñharacter Parameters")]
+    [Header("Ð¡haracter Parameters")]
     public string nameModelWithAnimator;
     public float playerHeight;
 
@@ -48,7 +48,7 @@ public class PlayerMovementController : MonoBehaviour
         else
             rb.drag = 0;
 
-        animator.SetFloat("FrontMove", ÑonversionRange(new Vector2(rb.velocity.x, rb.velocity.z).magnitude, moveSpeed));
+        animator.SetFloat("FrontMove", OnversionRange(new Vector2(rb.velocity.x, rb.velocity.z).magnitude, moveSpeed));
     }
 
     private void FixedUpdate()
@@ -96,7 +96,7 @@ public class PlayerMovementController : MonoBehaviour
         return Physics.Raycast(rb.worldCenterOfMass, Vector3.down, lRay);
     }
 
-    private float ÑonversionRange(float valueConverted, float inputRangeMax,
+    private float OnversionRange(float valueConverted, float inputRangeMax,
         float outputRangeMax = 1, float inputRangeMin = 0, float outputRangeMin = 0)
     {
         var diffOutputRange = MathF.Abs(outputRangeMax - outputRangeMin);
