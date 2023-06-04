@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 2093443782267337543}
   - component: {fileID: 4097195505043946274}
   - component: {fileID: 1679485235}
-  - component: {fileID: 3345011476708461418}
   - component: {fileID: 1470369804}
+  - component: {fileID: -6441455879510189003}
   m_Layer: 0
   m_Name: rust_key
   m_TagString: Key
@@ -66,6 +66,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 1a7c6b13b8983fa4bbfb1dbfbb5fef57, type: 2}
+  - {fileID: 2100000, guid: 93aecc30ce4367049b64d64dd8acd83e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -114,22 +115,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.12193201, y: 0.039105855, z: 0.23262405}
   m_Center: {x: 0, y: -9.313226e-10, z: 0.0000000037252903}
---- !u!114 &3345011476708461418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 374289202576707483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cdf11c5e4169c44d8f23dd4730d42a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <ItemName>k__BackingField: "\u041A\u043B\u044E\u0447"
-  OnItemPickUp:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1470369804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,3 +137,19 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-6441455879510189003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 374289202576707483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b61d3cdd3f03f0941868909b0022fa34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ItemName>k__BackingField: "\u041A\u043B\u044E\u0447"
+  OnItemPickUp:
+    m_PersistentCalls:
+      m_Calls: []

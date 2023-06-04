@@ -12,6 +12,8 @@ TagManager:
   - PlayerCamera
   - Key
   - Points
+  - Generator
+  - Lamppost
   layers:
   - Default
   - TransparentFX

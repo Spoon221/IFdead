@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1270646666}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.29, z: 0.038}
+  m_LocalPosition: {x: 0, y: 0.29, z: -0.052}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 1901550417}
   - component: {fileID: 1901550416}
   m_Layer: 0
-  m_Name: Bars
+  m_Name: ManiacCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,7 +161,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -220,7 +220,6 @@ GameObject:
   - component: {fileID: 1085475388915998646}
   - component: {fileID: 8935490345591800789}
   - component: {fileID: 856852341058911971}
-  - component: {fileID: 2015159822}
   - component: {fileID: 1817384867521719891}
   m_Layer: 0
   m_Name: Maniac
@@ -339,7 +338,7 @@ MonoBehaviour:
   - {fileID: 1085475388915998646}
   - {fileID: 1817384867521719891}
   - {fileID: 1270646670}
-  sceneViewId: 0
+  sceneViewId: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &856852341058911971
@@ -358,25 +357,8 @@ MonoBehaviour:
   scriptPlayerMovementController: {fileID: 6132893871799605145, guid: d0e1eaa7424fff54fb862bfa780fb50a, type: 3}
   scriptManiacMovementController: {fileID: 8059336578616850902}
   Bar: {fileID: 1901550418}
+  eCode: {fileID: 1901550418}
   camera: {fileID: 1270646669}
---- !u!114 &2015159822
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 529482825575864600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fb5ea250178f7b479ff6a91090c148a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <MaxMana>k__BackingField: 0
-  <ManaRecoveryPerSecond>k__BackingField: 0
-  <CurrentMana>k__BackingField: 0
-  OnManaChanged:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1817384867521719891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,11 +644,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9146413715602086848, guid: cebd83c774e0ac242a2a27c738fef157, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 53.260468
+      value: 56.599976
       objectReference: {fileID: 0}
     - target: {fileID: 9146413715602086848, guid: cebd83c774e0ac242a2a27c738fef157, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 17.49281
+      value: 23.599976
       objectReference: {fileID: 0}
     - target: {fileID: 9146413715602086848, guid: cebd83c774e0ac242a2a27c738fef157, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
