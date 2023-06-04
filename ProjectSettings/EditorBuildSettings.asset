@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/FindRoom.unity
-    guid: e8996398157f5144a81329e7ff83bb1c
+    path: Assets/Scenes/FindRoom 1.unity
+    guid: 4210011179b87424a82558e89b824325
   - enabled: 1
     path: Assets/Scenes/GameArea.unity
     guid: d0681fd5e689b6e4abf7aaf65a2cb2d0
