@@ -24,6 +24,7 @@ public class Connect : MonoBehaviourPunCallbacks
     public Text hint;
     private void Start()
     {
+        hint.enabled = false;
         cameraOnTable.enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
         Loading.SetActive(true);
@@ -54,6 +55,7 @@ public class Connect : MonoBehaviourPunCallbacks
         Debug.Log(PhotonNetwork.CloudRegion);
         PhotonNetwork.JoinLobby();
         lobby.enabled = false;
+        hint.enabled = true;
     }
 
     private void Update()
