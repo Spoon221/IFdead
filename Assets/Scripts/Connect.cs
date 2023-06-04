@@ -24,7 +24,7 @@ public class Connect : MonoBehaviourPunCallbacks
     private void Start()
     {
         cameraOnTable.enabled = false;
-        Cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.Locked;
         Loading.SetActive(true);
         lobby.enabled=true;
         PhotonNetwork.ConnectUsingSettings();
@@ -62,7 +62,7 @@ public class Connect : MonoBehaviourPunCallbacks
             if (GameIsPaused)
             {
                 Resume();
-                Cursor.lockState = CursorLockMode.None;
+                Cursor.lockState = CursorLockMode.Locked;
             }
             else
             {
