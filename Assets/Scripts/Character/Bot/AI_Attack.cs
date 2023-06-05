@@ -9,7 +9,7 @@ public class AI_Attack : AI_Manager
 
     [SerializeField] private float distanceAttack;
 
-    [SerializeField] private PhotonView view;
+    //[SerializeField] private PhotonView view;
 
     //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     //{
@@ -29,7 +29,7 @@ public class AI_Attack : AI_Manager
         //{
         if (botStatus == BotStatus.chase
             && canShot
-            && agent.remainingDistance - agent.stoppingDistance < 5f)
+            && agent.remainingDistance - agent.stoppingDistance < distanceAttack)
         {
             Shot();
             //view.RPC("Shot", RpcTarget.AllBuffered);
