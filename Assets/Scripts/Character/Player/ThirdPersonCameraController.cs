@@ -25,10 +25,12 @@ public class ThirdPersonCameraController : MonoBehaviour, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext(playerModel.rotation);
+            stream.SendNext(playerModel.position);
         }
         else
         {
             playerModel.rotation = (Quaternion) stream.ReceiveNext();
+            playerModel.position = (Vector3) stream.ReceiveNext();
         }
     }
 
