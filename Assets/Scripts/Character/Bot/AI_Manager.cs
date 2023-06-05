@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-public class AI_Manager : MonoBehaviourPun
+public class AI_Manager : MonoBehaviourPunCallbacks
 {
     private AI_FieldOfView fieldOfView;
     private AI_Attack attack;
@@ -23,6 +23,8 @@ public class AI_Manager : MonoBehaviourPun
 
     //private float softAnimations = 0f;
     private Animator animator;
+
+
 
     void Start()
     {
