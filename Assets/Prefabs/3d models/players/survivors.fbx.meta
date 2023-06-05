@@ -1,9 +1,64 @@
 fileFormatVersion: 2
-guid: 0c2317b680615324199b9c7e9fc2d061
+guid: f269fb506912ca14a8460d3e335bd3d9
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: balloon
+    second: {fileID: 2100000, guid: e25ddebafe50f4744b45a87ee121191a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: body
+    second: {fileID: 2100000, guid: 8b3b9172521eec94ebf53c89e6ed7e42, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: casing
+    second: {fileID: 2100000, guid: e25ddebafe50f4744b45a87ee121191a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal_1
+    second: {fileID: 2100000, guid: 6818a28e7658dc44dbc1dd6f9b3a68b1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal_2
+    second: {fileID: 2100000, guid: 212a000084a4cdd4985133a9130ba427, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal_3
+    second: {fileID: 2100000, guid: 6818a28e7658dc44dbc1dd6f9b3a68b1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metal_4
+    second: {fileID: 2100000, guid: 392039ce696bf4341aa8f161fe28e515, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: panel
+    second: {fileID: 2100000, guid: 8b3b9172521eec94ebf53c89e6ed7e42, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: panel_2
+    second: {fileID: 2100000, guid: 392039ce696bf4341aa8f161fe28e515, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: rubber
+    second: {fileID: 2100000, guid: 6818a28e7658dc44dbc1dd6f9b3a68b1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: screen
+    second: {fileID: 2100000, guid: 6818a28e7658dc44dbc1dd6f9b3a68b1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -36,7 +91,7 @@ ModelImporter:
       name: Idle
       takeName: Armature|Idle
       internalID: -8945691123924629249
-      firstFrame: 1
+      firstFrame: 0
       lastFrame: 40
       wrapMode: 0
       orientationOffsetY: 0
@@ -65,7 +120,7 @@ ModelImporter:
       name: Jump
       takeName: Armature|Jump
       internalID: 1079665108409675491
-      firstFrame: 1
+      firstFrame: 0
       lastFrame: 23
       wrapMode: 0
       orientationOffsetY: 0
@@ -94,7 +149,7 @@ ModelImporter:
       name: Run
       takeName: Armature|Run
       internalID: -7551964380084998518
-      firstFrame: 1
+      firstFrame: 0
       lastFrame: 40
       wrapMode: 0
       orientationOffsetY: 0
@@ -123,7 +178,7 @@ ModelImporter:
       name: Step Back
       takeName: Armature|Step Back
       internalID: -1116261817537419941
-      firstFrame: 1
+      firstFrame: 0
       lastFrame: 24
       wrapMode: 0
       orientationOffsetY: 0
@@ -152,7 +207,7 @@ ModelImporter:
       name: Turn Right TEST
       takeName: Armature|Turn Right TEST
       internalID: -4693298611325646665
-      firstFrame: 1
+      firstFrame: 0
       lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0

@@ -1,9 +1,64 @@
 fileFormatVersion: 2
-guid: f2506be64fd4e3142810690b0481b827
+guid: 66fa0be65bf0b694180396f3e53b1468
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: 8b3b9172521eec94ebf53c89e6ed7e42, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.0010
+    second: {fileID: 2100000, guid: 8b3b9172521eec94ebf53c89e6ed7e42, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.0011
+    second: {fileID: 2100000, guid: 392039ce696bf4341aa8f161fe28e515, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: 8b3b9172521eec94ebf53c89e6ed7e42, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: 6818a28e7658dc44dbc1dd6f9b3a68b1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.004
+    second: {fileID: 2100000, guid: 6818a28e7658dc44dbc1dd6f9b3a68b1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.005
+    second: {fileID: 2100000, guid: 6818a28e7658dc44dbc1dd6f9b3a68b1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.006
+    second: {fileID: 2100000, guid: 8b3b9172521eec94ebf53c89e6ed7e42, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.007
+    second: {fileID: 2100000, guid: 392039ce696bf4341aa8f161fe28e515, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.008
+    second: {fileID: 2100000, guid: 8b3b9172521eec94ebf53c89e6ed7e42, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.009
+    second: {fileID: 2100000, guid: 6818a28e7658dc44dbc1dd6f9b3a68b1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -33,10 +88,10 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: bot_attack_right_arm
+      name: attack_right_arm
       takeName: Armature.001|attack_right_arm
       internalID: 7114958763628302516
-      firstFrame: 1
+      firstFrame: 0
       lastFrame: 35
       wrapMode: 0
       orientationOffsetY: 0
@@ -62,10 +117,10 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: bot_idle
+      name: idle_b
       takeName: Armature.001|idle
       internalID: 9163257287205964719
-      firstFrame: 1
+      firstFrame: 0
       lastFrame: 40
       wrapMode: 0
       orientationOffsetY: 0
@@ -91,10 +146,10 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: bot_idle_turning_head
+      name: idle_turning_head
       takeName: Armature.001|idle_turning_head
       internalID: 364896041527566076
-      firstFrame: 1
+      firstFrame: 0
       lastFrame: 35
       wrapMode: 0
       orientationOffsetY: 0
@@ -120,10 +175,10 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: bot_walk
+      name: walk
       takeName: Armature.001|walk
       internalID: -6993090946979842912
-      firstFrame: 1
+      firstFrame: 0
       lastFrame: 40
       wrapMode: 0
       orientationOffsetY: 0
