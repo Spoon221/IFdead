@@ -57,8 +57,8 @@ public class LevelGoals : MonoBehaviour
 
     private void UpdateText()
     {
-        var keyText = $"Ключей найдено: {currentNumberOfKeys}/{numberOfKeysToFind}";
-        var generatorText = $"Генератов включено: {currentNumberOfActivatedGenerators}/{numberOfGeneratorsToActivate}";
-        gameObject.GetComponent<TMP_Text>().text = $"Цель: Выбраться со свалки\n{keyText}\n{generatorText}";
+        var keyText = $"ключей найдено: {currentNumberOfKeys}/{numberOfKeysToFind}";
+        var generatorText = $"генератов включено: {currentNumberOfActivatedGenerators}/{numberOfGeneratorsToActivate}";
+        gameObject.GetComponent<TMP_Text>().text = $"{keyText}\n{generatorText}";
     }
 }

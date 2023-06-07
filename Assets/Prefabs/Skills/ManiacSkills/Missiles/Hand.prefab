@@ -373,7 +373,7 @@ MonoBehaviour:
   <Damage>k__BackingField: 50
   <Speed>k__BackingField: 20
   <Distance>k__BackingField: 0
-  <CooldownTime>k__BackingField: 1
+  <CooldownTime>k__BackingField: 4
   <ManaCost>k__BackingField: 45
 --- !u!54 &-4091243308978657494
 Rigidbody:

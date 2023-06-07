@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerSkillManager : MonoBehaviourPun
 {
     public GameObject smokeCloudSkill;
-    private bool isSmokeReady;
+    public bool isSmokeReady;
     private float smokeManaCost;
     private float cooldownTime;
     private PlayerStats playerStats;

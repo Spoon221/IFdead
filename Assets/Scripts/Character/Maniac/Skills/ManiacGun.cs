@@ -11,7 +11,7 @@ public class ManiacGun : MonoBehaviourPun, IPunObservable
     [SerializeField] private Missile missilePrefab;
     [SerializeField] private PhotonView view;
     private ManiacStats maniacStats;
-    private bool canShoot;
+    public bool canShoot;
     private float missileCooldown;
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
