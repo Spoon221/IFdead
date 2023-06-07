@@ -5,8 +5,9 @@ using System.Linq.Expressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Photon.Pun;
 
-public class ItemManager : MonoBehaviour
+public class ItemManager : MonoBehaviourPunCallbacks
 {
     [FormerlySerializedAs("ItemMessage")] [SerializeField]
     private GameObject itemMessage;
@@ -26,7 +27,7 @@ public class ItemManager : MonoBehaviour
             {
                 actionText.text = $"Подобрать {pickableItem.ItemName}";
                 itemMessage.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.E) || !photonView.IsMine) //подумать над реализацией в онлайне
                 {
                     pickableItem.PickUpItem();
                     itemMessage.SetActive(false);
@@ -40,7 +41,7 @@ public class ItemManager : MonoBehaviour
             {
                 actionText.text = item.ItemName;
                 itemMessage.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.E) || !photonView.IsMine) ///подумать над реализацией в онлайне
                 {
                     item.ActivateItem();
                     itemMessage.SetActive(false);
