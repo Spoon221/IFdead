@@ -36,6 +36,11 @@ public class Connect : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();
         
     }
+    private void Awake()
+    {
+        PhotonNetwork.SendRate = 256; //скорость отправки файлов
+        PhotonNetwork.SerializationRate = 256; //скорость принятия файлов
+    }
 
     public void CreateRoomButton()
     {
