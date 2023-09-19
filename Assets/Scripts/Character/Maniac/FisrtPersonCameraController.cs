@@ -26,11 +26,13 @@ public class FisrtPersonCameraController : MonoBehaviour, IPunObservable
         {
             stream.SendNext(maniacModel.rotation);
             stream.SendNext(Skill.rotation);
+            stream.SendNext(Skill.position);
         }
         else
         {
             maniacModel.rotation = (Quaternion) stream.ReceiveNext();
             Skill.rotation = (Quaternion) stream.ReceiveNext();
+            Skill.position = (Vector3)stream.ReceiveNext();
         }
     }
 
