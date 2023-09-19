@@ -22,14 +22,19 @@ public class Connect : MonoBehaviourPunCallbacks
     public ThirdPersonCameraController scriptThirdPersonCameraController;
     [SerializeField] CinemachineVirtualCamera cameraOnTable;
     public Text hint;
+
+    string gameVersion = "1"; //Номер версии этого клиента
     private void Start()
     {
+        PhotonNetwork.GameVersion = gameVersion;
+        Debug.Log(PhotonNetwork.GameVersion);
         hint.enabled = false;
         cameraOnTable.enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
         Loading.SetActive(true);
         lobby.enabled=true;
         PhotonNetwork.ConnectUsingSettings();
+        
     }
 
     public void CreateRoomButton()
