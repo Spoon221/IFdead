@@ -40,6 +40,8 @@ public class ThirdPersonCameraController : MonoBehaviour, IPunObservable
         {
             cinemachineVirtualCamera.enabled = false;
         }
+        PhotonNetwork.SendRate = 60; //Default is 30
+        PhotonNetwork.SerializationRate = 60; //5 is really laggy, jumpy. Default is 10?
     }
 
     private void Start()
