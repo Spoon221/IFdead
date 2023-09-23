@@ -26,15 +26,17 @@ public class Connect : MonoBehaviourPunCallbacks
     string gameVersion = "1"; //Номер версии этого клиента
     private void Start()
     {
-        PhotonNetwork.GameVersion = gameVersion;
-        Debug.Log(PhotonNetwork.GameVersion);
-        hint.enabled = false;
-        cameraOnTable.enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
-        Loading.SetActive(true);
-        lobby.enabled=true;
-        PhotonNetwork.ConnectUsingSettings();
-        
+        if (!PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.GameVersion = gameVersion;
+            Debug.Log("Версия клиента: " + PhotonNetwork.GameVersion);
+            hint.enabled = false;
+            cameraOnTable.enabled = false;
+            Loading.SetActive(true);
+            lobby.enabled = true;
+            PhotonNetwork.ConnectUsingSettings();
+        }
     }
     private void Awake()
     {
@@ -62,7 +64,7 @@ public class Connect : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Loading.SetActive(false);
-        Debug.Log(PhotonNetwork.CloudRegion);
+        Debug.Log("Регион подключения: " + PhotonNetwork.CloudRegion);
         PhotonNetwork.JoinLobby();
         lobby.enabled = false;
         hint.enabled = true;
