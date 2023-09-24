@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class Settings : MonoBehaviour
 {
     public Dropdown resolution;
-    public GameObject settingsMenu;
+    //public GameObject settingsMenu;
 
     public void ChangeResolution()
     {
