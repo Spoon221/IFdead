@@ -16,11 +16,16 @@ public class SpawnManagerForPlayer : MonoBehaviour
 
         if (PhotonNetwork.PlayerList.Length == 1)
         {
-            PhotonNetwork.Instantiate(Maniac.name, randomPositions, Quaternion.identity);
+            var test = PhotonNetwork.Instantiate(Maniac.name, randomPositions, Quaternion.identity);
+            test.GetComponent<ManiacMovementController>().enabled = true;
+            //PhotonNetwork.Instantiate(Maniac.name, randomPositions, Quaternion.identity);
+
         }
         else if (PhotonNetwork.PlayerList.Length > 1)
         {
-            PhotonNetwork.Instantiate(Player.name, randomPositions, Quaternion.identity);
+            var test1 = PhotonNetwork.Instantiate(Player.name, randomPositions, Quaternion.identity);
+            test1.GetComponent<PlayerMovementController>().enabled = true;
+            //PhotonNetwork.Instantiate(Player.name, randomPositions, Quaternion.identity);
         }
     }
 }
