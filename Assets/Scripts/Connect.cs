@@ -68,6 +68,7 @@ public class Connect : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinLobby();
         lobby.enabled = false;
         hint.enabled = true;
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     private void Update()
