@@ -20,21 +20,30 @@ public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObserv
 
     private Slider sensitivitySlider;
 
-    private Vector3 targetPosition;
-    private Quaternion targetRotation;
+    float currentTime = 0;
+    double currentPacketTime = 0;
+    double lastPacketTime = 0;
+    Vector3 positionAtLastPacket = Vector3.zero;
+    Quaternion rotationAtLastPacket = Quaternion.identity;
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(transform.position);
-            stream.SendNext(transform.rotation);
+            stream.SendNext(playerModel.position);
             stream.SendNext(playerModel.rotation);
         }
         else
         {
-            targetPosition = (Vector3)stream.ReceiveNext();
-            targetRotation = (Quaternion)stream.ReceiveNext();
-            playerModel.rotation=(Quaternion)stream.ReceiveNext();
+            playerModel.position = (Vector3)stream.ReceiveNext();
+            playerModel.rotation = (Quaternion)stream.ReceiveNext();
+            //orientation.position = (Vector3)stream.ReceiveNext();
+            //orientation.rotation = (Quaternion)stream.ReceiveNext();
+
+            currentTime = 0.0f;
+            lastPacketTime = currentPacketTime;
+            currentPacketTime = info.SentServerTime;
+            positionAtLastPacket = playerModel.position;
+            rotationAtLastPacket = playerModel.rotation;
         }
     }
 
@@ -44,8 +53,6 @@ public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObserv
         {
             cinemachineVirtualCamera.enabled = false;
         }
-        targetPosition = transform.position;
-        targetRotation = transform.rotation;
     }
 
     private void Start()
@@ -63,6 +70,14 @@ public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObserv
 
     private void Update()
     {
+        if (!photonView.IsMine)
+        {
+            double timeToReachGoal = currentPacketTime - lastPacketTime;
+            currentTime += Time.deltaTime;
+
+            transform.position = Vector3.Lerp(positionAtLastPacket, orientation.position, (float)(currentTime / timeToReachGoal));
+            transform.rotation = Quaternion.Lerp(rotationAtLastPacket, orientation.rotation, (float)(currentTime / timeToReachGoal));
+        }
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         if (view.IsMine)
@@ -76,23 +91,9 @@ public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObserv
                 playerModel.forward = Vector3.Slerp(playerModel.forward, inputDir.normalized,
                     Time.deltaTime * rotationModelSpeed);
             }
-            targetPosition += viewDir * rotationModelSpeed * Time.fixedDeltaTime;
-            targetRotation *= Quaternion.Euler(inputDir * rotationModelSpeed * Time.fixedDeltaTime);
-
-            // Вызов метода вращения на всех клиентах
-            photonView.RPC("Rotate", RpcTarget.All, targetRotation);
-            photonView.RPC("Move", RpcTarget.All, targetPosition);
         }
     }
-    [PunRPC]
-    void Move(Vector3 newPosition)
-    {
-        transform.position = Vector3.Lerp(transform.position, newPosition, rotationModelSpeed * Time.fixedDeltaTime);
-    }
-    void Rotate(Quaternion newRotation)
-    {
-        transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, rotationModelSpeed * Time.fixedDeltaTime);
-    }
+
 
 
     private void ChangeSensitivity(float sensitivity)
