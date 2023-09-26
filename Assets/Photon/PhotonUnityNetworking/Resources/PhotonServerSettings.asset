@@ -46,6 +46,7 @@ MonoBehaviour:
   - Shot
   - Laterupdate
   - steamKey
+  - Move
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

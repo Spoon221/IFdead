@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class ThirdPersonCameraController : MonoBehaviour, IPunObservable
+public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObservable
 {
     [Header("References")] public CinemachineFreeLook cinemachineVirtualCamera;
     public PhotonView view;
@@ -19,18 +19,22 @@ public class ThirdPersonCameraController : MonoBehaviour, IPunObservable
     public float maxYSensitivity;
 
     private Slider sensitivitySlider;
-    
+
+    private Vector3 targetPosition;
+    private Quaternion targetRotation;
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
             stream.SendNext(playerModel.rotation);
-            stream.SendNext(playerModel.position);
         }
         else
         {
-            playerModel.rotation = (Quaternion) stream.ReceiveNext();
-            playerModel.position = (Vector3) stream.ReceiveNext();
+            targetPosition = (Vector3)stream.ReceiveNext();
+            targetRotation = (Quaternion)stream.ReceiveNext();
+            playerModel.rotation=(Quaternion)stream.ReceiveNext();
         }
     }
 
@@ -40,6 +44,8 @@ public class ThirdPersonCameraController : MonoBehaviour, IPunObservable
         {
             cinemachineVirtualCamera.enabled = false;
         }
+        targetPosition = transform.position;
+        targetRotation = transform.rotation;
     }
 
     private void Start()
@@ -70,8 +76,24 @@ public class ThirdPersonCameraController : MonoBehaviour, IPunObservable
                 playerModel.forward = Vector3.Slerp(playerModel.forward, inputDir.normalized,
                     Time.deltaTime * rotationModelSpeed);
             }
+            targetPosition += viewDir * rotationModelSpeed * Time.fixedDeltaTime;
+            targetRotation *= Quaternion.Euler(inputDir * rotationModelSpeed * Time.fixedDeltaTime);
+
+            // Вызов метода вращения на всех клиентах
+            photonView.RPC("Rotate", RpcTarget.All, targetRotation);
+            photonView.RPC("Move", RpcTarget.All, targetPosition);
         }
     }
+    [PunRPC]
+    void Move(Vector3 newPosition)
+    {
+        transform.position = Vector3.Lerp(transform.position, newPosition, rotationModelSpeed * Time.fixedDeltaTime);
+    }
+    void Rotate(Quaternion newRotation)
+    {
+        transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, rotationModelSpeed * Time.fixedDeltaTime);
+    }
+
 
     private void ChangeSensitivity(float sensitivity)
     {
