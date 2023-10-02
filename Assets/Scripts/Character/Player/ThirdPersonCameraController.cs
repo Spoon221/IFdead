@@ -26,15 +26,13 @@ public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObserv
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(transform.position);
-            stream.SendNext(transform.rotation);
             stream.SendNext(playerModel.rotation);
+            stream.SendNext(playerModel.position);
         }
         else
         {
-            targetPosition = (Vector3)stream.ReceiveNext();
-            targetRotation = (Quaternion)stream.ReceiveNext();
-            playerModel.rotation=(Quaternion)stream.ReceiveNext();
+            playerModel.rotation = (Quaternion)stream.ReceiveNext();
+            playerModel.position = (Vector3)stream.ReceiveNext();
         }
     }
 
@@ -67,8 +65,7 @@ public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObserv
         float verticalInput = Input.GetAxis("Vertical");
         if (view.IsMine)
         {
-            Vector3 viewDir = player.position -
-                              new Vector3(transform.position.x, player.position.y, transform.position.z);
+            Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
             orientation.forward = viewDir.normalized;
             Vector3 inputDir = orientation.forward * verticalInput + orientation.right * horizontalInput;
             if (inputDir != Vector3.zero)
@@ -78,22 +75,8 @@ public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObserv
             }
             targetPosition += viewDir * rotationModelSpeed * Time.fixedDeltaTime;
             targetRotation *= Quaternion.Euler(inputDir * rotationModelSpeed * Time.fixedDeltaTime);
-
-            // Вызов метода вращения на всех клиентах
-            photonView.RPC("Rotate", RpcTarget.All, targetRotation);
-            photonView.RPC("Move", RpcTarget.All, targetPosition);
         }
     }
-    [PunRPC]
-    void Move(Vector3 newPosition)
-    {
-        transform.position = Vector3.Lerp(transform.position, newPosition, rotationModelSpeed * Time.fixedDeltaTime);
-    }
-    void Rotate(Quaternion newRotation)
-    {
-        transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, rotationModelSpeed * Time.fixedDeltaTime);
-    }
-
 
     private void ChangeSensitivity(float sensitivity)
     {

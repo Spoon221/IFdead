@@ -8,11 +8,13 @@ public class IsMine : MonoBehaviourPun
     public ItemManager scriptPlayerItemManager;
     public Canvas Bar;
     public Camera camera;
+    public AudioListener audioListener;
 
     private void Awake()
     {
         if (!photonView.IsMine)
         {
+            audioListener.enabled = false;
             camera.enabled = false;
             Bar.enabled = false;
             scriptPlayerMovementController.enabled = false;
