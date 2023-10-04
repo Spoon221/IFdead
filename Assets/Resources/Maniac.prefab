@@ -649,7 +649,6 @@ MonoBehaviour:
   Bar: {fileID: 1901550418}
   camera: {fileID: 1270646669}
   audioListener: {fileID: 1270646668}
-  cameraController: {fileID: 0}
 --- !u!114 &1817384867521719891
 MonoBehaviour:
   m_ObjectHideFlags: 0
