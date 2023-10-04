@@ -17,6 +17,7 @@ public class PlayerMovementController : MonoBehaviour
     [Header("Сharacter Parameters")]
     public string nameModelWithAnimator;
     public float playerHeight;
+    private bool canJump = true;
 
     private float lengthPay;
 
@@ -69,16 +70,19 @@ public class PlayerMovementController : MonoBehaviour
     }
     private void JumpLogic()
     {
-        if (IsGround(lengthPay) && Input.GetKeyDown(KeyCode.Space))
+        if (IsGround(lengthPay) && Input.GetKeyDown(KeyCode.Space) && canJump)
             StartCoroutine(Jump());
     }
 
     private IEnumerator Jump()
     {
+        canJump = false;
         animator.SetTrigger("Jumping");
         yield return new WaitForSeconds(0.3f);
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Force);
-        yield break;
+        //yield break;
+        yield return new WaitForSeconds(0.5f);
+        canJump = true;
     }
 
     private void SpeedControl()
