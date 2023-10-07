@@ -20,17 +20,12 @@ public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObserv
 
     private Slider sensitivitySlider;
 
-    float currentTime = 0;
-    double currentPacketTime = 0;
-    double lastPacketTime = 0;
-    Vector3 positionAtLastPacket = Vector3.zero;
-    Quaternion rotationAtLastPacket = Quaternion.identity;
+    private Vector3 targetPosition;
+    private Quaternion targetRotation;
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(transform.position);
-            stream.SendNext(transform.rotation);
             stream.SendNext(playerModel.rotation);
             stream.SendNext(playerModel.position);
         }
@@ -47,6 +42,8 @@ public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObserv
         {
             cinemachineVirtualCamera.enabled = false;
         }
+        targetPosition = transform.position;
+        targetRotation = transform.rotation;
     }
 
     private void Start()
@@ -64,14 +61,6 @@ public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObserv
 
     private void Update()
     {
-        if (!photonView.IsMine)
-        {
-            double timeToReachGoal = currentPacketTime - lastPacketTime;
-            currentTime += Time.deltaTime;
-
-            transform.position = Vector3.Lerp(positionAtLastPacket, orientation.position, (float)(currentTime / timeToReachGoal));
-            transform.rotation = Quaternion.Lerp(rotationAtLastPacket, orientation.rotation, (float)(currentTime / timeToReachGoal));
-        }
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
         if (view.IsMine)
