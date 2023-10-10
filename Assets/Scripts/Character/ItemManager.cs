@@ -7,15 +7,20 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Photon.Pun;
 
-public class ItemManager : MonoBehaviourPunCallbacks
+public class ItemManager : MonoBehaviourPun
 {
-    [FormerlySerializedAs("ItemMessage")] [SerializeField]
+    [FormerlySerializedAs("ItemMessage")]
+    [SerializeField]
     private GameObject itemMessage;
 
     [SerializeField] private TMP_Text actionText;
 
+    [SerializeField] private PhotonView view;
+    private PickableItem pickableItem;
+
     public void Start()
     {
+        view = PhotonView.Get(this);
         itemMessage.SetActive(false);
     }
 
@@ -25,13 +30,13 @@ public class ItemManager : MonoBehaviourPunCallbacks
         {
             if (!pickableItem.IsCollected)
             {
+                this.pickableItem = pickableItem;
                 actionText.text = $"Подобрать {pickableItem.ItemName}";
-                itemMessage.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.E) || !photonView.IsMine) //подумать над реализацией в онлайне
-                {
-                    pickableItem.PickUpItem();
-                    itemMessage.SetActive(false);
-                }
+                //itemMessage.SetActive(true);
+                    //Key(pickableItem);
+                    //view.RPC("Key", RpcTarget.AllBuffered);
+               pickableItem.PickUpItem();
+               //itemMessage.SetActive(false);
             }
         }
 
@@ -55,4 +60,10 @@ public class ItemManager : MonoBehaviourPunCallbacks
         if (other.TryGetComponent(out PickableItem pickableItem) || other.TryGetComponent(out ActivatedItem item))
             itemMessage.SetActive(false);
     }
+
+    //[PunRPC]
+    //void Key()
+    //{
+    //    pickableItem.PickUpItem();
+    //}
 }

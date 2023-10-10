@@ -23,14 +23,17 @@ public class Connect : MonoBehaviourPunCallbacks
     [SerializeField] CinemachineVirtualCamera cameraOnTable;
     public Text hint;
 
-    string gameVersion = "1"; //Номер версии этого клиента
+    [Header("Версия клиента")]
+    public string gameVersion = "1"; //Номер версии этого клиента
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        PhotonNetwork.AutomaticallySyncScene = true;
         if (!PhotonNetwork.IsConnected)
         {
-            PhotonNetwork.GameVersion = gameVersion;
-            Debug.Log("Версия клиента: " + PhotonNetwork.GameVersion);
+            PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = gameVersion;
+            Debug.Log("Версия клиента: " + PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion);
             hint.enabled = false;
             cameraOnTable.enabled = false;
             Loading.SetActive(true);
@@ -38,6 +41,7 @@ public class Connect : MonoBehaviourPunCallbacks
             PhotonNetwork.ConnectUsingSettings();
         }
     }
+
     private void Awake()
     {
         PhotonNetwork.SendRate = 45; //скорость отправки файлов
@@ -68,7 +72,6 @@ public class Connect : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinLobby();
         lobby.enabled = false;
         hint.enabled = true;
-        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     private void Update()
