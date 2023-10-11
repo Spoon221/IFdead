@@ -30,16 +30,13 @@ public class Connect : MonoBehaviourPunCallbacks
     {
         Cursor.lockState = CursorLockMode.Locked;
         PhotonNetwork.AutomaticallySyncScene = true;
-        if (!PhotonNetwork.IsConnected)
-        {
-            PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = gameVersion;
-            Debug.Log("Версия клиента: " + PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion);
-            hint.enabled = false;
-            cameraOnTable.enabled = false;
-            Loading.SetActive(true);
-            lobby.enabled = true;
-            PhotonNetwork.ConnectUsingSettings();
-        }
+        PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = gameVersion;
+        Debug.Log("Версия клиента: " + PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion);
+        hint.enabled = false;
+        cameraOnTable.enabled = false;
+        Loading.SetActive(true);
+        lobby.enabled = true;
+        PhotonNetwork.ConnectUsingSettings();
     }
 
     private void Awake()
@@ -108,11 +105,6 @@ public class Connect : MonoBehaviourPunCallbacks
         GameIsPaused = true;
         scriptPlayerMovementController.enabled = false;
         scriptThirdPersonCameraController.enabled = false;
-    }
-
-    public void ExitButton()
-    {
-        Application.Quit();
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)

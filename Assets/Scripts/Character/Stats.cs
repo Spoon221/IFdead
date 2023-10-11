@@ -5,7 +5,7 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Stats : MonoBehaviourPun
+public class Stats : MonoBehaviourPunCallbacks
 {
     [field: SerializeField] public float MaxMana { get; private set; }
     [field: SerializeField] public float ManaRecoveryPerSecond { get; protected set; }

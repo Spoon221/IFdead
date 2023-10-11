@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : Stats
 {
@@ -25,8 +26,15 @@ public class PlayerStats : Stats
     {
         CurrentHealth -= amountOfDamage;
         if (CurrentHealth <= 0)
-            PhotonNetwork.Disconnect();
+            PhotonNetwork.LeaveRoom();
         OnHealthChanged.Invoke(CurrentHealth);
+    }
+
+    public override void OnLeftRoom()
+    {
+        SceneManager.LoadScene(0);
+
+        base.OnLeftRoom();
     }
 
     protected void RestoreHealth(int amountOfHealth)
