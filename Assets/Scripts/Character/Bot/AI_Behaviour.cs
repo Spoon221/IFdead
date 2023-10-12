@@ -73,7 +73,7 @@ public class AI_Behaviour : MonoBehaviour
             animator.SetFloat("motion", 1);
             agent.destination = navPoints[pointIndex].position;
             yield return new WaitUntil(
-                () => Vector3.Distance(agent.destination, transform.position) < 2 || canSeePlayer);
+                () => Vector3.Distance(agent.destination, transform.position) < agent.stoppingDistance || canSeePlayer);
             agent.isStopped = true;
             animator.SetFloat("motion", 0);
             yield return new WaitForDone(5, () => canSeePlayer);
