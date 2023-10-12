@@ -8,21 +8,22 @@ using Random = UnityEngine.Random;
 public class AI_Behaviour : MonoBehaviour
 {
     private NavMeshAgent agent;
-    [Range(0, 360)] public float AngleView;
     private Animator animator;
 
+    [Range(0, 360)] public float AngleView;
+    [SerializeField] private LayerMask viewRaycastLayerMask;
+    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private float radiusFieldsView;
+    [SerializeField] private float distanceAttack;
+
+    public Transform[] navPoints;
+    [SerializeField] private Missile prefabShot;
+
     public bool canSeePlayer;
-    public bool canShot = true;
-
-
+    private bool canShot = true;
     private Transform chaseTarget;
 
 
-    [SerializeField] private float distanceAttack;
-    public Transform[] navPoints;
-    [SerializeField] private Missile prefabShot;
-    public float RadiusFieldsView;
-    [SerializeField] private LayerMask TargetMask;
 
 
     private void Start()
@@ -50,6 +51,9 @@ public class AI_Behaviour : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
+        yield return new WaitUntil(() => (canSeePlayer || Vector3.Distance(agent.destination, transform.position) <= agent.stoppingDistance));
+        animator.SetFloat("motion", 0);
+        yield return new WaitForDone(3, () => canSeePlayer);
         LostPlayer();
     }
 
@@ -61,6 +65,7 @@ public class AI_Behaviour : MonoBehaviour
     private IEnumerator WalkingToPoints()
     {
         //var pointIndex = FindNearestPoint(transform.position, navPoints);
+        if (navPoints.Length <= 0) throw new ArgumentException("No navigation points");
         while (true)
         {
             var pointIndex = Random.Range(0, navPoints.Length - 1);
@@ -88,14 +93,17 @@ public class AI_Behaviour : MonoBehaviour
 
     private void FieldView()
     {
-        var objectsArea = Physics.OverlapSphere(transform.position, RadiusFieldsView, TargetMask);
+        var objectsArea = Physics.OverlapSphere(transform.position, radiusFieldsView, playerLayer);
 
         if (objectsArea.Length != 0)
         {
             var target = objectsArea[0].transform;
+
             var directionToTarget = (target.position - transform.position).normalized;
 
-            if (Vector3.Angle(transform.forward, directionToTarget) < AngleView / 2)
+            if (Vector3.Angle(transform.forward, directionToTarget) < AngleView / 2 &&
+                Physics.Raycast(new Ray(transform.position, directionToTarget), out var hitInfo, radiusFieldsView, viewRaycastLayerMask) &&
+                hitInfo.transform.gameObject.layer == 6)
             {
                 canSeePlayer = true;
                 chaseTarget = target.transform.parent.gameObject.transform;
@@ -105,6 +113,7 @@ public class AI_Behaviour : MonoBehaviour
             else
             {
                 canSeePlayer = false;
+                chaseTarget = null;
             }
         }
         else if (canSeePlayer)
@@ -116,9 +125,8 @@ public class AI_Behaviour : MonoBehaviour
 
     public void ÑheckingAttackCondition()
     {
-        if (chaseTarget is null) return;
-        if (canShot
-            && Vector3.Distance(transform.position, chaseTarget.position) < distanceAttack)
+        if (!canSeePlayer) return;
+        if (canShot && Vector3.Distance(transform.position, chaseTarget.position) < distanceAttack)
             Shot();
     }
 
