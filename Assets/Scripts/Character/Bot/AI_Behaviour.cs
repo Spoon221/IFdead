@@ -41,18 +41,24 @@ public class AI_Behaviour : MonoBehaviour
 
     private IEnumerator ChasePlayer()
     {
-        animator.SetFloat("motion", 1);
+        StartWalkAnim();
         agent.isStopped = false;
         while (canSeePlayer)
         {
             agent.destination = chaseTarget.position;
-            animator.SetFloat("motion",
-                Vector3.Distance(agent.destination, transform.position) <= agent.stoppingDistance ? 0 : 1);
+            if (Vector3.Distance(agent.destination, transform.position) <= agent.stoppingDistance)
+            {
+                StopWalkAnim();
+            }
+            else
+            {
+                StartWalkAnim();
+            }
             yield return new WaitForFixedUpdate();
         }
 
         yield return new WaitUntil(() => (canSeePlayer || Vector3.Distance(agent.destination, transform.position) <= agent.stoppingDistance));
-        animator.SetFloat("motion", 0);
+        StopWalkAnim();
         yield return new WaitForDone(3, () => canSeePlayer);
         LostPlayer();
     }
@@ -70,12 +76,12 @@ public class AI_Behaviour : MonoBehaviour
         {
             var pointIndex = Random.Range(0, navPoints.Length - 1);
             agent.isStopped = false;
-            animator.SetFloat("motion", 1);
+            StartWalkAnim();
             agent.destination = navPoints[pointIndex].position;
             yield return new WaitUntil(
                 () => Vector3.Distance(agent.destination, transform.position) < agent.stoppingDistance || canSeePlayer);
             agent.isStopped = true;
-            animator.SetFloat("motion", 0);
+            StopWalkAnim();
             yield return new WaitForDone(5, () => canSeePlayer);
             if (!canSeePlayer) continue;
             break;
@@ -107,7 +113,7 @@ public class AI_Behaviour : MonoBehaviour
             {
                 canSeePlayer = true;
                 chaseTarget = target.transform.parent.gameObject.transform;
-                animator.SetFloat("motion", 1);
+                StartWalkAnim();
                 StartCoroutine(ChasePlayer());
             }
             else
@@ -143,6 +149,31 @@ public class AI_Behaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(prefabShot.CooldownTime);
         canShot = true;
+    }
+
+    private void StartWalkAnim()
+    {
+        StopCoroutine(nameof(AnimChanger));
+        StartCoroutine(AnimChanger(1));
+    }
+
+    private void StopWalkAnim()
+    {
+        StopCoroutine(nameof(AnimChanger));
+        StartCoroutine(AnimChanger(0));
+    }
+
+    private IEnumerator AnimChanger(float state)
+    {
+        var animatorState = animator.GetFloat("motion");
+        var off = (animatorState - state) / 10;
+        while (Math.Abs(state - animatorState) >= 0.1)
+        {
+            animatorState -= off;
+            animator.SetFloat("motion", animatorState);
+            yield return new WaitForSeconds(0.05f);
+        }
+        animator.SetFloat("motion", state);
     }
 
     public sealed class WaitForDone : CustomYieldInstruction
