@@ -30,32 +30,48 @@ public class PlayerMovementController : MonoBehaviour
 
     private Animator animator;
     private Rigidbody rb;
+    private CharacterController cc;
+    private float verticalForce;
 
     private void Start()
     {
         lengthPay = playerHeight / 2 + 0.14f;
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
+        cc = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Transform>().Find(nameModelWithAnimator).GetComponent<Animator>();
-        rb.freezeRotation = true;
+        //rb.freezeRotation = true;
     }
 
     private void Update()
     {
         MyInput();
+        GravityHandling();
         JumpLogic();
-        SpeedControl();
-        if (IsGround(lengthPay))
-            rb.drag = groundDrag;
-        else
-            rb.drag = 0;
-
-        animator.SetFloat("FrontMove", OnversionRange(new Vector2(rb.velocity.x, rb.velocity.z).magnitude, moveSpeed));
+        //SpeedControl();
+        //if (IsGround(lengthPay))
+        //    rb.drag = groundDrag;
+        //else
+        //    rb.drag = 0;
+        animator.SetFloat("FrontMove", OnversionRange(new Vector2(cc.velocity.x, cc.velocity.z).magnitude, moveSpeed));
     }
 
     private void FixedUpdate()
     {
         MovePlayer();
     }
+
+    private void GravityHandling()
+    {
+        if (!cc.isGrounded)
+        {
+            verticalForce -= 2 * Time.deltaTime;
+        }
+        else
+        {
+            verticalForce = 0;
+        }
+    }
+
 
     private void MyInput()
     {
@@ -66,12 +82,19 @@ public class PlayerMovementController : MonoBehaviour
     private void MovePlayer()
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        moveDirection.y =  verticalForce;
+        Debug.Log(verticalForce);
+        cc.Move(moveSpeed * moveDirection);
     }
     private void JumpLogic()
     {
-        if (IsGround(lengthPay) && Input.GetKeyDown(KeyCode.Space) && canJump)
-            StartCoroutine(Jump());
+        if (cc.isGrounded && Input.GetKey(KeyCode.Space))
+        {
+            verticalForce += jumpForce;
+            animator.SetTrigger("Jumping");
+            
+        }
+        //StartCoroutine(Jump());
     }
 
     private IEnumerator Jump()
@@ -79,7 +102,7 @@ public class PlayerMovementController : MonoBehaviour
         canJump = false;
         animator.SetTrigger("Jumping");
         yield return new WaitForSeconds(0.3f);
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Force);
+        verticalForce += jumpForce;
         //yield break;
         yield return new WaitForSeconds(0.5f);
         canJump = true;
