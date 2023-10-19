@@ -516,10 +516,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0.2
   jumpForce: 1
-  groundDrag: 4
-  airMultiplier: 0.001
+  gravityForce: 2
+  resistanceForce: 0.01
   nameModelWithAnimator: survivor
-  playerHeight: 1
   orientation: {fileID: 2975010118004308887}
 --- !u!114 &6239622720118828946
 MonoBehaviour:
@@ -623,12 +622,12 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 1
-  m_Radius: 0.5
+  m_Radius: 0.29
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: -0.36, z: 0}
+  m_Center: {x: 0, y: -0.27, z: -0.03}
 --- !u!1 &2975010118939438037
 GameObject:
   m_ObjectHideFlags: 3
@@ -731,7 +730,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2975010118986234203}
-  m_LocalRotation: {x: 0.13439488, y: -0.31562915, z: 0.04521174, w: 0.93822825}
+  m_LocalRotation: {x: 0.13439488, y: -0.31562912, z: 0.04521176, w: 0.93822825}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
