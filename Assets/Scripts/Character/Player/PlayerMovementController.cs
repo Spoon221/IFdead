@@ -11,15 +11,13 @@ public class PlayerMovementController : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed;
     public float jumpForce;
-    public float groundDrag;
-    public float airMultiplier;
+    public float gravityForce;
+    public float resistanceForce;
 
-    [Header("Сharacter Parameters")]
+
+
+    [Header("Character Parameters")]
     public string nameModelWithAnimator;
-    public float playerHeight;
-    private bool canJump = true;
-
-    private float lengthPay;
 
     public Transform orientation;
 
@@ -32,27 +30,56 @@ public class PlayerMovementController : MonoBehaviour
     private Rigidbody rb;
     private CharacterController cc;
     private float verticalForce;
+    private Vector3 addForce;
 
     private void Start()
     {
-        lengthPay = playerHeight / 2 + 0.14f;
-        //rb = GetComponent<Rigidbody>();
         cc = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Transform>().Find(nameModelWithAnimator).GetComponent<Animator>();
-        //rb.freezeRotation = true;
     }
 
     private void Update()
     {
         MyInput();
         GravityHandling();
+        ForceHandling();
         JumpLogic();
-        //SpeedControl();
-        //if (IsGround(lengthPay))
-        //    rb.drag = groundDrag;
-        //else
-        //    rb.drag = 0;
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            AddForce(new Vector3(1, 1, 1));
+        }
+
+
         animator.SetFloat("FrontMove", OnversionRange(new Vector2(cc.velocity.x, cc.velocity.z).magnitude, moveSpeed));
+    }
+
+    private void ForceHandling()
+    {
+        if (addForce.magnitude == 0) return;
+
+        if (addForce.x > 0)
+        {
+            addForce.x -= resistanceForce;
+            if (addForce.x < 0) addForce.x = 0;
+        }
+        else if (addForce.x < 0)
+        {
+            addForce.x -= resistanceForce;
+            if (addForce.x > 0) addForce.x = 0;
+        }
+
+        if (addForce.z > 0)
+        {
+            addForce.z -= resistanceForce;
+            if (addForce.z < 0) addForce.z = 0;
+        }
+        else if (addForce.z < 0)
+        {
+            addForce.z -= resistanceForce;
+            if (addForce.z > 0) addForce.z = 0;
+        }
+
     }
 
     private void FixedUpdate()
@@ -64,12 +91,19 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (!cc.isGrounded)
         {
-            verticalForce -= 2 * Time.deltaTime;
+            verticalForce -= gravityForce * Time.deltaTime;
         }
         else
         {
             verticalForce = 0;
         }
+    }
+
+    public void AddForce(Vector3 force)
+    {
+        verticalForce += force.y;
+        force.y = 0;
+        addForce += force;
     }
 
 
@@ -83,6 +117,7 @@ public class PlayerMovementController : MonoBehaviour
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         moveDirection.y =  verticalForce;
+        moveDirection += addForce;
         Debug.Log(verticalForce);
         cc.Move(moveSpeed * moveDirection);
     }
@@ -99,28 +134,13 @@ public class PlayerMovementController : MonoBehaviour
 
     private IEnumerator Jump()
     {
-        canJump = false;
+        //canJump = false;
         animator.SetTrigger("Jumping");
         yield return new WaitForSeconds(0.3f);
         verticalForce += jumpForce;
         //yield break;
         yield return new WaitForSeconds(0.5f);
-        canJump = true;
-    }
-
-    private void SpeedControl()
-    {
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
-        if (flatVel.magnitude > moveSpeed)
-        {
-            Vector3 limitedVel = flatVel.normalized * moveSpeed;
-            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
-        }
-    }
-    private bool IsGround(float lRay)
-    {
-        return Physics.Raycast(rb.worldCenterOfMass, Vector3.down, lRay);
+        //canJump = true;
     }
 
     private float OnversionRange(float valueConverted, float inputRangeMax,
