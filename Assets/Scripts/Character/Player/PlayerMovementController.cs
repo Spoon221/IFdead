@@ -26,7 +26,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private Vector3 moveDirection;
 
-    [SerializeField] private Animator animator;
+    private Animator animator;
     private Rigidbody rb;
     private CharacterController cc;
     private float verticalForce;
@@ -35,7 +35,7 @@ public class PlayerMovementController : MonoBehaviour
     private void Start()
     {
         cc = GetComponent<CharacterController>();
-        //animator = GetComponentInChildren<Transform>().Find(nameModelWithAnimator).GetComponent<Animator>();
+        animator = GetComponentInChildren<Transform>().Find(nameModelWithAnimator).GetComponent<Animator>();
     }
 
     private void Update()
@@ -118,6 +118,7 @@ public class PlayerMovementController : MonoBehaviour
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         moveDirection.y =  verticalForce;
         moveDirection += addForce;
+        Debug.Log(verticalForce);
         cc.Move(moveSpeed * moveDirection);
     }
     private void JumpLogic()
