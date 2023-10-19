@@ -118,7 +118,6 @@ public class PlayerMovementController : MonoBehaviour
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         moveDirection.y =  verticalForce;
         moveDirection += addForce;
-        Debug.Log(verticalForce);
         cc.Move(moveSpeed * moveDirection);
     }
     private void JumpLogic()
