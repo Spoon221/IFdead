@@ -54,7 +54,6 @@ public class Connect : MonoBehaviourPunCallbacks
         var room = new RoomOptions();
         room.MaxPlayers = 5;
         PhotonNetwork.CreateRoom(RoomName.text, room, TypedLobby.Default);
-        
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -89,6 +88,13 @@ public class Connect : MonoBehaviourPunCallbacks
             }
         }
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("Вышел");
+    }
+
     public void Resume()
     {
         cameraOnTable.enabled = false;
@@ -129,10 +135,23 @@ public class Connect : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         PhotonNetwork.LoadLevel("GameArea");
+        Debug.Log("Создана комната с названием: " + PhotonNetwork.CurrentRoom.Name);
     }
 
     public void JoinRandom()
     {
-        PhotonNetwork.JoinRandomRoom();
+        if (!PhotonNetwork.InRoom)
+        {
+            if (PhotonNetwork.CountOfRooms == 0)
+            {
+                CreateRoomButton();
+                Debug.Log("Создана обычная комната");
+            }
+            else
+            {
+                PhotonNetwork.JoinRandomRoom();
+                Debug.Log("Присоединение к рандом лобби");
+            }
+        }
     }
 }

@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 54e588634a96c3141b46c0d9130ae028, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: ebc66f89df636f7469a583dde74d0bf5, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -18063,7 +18063,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 97543642}
         m_TargetAssemblyTypeName: Connect, Assembly-CSharp
-        m_MethodName: ExitButton
+        m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
