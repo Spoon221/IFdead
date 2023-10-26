@@ -8,16 +8,18 @@ public class SpawnManagerForPlayer : MonoBehaviour
     public GameObject Player;
     public GameObject Maniac;
 
+    private bool isManiacSpawned = false;
     public void Start()
     {
         var randomIndex = Random.Range(0, Spawns.Length);
         var randomPosition = Spawns[randomIndex].transform.position;
         var randomNumber = Random.Range(1, 6);
 
-        if (randomNumber == 1)
+        if (randomNumber == 1 && !isManiacSpawned)
         {
             var spawnManiac = PhotonNetwork.Instantiate(Maniac.name, randomPosition, Quaternion.identity);
             spawnManiac.GetComponent<ManiacMovementController>().enabled = true;
+            isManiacSpawned = true;
             print("Число 1");
         }
         else
