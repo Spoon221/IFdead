@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
-public class Settings : MonoBehaviour
+public class Settings : MonoBehaviourPunCallbacks
 {
     public Dropdown resolution;
     //public GameObject settingsMenu;
@@ -25,6 +26,18 @@ public class Settings : MonoBehaviour
     public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = !Screen.fullScreen;
+    }
+
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
+    public override void OnLeftRoom()
+    {
+        SceneManager.LoadScene(0);
+
+        base.OnLeftRoom();
     }
 
     public void QuitGame()

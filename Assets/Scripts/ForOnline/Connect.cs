@@ -1,0 +1,171 @@
+using Photon.Pun;
+using UnityEngine;
+using UnityEngine.UI;
+using Photon.Realtime;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using Cinemachine;
+
+public class Connect : MonoBehaviourPunCallbacks
+{
+    [SerializeField] InputField RoomName;
+    [SerializeField] ListItem ItemPrefab;
+    [SerializeField] Transform Connecting;
+
+    List<RoomInfo> AllRoomsInfo = new List<RoomInfo>();
+    public GameObject Loading;
+    public GameObject FindRoom;
+    public Canvas lobby;
+    public Canvas ESC;
+    public static bool GameIsPaused = false;
+    public PlayerMovementController scriptPlayerMovementController;
+    public ThirdPersonCameraController scriptThirdPersonCameraController;
+    [SerializeField] CinemachineVirtualCamera cameraOnTable;
+    public Text hint;
+
+    [Header("Версия клиента")]
+    public string gameVersion = "1"; //Номер версии этого клиента
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        PhotonNetwork.AutomaticallySyncScene = true;
+        PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = gameVersion;
+        Debug.Log("Версия клиента: " + PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion);
+        hint.enabled = false;
+        cameraOnTable.enabled = false;
+        Loading.SetActive(true);
+        lobby.enabled = true;
+        PhotonNetwork.ConnectUsingSettings();
+    }
+
+    private void Awake()
+    {
+        PhotonNetwork.SendRate = 45; //скорость отправки файлов
+        PhotonNetwork.SerializationRate = 45; //скорость принятия файлов
+    }
+
+    public void CreateRoomButton()
+    {
+        if (!PhotonNetwork.IsConnected)
+        {
+            return;
+        }
+        var room = new RoomOptions();
+        room.MaxPlayers = 5;
+        PhotonNetwork.CreateRoom(RoomName.text, room, TypedLobby.Default);
+    }
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        Debug.Log("ошибка создания лобби");
+    }
+
+    public override void OnConnectedToMaster()
+    {
+        Loading.SetActive(false);
+        Debug.Log("Регион подключения: " + PhotonNetwork.CloudRegion);
+        PhotonNetwork.JoinLobby();
+        lobby.enabled = false;
+        hint.enabled = true;
+    }
+
+    public void UpdateRoomList()
+    {
+        PhotonNetwork.JoinLobby();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (GameIsPaused)
+            {
+                Resume();
+                Cursor.lockState = CursorLockMode.Locked;
+                hint.enabled = true;
+            }
+            else
+            {
+                Pause();
+                Cursor.lockState = CursorLockMode.None;
+                hint.enabled = false;
+            }
+        }
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("Вышел");
+    }
+
+    public void Resume()
+    {
+        cameraOnTable.enabled = false;
+        ESC.enabled = true;
+        GameIsPaused = false;
+        scriptPlayerMovementController.enabled = true;
+        scriptThirdPersonCameraController.enabled = true;
+    }
+
+    void Pause()
+    {
+        cameraOnTable.enabled = true;
+        ESC.enabled = false;
+        GameIsPaused = true;
+        scriptPlayerMovementController.enabled = false;
+        scriptThirdPersonCameraController.enabled = false;
+    }
+
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        //print(roomList.Count + " Rooms");
+        //base.OnRoomListUpdate(roomList);
+        foreach (var info in roomList) 
+        {
+            if (info.RemovedFromList)
+            {
+
+            }
+            else
+            {
+
+            }
+            for (int i = 0; i < AllRoomsInfo.Count; i++)
+            {
+                if (AllRoomsInfo[i].masterClientId == info.masterClientId)
+                    return;
+            }
+            var Item = Instantiate(ItemPrefab, Connecting);
+            if (Item != null || info.RemovedFromList)
+            {
+                Item.SetInfo(info);
+                AllRoomsInfo.Add(info);
+            }
+        }
+    }
+
+    public override void OnJoinedRoom()
+    {
+        PhotonNetwork.LoadLevel("GameArea");
+        Debug.Log("Создана комната с названием: " + PhotonNetwork.CurrentRoom.Name);
+    }
+
+    public void JoinRandom()
+    {
+        if (!PhotonNetwork.InRoom)
+        {
+            if (PhotonNetwork.CountOfRooms == 0)
+            {
+                CreateRoomButton();
+                Debug.Log("Создана обычная комната");
+            }
+            else
+            {
+                PhotonNetwork.JoinRandomRoom();
+                Debug.Log("Присоединение к рандом лобби");
+            }
+        }
+    }
+}
