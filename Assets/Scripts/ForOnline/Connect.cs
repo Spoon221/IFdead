@@ -70,6 +70,11 @@ public class Connect : MonoBehaviourPunCallbacks
         hint.enabled = true;
     }
 
+    public void UpdateRoomList()
+    {
+        PhotonNetwork.JoinLobby();
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -115,16 +120,25 @@ public class Connect : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        foreach(var info in roomList) 
+        //print(roomList.Count + " Rooms");
+        //base.OnRoomListUpdate(roomList);
+        foreach (var info in roomList) 
         {
+            if (info.RemovedFromList)
+            {
+
+            }
+            else
+            {
+
+            }
             for (int i = 0; i < AllRoomsInfo.Count; i++)
             {
                 if (AllRoomsInfo[i].masterClientId == info.masterClientId)
                     return;
             }
             var Item = Instantiate(ItemPrefab, Connecting);
-
-            if (Item != null)
+            if (Item != null || info.RemovedFromList)
             {
                 Item.SetInfo(info);
                 AllRoomsInfo.Add(info);
