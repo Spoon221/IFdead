@@ -9,7 +9,6 @@ public class SpawnManagerForPlayer : MonoBehaviour
     public GameObject Maniac;
 
     private bool isManiacSpawned = false;
-    public List<Transform> ManiacSpawns; // список доступных спавнов для игрока "Maniac"
     public void Start()
     {
         var randomIndex = Random.Range(0, Spawns.Length);
