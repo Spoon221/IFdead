@@ -11,13 +11,7 @@ public class SpawnManagerForPlayer : MonoBehaviour
     private bool isManiacSpawned = false;
     public void Start()
     {
-        var randomIndex = Random.Range(0, Spawns.Length);
-
         SpawnRandomPlayer();
-
-        var spawnList = new List<GameObject>(Spawns);
-        spawnList.RemoveAt(randomIndex);
-        Spawns = spawnList.ToArray();
 
         /* Для тестов
         if (PhotonNetwork.PlayerList.Length == 1)
@@ -54,10 +48,12 @@ public class SpawnManagerForPlayer : MonoBehaviour
             {
                 var spawnPlayer = PhotonNetwork.Instantiate(Player.name, randomPosition, Quaternion.identity);
                 spawnPlayer.GetComponent<PlayerMovementController>().enabled = true;
-                Debug.Log("Player spawned");
                 print(randomNumber);
             }
         }
+        var spawnList = new List<GameObject>(Spawns);
+        spawnList.RemoveAt(randomIndex);
+        Spawns = spawnList.ToArray();
     }
 
     private int GetUniqueRandomNumber()
