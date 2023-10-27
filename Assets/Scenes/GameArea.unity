@@ -1901,6 +1901,8 @@ MonoBehaviour:
   - {fileID: 354287449}
   Player: {fileID: 6132893872328913182, guid: d0e1eaa7424fff54fb862bfa780fb50a, type: 3}
   Maniac: {fileID: 529482825575864600, guid: 27d5e79a76a3cfb48b60c158be1ffe13, type: 3}
+  ManiacSpawns:
+  - {fileID: 1854923884}
 --- !u!4 &395873899
 Transform:
   m_ObjectHideFlags: 0
@@ -3751,6 +3753,7 @@ GameObject:
   - component: {fileID: 8928955522999697088}
   - component: {fileID: 3461150625046752284}
   - component: {fileID: 8928955522999697091}
+  - component: {fileID: 8928955522999697092}
   m_Layer: 8
   m_Name: bot_new
   m_TagString: Untagged
@@ -12482,3 +12485,36 @@ MonoBehaviour:
   TargetMask:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &8928955522999697092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822247179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PositionModel:
+    SynchronizeEnabled: 1
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 0
+    InterpolateOption: 2
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 1
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 1
+    ExtrapolateIncludingRoundTripTime: 1
+    ExtrapolateNumberOfStoredPositions: 1
+  m_RotationModel:
+    SynchronizeEnabled: 1
+    InterpolateOption: 1
+    InterpolateRotateTowardsSpeed: 180
+    InterpolateLerpSpeed: 5
+  m_ScaleModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 0
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 0
