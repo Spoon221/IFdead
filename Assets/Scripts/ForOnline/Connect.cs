@@ -5,6 +5,8 @@ using Photon.Realtime;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Cinemachine;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class Connect : MonoBehaviourPunCallbacks
 {
@@ -21,7 +23,7 @@ public class Connect : MonoBehaviourPunCallbacks
     public PlayerMovementController scriptPlayerMovementController;
     public ThirdPersonCameraController scriptThirdPersonCameraController;
     [SerializeField] CinemachineVirtualCamera cameraOnTable;
-    public Text hint;
+    public Text TextLobbyE;
 
     [Header("Версия клиента")]
     public string gameVersion = "1"; //Номер версии этого клиента
@@ -32,7 +34,7 @@ public class Connect : MonoBehaviourPunCallbacks
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = gameVersion;
         Debug.Log("Версия клиента: " + PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion);
-        hint.enabled = false;
+        TextLobbyE.enabled = false;
         cameraOnTable.enabled = false;
         Loading.SetActive(true);
         lobby.enabled = true;
@@ -67,8 +69,9 @@ public class Connect : MonoBehaviourPunCallbacks
         Debug.Log("Регион подключения: " + PhotonNetwork.CloudRegion);
         PhotonNetwork.JoinLobby();
         lobby.enabled = false;
-        hint.enabled = true;
+        TextLobbyE.enabled = true;
     }
+
 
     private void Update()
     {
@@ -78,13 +81,13 @@ public class Connect : MonoBehaviourPunCallbacks
             {
                 Resume();
                 Cursor.lockState = CursorLockMode.Locked;
-                hint.enabled = true;
+                TextLobbyE.enabled = true;
             }
             else
             {
                 Pause();
                 Cursor.lockState = CursorLockMode.None;
-                hint.enabled = false;
+                TextLobbyE.enabled = false;
             }
         }
     }
@@ -147,8 +150,16 @@ public class Connect : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("GameArea");
+        StartCoroutine(LoadRoomSceneAsync());
         Debug.Log("Создана комната с названием: " + PhotonNetwork.CurrentRoom.Name);
+    }
+
+    private IEnumerator LoadRoomSceneAsync()
+    {
+        var asyncLoad = SceneManager.LoadSceneAsync("FindRoom 2");
+        while (!asyncLoad.isDone)
+            yield return null;
+        PhotonNetwork.LoadLevel("FindRoom 2");
     }
 
     public void JoinRandom()
