@@ -10,6 +10,5 @@ public class SpawnPlayerRoom : MonoBehaviour
         var randomIndex = Random.Range(0, Spawns.Length);
         var randomPosition = Spawns[randomIndex].transform.position;
         var spawnPlayer = PhotonNetwork.Instantiate(Player.name, randomPosition, Quaternion.identity);
-        //spawnPlayer.GetComponent<PlayerMovementController>().enabled = true;
     }
 }

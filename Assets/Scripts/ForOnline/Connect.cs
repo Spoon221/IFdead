@@ -19,14 +19,10 @@ public class Connect : MonoBehaviourPunCallbacks
     public GameObject FindRoom;
     public Canvas lobby;
     public Canvas ESC;
-    public static bool GameIsPaused = false;
-    public PlayerMovementController scriptPlayerMovementController;
-    public ThirdPersonCameraController scriptThirdPersonCameraController;
+    
     [SerializeField] CinemachineVirtualCamera cameraOnTable;
-    public Text TextLobbyE;
-
     [Header("Версия клиента")]
-    public string gameVersion = "1"; //Номер версии этого клиента
+    public string gameVersion; //Номер версии этого клиента
 
     private void Start()
     {
@@ -34,7 +30,6 @@ public class Connect : MonoBehaviourPunCallbacks
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = gameVersion;
         Debug.Log("Версия клиента: " + PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion);
-        TextLobbyE.enabled = false;
         cameraOnTable.enabled = false;
         Loading.SetActive(true);
         lobby.enabled = true;
@@ -69,51 +64,12 @@ public class Connect : MonoBehaviourPunCallbacks
         Debug.Log("Регион подключения: " + PhotonNetwork.CloudRegion);
         PhotonNetwork.JoinLobby();
         lobby.enabled = false;
-        TextLobbyE.enabled = true;
-    }
-
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (GameIsPaused)
-            {
-                Resume();
-                Cursor.lockState = CursorLockMode.Locked;
-                TextLobbyE.enabled = true;
-            }
-            else
-            {
-                Pause();
-                Cursor.lockState = CursorLockMode.None;
-                TextLobbyE.enabled = false;
-            }
-        }
     }
 
     public void QuitGame()
     {
         Application.Quit();
         Debug.Log("Вышел");
-    }
-
-    public void Resume()
-    {
-        cameraOnTable.enabled = false;
-        ESC.enabled = true;
-        GameIsPaused = false;
-        scriptPlayerMovementController.enabled = true;
-        scriptThirdPersonCameraController.enabled = true;
-    }
-
-    void Pause()
-    {
-        cameraOnTable.enabled = true;
-        ESC.enabled = false;
-        GameIsPaused = true;
-        scriptPlayerMovementController.enabled = false;
-        scriptThirdPersonCameraController.enabled = false;
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -150,7 +106,8 @@ public class Connect : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        StartCoroutine(LoadRoomSceneAsync());
+        PhotonNetwork.LoadLevel("FindRoom 2");
+        //StartCoroutine(LoadRoomSceneAsync());
         Debug.Log("Создана комната с названием: " + PhotonNetwork.CurrentRoom.Name);
     }
 

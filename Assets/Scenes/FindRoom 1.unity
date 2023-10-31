@@ -2174,7 +2174,7 @@ MonoBehaviour:
   scriptThirdPersonCameraController: {fileID: 12336468}
   cameraOnTable: {fileID: 1289811680}
   TextLobbyE: {fileID: 1513985711}
-  gameVersion: 1
+  gameVersion: 0.1
 --- !u!1001 &102595307
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7733,11 +7733,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6132893871974498304, guid: a376b1efdaaedf547af16580e4507167, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.33157447
+      value: -0.3315745
       objectReference: {fileID: 0}
     - target: {fileID: 6132893871974498304, guid: a376b1efdaaedf547af16580e4507167, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.030809747
+      value: -0.030809764
       objectReference: {fileID: 0}
     - target: {fileID: 6132893871974498304, guid: a376b1efdaaedf547af16580e4507167, type: 3}
       propertyPath: m_LocalRotation.y
@@ -7745,7 +7745,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6132893871974498304, guid: a376b1efdaaedf547af16580e4507167, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.087240435
+      value: 0.08724044
       objectReference: {fileID: 0}
     - target: {fileID: 6132893872328913182, guid: a376b1efdaaedf547af16580e4507167, type: 3}
       propertyPath: m_Name
