@@ -19,13 +19,14 @@ public class Connect : MonoBehaviourPunCallbacks
     public GameObject FindRoom;
     public Canvas lobby;
     public Canvas ESC;
-    
+    public Text TextLobbyE;
     [SerializeField] CinemachineVirtualCamera cameraOnTable;
     [Header("Версия клиента")]
     public string gameVersion; //Номер версии этого клиента
 
     private void Start()
     {
+        TextLobbyE.enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = gameVersion;
@@ -60,6 +61,7 @@ public class Connect : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
+        TextLobbyE.enabled = true;
         Loading.SetActive(false);
         Debug.Log("Регион подключения: " + PhotonNetwork.CloudRegion);
         PhotonNetwork.JoinLobby();

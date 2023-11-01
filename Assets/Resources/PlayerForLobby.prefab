@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1635587822}
   - component: {fileID: 1635587821}
   m_Layer: 6
-  m_Name: Camera
+  m_Name: CameraPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -784,7 +784,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6132893871974498305}
-  m_LocalRotation: {x: 0.087240465, y: -0.33157447, z: 0.030809768, w: 0.9388814}
+  m_LocalRotation: {x: 0.08724046, y: -0.33157444, z: 0.030809747, w: 0.93888146}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1005,7 +1005,6 @@ MonoBehaviour:
   view: {fileID: 6132893871799605146}
   TextLobbyE: {fileID: 367789903285217498}
   cameraOnTable: {fileID: 0}
-  cameraOnTableName: CM vcam1
   scriptPlayerMovementController: {fileID: 6132893871799605145}
   scriptThirdPersonCameraController: {fileID: 6132893872779753880}
 --- !u!1 &6132893872649457732
@@ -1254,7 +1253,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6132893872856189291}
-  m_LocalRotation: {x: 0.04491342, y: -0.33262482, z: 0.01586158, w: 0.9418556}
+  m_LocalRotation: {x: 0.04491342, y: -0.33262482, z: 0.015861582, w: 0.9418556}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

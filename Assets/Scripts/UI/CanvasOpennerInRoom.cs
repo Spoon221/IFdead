@@ -9,14 +9,24 @@ public class CanvasOpennerInRoom : MonoBehaviour
     public static bool GameIsPaused = false;
     public Text TextLobbyE;
     [SerializeField] CinemachineVirtualCamera cameraOnTable;
-    public string cameraOnTableName;
     public PlayerMovementController scriptPlayerMovementController;
     public ThirdPersonCameraController scriptThirdPersonCameraController;
+    private Canvas gameTable;
+    private Camera cameraPlayer;
 
     void Start()
     {
-        TextLobbyE.enabled = true;
-        cameraOnTable = GameObject.Find(cameraOnTableName).GetComponent<CinemachineVirtualCamera>();
+        if (view.IsMine)
+        {
+            cameraOnTable = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
+            cameraPlayer = GameObject.Find("CameraPlayer").GetComponent<Camera>();
+            gameTable = GameObject.Find("GameTable").GetComponent<Canvas>();
+            if (gameTable != null)
+            {
+                gameTable.renderMode = RenderMode.WorldSpace;
+                gameTable.worldCamera = cameraPlayer;
+            }
+        }
     }
 
     private void Update()
@@ -28,6 +38,7 @@ public class CanvasOpennerInRoom : MonoBehaviour
                 Resume();
                 Cursor.lockState = CursorLockMode.Locked;
                 TextLobbyE.enabled = true;
+                
             }
             else
             {
