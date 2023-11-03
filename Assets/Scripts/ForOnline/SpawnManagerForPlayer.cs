@@ -8,12 +8,12 @@ public class SpawnManagerForPlayer : MonoBehaviour
     public GameObject Player;
     public GameObject Maniac;
 
-    private bool isManiacSpawned = false;
+    private bool isManiacSpawned = true;
     public void Start()
     {
         SpawnRandomPlayer();
 
-        /* Для тестов
+        /* пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         if (PhotonNetwork.PlayerList.Length == 1)
         {
             var test = PhotonNetwork.Instantiate(Maniac.name, randomPositions, Quaternion.identity);

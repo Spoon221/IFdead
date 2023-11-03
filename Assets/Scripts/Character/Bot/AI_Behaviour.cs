@@ -36,7 +36,7 @@ public class AI_Behaviour : MonoBehaviour
     private void FixedUpdate()
     {
         FieldView();
-        ÑheckingAttackCondition();
+        CheckingAttackCondition();
     }
 
     private IEnumerator ChasePlayer()
@@ -129,7 +129,7 @@ public class AI_Behaviour : MonoBehaviour
         }
     }
 
-    public void ÑheckingAttackCondition()
+    public void CheckingAttackCondition()
     {
         if (!canSeePlayer) return;
         if (canShot && Vector3.Distance(transform.position, chaseTarget.position) < distanceAttack)
