@@ -18,6 +18,7 @@ public class AI_Behaviour : MonoBehaviour
 
     public Transform[] navPoints;
     [SerializeField] private Missile prefabShot;
+    [SerializeField] private Light light;
 
     public bool canSeePlayer;
     private bool canShot = true;
@@ -41,8 +42,10 @@ public class AI_Behaviour : MonoBehaviour
 
     private IEnumerator ChasePlayer()
     {
+
         StartWalkAnim();
         agent.isStopped = false;
+        light.color = Color.red;
         while (canSeePlayer)
         {
             agent.destination = chaseTarget.position;
@@ -59,13 +62,17 @@ public class AI_Behaviour : MonoBehaviour
 
         yield return new WaitUntil(() => (canSeePlayer || Vector3.Distance(agent.destination, transform.position) <= agent.stoppingDistance));
         StopWalkAnim();
+        light.color = Color.yellow;
         yield return new WaitForDone(3, () => canSeePlayer);
-        LostPlayer();
+        if (!canSeePlayer)
+            LostPlayer();
+        else StartCoroutine(ChasePlayer());
     }
 
     public void LostPlayer()
     {
         StartCoroutine(WalkingToPoints());
+        light.color = Color.blue;
     }
 
     private IEnumerator WalkingToPoints()
@@ -84,6 +91,17 @@ public class AI_Behaviour : MonoBehaviour
             StopWalkAnim();
             yield return new WaitForDone(5, () => canSeePlayer);
             if (!canSeePlayer) continue;
+
+            light.color = Color.yellow;
+            yield return new WaitForSeconds(.5f);
+
+            if (!canSeePlayer)
+            {
+                light.color = Color.blue;
+                continue;
+            }
+
+            StartCoroutine(ChasePlayer());
             break;
         }
     }
@@ -111,10 +129,9 @@ public class AI_Behaviour : MonoBehaviour
                 Physics.Raycast(new Ray(transform.position, directionToTarget), out var hitInfo, radiusFieldsView, viewRaycastLayerMask) &&
                 hitInfo.transform.gameObject.layer == 6)
             {
+                if (canSeePlayer) return;
                 canSeePlayer = true;
                 chaseTarget = target.transform.parent.gameObject.transform;
-                StartWalkAnim();
-                StartCoroutine(ChasePlayer());
             }
             else
             {
