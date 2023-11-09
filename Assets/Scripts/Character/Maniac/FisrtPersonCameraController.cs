@@ -39,7 +39,7 @@ public class FisrtPersonCameraController : MonoBehaviour, IPunObservable
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        ChangeSensitivity(50);
+        ChangeSensitivity(GameSettingSaver.settings.Sensitivity * 100);
     }
 
     void Update()
@@ -57,9 +57,10 @@ public class FisrtPersonCameraController : MonoBehaviour, IPunObservable
         }
     }
     
-    private void ChangeSensitivity(float sensitivity)
+    public void ChangeSensitivity(float sensitivity)
     {
         sensitivity *= 0.01f;
+        GameSettingSaver.settings.Sensitivity = sensitivity;
         currentSensX = maxSensX * sensitivity;
         currentSensY = maxSensY * sensitivity;
     }
