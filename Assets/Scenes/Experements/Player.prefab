@@ -452,6 +452,7 @@ GameObject:
   - component: {fileID: 5035619657575678242}
   - component: {fileID: 9042089691396293462}
   - component: {fileID: 8959121507276275359}
+  - component: {fileID: 138816759}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -573,7 +574,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scriptPlayerMovementController: {fileID: 2975010118752484429}
   scriptManiacMovementController: {fileID: 8059336578616850902, guid: 27d5e79a76a3cfb48b60c158be1ffe13, type: 3}
-  scriptPlayerItemManager: {fileID: 8769231021516566927}
   Bar: {fileID: 8959121508912252287}
   camera: {fileID: 8959121507126820155}
   audioListener: {fileID: 8959121507126820154}
@@ -628,6 +628,19 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: -0.27, z: -0.03}
+--- !u!114 &138816759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2975010118224288458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d739808aaa90f7f4698f8950318ad9cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyRect: {fileID: 0}
 --- !u!1 &2975010118939438037
 GameObject:
   m_ObjectHideFlags: 3
@@ -730,7 +743,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2975010118986234203}
-  m_LocalRotation: {x: 0.13439488, y: -0.31562912, z: 0.04521176, w: 0.93822825}
+  m_LocalRotation: {x: 0.13439487, y: -0.31562912, z: 0.045211732, w: 0.93822825}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1225,6 +1238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemMessage: {fileID: 5696570435704821825}
   actionText: {fileID: 5696570436801322465}
+  view: {fileID: 0}
 --- !u!1 &8959121507126820152
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,6 +1251,8 @@ GameObject:
   - component: {fileID: 8959121507126820155}
   - component: {fileID: 8959121507126820154}
   - component: {fileID: 8959121507126820153}
+  - component: {fileID: 8959121508121902963}
+  - component: {fileID: 8959121508121902964}
   m_Layer: 6
   m_Name: Camera
   m_TagString: Untagged
@@ -1344,6 +1360,55 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8959121508121902963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8959121507126820152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911f5f247ec548047b2e2c1db048578b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetObject: {fileID: 4548596205024281118}
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 1025
+--- !u!114 &8959121508121902964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8959121507126820152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &8959121508819388767
 GameObject:
   m_ObjectHideFlags: 0
