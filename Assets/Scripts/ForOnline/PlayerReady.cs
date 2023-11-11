@@ -66,7 +66,7 @@ public class PlayerReady : MonoBehaviourPunCallbacks
         countText.text = $"{readyCount}/{playerReadyStatus.Count}";
 
         // ≈сли все игроки готовы, можно запустить игру
-        if (allPlayersReady)
+        if (allPlayersReady && PhotonNetwork.IsMasterClient)
         {
             startButton.interactable = true;
         }
