@@ -5,10 +5,10 @@ using Cinemachine;
 
 public class CanvasOpennerInRoom : MonoBehaviour
 {
-    [SerializeField] PhotonView view;
+    [SerializeField] private PhotonView view;
     private static bool GameIsPaused = false;
     public Text TextLobbyE;
-    [SerializeField] CinemachineVirtualCamera cameraOnTable;
+    [SerializeField] private CinemachineVirtualCamera cameraOnTable;
     public PlayerMovementController scriptPlayerMovementController;
     public ThirdPersonCameraController scriptThirdPersonCameraController;
     private Canvas gameTable;
@@ -31,7 +31,7 @@ public class CanvasOpennerInRoom : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && view.IsMine)
         {
             if (GameIsPaused)
             {

@@ -282,7 +282,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1635587820}
-  m_LocalRotation: {x: 0.044913433, y: -0.33262485, z: 0.015861584, w: 0.9418556}
+  m_LocalRotation: {x: 0.044913426, y: -0.33262485, z: 0.015861582, w: 0.9418556}
   m_LocalPosition: {x: 4.395957, y: 2, z: -5.447528}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -982,13 +982,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6132893871799605127}
-  - component: {fileID: 6132893871799605144}
   - component: {fileID: 6132893871799605149}
   - component: {fileID: 6132893871799605145}
   - component: {fileID: 3081207912094598214}
   - component: {fileID: 6132893871799605146}
   - component: {fileID: 4158842178986306294}
   - component: {fileID: 85222191180015746}
+  - component: {fileID: 5636307185853901271}
+  - component: {fileID: 5236388313825635122}
+  - component: {fileID: 4596311036160586101}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1016,22 +1018,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &6132893871799605144
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6132893872328913182}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 80
-  m_CollisionDetection: 1
 --- !u!114 &6132893871799605149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1067,13 +1053,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 321182be3fa11e14484e9442e323e276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
-  jumpForce: 100
-  gravityForce: 0
-  resistanceForce: 0
+  moveSpeed: 0.2
+  jumpForce: 1
+  gravityForce: 2
+  resistanceForce: 0.01
   nameModelWithAnimator: survivor
   orientation: {fileID: 6132893872649457731}
-  animator: {fileID: 0}
+  animator: {fileID: 1561272949845160880}
 --- !u!114 &3081207912094598214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1108,6 +1094,8 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 85222191180015746}
+  - {fileID: 5236388313825635122}
+  - {fileID: 4596311036160586101}
   - {fileID: 6132893872779753880}
   - {fileID: 6888530892309526385}
   sceneViewId: 0
@@ -1131,6 +1119,90 @@ MonoBehaviour:
   camera: {fileID: 1635587823}
   audioListener: {fileID: 1635587822}
 --- !u!114 &85222191180015746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6132893872328913182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PositionModel:
+    SynchronizeEnabled: 1
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 0
+    InterpolateOption: 2
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 1
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 1
+    ExtrapolateIncludingRoundTripTime: 1
+    ExtrapolateNumberOfStoredPositions: 1
+  m_RotationModel:
+    SynchronizeEnabled: 1
+    InterpolateOption: 1
+    InterpolateRotateTowardsSpeed: 180
+    InterpolateLerpSpeed: 5
+  m_ScaleModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 0
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 0
+--- !u!143 &5636307185853901271
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6132893872328913182}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1
+  m_Radius: 0.29
+  m_SlopeLimit: 45
+  m_StepOffset: 0
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: -0.27, z: -0.03}
+--- !u!114 &5236388313825635122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6132893872328913182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PositionModel:
+    SynchronizeEnabled: 1
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 0
+    InterpolateOption: 2
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 1
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 1
+    ExtrapolateIncludingRoundTripTime: 1
+    ExtrapolateNumberOfStoredPositions: 1
+  m_RotationModel:
+    SynchronizeEnabled: 1
+    InterpolateOption: 1
+    InterpolateRotateTowardsSpeed: 180
+    InterpolateLerpSpeed: 5
+  m_ScaleModel:
+    SynchronizeEnabled: 0
+    InterpolateOption: 0
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 0
+--- !u!114 &4596311036160586101
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1409,7 +1481,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6132893872856189291}
-  m_LocalRotation: {x: 0.044913422, y: -0.33262482, z: 0.015861582, w: 0.9418556}
+  m_LocalRotation: {x: 0.04491342, y: -0.33262482, z: 0.01586158, w: 0.9418556}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2190,6 +2262,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f269fb506912ca14a8460d3e335bd3d9, type: 3}
+--- !u!95 &1561272949845160880 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: f269fb506912ca14a8460d3e335bd3d9, type: 3}
+  m_PrefabInstance: {fileID: 4954052843229335073}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4848949277471254986 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f269fb506912ca14a8460d3e335bd3d9, type: 3}
