@@ -55,7 +55,7 @@ public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObserv
             var parent = gameObject.transform.parent.transform;
             cinemachineVirtualCamera.Follow = parent;
             cinemachineVirtualCamera.LookAt = parent;
-            ChangeSensitivity(50);
+            ChangeSensitivity(GameSettingSaver.settings.Sensitivity * 100);
         }
     }
 
@@ -78,9 +78,10 @@ public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObserv
         }
     }
 
-    private void ChangeSensitivity(float sensitivity)
+    public void ChangeSensitivity(float sensitivity)
     {
         sensitivity *= 0.01f;
+        GameSettingSaver.settings.Sensitivity = sensitivity;
         cinemachineVirtualCamera.m_XAxis.m_MaxSpeed = maxXSensitivity * sensitivity;
         cinemachineVirtualCamera.m_YAxis.m_MaxSpeed = maxYSensitivity * sensitivity;
     }
