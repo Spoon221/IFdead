@@ -6,7 +6,7 @@ using Cinemachine;
 public class CanvasOpennerInRoom : MonoBehaviour
 {
     [SerializeField] PhotonView view;
-    public static bool GameIsPaused = false;
+    private static bool GameIsPaused = false;
     public Text TextLobbyE;
     [SerializeField] CinemachineVirtualCamera cameraOnTable;
     public PlayerMovementController scriptPlayerMovementController;

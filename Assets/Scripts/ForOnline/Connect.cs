@@ -10,9 +10,9 @@ using System.Collections;
 
 public class Connect : MonoBehaviourPunCallbacks
 {
-    [SerializeField] InputField RoomName;
-    [SerializeField] ListItem ItemPrefab;
-    [SerializeField] Transform Connecting;
+    [SerializeField] private InputField RoomName;
+    [SerializeField] private ListItem ItemPrefab;
+    [SerializeField] private Transform Connecting;
 
     List<RoomInfo> AllRoomsInfo = new List<RoomInfo>();
     public GameObject Loading;
@@ -108,8 +108,7 @@ public class Connect : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("FindRoom 2");
-        //StartCoroutine(LoadRoomSceneAsync());
+        StartCoroutine(LoadRoomSceneAsync());
         Debug.Log("Создана комната с названием: " + PhotonNetwork.CurrentRoom.Name);
     }
 

@@ -1069,11 +1069,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 6
   jumpForce: 100
-  groundDrag: 4
-  airMultiplier: 0.001
+  gravityForce: 0
+  resistanceForce: 0
   nameModelWithAnimator: survivor
-  playerHeight: 1
   orientation: {fileID: 6132893872649457731}
+  animator: {fileID: 0}
 --- !u!114 &3081207912094598214
 MonoBehaviour:
   m_ObjectHideFlags: 0
