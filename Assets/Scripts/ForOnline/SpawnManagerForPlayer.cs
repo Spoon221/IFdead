@@ -11,9 +11,8 @@ public class SpawnManagerForPlayer : MonoBehaviour
     public GameObject Maniac;
 
     private bool isManiacSpawned = false;
-    private static int PlayerRoom;
+    public int PlayerRoom;
     private List<int> generatedNumbers = new List<int>();
-    public RoomInfo RoomInfo { get; set; }
 
     public void Start()
     {

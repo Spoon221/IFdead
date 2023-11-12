@@ -2204,6 +2204,7 @@ MonoBehaviour:
   startButton: {fileID: 528157769}
   readyButton: {fileID: 841612012}
   countText: {fileID: 165150777}
+  spawnManagerForPlayer: {fileID: 1988392065}
 --- !u!114 &97543644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25013,6 +25014,7 @@ MonoBehaviour:
   - {fileID: 366317079}
   Player: {fileID: 6132893872328913182, guid: a376b1efdaaedf547af16580e4507167, type: 3}
   Maniac: {fileID: 529482825575864600, guid: 27d5e79a76a3cfb48b60c158be1ffe13, type: 3}
+  PlayerRoom: 0
 --- !u!1 &1989444440
 GameObject:
   m_ObjectHideFlags: 0

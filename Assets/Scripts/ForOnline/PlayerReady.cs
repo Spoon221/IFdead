@@ -14,6 +14,19 @@ public class PlayerReady : MonoBehaviourPunCallbacks
     [SerializeField] private Button startButton;
     [SerializeField] private Button readyButton;
     [SerializeField] private TMP_Text countText;
+    [SerializeField] private SpawnManagerForPlayer spawnManagerForPlayer;
+
+    private void Update()
+    {
+        StartCoroutine(LateUpdateCountPlayers());
+    }
+
+    IEnumerator LateUpdateCountPlayers()
+    {
+        var readyCount = playerReadyStatus.Count;
+        countText.text = $"{readyCount}/{spawnManagerForPlayer.PlayerRoom}";
+        yield return new WaitForSeconds(1.5f);
+    }
 
     // ћетод дл€ получени€ списка имен готовых игроков
     public List<string> GetReadyPlayerNames()
@@ -63,8 +76,7 @@ public class PlayerReady : MonoBehaviourPunCallbacks
             readyCount--;
         }
 
-        countText.text = $"{readyCount}/{playerReadyStatus.Count}";
-        readyCount = PlayerPrefs.GetInt("PlayerReady", 0);
+        countText.text = $"{readyCount}/{spawnManagerForPlayer.PlayerRoom}";
 
         // ≈сли все игроки готовы, можно запустить игру
         if (allPlayersReady && PhotonNetwork.IsMasterClient)
@@ -99,7 +111,7 @@ public class PlayerReady : MonoBehaviourPunCallbacks
             playerReadyStatus[player] = false;
         }
 
-        countText.text = $"{0}/{playerReadyStatus.Count}";
+        countText.text = $"{0}/{spawnManagerForPlayer.PlayerRoom}";
         readyButton.interactable = true;
         startButton.interactable = false;
 
