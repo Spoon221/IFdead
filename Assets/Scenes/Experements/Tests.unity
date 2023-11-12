@@ -1436,6 +1436,11 @@ Transform:
   m_Father: {fileID: 1959258720}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 89.995}
+--- !u!95 &601789208 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7638088418006947940, guid: 633625306a1142a4080f35a41b4f5326, type: 3}
+  m_PrefabInstance: {fileID: 8959121508121902961}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &605202079 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9fe582b88850fc641a48927b3400c327, type: 3}
@@ -4286,10 +4291,18 @@ PrefabInstance:
       propertyPath: keyRect
       value: 
       objectReference: {fileID: 1199195037}
+    - target: {fileID: 2975010118134059596, guid: 633625306a1142a4080f35a41b4f5326, type: 3}
+      propertyPath: rendererFeature
+      value: 
+      objectReference: {fileID: 8196152269615680424, guid: 8891ee65b2d3b6c46bd294b3a222a9a5, type: 2}
     - target: {fileID: 2975010118224288458, guid: 633625306a1142a4080f35a41b4f5326, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2975010118752484429, guid: 633625306a1142a4080f35a41b4f5326, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 601789208}
     - target: {fileID: 2975010118752484430, guid: 633625306a1142a4080f35a41b4f5326, type: 3}
       propertyPath: sceneViewId
       value: 1
@@ -4352,7 +4365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2975010118986234202, guid: 633625306a1142a4080f35a41b4f5326, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.13439488
+      value: 0.13439487
       objectReference: {fileID: 0}
     - target: {fileID: 2975010118986234202, guid: 633625306a1142a4080f35a41b4f5326, type: 3}
       propertyPath: m_LocalRotation.y
@@ -4360,7 +4373,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2975010118986234202, guid: 633625306a1142a4080f35a41b4f5326, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.04521176
+      value: 0.045211732
       objectReference: {fileID: 0}
     - target: {fileID: 7474820278676209185, guid: 633625306a1142a4080f35a41b4f5326, type: 3}
       propertyPath: m_AnchoredPosition.x

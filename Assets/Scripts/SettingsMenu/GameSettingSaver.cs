@@ -2,15 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 using UnityEngine;
 
 public static class GameSettingSaver
 {
     public static GameSaverXML settings;
+    private static bool isBusy;
 
     static GameSettingSaver()
     {
+        isBusy = true;
         if (!File.Exists(Application.persistentDataPath + "\\settings" + ".cfg"))
         {
             settings = new GameSaverXML();
@@ -20,23 +23,30 @@ public static class GameSettingSaver
 
         XmlSerializer serializer = new XmlSerializer(typeof(GameSaverXML));
 
-        FileStream fs = new FileStream(Application.persistentDataPath + "\\settings" + ".cfg", FileMode.Open);
+        FileStream fs = new FileStream(Application.persistentDataPath + "\\settings" + ".cfg", FileMode.Open, FileAccess.Read);
         GameSaverXML settingsXml = (GameSaverXML)serializer.Deserialize(fs);
         fs.Close();
 
         settings = settingsXml;
+        isBusy = false;
     }
 
-    public static void SaveXml()
+    public static async void SaveXml()
     {
+        while (isBusy)
+        {
+            await Task.Delay(500);
+        }
+        isBusy = true;
         var datapath = Application.persistentDataPath + "\\settings" + ".cfg";
         if (File.Exists(datapath)) File.Delete(datapath);
 
-        XmlSerializer serializer = new XmlSerializer(typeof(GameSaverXML));
+        var serializer = new XmlSerializer(typeof(GameSaverXML));
 
-        FileStream fs = new FileStream(datapath, FileMode.CreateNew);
+        var fs = new FileStream(datapath, FileMode.CreateNew, FileAccess.Write);
         serializer.Serialize(fs, settings);
         fs.Close();
+        isBusy = false;
     }
 }
 

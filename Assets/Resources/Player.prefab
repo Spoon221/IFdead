@@ -1323,6 +1323,7 @@ MonoBehaviour:
   rotationModelSpeed: 12
   maxXSensitivity: 1000
   maxYSensitivity: 7
+  rendererFeature: {fileID: 8196152269615680424, guid: 8891ee65b2d3b6c46bd294b3a222a9a5, type: 2}
 --- !u!114 &6132893872779753881
 MonoBehaviour:
   m_ObjectHideFlags: 0
