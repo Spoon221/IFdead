@@ -4,6 +4,7 @@ using Cinemachine;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObservable
@@ -17,6 +18,9 @@ public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObserv
     [Header("Sensitivity Parameters")] public float rotationModelSpeed;
     public float maxXSensitivity;
     public float maxYSensitivity;
+
+    [SerializeField]
+    private ScriptableRendererFeature rendererFeature;
 
     private Slider sensitivitySlider;
 
@@ -48,6 +52,7 @@ public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObserv
 
     private void Start()
     {
+        rendererFeature.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         if (view.IsMine)
         {
