@@ -435,6 +435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemMessage: {fileID: 3700684741596132245}
   actionText: {fileID: 3700684740533089845}
+  view: {fileID: 0}
 --- !u!1 &6132893871305215202
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,7 +1062,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6132893872328913182}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 321182be3fa11e14484e9442e323e276, type: 3}
   m_Name: 
@@ -1126,11 +1127,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scriptPlayerMovementController: {fileID: 6132893871799605145}
   scriptManiacMovementController: {fileID: 8059336578616850902, guid: 27d5e79a76a3cfb48b60c158be1ffe13, type: 3}
-  scriptPlayerItemManager: {fileID: 425485352089852507}
   Bar: {fileID: 216067755}
   camera: {fileID: 1635587823}
   audioListener: {fileID: 1635587822}
-  cameraController: {fileID: 6132893872779753880}
 --- !u!114 &85222191180015746
 MonoBehaviour:
   m_ObjectHideFlags: 0
