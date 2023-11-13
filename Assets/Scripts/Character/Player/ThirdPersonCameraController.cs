@@ -4,6 +4,7 @@ using Cinemachine;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObservable
@@ -17,6 +18,9 @@ public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObserv
     [Header("Sensitivity Parameters")] public float rotationModelSpeed;
     public float maxXSensitivity;
     public float maxYSensitivity;
+
+    [SerializeField]
+    private ScriptableRendererFeature rendererFeature;
 
     private Slider sensitivitySlider;
 
@@ -48,6 +52,7 @@ public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObserv
 
     private void Start()
     {
+        rendererFeature.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         if (view.IsMine)
         {
@@ -55,7 +60,7 @@ public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObserv
             var parent = gameObject.transform.parent.transform;
             cinemachineVirtualCamera.Follow = parent;
             cinemachineVirtualCamera.LookAt = parent;
-            ChangeSensitivity(50);
+            ChangeSensitivity(GameSettingSaver.settings.Sensitivity * 100);
         }
     }
 
@@ -78,9 +83,10 @@ public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObserv
         }
     }
 
-    private void ChangeSensitivity(float sensitivity)
+    public void ChangeSensitivity(float sensitivity)
     {
         sensitivity *= 0.01f;
+        GameSettingSaver.settings.Sensitivity = sensitivity;
         cinemachineVirtualCamera.m_XAxis.m_MaxSpeed = maxXSensitivity * sensitivity;
         cinemachineVirtualCamera.m_YAxis.m_MaxSpeed = maxYSensitivity * sensitivity;
     }

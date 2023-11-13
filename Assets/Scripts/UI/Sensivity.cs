@@ -8,6 +8,7 @@ public class Sensivity : MonoBehaviour
 {
     void Start()
     {
+        gameObject.GetComponent<Slider>().SetValueWithoutNotify(GameSettingSaver.settings.Sensitivity * 100);
         var player = GameObject.FindGameObjectWithTag("Player");
         if (player is not null)
         {

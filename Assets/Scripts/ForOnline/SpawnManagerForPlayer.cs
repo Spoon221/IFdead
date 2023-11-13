@@ -1,6 +1,8 @@
 using UnityEngine;
 using Photon.Pun;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using Photon.Realtime;
 
 public class SpawnManagerForPlayer : MonoBehaviour
 {
@@ -9,9 +11,15 @@ public class SpawnManagerForPlayer : MonoBehaviour
     public GameObject Maniac;
 
     private bool isManiacSpawned = false;
+    public int PlayerRoom;
+    private List<int> generatedNumbers = new List<int>();
+
     public void Start()
     {
-        SpawnRandomPlayer();
+        if (SceneManager.GetActiveScene().name == "FindRoom 2")
+            SpawnPlayerOnRoom();
+        else
+            SpawnRandomPlayer();
 
         /* Для тестов
         if (PhotonNetwork.PlayerList.Length == 1)
@@ -32,39 +40,43 @@ public class SpawnManagerForPlayer : MonoBehaviour
     {
         var randomIndex = Random.Range(0, Spawns.Length);
         var randomPosition = Spawns[randomIndex].transform.position;
-
-        if (PhotonNetwork.PlayerList.Length < 5)
+        var randomNumber = GetUniqueRandomNumber();
+        if (randomNumber == 1 && !isManiacSpawned)
         {
-            var randomNumber = GetUniqueRandomNumber();
-
-            if (randomNumber == 1 && !isManiacSpawned)
-            {
-                var spawnManiac = PhotonNetwork.Instantiate(Maniac.name, randomPosition, Quaternion.identity);
-                spawnManiac.GetComponent<ManiacMovementController>().enabled = true;
-                isManiacSpawned = true;
-                print(randomNumber);
-            }
-            else
-            {
-                var spawnPlayer = PhotonNetwork.Instantiate(Player.name, randomPosition, Quaternion.identity);
-                spawnPlayer.GetComponent<PlayerMovementController>().enabled = true;
-                print(randomNumber);
-            }
+            var spawnManiac = PhotonNetwork.Instantiate(Maniac.name, randomPosition, Quaternion.identity);
+            spawnManiac.GetComponent<ManiacMovementController>().enabled = true;
+            isManiacSpawned = true;
+            print(randomNumber);
+        }
+        else
+        {
+            var spawnPlayer = PhotonNetwork.Instantiate(Player.name, randomPosition, Quaternion.identity);
+            spawnPlayer.GetComponent<PlayerMovementController>().enabled = true;
+            print(randomNumber);
         }
         var spawnList = new List<GameObject>(Spawns);
         spawnList.RemoveAt(randomIndex);
         Spawns = spawnList.ToArray();
     }
 
-    private int GetUniqueRandomNumber()
+    private void SpawnPlayerOnRoom()
     {
-        var randomNumber = Random.Range(1, 5);
+        var room = PhotonNetwork.CurrentRoom;
+        var randomIndex = Random.Range(0, Spawns.Length);
+        var randomPosition = Spawns[randomIndex].transform.position;
+        var spawnPlayer = PhotonNetwork.Instantiate(Player.name, randomPosition, Quaternion.identity);
+        PlayerRoom = (int)room.PlayerCount;
+        print(PlayerRoom);
+    }
 
-        while (randomNumber == 1 && isManiacSpawned)
+    public int GetUniqueRandomNumber()
+    {
+        var randomNumber = Random.Range(1, PlayerRoom + 1);
+        while (generatedNumbers.Contains(randomNumber))
         {
-            randomNumber = Random.Range(1, 5);
+            randomNumber = Random.Range(1, PlayerRoom + 1);
         }
-
+        generatedNumbers.Add(randomNumber);
         return randomNumber;
     }
 }

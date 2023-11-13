@@ -3,6 +3,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class FisrtPersonCameraController : MonoBehaviour, IPunObservable
@@ -17,6 +18,8 @@ public class FisrtPersonCameraController : MonoBehaviour, IPunObservable
     private float xRotation;
     private float yRotation;
     private Slider sensitivitySlider;
+    [SerializeField]
+    private ScriptableRendererFeature rendererFeature;
 
     public PhotonView view;
 
@@ -38,8 +41,9 @@ public class FisrtPersonCameraController : MonoBehaviour, IPunObservable
 
     void Start()
     {
+        rendererFeature.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
-        ChangeSensitivity(50);
+        ChangeSensitivity(GameSettingSaver.settings.Sensitivity * 100);
     }
 
     void Update()
@@ -57,9 +61,10 @@ public class FisrtPersonCameraController : MonoBehaviour, IPunObservable
         }
     }
     
-    private void ChangeSensitivity(float sensitivity)
+    public void ChangeSensitivity(float sensitivity)
     {
         sensitivity *= 0.01f;
+        GameSettingSaver.settings.Sensitivity = sensitivity;
         currentSensX = maxSensX * sensitivity;
         currentSensY = maxSensY * sensitivity;
     }
