@@ -2,6 +2,7 @@ using UnityEngine;
 using Photon.Pun;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using Photon.Realtime;
 
 public class SpawnManagerForPlayer : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class SpawnManagerForPlayer : MonoBehaviour
     public GameObject Maniac;
 
     private bool isManiacSpawned = false;
-    private static int PlayerRoom;
+    public int PlayerRoom;
     private List<int> generatedNumbers = new List<int>();
 
     public void Start()
@@ -40,7 +41,7 @@ public class SpawnManagerForPlayer : MonoBehaviour
         var randomIndex = Random.Range(0, Spawns.Length);
         var randomPosition = Spawns[randomIndex].transform.position;
         var randomNumber = GetUniqueRandomNumber();
-        if (!(randomNumber == 1 && !isManiacSpawned))
+        if (randomNumber == 1 && !isManiacSpawned)
         {
             var spawnManiac = PhotonNetwork.Instantiate(Maniac.name, randomPosition, Quaternion.identity);
             spawnManiac.GetComponent<ManiacMovementController>().enabled = true;
@@ -60,10 +61,11 @@ public class SpawnManagerForPlayer : MonoBehaviour
 
     private void SpawnPlayerOnRoom()
     {
+        var room = PhotonNetwork.CurrentRoom;
         var randomIndex = Random.Range(0, Spawns.Length);
         var randomPosition = Spawns[randomIndex].transform.position;
         var spawnPlayer = PhotonNetwork.Instantiate(Player.name, randomPosition, Quaternion.identity);
-        PlayerRoom++;
+        PlayerRoom = (int)room.PlayerCount;
         print(PlayerRoom);
     }
 
