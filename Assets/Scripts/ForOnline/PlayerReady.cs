@@ -14,19 +14,7 @@ public class PlayerReady : MonoBehaviourPunCallbacks
     [SerializeField] private Button startButton;
     [SerializeField] private Button readyButton;
     [SerializeField] private TMP_Text countText;
-    [SerializeField] private SpawnManagerForPlayer spawnManagerForPlayer;
-
-    private void Update()
-    {
-        StartCoroutine(LateUpdateCountPlayers());
-    }
-
-    IEnumerator LateUpdateCountPlayers()
-    {
-        var readyCount = playerReadyStatus.Count;
-        countText.text = $"{readyCount}/{spawnManagerForPlayer.PlayerRoom}";
-        yield return new WaitForSeconds(1.5f);
-    }
+    public SpawnManagerForPlayer spawnManagerForPlayer;
 
     // ћетод дл€ получени€ списка имен готовых игроков
     public List<string> GetReadyPlayerNames()

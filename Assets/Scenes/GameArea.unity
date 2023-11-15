@@ -1311,6 +1311,7 @@ MonoBehaviour:
   - {fileID: 354287449}
   Player: {fileID: 6132893872328913182, guid: d0e1eaa7424fff54fb862bfa780fb50a, type: 3}
   Maniac: {fileID: 529482825575864600, guid: 27d5e79a76a3cfb48b60c158be1ffe13, type: 3}
+  PlayerRoom: 0
 --- !u!114 &419201001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10233,7 +10234,13 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1064343954}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5787304492450477008, guid: 70e0a7b24eb1ada4ba11063c4d3f88f9, type: 3}
+    - {fileID: 7406005750757950214, guid: 70e0a7b24eb1ada4ba11063c4d3f88f9, type: 3}
+    - {fileID: 5724709921124207834, guid: 70e0a7b24eb1ada4ba11063c4d3f88f9, type: 3}
+    - {fileID: 8484112500280309935, guid: 70e0a7b24eb1ada4ba11063c4d3f88f9, type: 3}
+    - {fileID: 6706691217903866667, guid: 70e0a7b24eb1ada4ba11063c4d3f88f9, type: 3}
+    - {fileID: 5058194595572133833, guid: 70e0a7b24eb1ada4ba11063c4d3f88f9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 70e0a7b24eb1ada4ba11063c4d3f88f9, type: 3}
 --- !u!1 &2325291462759628488 stripped
 GameObject:

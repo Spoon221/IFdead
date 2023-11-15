@@ -3,6 +3,7 @@ using Photon.Pun;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using Photon.Realtime;
+using System.Linq;
 
 public class SpawnManagerForPlayer : MonoBehaviour
 {
@@ -14,12 +15,25 @@ public class SpawnManagerForPlayer : MonoBehaviour
     public int PlayerRoom;
     private List<int> generatedNumbers = new List<int>();
 
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "FindRoom 2") 
+        {
+            var room = PhotonNetwork.CurrentRoom;
+            PlayerRoom = (int)room.PlayerCount;
+        }
+    }
+
     public void Start()
     {
         if (SceneManager.GetActiveScene().name == "FindRoom 2")
             SpawnPlayerOnRoom();
         else
+        {
+            CountPlayer();
             SpawnRandomPlayer();
+        }
+            
 
         /* ��� ������
         if (PhotonNetwork.PlayerList.Length == 1)
@@ -38,6 +52,7 @@ public class SpawnManagerForPlayer : MonoBehaviour
 
     private void SpawnRandomPlayer()
     {
+        PlayerRoom = PlayerPrefs.GetInt("Players");
         var randomIndex = Random.Range(0, Spawns.Length);
         var randomPosition = Spawns[randomIndex].transform.position;
         var randomNumber = GetUniqueRandomNumber();
@@ -61,22 +76,40 @@ public class SpawnManagerForPlayer : MonoBehaviour
 
     private void SpawnPlayerOnRoom()
     {
-        var room = PhotonNetwork.CurrentRoom;
         var randomIndex = Random.Range(0, Spawns.Length);
         var randomPosition = Spawns[randomIndex].transform.position;
         var spawnPlayer = PhotonNetwork.Instantiate(Player.name, randomPosition, Quaternion.identity);
-        PlayerRoom = (int)room.PlayerCount;
-        print(PlayerRoom);
+        CountPlayer();
     }
 
     public int GetUniqueRandomNumber()
     {
-        var randomNumber = Random.Range(1, PlayerRoom + 1);
-        while (generatedNumbers.Contains(randomNumber))
+        // Создаем список доступных чисел
+        List<int> availableNumbers = new List<int>();
+        for (int i = 1; i <= PlayerRoom; i++)
+            availableNumbers.Add(i);
+        // Удаляем уже выбранные числа из списка доступных чисел
+        foreach (int selectedNumber in generatedNumbers)
+            availableNumbers.Remove(selectedNumber);
+        // Если все числа уже выбраны, сбрасываем список выбранных чисел
+        if (availableNumbers.Count == 0)
         {
-            randomNumber = Random.Range(1, PlayerRoom + 1);
+            generatedNumbers.Clear();
+            availableNumbers = new List<int>(Enumerable.Range(1, PlayerRoom));
         }
+        // Выбираем случайное число из доступных чисел
+        int randomNumberIndex = Random.Range(0, availableNumbers.Count);
+        int randomNumber = availableNumbers[randomNumberIndex];
+        // Добавляем выбранное число в список выбранных чисел
         generatedNumbers.Add(randomNumber);
         return randomNumber;
+    }
+
+    public void CountPlayer()
+    {
+        var room = PhotonNetwork.CurrentRoom;
+        PlayerRoom = (int)room.PlayerCount;
+        print("Кол-во игроков: " + PlayerRoom);
+        PlayerPrefs.SetInt("Players", PlayerRoom);
     }
 }
