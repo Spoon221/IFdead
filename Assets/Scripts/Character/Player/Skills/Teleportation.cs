@@ -1,12 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Cinemachine;
+using Photon.Pun;
 
 namespace Character.Player.Skills
 {
-    public class Teleportation : MonoBehaviour
+    public class Teleportation : MonoBehaviourPun
     {
         public float minTeleportRange = 15f;
         private GameObject target;
@@ -16,6 +15,7 @@ namespace Character.Player.Skills
         public float teleportTime = 1f; // Время, за которое будет происходить телепортация
         private PlayerStats playerStats;
         public int manaCost = 90;
+        public CharacterController cc;
 
         private void Start()
         {
@@ -25,13 +25,18 @@ namespace Character.Player.Skills
 
         private void Update()
         {
-            if (!isTeleporting && playerStats.CurrentMana >= manaCost && Input.GetKeyDown(KeyCode.T))
+            if (photonView.IsMine 
+                && !isTeleporting 
+                // && playerStats.CurrentMana >= manaCost 
+                && Input.GetKeyDown(KeyCode.T))
             {
                 isTeleporting = true;
                 target = GetTargetTeleport();
             }
 
             if (!isTeleporting) return;
+            Debug.Log("телепортинг");
+            cc.enabled = false;
             timer += Time.deltaTime;
             var t = timer / teleportTime;
             transform.position = Vector3.Lerp(transform.position, target.transform.position, t);
@@ -42,6 +47,7 @@ namespace Character.Player.Skills
                 isTeleporting = false;
                 timer = 0f;
                 playerStats.SpendMana(manaCost);
+                cc.enabled = true;
             }
         }
 

@@ -13,7 +13,7 @@ public class LevelGoals : MonoBehaviour
 
     private List<GameObject> generators;
     private bool generatorRepaired;
-    private string generatorDisplayTest = "";
+    private string generatorDisplayTest = "Загрузка данных не сделана";
 
     void Start()
     {
@@ -47,7 +47,7 @@ public class LevelGoals : MonoBehaviour
 
     private void UpdateGeneratorText()
     {
-        generatorDisplayTest = "генераторы восстановлены";
+        generatorDisplayTest = "Загрузка данных завершена";
         UpdateText();
     }
 

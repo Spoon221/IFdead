@@ -73,6 +73,8 @@ GameObject:
   - component: {fileID: 1873872349991177773}
   - component: {fileID: 8008259426975488200}
   - component: {fileID: 5206336771208334484}
+  - component: {fileID: -6825789147157796806}
+  - component: {fileID: -2574046300445010871}
   m_Layer: 0
   m_Name: Generator
   m_TagString: Generator
@@ -176,6 +178,14 @@ MonoBehaviour:
   OnItemActivate:
     m_PersistentCalls:
       m_Calls: []
+  baseRepairTime: 3
+  baseGeneratorHealth: 1000
+  isPlayerInTriggerZone:
+    m_PersistentCalls:
+      m_Calls: []
+  isPlayerExitTriggerZone:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5206336771208334484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,3 +208,40 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-6825789147157796806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937731270109708273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6244aea1ab0a35478860f862cfc7faf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ItemName>k__BackingField: 
+  OnItemActivate:
+    m_PersistentCalls:
+      m_Calls: []
+  baseRepairTime: 3
+  baseGeneratorHealth: 1000
+  isPlayerInTriggerZone:
+    m_PersistentCalls:
+      m_Calls: []
+  isPlayerExitTriggerZone:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!65 &-2574046300445010871
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937731270109708273}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6, y: 3, z: 3}
+  m_Center: {x: 0.000000059604645, y: 0.000000029802322, z: -0.00000035762787}

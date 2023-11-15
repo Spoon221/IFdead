@@ -20,7 +20,7 @@ public class SpawnManagerForPlayer : MonoBehaviour
         else
             SpawnRandomPlayer();
 
-        /* Для тестов
+        /* пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         if (PhotonNetwork.PlayerList.Length == 1)
         {
             var test = PhotonNetwork.Instantiate(Maniac.name, randomPositions, Quaternion.identity);
@@ -40,7 +40,7 @@ public class SpawnManagerForPlayer : MonoBehaviour
         var randomIndex = Random.Range(0, Spawns.Length);
         var randomPosition = Spawns[randomIndex].transform.position;
         var randomNumber = GetUniqueRandomNumber();
-        if (randomNumber == 1 && !isManiacSpawned)
+        if (!(randomNumber == 1 && !isManiacSpawned))
         {
             var spawnManiac = PhotonNetwork.Instantiate(Maniac.name, randomPosition, Quaternion.identity);
             spawnManiac.GetComponent<ManiacMovementController>().enabled = true;
