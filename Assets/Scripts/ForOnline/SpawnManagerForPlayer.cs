@@ -21,7 +21,7 @@ public class SpawnManagerForPlayer : MonoBehaviour
         else
             SpawnRandomPlayer();
 
-        /* Для тестов
+        /* пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         if (PhotonNetwork.PlayerList.Length == 1)
         {
             var test = PhotonNetwork.Instantiate(Maniac.name, randomPositions, Quaternion.identity);
