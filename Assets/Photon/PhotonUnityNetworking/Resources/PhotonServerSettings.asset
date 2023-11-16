@@ -50,6 +50,8 @@ MonoBehaviour:
   - LoadGameScene
   - SetPlayerReady
   - StartGame
+  - LoadLevelRoom
+  - SyncInt
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
