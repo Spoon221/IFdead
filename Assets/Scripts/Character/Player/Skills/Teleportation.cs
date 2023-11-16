@@ -13,14 +13,13 @@ namespace Character.Player.Skills
         private bool isTeleporting;
         private float timer;
         public float teleportTime = 1f; // Время, за которое будет происходить телепортация
-        private PlayerStats playerStats;
+        public PlayerStats playerStats;
         public int manaCost = 90;
         public CharacterController cc;
 
         private void Start()
         {
             teleports = GameObject.FindGameObjectsWithTag("Teleport");
-            playerStats = gameObject.GetComponent<PlayerStats>();
         }
 
         private void Update()
