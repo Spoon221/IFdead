@@ -31,19 +31,21 @@ public class MasterRoom : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            StartCoroutine(LoadRoomSceneAsync());
+            var props = new ExitGames.Client.Photon.Hashtable();
+            props.Add("StartMatch", true);
+            PhotonNetwork.CurrentRoom.SetCustomProperties(props);
         }
     }
 
-    private IEnumerator LoadRoomSceneAsync()
+    public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
     {
-        var asyncLoad = SceneManager.LoadSceneAsync("GameArea");
-        while (!asyncLoad.isDone)
+        if (propertiesThatChanged.ContainsKey("StartMatch"))
         {
-            float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
-            Debug.Log("Загрузка сцены... Прогресс: " + (progress * 100) + "%");
-            yield return null;
+            var startMatch = (bool)propertiesThatChanged["StartMatch"];
+            if (startMatch)
+            {
+                PhotonNetwork.LoadLevel("GameArea");
+            }
         }
-        PhotonNetwork.LoadLevel("GameArea");
     }
 }

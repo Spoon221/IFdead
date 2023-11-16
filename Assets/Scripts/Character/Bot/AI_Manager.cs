@@ -48,7 +48,7 @@ public class AI_Manager : MonoBehaviourPunCallbacks
     {
         fieldOfView.CheckingFieldView();
         StatusLogic();
-        attack.ÑheckingAttackCondition();
+        attack.CheckingAttackCondition();
     }
 
     private void StatusLogic()

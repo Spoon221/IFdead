@@ -10,11 +10,10 @@ public class LevelGoals : MonoBehaviour
     private List<GameObject> keys;
     private int currentNumberOfKeys;
     private int numberOfKeysToFind;
-    
-    private List<GameObject> generators;
-    private int currentNumberOfActivatedGenerators;
-    private int numberOfGeneratorsToActivate;
 
+    private List<GameObject> generators;
+    private bool generatorRepaired;
+    private string generatorDisplayTest = "Загрузка данных не сделана";
 
     void Start()
     {
@@ -37,10 +36,7 @@ public class LevelGoals : MonoBehaviour
     {
         generators = GameObject.FindGameObjectsWithTag("Generator").ToList();
         foreach (var generator in generators)
-            generator.GetComponent<ActivatedItem>().OnItemActivate.AddListener(UpdateNumberOfActivatedGenerators);
-
-        currentNumberOfActivatedGenerators = 0;
-        numberOfGeneratorsToActivate = generators.Count;
+            generator.GetComponent<ActivatedItem>().OnItemActivate.AddListener(UpdateGeneratorText);
     }
 
     private void UpdateNumberOfKeys()
@@ -49,16 +45,15 @@ public class LevelGoals : MonoBehaviour
         UpdateText();
     }
 
-    private void UpdateNumberOfActivatedGenerators()
+    private void UpdateGeneratorText()
     {
-        currentNumberOfActivatedGenerators++;
+        generatorDisplayTest = "Загрузка данных завершена";
         UpdateText();
     }
 
     private void UpdateText()
     {
         var keyText = $"ключей найдено: {currentNumberOfKeys}/{numberOfKeysToFind}";
-        var generatorText = $"генератов включено: {currentNumberOfActivatedGenerators}/{numberOfGeneratorsToActivate}";
-        gameObject.GetComponent<TMP_Text>().text = $"{keyText}\n{generatorText}";
+        gameObject.GetComponent<TMP_Text>().text = $"{keyText}\n{generatorDisplayTest}";
     }
 }
