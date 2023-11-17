@@ -73,14 +73,11 @@ public class Generator : ActivatedItem
         {
             playerCount--;
         }
-
-        Debug.Log("ВЫШЕЛ");
     }
 
 
     public void Start()
     {
-        
         singltonGeneratorHealth = SingletonGeneratorHealth.GetInstance();
         tickGeneratorRepairing = baseGeneratorHealth / baseRepairTime / 1000;
     }
