@@ -9,13 +9,7 @@ using Photon.Pun;
 public class Settings : MonoBehaviourPunCallbacks
 {
     public Dropdown resolution;
-    private SpawnManagerForPlayer spawn;
     //public GameObject settingsMenu;
-
-    private void Start()
-    {
-        spawn = FindObjectOfType<SpawnManagerForPlayer>();
-    }
 
     public void ChangeResolution()
     {
@@ -41,7 +35,6 @@ public class Settings : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
-        Destroy(spawn.gameObject);
         SceneManager.LoadScene(0);
 
         base.OnLeftRoom();

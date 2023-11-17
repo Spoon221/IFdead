@@ -7,15 +7,15 @@ namespace Character.Player.Skills
 {
     public class Teleportation : MonoBehaviourPun
     {
-        public float minTeleportRange = 15f;
+        [SerializeField] private float minTeleportRange = 15f;
         private GameObject target;
         private GameObject[] teleports;
         private bool isTeleporting;
         private float timer;
-        public float teleportTime = 1f; // Время, за которое будет происходить телепортация
-        public PlayerStats playerStats;
-        public int manaCost = 90;
-        public CharacterController cc;
+        [SerializeField] private float teleportTime = 1f; // Время, за которое будет происходить телепортация
+        [SerializeField] private PlayerStats playerStats;
+        [SerializeField] private int manaCost = 90;
+        [SerializeField] private CharacterController cc;
 
         private void Start()
         {
@@ -34,7 +34,6 @@ namespace Character.Player.Skills
             }
 
             if (!isTeleporting) return;
-            Debug.Log("телепортинг");
             cc.enabled = false;
             timer += Time.deltaTime;
             var t = timer / teleportTime;
@@ -42,7 +41,6 @@ namespace Character.Player.Skills
 
             if (Math.Abs(Vector3.Distance(transform.position, target.transform.position)) <= 1e-1)
             {
-                Debug.Log("teleporated");
                 isTeleporting = false;
                 timer = 0f;
                 playerStats.SpendMana(manaCost);

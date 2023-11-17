@@ -52,6 +52,9 @@ MonoBehaviour:
   - StartGame
   - LoadLevelRoom
   - SyncInt
+  - FindPlayer
+  - AssignRandomNumber
+  - GetUniqueRandomNumber
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

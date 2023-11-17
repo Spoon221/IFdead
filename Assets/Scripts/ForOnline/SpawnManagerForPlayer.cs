@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using Photon.Realtime;
 using System.Linq;
 
-public class SpawnManagerForPlayer : MonoBehaviour
+public class SpawnManagerForPlayer : MonoBehaviourPun
 {
     public GameObject[] Spawns;
     public GameObject Player;
@@ -21,7 +21,7 @@ public class SpawnManagerForPlayer : MonoBehaviour
     public void Start()
     {
         SpawnPlayerOnRoom();
-
+        
 
         /* для тестов
         if (PhotonNetwork.PlayerList.Length == 1)
@@ -40,7 +40,6 @@ public class SpawnManagerForPlayer : MonoBehaviour
 
     private void SpawnPlayerOnRoom()
     {
-        DontDestroyOnLoad(this.gameObject);
         var randomIndex = Random.Range(0, Spawns.Length);
         var randomPosition = Spawns[randomIndex].transform.position;
         var spawnPlayer = PhotonNetwork.Instantiate(Player.name, randomPosition, Quaternion.identity);

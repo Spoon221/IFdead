@@ -8011,6 +8011,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1995971061}
   - component: {fileID: 1995971062}
+  - component: {fileID: 1995971063}
   m_Layer: 0
   m_Name: Spawn
   m_TagString: Untagged
@@ -8059,7 +8060,20 @@ MonoBehaviour:
   Player: {fileID: 6132893872328913182, guid: d0e1eaa7424fff54fb862bfa780fb50a, type: 3}
   Maniac: {fileID: 529482825575864600, guid: 27d5e79a76a3cfb48b60c158be1ffe13, type: 3}
   PlayerRoom: 0
-  spawn: {fileID: 0}
+--- !u!114 &1995971063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995971059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 008d4398129befd499c5d448a85a8fd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: []
+  Maniac: []
 --- !u!1001 &2038883892
 PrefabInstance:
   m_ObjectHideFlags: 0
