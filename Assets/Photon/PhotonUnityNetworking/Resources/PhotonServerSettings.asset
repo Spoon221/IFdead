@@ -55,6 +55,8 @@ MonoBehaviour:
   - FindPlayer
   - AssignRandomNumber
   - GetUniqueRandomNumber
+  - SetRandomNumber
+  - SyncGeneratedNumbers
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

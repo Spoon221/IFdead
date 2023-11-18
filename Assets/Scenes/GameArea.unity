@@ -3097,7 +3097,8 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5206336771208334484, guid: 3b3318b0a0f194342a14139b8b9ec520, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3b3318b0a0f194342a14139b8b9ec520, type: 3}
 --- !u!1001 &933264380
 PrefabInstance:
@@ -8059,7 +8060,7 @@ MonoBehaviour:
   - {fileID: 228283446}
   Player: {fileID: 6132893872328913182, guid: d0e1eaa7424fff54fb862bfa780fb50a, type: 3}
   Maniac: {fileID: 529482825575864600, guid: 27d5e79a76a3cfb48b60c158be1ffe13, type: 3}
-  PlayerRoom: 0
+  isManiacSpawned: 0
 --- !u!114 &1995971063
 MonoBehaviour:
   m_ObjectHideFlags: 0
