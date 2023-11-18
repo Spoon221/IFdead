@@ -8,7 +8,7 @@ public class SpawnOnGameArea : MonoBehaviourPun
     public GameObject[] Spawns;
     public GameObject Player;
     public GameObject Maniac;
-    private bool isManiacSpawned = false;
+    public bool isManiacSpawned = false;
     
 
     void Start()
