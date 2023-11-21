@@ -10,13 +10,13 @@ public class SpawnManagerForPlayer : MonoBehaviourPun
     public GameObject[] Spawns;
     public GameObject Player;
 
-    public int PlayerRoom;
+    //public int PlayerRoom;
 
-    private void Update()
-    {
-        var room = PhotonNetwork.CurrentRoom;
-        PlayerRoom = (int)room.PlayerCount;
-    }
+    //private void Update()
+    //{
+    //    var room = PhotonNetwork.CurrentRoom;
+    //    PlayerRoom = (int)room.PlayerCount;
+    //}
 
     public void Start()
     {

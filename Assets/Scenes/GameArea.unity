@@ -3337,6 +3337,7 @@ GameObject:
   - component: {fileID: 958458831}
   - component: {fileID: 958458830}
   - component: {fileID: 958458829}
+  - component: {fileID: 958458832}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -3382,6 +3383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resolution: {fileID: 923260669}
+  view: {fileID: 958458832}
 --- !u!114 &958458830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3420,6 +3422,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 958458827}
   m_CullTransparentMesh: 1
+--- !u!114 &958458832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958458827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 99
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &990421720
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8012,7 +8036,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1995971061}
   - component: {fileID: 1995971062}
-  - component: {fileID: 1995971063}
   m_Layer: 0
   m_Name: Spawn
   m_TagString: Untagged
@@ -8060,21 +8083,6 @@ MonoBehaviour:
   - {fileID: 228283446}
   Player: {fileID: 6132893872328913182, guid: d0e1eaa7424fff54fb862bfa780fb50a, type: 3}
   Maniac: {fileID: 529482825575864600, guid: 27d5e79a76a3cfb48b60c158be1ffe13, type: 3}
-  isManiacSpawned: 0
---- !u!114 &1995971063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1995971059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 008d4398129befd499c5d448a85a8fd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: []
-  Maniac: []
 --- !u!1001 &2038883892
 PrefabInstance:
   m_ObjectHideFlags: 0

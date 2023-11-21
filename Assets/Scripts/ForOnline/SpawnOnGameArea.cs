@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
-public class SpawnOnGameArea : MonoBehaviourPun
+public class SpawnOnGameArea : MonoBehaviourPunCallbacks
 {
     public GameObject[] Spawns;
     public GameObject Player;
     public GameObject Maniac;
-    public bool isManiacSpawned = false;
-    
 
     void Start()
     {
@@ -22,7 +21,6 @@ public class SpawnOnGameArea : MonoBehaviourPun
             {
                 var spawnManiac = PhotonNetwork.Instantiate(Maniac.name, randomPosition, Quaternion.identity);
                 spawnManiac.GetComponent<ManiacMovementController>().enabled = true;
-                isManiacSpawned = true;
             }
             else if (nextScenePlayer == "Player2")
             {
