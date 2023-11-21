@@ -1,7 +1,7 @@
 using UnityEngine;
 using Photon.Pun;
 
-public class IsMine : MonoBehaviourPun
+public class IsMine : MonoBehaviourPunCallbacks
 {
     public PlayerMovementController scriptPlayerMovementController;
     public ManiacMovementController scriptManiacMovementController;

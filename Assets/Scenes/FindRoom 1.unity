@@ -7771,7 +7771,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1635587824, guid: a376b1efdaaedf547af16580e4507167, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.04491342
+      value: 0.044913415
       objectReference: {fileID: 0}
     - target: {fileID: 6132893871568048782, guid: a376b1efdaaedf547af16580e4507167, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7919,7 +7919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6132893872856189290, guid: a376b1efdaaedf547af16580e4507167, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.04491342
+      value: 0.044913415
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a376b1efdaaedf547af16580e4507167, type: 3}
@@ -17969,6 +17969,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resolution: {fileID: 1906156247}
+  view: {fileID: 1686188751}
+  ManiacSpawned: {fileID: 0}
+  PlayerOnRoom: {fileID: 0}
 --- !u!114 &1401591356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21368,6 +21371,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fe582b88850fc641a48927b3400c327, type: 3}
+--- !u!114 &1686188751 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6132893871799605146, guid: a376b1efdaaedf547af16580e4507167, type: 3}
+  m_PrefabInstance: {fileID: 599036032}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1688449102
 PrefabInstance:
   m_ObjectHideFlags: 0

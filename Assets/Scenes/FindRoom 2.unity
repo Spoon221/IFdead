@@ -2190,7 +2190,8 @@ MonoBehaviour:
   startButton: {fileID: 528157769}
   exitButton: {fileID: 1556135335}
   forPlayer: {fileID: 1988392065}
-  generatedNumbers: 
+  isManiacSpawned: 0
+  randomNumber: 0
 --- !u!114 &97543643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17578,6 +17579,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resolution: {fileID: 1906156247}
+  view: {fileID: 0}
+  ManiacSpawned: {fileID: 0}
+  PlayerOnRoom: {fileID: 1988392065}
 --- !u!114 &1401591356
 MonoBehaviour:
   m_ObjectHideFlags: 0

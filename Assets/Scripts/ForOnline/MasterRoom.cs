@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
-using Photon.Realtime;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
@@ -11,14 +10,9 @@ public class MasterRoom : MonoBehaviourPunCallbacks
     [SerializeField] private Button exitButton;
     [SerializeField] private SpawnManagerForPlayer forPlayer;
 
-    public List<int> generatedNumbers = new List<int>();
+    private Dictionary<int, int> generatedNumbers = new Dictionary<int, int>();
     public bool isManiacSpawned = false;
     public int randomNumber;
-
-    private void Awake()
-    {
-        //PhotonNetwork.AutomaticallySyncScene = true;
-    }
 
     public void LeaveRoom()
     {
@@ -33,7 +27,7 @@ public class MasterRoom : MonoBehaviourPunCallbacks
 
     public void LoadLevel()
     {
-        photonView.RPC("AssignRandomNumber", RpcTarget.AllBuffered);
+        photonView.RPC("AssignRandomNumber", RpcTarget.All);
 
         if (PhotonNetwork.IsMasterClient)
         {
@@ -41,65 +35,79 @@ public class MasterRoom : MonoBehaviourPunCallbacks
             props.Add("StartMatch", true);
             PhotonNetwork.CurrentRoom.SetCustomProperties(props);
         }
-
-        if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("IsManiacSpawned"))
-        {
-            isManiacSpawned = (bool)PhotonNetwork.CurrentRoom.CustomProperties["IsManiacSpawned"];
-        }
-
-        if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("GeneratedNumbers"))
-        {
-            generatedNumbers = new List<int>((int[])PhotonNetwork.CurrentRoom.CustomProperties["GeneratedNumbers"]);
-        }
     }
+
 
     [PunRPC]
     private void AssignRandomNumber()
     {
-        randomNumber = GetUniqueRandomNumber();
-        if (randomNumber == 1 && !isManiacSpawned)
+        if (!PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("IsPlayer1Assigned"))
         {
-            PhotonNetwork.LocalPlayer.CustomProperties["NextScenePlayer"] = "Player1";
+            var player1ActorNumber = GetPlayerWithLowestActorNumber();
+            if (PhotonNetwork.LocalPlayer.ActorNumber == player1ActorNumber)
+            {
+                PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "IsPlayer1Assigned", true } });
+                PhotonNetwork.LocalPlayer.CustomProperties["NextScenePlayer"] = "Player1";
+                isManiacSpawned = true;
+            }
+            else
+            {
+                PhotonNetwork.LocalPlayer.CustomProperties["NextScenePlayer"] = "Player2";
+            }
         }
         else
         {
             PhotonNetwork.LocalPlayer.CustomProperties["NextScenePlayer"] = "Player2";
         }
+    }
 
-        var props = new ExitGames.Client.Photon.Hashtable();
-        props.Add("IsManiacSpawned", isManiacSpawned);
-        PhotonNetwork.CurrentRoom.SetCustomProperties(props);
-
-        photonView.RPC("SyncGeneratedNumbers", RpcTarget.AllBuffered, randomNumber);
+    private int GetPlayerWithLowestActorNumber()
+    {
+        var lowestPlayerActorNumber = int.MaxValue;
+        foreach (var player in PhotonNetwork.PlayerList)
+        {
+            if (player.ActorNumber == lowestPlayerActorNumber || player.ActorNumber > lowestPlayerActorNumber || player.ActorNumber < lowestPlayerActorNumber)
+            {
+                lowestPlayerActorNumber = player.ActorNumber;
+            }
+        }
+        return lowestPlayerActorNumber;
     }
 
     [PunRPC]
-    private void SyncGeneratedNumbers(int randomNumber)
+    private void SyncGeneratedNumbers(int playerActorNumber, int randomNumber)
     {
-        generatedNumbers.Add(randomNumber);
+        generatedNumbers[playerActorNumber] = randomNumber;
+
         if (generatedNumbers.Count == PhotonNetwork.PlayerList.Length)
         {
             var props = new ExitGames.Client.Photon.Hashtable();
-            props.Add("GeneratedNumbers", generatedNumbers.ToArray());
+            props.Add("GeneratedNumbers", generatedNumbers);
             PhotonNetwork.CurrentRoom.SetCustomProperties(props);
         }
     }
 
-    public int GetUniqueRandomNumber()
-    {
-        var roomProperties = PhotonNetwork.CurrentRoom.CustomProperties;
-        if (roomProperties.TryGetValue("GeneratedNumbers", out object generatedNumbersObj))
-        {
-            generatedNumbers = new List<int>((int[])generatedNumbersObj);
-        }
-        var randomNumber = Random.Range(1, forPlayer.PlayerRoom + 1);
-        while (generatedNumbers.Exists(number => number == randomNumber))
-        {
-            randomNumber = Random.Range(1, forPlayer.PlayerRoom + 1);
-        }
-        generatedNumbers.Add(randomNumber);
-        return randomNumber;
-    }
+    //public int GetUniqueRandomNumber()
+    //{
+    //    var roomProperties = PhotonNetwork.CurrentRoom.CustomProperties;
+    //    if (roomProperties.TryGetValue("GeneratedNumbers", out object generatedNumbersObj))
+    //    {
+    //        generatedNumbers = (Dictionary<int, int>)generatedNumbersObj;
+    //    }
+    //    else
+    //    {
+    //        generatedNumbers = new Dictionary<int, int>();
+    //    }
+
+    //    var randomNumber = Random.Range(1, forPlayer.PlayerRoom + 1);
+    //    while (generatedNumbers.ContainsValue(randomNumber))
+    //    {
+    //        randomNumber = Random.Range(1, forPlayer.PlayerRoom + 1);
+    //    }
+
+    //    generatedNumbers[PhotonNetwork.LocalPlayer.ActorNumber] = randomNumber;
+    //    return randomNumber;
+    //}
 
     public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
     {
