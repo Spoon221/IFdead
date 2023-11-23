@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ManiacMinigame : MonoBehaviour
+public class ManiacMinigame : MonoBehaviourPunCallbacks
 {
     private PlayerMinigame caughtPlayer;
     public int rescueProgress;
-    public Image progressBar;
-    public RectTransform keyRect;
-    public Canvas canvas;
+    private Image progressBar;
+    private RectTransform keyRect;
+    private GameObject canvas;
 
-    public static KeyCode[] validSequenceKeys = new[] {
+    public static readonly KeyCode[] validSequenceKeys = new[] {
         KeyCode.Q,
         KeyCode.W,
         KeyCode.E,
@@ -29,14 +30,33 @@ public class ManiacMinigame : MonoBehaviour
         KeyCode.B,
     };
 
-    private void OnTriggerEnter(Collider other)
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    StartMiniGame(other);
+    //}
+
+    private void Start()
     {
-        if (!other.TryGetComponent(out caughtPlayer)) return;
-        caughtPlayer.StartMinigame(this);
+        canvas = MiniGameCanvas.Canvas;
+        keyRect = MiniGameCanvas.KeyRect;
+        progressBar = MiniGameCanvas.ProgressBar;
+    }
+
+    public void StartMiniGame(Collider playerCollider)
+    {
+        //if(!PhotonNetwork.IsMasterClient) return;
+        //photonView.RPC("StartMiniGameRPC", RpcTarget.All, playerCollider);
+        StartMiniGameRPC(playerCollider);
+    }
+
+    [PunRPC]
+    private void StartMiniGameRPC(Component playerCollider)
+    {
+        if (!playerCollider.TryGetComponent(out caughtPlayer)) return;
+        caughtPlayer.StartMiniGame(this);
         StartCoroutine(QTEGame());
         rescueProgress = 0;
         canvas.gameObject.SetActive(true);
-
     }
 
     private void ReleasePlayer()
@@ -45,6 +65,7 @@ public class ManiacMinigame : MonoBehaviour
         canvas.gameObject.SetActive(false);
         caughtPlayer = null;
         progressBar.fillAmount = 0;
+        GetComponent<ManiacHook>().Miss.UnHook();
     }
     private void FixedUpdate()
     {
@@ -62,8 +83,9 @@ public class ManiacMinigame : MonoBehaviour
         {
             var rand = Random.Range(0, validSequenceKeys.Length-1);
             SetKeyOnScreen(validSequenceKeys[rand]);
-            yield return new WaitUntil(() => Input.GetKeyDown(validSequenceKeys[rand]));
-
+            yield return new WaitUntil(() => Input.GetKeyDown(validSequenceKeys[rand]) || Input.GetKeyDown(KeyCode.L));
+            var dir = transform.position - caughtPlayer.transform.position;
+            caughtPlayer.GetComponent<PlayerMovementController>().AddForce(dir * 3);
             rescueProgress -= 10;
             yield return new WaitForEndOfFrame();
         }
