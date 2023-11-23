@@ -2987,7 +2987,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 958458829}
+      - m_Target: {fileID: 1026410611}
         m_TargetAssemblyTypeName: Settings, Assembly-CSharp
         m_MethodName: ChangeResolution
         m_Mode: 1
@@ -3336,8 +3336,6 @@ GameObject:
   - component: {fileID: 958458828}
   - component: {fileID: 958458831}
   - component: {fileID: 958458830}
-  - component: {fileID: 958458829}
-  - component: {fileID: 958458832}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -3370,20 +3368,6 @@ RectTransform:
   m_AnchoredPosition: {x: -3.333496, y: -0.00008899416}
   m_SizeDelta: {x: -7.300049, y: 1920}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &958458829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 958458827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d686d7e290aaeb4e8323f1f80dff228, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resolution: {fileID: 923260669}
-  view: {fileID: 958458832}
 --- !u!114 &958458830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3422,28 +3406,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 958458827}
   m_CullTransparentMesh: 1
---- !u!114 &958458832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 958458827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents: []
-  sceneViewId: 99
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!1001 &990421720
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3824,6 +3786,8 @@ GameObject:
   - component: {fileID: 1026410607}
   - component: {fileID: 1026410606}
   - component: {fileID: 1026410610}
+  - component: {fileID: 1026410611}
+  - component: {fileID: 1026410612}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3927,6 +3891,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsMenu: {fileID: 958458827}
+--- !u!114 &1026410611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026410605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d686d7e290aaeb4e8323f1f80dff228, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resolution: {fileID: 923260669}
+  view: {fileID: 1026410612}
+--- !u!114 &1026410612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1026410605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 99
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1026479244
 GameObject:
   m_ObjectHideFlags: 0
@@ -6003,7 +6003,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 958458829}
+      - m_Target: {fileID: 1026410611}
         m_TargetAssemblyTypeName: Settings, Assembly-CSharp
         m_MethodName: LeaveRoom
         m_Mode: 1
@@ -8596,7 +8596,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 958458829}
+      - m_Target: {fileID: 1026410611}
         m_TargetAssemblyTypeName: Settings, Assembly-CSharp
         m_MethodName: SetFullscreen
         m_Mode: 6

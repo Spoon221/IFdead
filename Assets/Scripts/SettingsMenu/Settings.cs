@@ -2,34 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
-using System;
-using Photon.Realtime;
-using Hashtable = ExitGames.Client.Photon.Hashtable;
-using System.Collections;
 
 public class Settings : MonoBehaviourPunCallbacks
 {
     public Dropdown resolution;
 
     public PhotonView view;
-
-    public const string Player1LeftProp = "Player1Left";
-    public bool player1Left = false;
-    //public SpawnManagerForPlayer PlayerOnRoom;
-
-    //private void Start()
-    //{
-    //    if (SceneManager.GetActiveScene().name == "FindRoom 2")
-    //    {
-    //        view = PlayerOnRoom.Player.GetComponent<PhotonView>();
-    //    }
-    //}
-
-    //private void Update()
-    //{
-    //    if (SceneManager.GetActiveScene().name == "GameArea")
-    //        view = GameObject.FindWithTag("Maniac").GetComponent<PhotonView>();
-    //}
 
     public void ChangeResolution()
     {
@@ -55,22 +33,15 @@ public class Settings : MonoBehaviourPunCallbacks
             if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("NextScenePlayer"))
             {
                 var nextScenePlayer = (string)PhotonNetwork.LocalPlayer.CustomProperties["NextScenePlayer"];
-                //var view = gameObject.AddComponent<PhotonView>();
-                //view.ViewID = 99;
                 if (nextScenePlayer == "Player1")
                 {
-                    player1Left = true;
-                    var props = new Hashtable();
-                    props[Player1LeftProp] = true;
-                    PhotonNetwork.LocalPlayer.SetCustomProperties(props);
-                    LeaveGame();
+                    view.RPC("LeaveGame", RpcTarget.All);
                 }
-                else if (nextScenePlayer == "Player2" && PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey(Player1LeftProp) && (bool)PhotonNetwork.LocalPlayer.CustomProperties[Player1LeftProp])
+                else if (nextScenePlayer == "Player2")
                 {
                     LeaveGame();
                     //PhotonNetwork.LeaveRoom();
                 }
-                
             }
         }
         else if (SceneManager.GetActiveScene().name == "FindRoom 2")
@@ -82,10 +53,6 @@ public class Settings : MonoBehaviourPunCallbacks
     [PunRPC]
     public void LeaveGame()
     {
-        player1Left = true;
-        Hashtable props = new Hashtable();
-        props[Player1LeftProp] = true;
-        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
         PhotonNetwork.LeaveRoom();
     }
 
