@@ -11,7 +11,6 @@ public class MasterRoom : MonoBehaviourPunCallbacks
     [SerializeField] private SpawnManagerForPlayer forPlayer;
 
     private Dictionary<int, int> generatedNumbers = new Dictionary<int, int>();
-    public bool isManiacSpawned = false;
     public int randomNumber;
 
     public void LeaveRoom()
@@ -48,7 +47,6 @@ public class MasterRoom : MonoBehaviourPunCallbacks
             {
                 PhotonNetwork.CurrentRoom.SetCustomProperties(new ExitGames.Client.Photon.Hashtable { { "IsPlayer1Assigned", true } });
                 PhotonNetwork.LocalPlayer.CustomProperties["NextScenePlayer"] = "Player1";
-                isManiacSpawned = true;
             }
             else
             {

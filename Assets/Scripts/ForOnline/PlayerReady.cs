@@ -15,6 +15,22 @@ public class PlayerReady : MonoBehaviourPunCallbacks
     [SerializeField] private Button readyButton;
     [SerializeField] private TMP_Text countText;
 
+    private void Update()
+    {
+        var allPlayersReady = true;
+        var readyCount = playerReadyStatus.Count;
+
+        foreach (var entry in playerReadyStatus)
+        {
+            if (entry.Value) continue;
+            allPlayersReady = false;
+            readyCount--;
+        }
+
+        countText.text = $"{readyCount}/{PhotonNetwork.PlayerList.Length}";
+        //CheckAllPlayersReady();
+    }
+
     // ћетод дл€ получени€ списка имен готовых игроков
     public List<string> GetReadyPlayerNames()
     {
