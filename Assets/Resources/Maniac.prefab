@@ -538,13 +538,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 529482825575864603}
-  - component: {fileID: 7377211870041003379}
   - component: {fileID: 2602679348726651294}
   - component: {fileID: 8059336578616850902}
   - component: {fileID: 1085475388915998646}
   - component: {fileID: 8935490345591800789}
   - component: {fileID: 856852341058911971}
   - component: {fileID: 1817384867521719891}
+  - component: {fileID: 5112664016563151366}
   m_Layer: 0
   m_Name: Maniac
   m_TagString: Maniac
@@ -571,22 +571,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &7377211870041003379
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 529482825575864600}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 1
 --- !u!114 &2602679348726651294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -612,18 +596,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 529482825575864600}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 262e30a1f2746094794e786f4221f929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 6
-  JumpForce: 7
-  ManiacHeight: 1
-  GroundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  view: {fileID: 8935490345591800789}
+  moveSpeed: 15
+  jumpForce: 2
+  gravityForce: 5
   orientation: {fileID: 6720464477614676291}
 --- !u!114 &1085475388915998646
 MonoBehaviour:
@@ -716,6 +696,24 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!143 &5112664016563151366
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529482825575864600}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1.14
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &529482825958493947
 GameObject:
   m_ObjectHideFlags: 0
