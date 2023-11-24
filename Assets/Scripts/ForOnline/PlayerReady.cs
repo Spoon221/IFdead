@@ -15,19 +15,21 @@ public class PlayerReady : MonoBehaviourPunCallbacks
     [SerializeField] private Button readyButton;
     [SerializeField] private TMP_Text countText;
 
+    private void Awake()
+    {
+        PhotonNetwork.AutomaticallySyncScene = true;
+    }
+
     private void Update()
     {
-        var allPlayersReady = true;
         var readyCount = playerReadyStatus.Count;
-
         foreach (var entry in playerReadyStatus)
         {
             if (entry.Value) continue;
-            allPlayersReady = false;
             readyCount--;
         }
-
         countText.text = $"{readyCount}/{PhotonNetwork.PlayerList.Length}";
+        
         //CheckAllPlayersReady();
     }
 
@@ -82,11 +84,12 @@ public class PlayerReady : MonoBehaviourPunCallbacks
         countText.text = $"{readyCount}/{PhotonNetwork.PlayerList.Length}";
 
         // ≈сли все игроки готовы, можно запустить игру
-        if (allPlayersReady && PhotonNetwork.IsMasterClient)
+        if (allPlayersReady && PhotonNetwork.IsMasterClient && PhotonNetwork.PlayerList.Length > 1)
         {
             startButton.interactable = true;
         }
     }
+
     public override void OnJoinedRoom()
     {
         //playerReadyStatus.TryAdd(newPlayer, false);
@@ -99,6 +102,7 @@ public class PlayerReady : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
+        countText.text = $"{playerReadyStatus.Count}/{PhotonNetwork.PlayerList.Length}";
         playerReadyStatus.TryAdd(newPlayer, false);
     }
 
