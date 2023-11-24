@@ -10,14 +10,29 @@ public class Settings : MonoBehaviourPunCallbacks
 
     public PhotonView view;
     private bool LeftGameAllInRoom = false;
+    public GameObject Maniac;
+    private Coroutine checkPlayerCoroutine;
 
     private void Update()
     {
         if (SceneManager.GetActiveScene().name == "GameArea")
         {
-            var maniac = GameObject.FindWithTag("Maniac");
-            if (LeftGameAllInRoom || PhotonNetwork.PlayerList.Length == 1 || maniac == null)
-                StartCoroutine(CheckPlayerList());
+            Maniac = GameObject.FindWithTag("Maniac");
+            if (LeftGameAllInRoom || PhotonNetwork.PlayerList.Length == 1 || Maniac == null)
+            {
+                if (checkPlayerCoroutine == null)
+                {
+                    checkPlayerCoroutine = StartCoroutine(CheckPlayerList());
+                }
+            }
+            else
+            {
+                if (checkPlayerCoroutine != null)
+                {
+                    StopCoroutine(checkPlayerCoroutine);
+                    checkPlayerCoroutine = null;
+                }
+            }
         }
     }
 
