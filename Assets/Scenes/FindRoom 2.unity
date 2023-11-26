@@ -25020,6 +25020,7 @@ MonoBehaviour:
   - {fileID: 366317079}
   Player: {fileID: 6132893872328913182, guid: a376b1efdaaedf547af16580e4507167, type: 3}
   PlayerRoom: 0
+  spawnManagerForPlayer: {fileID: 1988392065}
 --- !u!1 &1989444440
 GameObject:
   m_ObjectHideFlags: 0

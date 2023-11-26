@@ -19,6 +19,7 @@ public class AI_Behaviour : MonoBehaviour
     public Transform[] navPoints;
     [SerializeField] private Missile prefabShot;
     [SerializeField] private Light light;
+    private Material eyeMaterial;
 
     public bool canSeePlayer;
     private bool canShot = true;
@@ -29,6 +30,7 @@ public class AI_Behaviour : MonoBehaviour
 
     private void Start()
     {
+        eyeMaterial = light.GetComponentInParent<MeshRenderer>().material;
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         LostPlayer();
@@ -46,6 +48,7 @@ public class AI_Behaviour : MonoBehaviour
         StartWalkAnim();
         agent.isStopped = false;
         light.color = Color.red;
+        eyeMaterial.SetColor("_Emission", Color.red);
         while (canSeePlayer)
         {
             agent.destination = chaseTarget.position;
@@ -63,6 +66,7 @@ public class AI_Behaviour : MonoBehaviour
         yield return new WaitUntil(() => (canSeePlayer || Vector3.Distance(agent.destination, transform.position) <= agent.stoppingDistance));
         StopWalkAnim();
         light.color = Color.yellow;
+        eyeMaterial.SetColor("_Emission", Color.yellow);
         yield return new WaitForDone(3, () => canSeePlayer);
         if (!canSeePlayer)
             LostPlayer();
@@ -73,6 +77,7 @@ public class AI_Behaviour : MonoBehaviour
     {
         StartCoroutine(WalkingToPoints());
         light.color = Color.blue;
+        eyeMaterial.SetColor("_Emission", Color.blue);
     }
 
     private IEnumerator WalkingToPoints()
@@ -93,11 +98,13 @@ public class AI_Behaviour : MonoBehaviour
             if (!canSeePlayer) continue;
 
             light.color = Color.yellow;
+            eyeMaterial.SetColor("_Emission", Color.yellow);
             yield return new WaitForSeconds(.5f);
 
             if (!canSeePlayer)
             {
                 light.color = Color.blue;
+                eyeMaterial.SetColor("_Emission", Color.blue);
                 continue;
             }
 

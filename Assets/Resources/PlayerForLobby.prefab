@@ -927,10 +927,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 321182be3fa11e14484e9442e323e276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.2
-  jumpForce: 1
-  gravityForce: 2
-  resistanceForce: 0.01
+  moveSpeed: 14
+  jumpForce: 2
+  gravityForce: 5
+  resistanceForce: 3
   nameModelWithAnimator: survivor
   orientation: {fileID: 6132893872649457731}
   animator: {fileID: 4236220941208175545}
