@@ -285,7 +285,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1635587820}
-  m_LocalRotation: {x: 0.060331583, y: -0.19558318, z: 0.012055967, w: 0.97875535}
+  m_LocalRotation: {x: 0.060331583, y: -0.19558316, z: 0.012055967, w: 0.97875535}
   m_LocalPosition: {x: 2.6694305, y: 2.143312, z: -6.4125915}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1104,7 +1104,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6132893871568048783}
-  m_LocalRotation: {x: 0.1462005, y: -0.1937643, z: 0.029215017, w: 0.9696532}
+  m_LocalRotation: {x: 0.14620048, y: -0.19376427, z: 0.029215014, w: 0.9696532}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1439,17 +1439,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6132893872328913182}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 321182be3fa11e14484e9442e323e276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.2
+  moveSpeed: 14
   jumpForce: 1
   gravityForce: 2
   resistanceForce: 0.01
   nameModelWithAnimator: survivor
   orientation: {fileID: 6132893872649457731}
+  canMove: 1
   animator: {fileID: 1561272949845160880}
 --- !u!114 &3081207912094598214
 MonoBehaviour:
