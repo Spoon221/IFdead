@@ -24,7 +24,7 @@ public class Generator : ActivatedItem
 
     private float tickGeneratorRepairing; // Время тика починки генератора
     private bool isRepairing;
-    
+    public int CounterCompletedTasks;
 
     private bool isRepaired;
 
@@ -54,6 +54,7 @@ public class Generator : ActivatedItem
             Debug.Log("loaded");
             isRepaired = true;
             ActivateItem();
+            CounterCompletedTasks = 1;
         }
     }
 
@@ -76,8 +77,9 @@ public class Generator : ActivatedItem
     }
 
 
-    public void Start()
+    public override void Start()
     {
+        CounterCompletedTasks = 0;
         singltonGeneratorHealth = SingletonGeneratorHealth.GetInstance();
         tickGeneratorRepairing = baseGeneratorHealth / baseRepairTime / 1000;
     }
