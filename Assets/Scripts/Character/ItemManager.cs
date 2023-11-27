@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Photon.Pun;
 
-public class ItemManager : MonoBehaviourPun
+public class ItemManager : MonoBehaviourPunCallbacks
 {
     [FormerlySerializedAs("ItemMessage")]
     [SerializeField]
@@ -15,12 +15,8 @@ public class ItemManager : MonoBehaviourPun
 
     [SerializeField] private TMP_Text actionText;
 
-    [SerializeField] private PhotonView view;
-    private PickableItem pickableItem;
-
     public void Start()
     {
-        view = PhotonView.Get(this);
         itemMessage.SetActive(false);
     }
 
@@ -30,40 +26,34 @@ public class ItemManager : MonoBehaviourPun
         {
             if (!pickableItem.IsCollected)
             {
-                this.pickableItem = pickableItem;
                 actionText.text = $"Подобрать {pickableItem.ItemName}";
-                //itemMessage.SetActive(true);
-                //Key(pickableItem);
-                //view.RPC("Key", RpcTarget.AllBuffered);
-                pickableItem.PickUpItem();
-                //itemMessage.SetActive(false);
+                itemMessage.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.E) /*|| !photonView.IsMine*/) //подумать над реализацией в онлайне
+                {
+                    pickableItem.PickUpItem();
+                    itemMessage.SetActive(false);
+                }
             }
         }
 
-        // else if (other.TryGetComponent(out ActivatedItem item))
-        // {
-            // if (!item.IsActivated)
-            // {
-                // actionText.text = item.ItemName;
-                // itemMessage.SetActive(true);
-                // if (Input.GetKeyDown(KeyCode.E) || !photonView.IsMine) ///подумать над реализацией в онлайне
-                // {
-                    // item.ActivateItem();
-                    // itemMessage.SetActive(false);
-                // }
-            // }
-        // }
+        //else if (other.TryGetComponent(out ActivatedItem item))
+        //{
+        //    if (!item.IsActivated)
+        //    {
+        //        actionText.text = item.ItemName;
+        //        itemMessage.SetActive(true);
+        //        if (Input.GetKeyDown(KeyCode.E) || !photonView.IsMine) ///подумать над реализацией в онлайне
+        //        {
+        //            item.ActivateItem();
+        //            itemMessage.SetActive(false);
+        //        }
+        //    }
+        //}
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out PickableItem pickableItem))
+        if (other.TryGetComponent(out PickableItem pickableItem) || other.TryGetComponent(out ActivatedItem item))
             itemMessage.SetActive(false);
     }
-
-    //[PunRPC]
-    //void Key()
-    //{
-    //    pickableItem.PickUpItem();
-    //}
 }
