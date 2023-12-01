@@ -22,7 +22,7 @@ public class PlayerMovementController : MonoBehaviour
 
     public Transform orientation;
 
-    public bool canMove;
+    public bool canMove = true;
     private float horizontalInput;
     private float verticalInput;
 

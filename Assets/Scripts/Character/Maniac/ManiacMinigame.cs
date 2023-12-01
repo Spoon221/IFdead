@@ -12,6 +12,8 @@ public class ManiacMinigame : MonoBehaviourPunCallbacks
     private RectTransform keyRect;
     private GameObject canvas;
 
+    private ManiacMovementController movementController;
+
     public static readonly KeyCode[] validSequenceKeys = new[] {
         KeyCode.Q,
         KeyCode.W,
@@ -40,9 +42,10 @@ public class ManiacMinigame : MonoBehaviourPunCallbacks
         canvas = MiniGameCanvas.Canvas;
         keyRect = MiniGameCanvas.KeyRect;
         progressBar = MiniGameCanvas.ProgressBar;
+        movementController = GetComponent<ManiacMovementController>();
     }
 
-    public void StartMiniGame(Collider playerCollider)
+    public void StartMiniGame(Component playerCollider)
     {
         //if(!PhotonNetwork.IsMasterClient) return;
         //photonView.RPC("StartMiniGameRPC", RpcTarget.All, playerCollider);
@@ -55,7 +58,8 @@ public class ManiacMinigame : MonoBehaviourPunCallbacks
         if (!playerCollider.TryGetComponent(out caughtPlayer)) return;
         caughtPlayer.StartMiniGame(this);
         StartCoroutine(QTEGame());
-        rescueProgress = 0;
+        rescueProgress = 50;
+        progressBar.fillAmount = rescueProgress / 100f;
         canvas.gameObject.SetActive(true);
     }
 
@@ -64,7 +68,25 @@ public class ManiacMinigame : MonoBehaviourPunCallbacks
         caughtPlayer.Release();
         canvas.gameObject.SetActive(false);
         caughtPlayer = null;
-        progressBar.fillAmount = 0;
+        progressBar.fillAmount = 50;
+        GetComponent<ManiacHook>().Miss.UnHook();
+        StartCoroutine(Stun());
+    }
+
+    private IEnumerator Stun()
+    {
+        movementController.canMove = false;
+        yield return new WaitForSeconds(4);
+        movementController.canMove = true;
+    }
+
+
+    private void KillPlayer()
+    {
+        caughtPlayer.Kill();
+        canvas.gameObject.SetActive(false);
+        caughtPlayer = null;
+        progressBar.fillAmount = 50;
         GetComponent<ManiacHook>().Miss.UnHook();
     }
     private void FixedUpdate()
@@ -75,6 +97,7 @@ public class ManiacMinigame : MonoBehaviourPunCallbacks
         progressBar.fillAmount = rescueProgress / 100f;
 
         if (rescueProgress >= 100) ReleasePlayer();
+        else if (rescueProgress <= 0) KillPlayer();
     }
 
     private IEnumerator QTEGame()
@@ -84,8 +107,6 @@ public class ManiacMinigame : MonoBehaviourPunCallbacks
             var rand = Random.Range(0, validSequenceKeys.Length-1);
             SetKeyOnScreen(validSequenceKeys[rand]);
             yield return new WaitUntil(() => Input.GetKeyDown(validSequenceKeys[rand]) || Input.GetKeyDown(KeyCode.L));
-            var dir = transform.position - caughtPlayer.transform.position;
-            caughtPlayer.GetComponent<PlayerMovementController>().AddForce(dir * 3);
             rescueProgress -= 10;
             yield return new WaitForEndOfFrame();
         }

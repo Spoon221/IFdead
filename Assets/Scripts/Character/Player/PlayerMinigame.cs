@@ -56,4 +56,13 @@ public class PlayerMinigame : MonoBehaviour
         maniac = null;
         GetComponent<PlayerMovementController>().canMove = true;
     }
+
+    public void Kill()
+    {
+        StopCoroutine(routine);
+        isCaught = false;
+        maniac = null;
+        GetComponent<PlayerMovementController>().canMove = true;
+        GetComponent<PlayerStats>().GetDamage(100000);
+    }
 }
