@@ -9,12 +9,16 @@ public class ManiacHook : MonoBehaviourPun
     private ManiacStats maniacStats;
     [SerializeField] private HookMiss hookMiss;
     [SerializeField] private Transform launchPoint;
+    public readonly GameObject missPrefab;
+
 
     public HookMiss Miss => hookMiss;
 
     void Start()
     {
         maniacStats = GetComponent<ManiacStats>();
+        hookMiss = Instantiate(missPrefab).GetComponent<HookMiss>();
+        launchPoint ??= transform;
     }
 
     // Update is called once per frame
