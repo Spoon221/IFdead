@@ -1450,6 +1450,7 @@ MonoBehaviour:
   resistanceForce: 0.01
   nameModelWithAnimator: survivor
   orientation: {fileID: 6132893872649457731}
+  canMove: 1
   animator: {fileID: 1561272949845160880}
 --- !u!114 &3081207912094598214
 MonoBehaviour:
