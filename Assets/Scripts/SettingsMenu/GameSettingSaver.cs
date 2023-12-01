@@ -79,6 +79,19 @@ public class GameSaverXML
     [XmlElement("Sensitivity")]
     private float _sensitivity = 0.5f;
 
+    [XmlElement("Fullscreen")]
+    private bool _fullscreen = true;
+
+    public bool Fullscreen
+    {
+        get => _fullscreen;
+        set
+        {
+            _fullscreen = value;
+            GameSettingSaver.SaveXml();
+        }
+    }
+
 
     public float Sensitivity
     {
