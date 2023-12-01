@@ -23,6 +23,8 @@ public class ManiacMovementController : MonoBehaviour
 
     //private float groundDrag;
     private CharacterController cc;
+    public bool canMove = true;
+
 
 
     private void Start()
@@ -37,10 +39,6 @@ public class ManiacMovementController : MonoBehaviour
         GravityHandling();
         JumpLogic();
         MovePlayer();
-    }
-
-    private void FixedUpdate()
-    {
     }
 
     private void MyInput()
@@ -58,8 +56,8 @@ public class ManiacMovementController : MonoBehaviour
         //    rb.AddForce(moveDirection.normalized * MoveSpeed * 10f, ForceMode.Force);
         //else if (!isOnGround)
         //    rb.AddForce(moveDirection.normalized * MoveSpeed * 10f * airMultiplier, ForceMode.Force);
-
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        if (canMove)
+            moveDirection = (orientation.forward * verticalInput + orientation.right * horizontalInput).normalized;
         moveDirection.y = verticalForce;
         cc.Move(moveSpeed * moveDirection * Time.deltaTime);
     }
