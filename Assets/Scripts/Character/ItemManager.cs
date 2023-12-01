@@ -10,14 +10,14 @@ using Photon.Pun;
 public class ItemManager : MonoBehaviourPunCallbacks
 {
     [FormerlySerializedAs("ItemMessage")]
-    [SerializeField]
-    private GameObject itemMessage;
-
+    [SerializeField] private GameObject itemMessage;
     [SerializeField] private TMP_Text actionText;
+    public PickableItem pickableItem;
 
     public void Start()
     {
         itemMessage.SetActive(false);
+        pickableItem = FindObjectOfType(typeof(PickableItem)) as PickableItem;
     }
 
     private void OnTriggerStay(Collider other)
@@ -28,9 +28,10 @@ public class ItemManager : MonoBehaviourPunCallbacks
             {
                 actionText.text = $"Подобрать {pickableItem.ItemName}";
                 itemMessage.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.E) /*|| !photonView.IsMine*/) //подумать над реализацией в онлайне
+                if (Input.GetKeyDown(KeyCode.E) && pickableItem.view.IsMine)
                 {
-                    pickableItem.PickUpItem();
+                    //pickableItem.PickUpItem();
+                    pickableItem.view.RPC("PickUpItem", RpcTarget.All);
                     itemMessage.SetActive(false);
                 }
             }
