@@ -26,7 +26,7 @@ public class ExitForPlayer : MonoBehaviour
     private void Update()
     {
         complitedTask = generator.CounterCompletedTasks;
-        if (complitedTask >= 1)
+        if (complitedTask == 2)
         {
             boxCollider.isTrigger = true;
             meshRenderer.enabled = true;

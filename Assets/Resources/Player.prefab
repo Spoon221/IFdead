@@ -285,7 +285,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1635587820}
-  m_LocalRotation: {x: 0.060331583, y: -0.19558318, z: 0.012055967, w: 0.97875535}
+  m_LocalRotation: {x: 0.060331583, y: -0.19558316, z: 0.012055967, w: 0.97875535}
   m_LocalPosition: {x: 2.6694305, y: 2.143312, z: -6.4125915}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -422,6 +422,7 @@ GameObject:
   - component: {fileID: 2721554707993650821}
   - component: {fileID: 5255861044850265998}
   - component: {fileID: 425485352089852507}
+  - component: {fileID: 8894698675282482361}
   m_Layer: 6
   m_Name: PickUpItemZone
   m_TagString: Untagged
@@ -471,6 +472,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemMessage: {fileID: 3700684741596132245}
   actionText: {fileID: 3700684740533089845}
+  pickableItem: {fileID: 0}
+--- !u!54 &8894698675282482361
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2499944186435415395}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 1
 --- !u!1 &4315100209566860923
 GameObject:
   m_ObjectHideFlags: 0
@@ -1103,7 +1121,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6132893871568048783}
-  m_LocalRotation: {x: 0.1462005, y: -0.1937643, z: 0.029215017, w: 0.9696532}
+  m_LocalRotation: {x: 0.14620048, y: -0.19376427, z: 0.029215014, w: 0.9696532}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1308,7 +1326,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6132893871974498305}
-  m_LocalRotation: {x: 0.10097346, y: -0.19491278, z: 0.02017737, w: 0.9754006}
+  m_LocalRotation: {x: 0.10097345, y: -0.1949128, z: 0.020177374, w: 0.97540057}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
