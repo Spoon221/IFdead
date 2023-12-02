@@ -28,6 +28,7 @@ public class SpawnOnGameArea : MonoBehaviourPunCallbacks
                 spawnPlayer.GetComponent<PlayerMovementController>().enabled = true;
             }
         }
+        PhotonNetwork.CurrentRoom.IsVisible = false;
     }
 
     //private void SpawnRandomPlayer()
