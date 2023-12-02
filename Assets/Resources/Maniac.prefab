@@ -605,6 +605,7 @@ MonoBehaviour:
   jumpForce: 2
   gravityForce: 5
   orientation: {fileID: 6720464477614676291}
+  canMove: 1
 --- !u!114 &1085475388915998646
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,28 +10,30 @@ public class Settings : MonoBehaviourPunCallbacks
 
     public PhotonView view;
     private bool LeftGameAllInRoom = false;
-    public GameObject Maniac;
+    [SerializeField] private GameObject Maniac;
     private Coroutine checkPlayerCoroutine;
+    public GameObject LoseCanvas;
+    [SerializeField] private ExitForPlayer exit;
+    private float displayTime = 5f;
+
+    private void Start()
+    {
+        LoseCanvas.SetActive(false);
+    }
 
     private void Update()
     {
         if (SceneManager.GetActiveScene().name == "GameArea")
         {
             Maniac = GameObject.FindWithTag("Maniac");
-            if (LeftGameAllInRoom || PhotonNetwork.PlayerList.Length == 1 || Maniac == null)
+            if ((LeftGameAllInRoom || PhotonNetwork.PlayerList.Length == 1 || Maniac == null) && checkPlayerCoroutine == null)
             {
-                if (checkPlayerCoroutine == null)
-                {
-                    checkPlayerCoroutine = StartCoroutine(CheckPlayerList());
-                }
+                checkPlayerCoroutine = StartCoroutine(CheckPlayerList());
             }
-            else
+            else if (!LeftGameAllInRoom && PhotonNetwork.PlayerList.Length > 1 && Maniac != null && checkPlayerCoroutine != null)
             {
-                if (checkPlayerCoroutine != null)
-                {
-                    StopCoroutine(checkPlayerCoroutine);
-                    checkPlayerCoroutine = null;
-                }
+                StopCoroutine(checkPlayerCoroutine);
+                checkPlayerCoroutine = null;
             }
         }
     }
@@ -39,6 +41,20 @@ public class Settings : MonoBehaviourPunCallbacks
     private IEnumerator CheckPlayerList()
     {
         yield return new WaitForSeconds(20f); // проверка раз в 20 секунд на кол-во игроков
+        StartCoroutine(exit.ShowCanvasAndLeaveGame());
+        view.RPC("LeaveGame", RpcTarget.All);
+    }
+
+    public IEnumerator ShowLoseCanvas()
+    {
+        LoseCanvas.SetActive(true);
+        yield return new WaitForSeconds(displayTime);
+        LoseCanvas.SetActive(false);
+    }
+
+    private IEnumerator CurrentLeavegameManiac()
+    {
+        yield return StartCoroutine(ShowLoseCanvas());
         view.RPC("LeaveGame", RpcTarget.All);
     }
 
@@ -68,10 +84,11 @@ public class Settings : MonoBehaviourPunCallbacks
                 var nextScenePlayer = (string)PhotonNetwork.LocalPlayer.CustomProperties["NextScenePlayer"];
                 if (nextScenePlayer == "Player1")
                 {
-                    view.RPC("LeaveGame", RpcTarget.All);
+                    StartCoroutine(CurrentLeavegameManiac());
                 }
                 else if (nextScenePlayer == "Player2")
                 {
+                    StartCoroutine(ShowLoseCanvas());
                     LeaveGame();
                 }
             }
