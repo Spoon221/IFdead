@@ -9,11 +9,13 @@ public class PlayerStats : Stats
     [field: SerializeField] public int MaxHealth { get; private set; }
     [field: SerializeField] public int CurrentHealth { get; private set; }
     [HideInInspector] public UnityEvent<int> OnHealthChanged = new UnityEvent<int>();
+    [SerializeField] private Settings settings;
 
     protected override void Start()
     {
         base.Start();
         CurrentHealth = MaxHealth;
+        settings = FindObjectOfType(typeof(Settings)) as Settings;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -26,7 +28,10 @@ public class PlayerStats : Stats
     {
         CurrentHealth -= amountOfDamage;
         if (CurrentHealth <= 0)
+        {
+            settings.ShowLoseCanvas();
             PhotonNetwork.LeaveRoom();
+        }
         OnHealthChanged.Invoke(CurrentHealth);
     }
 

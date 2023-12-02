@@ -35,10 +35,9 @@ public class ExitForPlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (settings.photonView.IsMine)
+        if (settings.photonView.IsMine && other.CompareTag("Player"))
         {
-            if (other.CompareTag("Player"))
-                StartCoroutine(ShowCanvasAndLeaveGame());
+            StartCoroutine(ShowCanvasAndLeaveGame());
         }
         else
         {
@@ -49,7 +48,7 @@ public class ExitForPlayer : MonoBehaviour
         //    settings.view.RPC("LeaveGame", RpcTarget.All);
     }
 
-    private IEnumerator ShowCanvasAndLeaveGame()
+    public IEnumerator ShowCanvasAndLeaveGame()
     {
         WinnerCanvas.SetActive(true);
         yield return new WaitForSeconds(displayTime);
