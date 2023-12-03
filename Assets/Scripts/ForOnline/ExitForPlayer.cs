@@ -8,6 +8,7 @@ public class ExitForPlayer : MonoBehaviour
     [SerializeField] private Settings settings;
     [SerializeField] private Generator generator;
     [SerializeField] private GameObject WinnerCanvas;
+    [SerializeField] private GameObject LoseCanvas;
     private MeshRenderer meshRenderer;
     private BoxCollider boxCollider;
     private int complitedTask;
@@ -43,9 +44,6 @@ public class ExitForPlayer : MonoBehaviour
         {
             StartCoroutine(CheckPlayersAfterCoroutine());
         }
-        //var countPlayers = GameObject.FindGameObjectsWithTag("Player").Length;
-        //if (countPlayers < 1)
-        //    settings.view.RPC("LeaveGame", RpcTarget.All);
     }
 
     public IEnumerator ShowCanvasAndLeaveGame()
@@ -64,6 +62,9 @@ public class ExitForPlayer : MonoBehaviour
 
         var countPlayers = GameObject.FindGameObjectsWithTag("Player").Length;
         if (countPlayers < 1)
+        {
+            yield return new WaitForSeconds(displayTime);
             settings.view.RPC("LeaveGame", RpcTarget.All);
+        }
     }
 }
