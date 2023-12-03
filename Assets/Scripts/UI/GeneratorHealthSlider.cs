@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class GeneratorHealthSlider : MonoBehaviourPunCallbacks
+public class GeneratorHealthSlider : MonoBehaviourPun
 {
     public Slider generatorHealthSlider;
     private Slider slider;
@@ -15,11 +15,6 @@ public class GeneratorHealthSlider : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        if (photonView.IsMine)
-        {
-            // view.GetComponent<PhotonView>();
-        }
-
         generatorHealthSlider.gameObject.SetActive(false);
         generatorHealth = SingletonGeneratorHealth.GetInstance();
         var generators = GameObject.FindGameObjectsWithTag("Generator").ToList();

@@ -2,6 +2,7 @@ using Items;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
+using Photon.Pun;
 
 public class Generator : ActivatedItem
 {
@@ -35,7 +36,7 @@ public class Generator : ActivatedItem
     {
         OnTriggerEnterPlayer();
         
-        Debug.Log(singltonGeneratorHealth.GetHealth());
+        //Debug.Log(singltonGeneratorHealth.GetHealth());
         if (!isRepaired)
         {
             singltonGeneratorHealth.AddHealth(tickGeneratorRepairing * playerCount);
@@ -43,10 +44,8 @@ public class Generator : ActivatedItem
 
         if (singltonGeneratorHealth.GetHealth() >= baseGeneratorHealth && !isRepaired)
         {
-            Debug.Log("loaded");
-            isRepaired = true;
-            ActivateItem();
-            CounterCompletedTasks = 1;
+            //Debug.Log("loaded");
+            photonView.RPC("SuncComplitedTask", RpcTarget.All);
         }
     }
 
@@ -74,5 +73,13 @@ public class Generator : ActivatedItem
         CounterCompletedTasks = 0;
         singltonGeneratorHealth = SingletonGeneratorHealth.GetInstance();
         tickGeneratorRepairing = baseGeneratorHealth / baseRepairTime / 1000;
+    }
+
+    [PunRPC]
+    public void SuncComplitedTask()
+    {
+        isRepaired = true;
+        ActivateItem();
+        CounterCompletedTasks = 1;
     }
 }
