@@ -3,16 +3,23 @@ using System.Linq;
 using Items;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class GeneratorHealthSlider : MonoBehaviour
+public class GeneratorHealthSlider : MonoBehaviourPunCallbacks
 {
     public Slider generatorHealthSlider;
     private Slider slider;
     private SingletonGeneratorHealth generatorHealth;
     private bool isRepairing;
+    private PhotonView view;
 
     private void Start()
     {
+        if (photonView.IsMine)
+        {
+            // view.GetComponent<PhotonView>();
+        }
+
         generatorHealthSlider.gameObject.SetActive(false);
         generatorHealth = SingletonGeneratorHealth.GetInstance();
         var generators = GameObject.FindGameObjectsWithTag("Generator").ToList();
@@ -25,17 +32,18 @@ public class GeneratorHealthSlider : MonoBehaviour
 
     private void DisplaySlider()
     {
-        generatorHealthSlider.gameObject.SetActive(true);
+        if (photonView.IsMine)
+            generatorHealthSlider.gameObject.SetActive(true);
     }
 
     private void Update()
     {
-        
         generatorHealthSlider.value = generatorHealth.GetHealth();
     }
 
     private void HideSlider()
     {
-        generatorHealthSlider.gameObject.SetActive(false);
+        if (photonView.IsMine)
+            generatorHealthSlider.gameObject.SetActive(false);
     }
 }

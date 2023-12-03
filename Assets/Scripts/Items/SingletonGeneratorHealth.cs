@@ -8,11 +8,14 @@ namespace Items
 
         public static SingletonGeneratorHealth GetInstance()
         {
-            return instance ??= new SingletonGeneratorHealth();
-            
+            // return instance ??= new SingletonGeneratorHealth();
+            if (instance != null) return instance;
+            instance = new SingletonGeneratorHealth();
+            return instance;
+
             // return new SingletonGeneratorHealth(); для локального тестирования
         }
-
+        
         public float GetHealth()
         {
             return singletonGeneratorHealth;
