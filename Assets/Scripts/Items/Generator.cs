@@ -10,6 +10,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class Generator : ActivatedItem
 {
@@ -37,25 +39,31 @@ public class Generator : ActivatedItem
         {
             playerCount++;
         }
+        else
+            return;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        OnTriggerEnterPlayer();
-        
-        Debug.Log(singltonGeneratorHealth.GetHealth());
-        if (!isRepaired)
+        if (photonView.IsMine)
         {
-            singltonGeneratorHealth.AddHealth(tickGeneratorRepairing * playerCount);
-        }
+            OnTriggerEnterPlayer();
 
-        if (singltonGeneratorHealth.GetHealth() >= baseGeneratorHealth && !isRepaired)
-        {
-            Debug.Log("loaded");
-            isRepaired = true;
-            ActivateItem();
-            CounterCompletedTasks = 1;
+            //Debug.Log(singltonGeneratorHealth.GetHealth());
+            if (!isRepaired)
+            {
+                singltonGeneratorHealth.AddHealth(tickGeneratorRepairing * playerCount);
+            }
+            if (singltonGeneratorHealth.GetHealth() >= baseGeneratorHealth && !isRepaired)
+            {
+                //Debug.Log("loaded");
+                photonView.RPC("TaskSynchronization", RpcTarget.All);
+                photonView.RPC("ActivateItem", RpcTarget.All);
+                //ActivateItem();
+            }
         }
+        else
+            return;
     }
 
     private void OnTriggerEnterPlayer()
@@ -74,6 +82,8 @@ public class Generator : ActivatedItem
         {
             playerCount--;
         }
+        else
+            return;
     }
 
 
@@ -82,5 +92,12 @@ public class Generator : ActivatedItem
         CounterCompletedTasks = 0;
         singltonGeneratorHealth = SingletonGeneratorHealth.GetInstance();
         tickGeneratorRepairing = baseGeneratorHealth / baseRepairTime / 1000;
+    }
+
+    [PunRPC]
+    public void TaskSynchronization()
+    {
+        isRepaired = true;
+        CounterCompletedTasks = 1;
     }
 }
