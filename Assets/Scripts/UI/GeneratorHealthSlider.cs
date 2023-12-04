@@ -5,40 +5,44 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
-public class GeneratorHealthSlider : MonoBehaviourPun
+public class GeneratorHealthSlider : MonoBehaviour
 {
     public Slider generatorHealthSlider;
     private Slider slider;
     private SingletonGeneratorHealth generatorHealth;
     private bool isRepairing;
-    private PhotonView view;
+    public PhotonView view;
 
     private void Start()
     {
-        generatorHealthSlider.gameObject.SetActive(false);
         generatorHealth = SingletonGeneratorHealth.GetInstance();
-        var generators = GameObject.FindGameObjectsWithTag("Generator").ToList();
-        foreach (var generator in generators)
+        if (view.IsMine)
         {
-            generator.GetComponent<Generator>().isPlayerInTriggerZone.AddListener(DisplaySlider);
-            generator.GetComponent<Generator>().isPlayerExitTriggerZone.AddListener(HideSlider);
+            generatorHealthSlider.gameObject.SetActive(false);
+            var generators = GameObject.FindGameObjectsWithTag("Generator").ToList();
+            foreach (var generator in generators)
+            {
+                generator.GetComponent<Generator>().isPlayerInTriggerZone.AddListener(DisplaySlider);
+                generator.GetComponent<Generator>().isPlayerExitTriggerZone.AddListener(HideSlider);
+            }
         }
     }
 
     private void DisplaySlider()
     {
-        if (photonView.IsMine)
+        if (view.IsMine)
             generatorHealthSlider.gameObject.SetActive(true);
     }
 
     private void Update()
     {
-        generatorHealthSlider.value = generatorHealth.GetHealth();
+        if (view.IsMine)
+            generatorHealthSlider.value = generatorHealth.GetHealth();
     }
 
     private void HideSlider()
     {
-        if (photonView.IsMine)
+        if (view.IsMine)
             generatorHealthSlider.gameObject.SetActive(false);
     }
 }
