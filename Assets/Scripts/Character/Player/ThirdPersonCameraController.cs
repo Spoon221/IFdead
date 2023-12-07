@@ -91,7 +91,9 @@ public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObserv
         }
         else
         {
-            playerModel.SetPositionAndRotation((Vector3)stream.ReceiveNext(), (Quaternion)stream.ReceiveNext());
+            // playerModel.SetPositionAndRotation((Vector3)stream.ReceiveNext(), (Quaternion)stream.ReceiveNext());
+            playerModel.rotation = (Quaternion) stream.ReceiveNext();
+            playerModel.position = (Vector3)stream.ReceiveNext();
         }
     }
 }
