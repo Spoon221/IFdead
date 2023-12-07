@@ -82,11 +82,31 @@ public class GameSaverXML
     [XmlElement("Fullscreen")]
     private bool _fullscreen = true;
 
+    //[XmlElement("ResolutionX")]
+    //private int _resolutionX;
+
+    //[XmlElement("ResolutionY")]
+    //private int _resolutionY;
+
+    [XmlElement("Resolution")]
+    private Resolution _resolution = Screen.currentResolution;
+
+    public Resolution Resolution
+    {
+        get => _resolution;
+        set
+        {
+            if (Equals(_resolution,value)) return;
+            _resolution = value;
+            GameSettingSaver.SaveXml();
+        }
+    }
     public bool Fullscreen
     {
         get => _fullscreen;
         set
         {
+            if(value == _fullscreen) return;
             _fullscreen = value;
             GameSettingSaver.SaveXml();
         }
