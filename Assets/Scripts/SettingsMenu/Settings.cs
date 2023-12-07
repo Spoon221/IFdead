@@ -24,7 +24,8 @@ public class Settings : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        //LoseCanvas.SetActive(false);
+        if (SceneManager.GetActiveScene().name == "GameArea")
+            LoseCanvas.SetActive(false);
         SetupResolutions();
         fullscreenToggle.SetIsOnWithoutNotify(Screen.fullScreen);
     }
