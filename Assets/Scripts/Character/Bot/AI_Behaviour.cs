@@ -130,11 +130,13 @@ public class AI_Behaviour : MonoBehaviour
         {
             var target = objectsArea[0].transform;
 
-            var directionToTarget = (target.position - transform.position).normalized;
-
-            if (Vector3.Angle(transform.forward, directionToTarget) < AngleView / 2 &&
-                Physics.Raycast(new Ray(transform.position, directionToTarget), out var hitInfo, radiusFieldsView, viewRaycastLayerMask) &&
-                hitInfo.transform.gameObject.layer == 6)
+            var directionToTarget = (target.position - transform.position + new Vector3(0,1,0)).normalized;
+            if (
+                ((Vector3.Angle(transform.forward, directionToTarget) < AngleView / 2 &&
+                Physics.Raycast(new Ray(transform.position, directionToTarget), out var hitInfo, radiusFieldsView, viewRaycastLayerMask)) 
+                 || Vector3.Distance(transform.position, target.position) < 1) &&
+                target.transform.gameObject.layer == 6
+                )
             {
                 if (canSeePlayer) return;
                 canSeePlayer = true;
