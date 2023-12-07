@@ -302,6 +302,7 @@ MonoBehaviour:
   rotationModelSpeed: 12
   maxXSensitivity: 1000
   maxYSensitivity: 7
+  rendererFeature: {fileID: 0}
 --- !u!114 &2975010118134059597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,6 +504,7 @@ MonoBehaviour:
   OnHealthChanged:
     m_PersistentCalls:
       m_Calls: []
+  settings: {fileID: 0}
 --- !u!114 &2975010118752484429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,6 +523,8 @@ MonoBehaviour:
   resistanceForce: 0.01
   nameModelWithAnimator: survivor
   orientation: {fileID: 2975010118004308887}
+  canMove: 1
+  animator: {fileID: 0}
 --- !u!114 &6239622720118828946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -640,7 +644,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d739808aaa90f7f4698f8950318ad9cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyRect: {fileID: 0}
 --- !u!1 &2975010118939438037
 GameObject:
   m_ObjectHideFlags: 3
@@ -1189,7 +1192,7 @@ GameObject:
   - component: {fileID: 6454175161383308625}
   - component: {fileID: 3793614515677635674}
   - component: {fileID: 8769231021516566927}
-  m_Layer: 6
+  m_Layer: 2
   m_Name: PickUpItemZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1238,7 +1241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemMessage: {fileID: 5696570435704821825}
   actionText: {fileID: 5696570436801322465}
-  view: {fileID: 0}
+  pickableItem: {fileID: 0}
 --- !u!1 &8959121507126820152
 GameObject:
   m_ObjectHideFlags: 0
