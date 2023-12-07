@@ -17,14 +17,14 @@ public class GeneratorHealthSlider : MonoBehaviour
         gameObject.SetActive(false);
         generatorHealth = SingletonGeneratorHealth.GetInstance();
         var generators = GameObject.FindGameObjectsWithTag("Generator").ToList();
-        foreach (var generator in generators)
-        {
-            generator.GetComponent<Generator>().isPlayerInTriggerZone.AddListener(DisplaySlider);
-            generator.GetComponent<Generator>().isPlayerExitTriggerZone.AddListener(HideSlider);
-        }
+        //foreach (var generator in generators)
+        //{
+        //    generator.GetComponent<Generator>().isPlayerInTriggerZone.AddListener(DisplaySlider);
+        //    generator.GetComponent<Generator>().isPlayerExitTriggerZone.AddListener(HideSlider);
+        //}
     }
 
-    private void DisplaySlider()
+    public void DisplaySlider()
     {
         gameObject.SetActive(true);
     }
@@ -35,7 +35,7 @@ public class GeneratorHealthSlider : MonoBehaviour
         progressText.text = ((int)(generatorHealth.GetHealth()/10)).ToString();
     }
 
-    private void HideSlider()
+    public void HideSlider()
     {
         gameObject.SetActive(false);
     }
