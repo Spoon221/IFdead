@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ManaBar : MonoBehaviour
 {
-    [SerializeField] private Text manaText;
+    //[SerializeField] private Text manaText;
     [SerializeField] private Image manaBar;
     private Stats userStats;
     private float maxUserMana;
@@ -21,7 +21,7 @@ public class ManaBar : MonoBehaviour
 
     private void SetManaBar(float userMana)
     {
-        manaText.text = Mathf.Round(userMana).ToString();
+        //manaText.text = Mathf.Round(userMana).ToString();
         manaBar.fillAmount = userMana / maxUserMana;
         
     }
