@@ -70,6 +70,7 @@ public class Generator : ActivatedItem
 
     public override void Start()
     {
+        SingletonGeneratorHealth.GetInstance().ResetHealth();
         CounterCompletedTasks = 0;
         singltonGeneratorHealth = SingletonGeneratorHealth.GetInstance();
         tickGeneratorRepairing = baseGeneratorHealth / baseRepairTime / 1000;
