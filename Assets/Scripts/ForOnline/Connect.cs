@@ -19,6 +19,7 @@ public class Connect : MonoBehaviourPunCallbacks
     public GameObject FindRoom;
     public Canvas lobby;
     public Canvas ESC;
+    private int TickRate = 64;
     public Text TextLobbyE;
     [SerializeField] CinemachineVirtualCamera cameraOnTable;
     [Header("Версия клиента")]
@@ -39,8 +40,8 @@ public class Connect : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        PhotonNetwork.SendRate = 45; //скорость отправки файлов
-        PhotonNetwork.SerializationRate = 45; //скорость принятия файлов
+        PhotonNetwork.SendRate = TickRate;
+        PhotonNetwork.SerializationRate = TickRate;
     }
 
     public void CreateRoomButton()
