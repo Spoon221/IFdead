@@ -1,22 +1,12 @@
 using UnityEngine;
 using Photon.Pun;
-using System.Collections.Generic;
-using UnityEngine.SceneManagement;
-using Photon.Realtime;
-using System.Linq;
 
 public class SpawnManagerForPlayer : MonoBehaviourPun
 {
     public GameObject[] Spawns;
     public GameObject Player;
 
-    //public int PlayerRoom;
-
-    //private void Update()
-    //{
-    //    var room = PhotonNetwork.CurrentRoom;
-    //    PlayerRoom = (int)room.PlayerCount;
-    //}
+    [SerializeField] private PlayerReady playerReady;
 
     public void Start()
     {
@@ -43,5 +33,7 @@ public class SpawnManagerForPlayer : MonoBehaviourPun
         var randomIndex = Random.Range(0, Spawns.Length);
         var randomPosition = Spawns[randomIndex].transform.position;
         var spawnPlayer = PhotonNetwork.Instantiate(Player.name, randomPosition, Quaternion.identity);
+
+        playerReady.countText.text = $"{playerReady.playerReadyStatus.Count}/{PhotonNetwork.PlayerList.Length}";
     }
 }

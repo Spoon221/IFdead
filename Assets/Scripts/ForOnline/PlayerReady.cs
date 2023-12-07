@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Photon.Pun;
@@ -9,28 +8,15 @@ using UnityEngine.UI;
 
 public class PlayerReady : MonoBehaviourPunCallbacks
 {
-    private Dictionary<Player, bool> playerReadyStatus = new();
+    public Dictionary<Player, bool> playerReadyStatus = new();
 
     [SerializeField] private Button startButton;
     [SerializeField] private Button readyButton;
-    [SerializeField] private TMP_Text countText;
+    [SerializeField] public TMP_Text countText;
 
     private void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
-    }
-
-    private void Update()
-    {
-        var readyCount = playerReadyStatus.Count;
-        foreach (var entry in playerReadyStatus)
-        {
-            if (entry.Value) continue;
-            readyCount--;
-        }
-        countText.text = $"{readyCount}/{PhotonNetwork.PlayerList.Length}";
-        
-        //CheckAllPlayersReady();
     }
 
     // ћетод дл€ получени€ списка имен готовых игроков
