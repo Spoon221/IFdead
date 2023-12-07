@@ -38,6 +38,7 @@ public class Generator : ActivatedItem
         if (other.gameObject.CompareTag("Player"))
         {
             playerCount++;
+            other.GetComponentInChildren<GeneratorHealthSlider>().DisplaySlider();
         }
         else
             return;
@@ -81,6 +82,7 @@ public class Generator : ActivatedItem
         if (other.gameObject.CompareTag("Player"))
         {
             playerCount--;
+            other.GetComponentInChildren<GeneratorHealthSlider>().HideSlider();
         }
         else
             return;
