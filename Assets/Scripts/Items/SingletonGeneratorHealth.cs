@@ -1,21 +1,29 @@
+using UnityEngine.SceneManagement;
+using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
+
 namespace Items
 {
     public class SingletonGeneratorHealth
     {
-        public static float singletonGeneratorHealth;
-        
+        private static float singletonGeneratorHealth;
+        public static float SingletonGeneratorHealthValue
+        {
+            get { return singletonGeneratorHealth; }
+            private set { singletonGeneratorHealth = value; }
+        }
+
         private static SingletonGeneratorHealth instance;
 
         public static SingletonGeneratorHealth GetInstance()
         {
-            // return instance ??= new SingletonGeneratorHealth();
-            if (instance != null) return instance;
-            instance = new SingletonGeneratorHealth();
+            if (instance == null)
+            {
+                instance = new SingletonGeneratorHealth();
+            }
             return instance;
-
-            // return new SingletonGeneratorHealth(); для локального тестирования
         }
-        
+
         public float GetHealth()
         {
             return singletonGeneratorHealth;
@@ -24,6 +32,11 @@ namespace Items
         public void AddHealth(float added)
         {
             singletonGeneratorHealth += added;
+        }
+
+        public void ResetHealth()
+        {
+            singletonGeneratorHealth = 0f;
         }
     }
 }
