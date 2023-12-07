@@ -3,10 +3,12 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Settings : MonoBehaviourPunCallbacks
 {
-    public Dropdown resolution;
+    public Dropdown ResoDd;
 
     public PhotonView view;
     private bool LeftGameAllInRoom = false;
@@ -14,12 +16,56 @@ public class Settings : MonoBehaviourPunCallbacks
     private Coroutine checkPlayerCoroutine;
     public GameObject LoseCanvas;
     [SerializeField] private ExitForPlayer exit;
-    private float displayTime = 5f;
+    private const float DisplayTime = 5f;
+
+    [SerializeField] private Toggle fullscreenToggle;
+    [SerializeField] private Resolution[] resolutions;
+    private List<Dropdown.OptionData> odList = new List<Dropdown.OptionData>();
 
     private void Start()
     {
-        LoseCanvas.SetActive(false);
+        //LoseCanvas.SetActive(false);
+        SetupResolutions();
+        fullscreenToggle.SetIsOnWithoutNotify(Screen.fullScreen);
     }
+
+    private void SetupResolutions()
+    {
+
+        var resList = new List<Resolution>();
+        for (var i = 0; i < Screen.resolutions.Length - 1; i++)
+        {
+            if(Screen.resolutions[i].height == Screen.resolutions[i+1].height && Screen.resolutions[i].width == Screen.resolutions[i + 1].width) continue;
+                resList.Add(Screen.resolutions[i]);
+        }
+        resList.Add(Screen.resolutions.Last());
+        resList.Reverse();
+        resolutions = resList.ToArray();
+
+        ResoDd.options.Clear();
+
+        for (var i = 0; i < resolutions.Length; i++)
+        {
+            odList.Add(new Dropdown.OptionData());
+
+            odList[i].text = ShowResolving(resolutions[i]);
+
+            ResoDd.options.Add(odList[i]);
+        }
+
+        ResoDd.onValueChanged.AddListener(index =>
+            {
+                ResoDd.captionText.text = ShowResolving(resolutions[index]);
+                Screen.SetResolution(resolutions[index].width, resolutions[index].height, Screen.fullScreen);
+                GameSettingSaver.settings.Resolution = resolutions[index];
+                Debug.Log("Resolution now: " + ResoDd.captionText.text + " " + resolutions[index].refreshRate + "Hz");
+            });
+        ResoDd.captionText.text = ShowResolving(GameSettingSaver.settings.Resolution);
+
+    }
+
+    private static string ShowResolving(Resolution res) => res.width + "X" + res.height;
+
 
     private void Update()
     {
@@ -48,7 +94,7 @@ public class Settings : MonoBehaviourPunCallbacks
     public IEnumerator ShowLoseCanvas()
     {
         LoseCanvas.SetActive(true);
-        yield return new WaitForSeconds(displayTime);
+        yield return new WaitForSeconds(DisplayTime);
         LoseCanvas.SetActive(false);
     }
 
@@ -58,17 +104,17 @@ public class Settings : MonoBehaviourPunCallbacks
         view.RPC("LeaveGame", RpcTarget.All);
     }
 
-    public void ChangeResolution()
-    {
-        if (resolution.value == 0)
-        {
-            Screen.SetResolution(1366, 768, true);
-        }
-        if (resolution.value == 1)
-        {
-            Screen.SetResolution(1920, 1080, true);
-        }
-    }
+    //public void ChangeResolution()
+    //{
+    //    if (resolution.value == 0)
+    //    {
+    //        Screen.SetResolution(1366, 768, true);
+    //    }
+    //    if (resolution.value == 1)
+    //    {
+    //        Screen.SetResolution(1920, 1080, true);
+    //    }
+    //}
 
     public void SetFullscreen(bool isFullscreen)
     {
