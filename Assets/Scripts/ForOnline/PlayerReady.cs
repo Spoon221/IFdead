@@ -40,7 +40,7 @@ public class PlayerReady : MonoBehaviourPunCallbacks
     {
         readyButton.interactable = false;
         var isLocalPlayerReady = !playerReadyStatus.ContainsKey(PhotonNetwork.LocalPlayer) || !playerReadyStatus[PhotonNetwork.LocalPlayer];
-        photonView.RPC("SetPlayerReady", RpcTarget.All, PhotonNetwork.LocalPlayer, isLocalPlayerReady);
+        photonView.RPC("SetPlayerReady", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer, isLocalPlayerReady);
     }
 
     // RPC-метод для установки готовности игрока
