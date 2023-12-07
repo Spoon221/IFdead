@@ -1,19 +1,20 @@
 using System;
 using System.Linq;
 using Items;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GeneratorHealthSlider : MonoBehaviour
 {
-    public Slider generatorHealthSlider;
-    private Slider slider;
+    [SerializeField]private Image slider;
+    [SerializeField]private TMP_Text progressText;
     private SingletonGeneratorHealth generatorHealth;
-    private bool isRepairing;
 
     private void Start()
     {
-        generatorHealthSlider.gameObject.SetActive(false);
+        slider = GetComponent<Image>();
+        gameObject.SetActive(false);
         generatorHealth = SingletonGeneratorHealth.GetInstance();
         var generators = GameObject.FindGameObjectsWithTag("Generator").ToList();
         foreach (var generator in generators)
@@ -25,17 +26,17 @@ public class GeneratorHealthSlider : MonoBehaviour
 
     private void DisplaySlider()
     {
-        generatorHealthSlider.gameObject.SetActive(true);
+        gameObject.SetActive(true);
     }
 
     private void Update()
     {
-        
-        generatorHealthSlider.value = generatorHealth.GetHealth();
+        slider.fillAmount = generatorHealth.GetHealth()/1000;
+        progressText.text = ((int)(generatorHealth.GetHealth()/10)).ToString();
     }
 
     private void HideSlider()
     {
-        generatorHealthSlider.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }

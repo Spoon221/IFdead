@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2795455413628168522}
   - component: {fileID: 8192205785165500364}
   m_Layer: 0
-  m_Name: ManiacStartText
+  m_Name: PlayerStartText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,7 +24,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2795455413628168521}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -117,8 +117,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0423\u0431\u0435\u0439 \u0432\u0441\u0435\u0445 \u0432\u044B\u0436\u0438\u0432\u0448\u0438\u0445,
-    \u0438\u043B\u0438 \u0443\u043C\u0440\u0438."
+  m_text: "\u0422\u0432\u043E\u044F \u043C\u0438\u0441\u0441\u0438\u044F - \u043F\u043E\u043A\u0438\u043D\u0443\u0442\u044C
+    \u043E\u0431\u044A\u0435\u043A\u0442 R13."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 66cbc54512cd1944f93a3cf4d1756d49, type: 2}
   m_sharedMaterial: {fileID: 6350221501465565419, guid: 66cbc54512cd1944f93a3cf4d1756d49, type: 2}
@@ -253,9 +253,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<color=red>\u041C\u0410\u041D\u042C\u042F\u041A</color>, \u0431\u0443\u0434\u044C
-    \u043A\u0440\u043E\u0432\u043E\u0436\u0430\u0434\u0435\u043D \u043A\u0430\u043A
-    \u0438 \u0432\u0441\u0435\u0433\u0434\u0430!"
+  m_text: "<color=green>\u0412\u042B\u0416\u0418\u0412\u0428\u0418\u0419</color>,
+    \u043F\u0440\u0438\u0433\u043E\u0442\u043E\u0432\u044C\u0441\u044F!\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 66cbc54512cd1944f93a3cf4d1756d49, type: 2}
   m_sharedMaterial: {fileID: 6350221501465565419, guid: 66cbc54512cd1944f93a3cf4d1756d49, type: 2}

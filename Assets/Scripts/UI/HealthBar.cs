@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviourPun
 {
-    [SerializeField] private Text healthText;
+    [SerializeField] private TMP_Text healthText;
     [SerializeField] private Image healthBar;
     private PlayerStats userStats;
     private int maxUserHealth;
