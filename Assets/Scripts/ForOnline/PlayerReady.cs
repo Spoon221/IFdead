@@ -9,28 +9,15 @@ using UnityEngine.UI;
 
 public class PlayerReady : MonoBehaviourPunCallbacks
 {
-    private Dictionary<Player, bool> playerReadyStatus = new();
+    public Dictionary<Player, bool> playerReadyStatus = new();
 
     [SerializeField] private Button startButton;
     [SerializeField] private Button readyButton;
-    [SerializeField] private TMP_Text countText;
+    [SerializeField] public TMP_Text countText;
 
     private void Awake()
     {
         PhotonNetwork.AutomaticallySyncScene = true;
-    }
-
-    private void Update()
-    {
-        var readyCount = playerReadyStatus.Count;
-        foreach (var entry in playerReadyStatus)
-        {
-            if (entry.Value) continue;
-            readyCount--;
-        }
-        countText.text = $"{readyCount}/{PhotonNetwork.PlayerList.Length}";
-        
-        //CheckAllPlayersReady();
     }
 
     // Метод для получения списка имен готовых игроков
@@ -54,7 +41,7 @@ public class PlayerReady : MonoBehaviourPunCallbacks
     {
         readyButton.interactable = false;
         var isLocalPlayerReady = !playerReadyStatus.ContainsKey(PhotonNetwork.LocalPlayer) || !playerReadyStatus[PhotonNetwork.LocalPlayer];
-        photonView.RPC("SetPlayerReady", RpcTarget.All, PhotonNetwork.LocalPlayer, isLocalPlayerReady);
+        photonView.RPC("SetPlayerReady", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer, isLocalPlayerReady);
     }
 
     // RPC-метод для установки готовности игрока
