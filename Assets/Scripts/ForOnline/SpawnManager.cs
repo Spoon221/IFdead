@@ -22,7 +22,7 @@ public class SpawnManager : MonoBehaviourPun
             {
                 SpawnPlayerOnRoom();
             }
-        }
+        } 
         else 
         {
             SpawnPlayerLobby();
@@ -47,7 +47,7 @@ public class SpawnManager : MonoBehaviourPun
     private void SpawnPlayerLobby()
     {
         var randomPosition = GetRandomSpawnPosition();
-        var spawnManiac = PhotonNetwork.Instantiate(PlayerLobby.name, randomPosition, Quaternion.identity);
+        var spawnPlayer = PhotonNetwork.Instantiate(PlayerLobby.name, randomPosition, Quaternion.identity);
         UpdatePlayerReadyCount();
     }
 

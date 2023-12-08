@@ -8,7 +8,7 @@ public class MasterRoom : MonoBehaviourPunCallbacks
 {
     [SerializeField] private Button startButton;
     [SerializeField] private Button exitButton;
-    [SerializeField] private SpawnManagerForPlayer forPlayer;
+    [SerializeField] private SpawnManager forPlayer;
 
     private Dictionary<int, int> generatedNumbers = new Dictionary<int, int>();
     public int randomNumber;
