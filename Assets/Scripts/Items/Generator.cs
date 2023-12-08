@@ -76,6 +76,7 @@ public class Generator : ActivatedItem
     {
         isPlayerExitTriggerZone.Invoke();
     }
+
     private void OnTriggerExit(Collider other)
     {
         OnTriggerExitPlayer();

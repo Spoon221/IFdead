@@ -842,8 +842,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3415ccaeeb7b4935a48f2eb84706b117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generatorHealthSlider: {fileID: 4981984381922065019}
-  view: {fileID: 6132893871799605146}
+  slider: {fileID: 0}
+  progressText: {fileID: 0}
 --- !u!1 &6132893871305215202
 GameObject:
   m_ObjectHideFlags: 0
