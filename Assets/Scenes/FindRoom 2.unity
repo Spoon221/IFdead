@@ -2189,7 +2189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startButton: {fileID: 528157769}
   exitButton: {fileID: 1556135335}
-  forPlayer: {fileID: 1988392065}
+  forPlayer: {fileID: 0}
   randomNumber: 0
 --- !u!114 &97543643
 MonoBehaviour:
@@ -24971,7 +24971,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1988392064}
-  - component: {fileID: 1988392065}
+  - component: {fileID: 1988392066}
   m_Layer: 0
   m_Name: Spawn
   m_TagString: Untagged
@@ -24999,7 +24999,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1988392065
+--- !u!114 &1988392066
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -25008,7 +25008,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1988392062}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 892710b201f38454fa76741a75f5e84c, type: 3}
+  m_Script: {fileID: 11500000, guid: c85894ebfb119b94fb68780653eafe5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Spawns:
@@ -25017,7 +25017,9 @@ MonoBehaviour:
   - {fileID: 1989444440}
   - {fileID: 1258376761}
   - {fileID: 366317079}
-  Player: {fileID: 6132893872328913182, guid: a376b1efdaaedf547af16580e4507167, type: 3}
+  Player: {fileID: 0}
+  PlayerLobby: {fileID: 6132893872328913182, guid: a376b1efdaaedf547af16580e4507167, type: 3}
+  Maniac: {fileID: 0}
   playerReady: {fileID: 97543643}
 --- !u!1 &1989444440
 GameObject:
