@@ -22,5 +22,10 @@ namespace Items
         {
             singletonGeneratorHealth += added;
         }
+
+        public void ResetHealth()
+        {
+            singletonGeneratorHealth = 0f;
+        }
     }
 }

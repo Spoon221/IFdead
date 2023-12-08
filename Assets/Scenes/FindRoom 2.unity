@@ -23417,6 +23417,7 @@ MonoBehaviour:
   - {fileID: 1258376761}
   - {fileID: 366317079}
   Player: {fileID: 6132893872328913182, guid: a376b1efdaaedf547af16580e4507167, type: 3}
+  playerReady: {fileID: 97543643}
 --- !u!1 &1989444440
 GameObject:
   m_ObjectHideFlags: 0

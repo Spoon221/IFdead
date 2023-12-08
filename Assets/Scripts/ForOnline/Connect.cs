@@ -20,6 +20,7 @@ public class Connect : MonoBehaviourPunCallbacks
     public Canvas lobby;
     public Canvas ESC;
     public Text TextLobbyE;
+    private int TickRate = 64;
     [SerializeField] CinemachineVirtualCamera cameraOnTable;
     [Header("Версия клиента")]
     public string gameVersion; //Номер версии этого клиента
@@ -39,8 +40,8 @@ public class Connect : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        PhotonNetwork.SendRate = 45; //скорость отправки файлов
-        PhotonNetwork.SerializationRate = 45; //скорость принятия файлов
+        PhotonNetwork.SendRate = TickRate; //скорость отправки файлов
+        PhotonNetwork.SerializationRate = TickRate; //скорость принятия файлов
     }
 
     public void CreateRoomButton()
