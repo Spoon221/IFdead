@@ -20,19 +20,6 @@ public class PlayerReady : MonoBehaviourPunCallbacks
         PhotonNetwork.AutomaticallySyncScene = true;
     }
 
-    private void Update()
-    {
-        var readyCount = playerReadyStatus.Count;
-        foreach (var entry in playerReadyStatus)
-        {
-            if (entry.Value) continue;
-            readyCount--;
-        }
-        countText.text = $"{readyCount}/{PhotonNetwork.PlayerList.Length}";
-        
-        //CheckAllPlayersReady();
-    }
-
     // ћетод дл€ получени€ списка имен готовых игроков
     public List<string> GetReadyPlayerNames()
     {

@@ -43,9 +43,6 @@ public class ExitForPlayer : MonoBehaviour
         {
             StartCoroutine(CheckPlayersAfterCoroutine());
         }
-        //var countPlayers = GameObject.FindGameObjectsWithTag("Player").Length;
-        //if (countPlayers < 1)
-        //    settings.view.RPC("LeaveGame", RpcTarget.All);
     }
 
     public IEnumerator ShowCanvasAndLeaveGame()

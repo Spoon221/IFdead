@@ -12,14 +12,6 @@ public class SpawnManagerForPlayer : MonoBehaviourPun
 
     [SerializeField] private PlayerReady playerReady;
 
-    //public int PlayerRoom;
-
-    //private void Update()
-    //{
-    //    var room = PhotonNetwork.CurrentRoom;
-    //    PlayerRoom = (int)room.PlayerCount;
-    //}
-
     public void Start()
     {
         SpawnPlayerOnRoom();
