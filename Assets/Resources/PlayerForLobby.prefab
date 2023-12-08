@@ -978,6 +978,7 @@ MonoBehaviour:
   Bar: {fileID: 3852461458134885573}
   camera: {fileID: 1635587823}
   audioListener: {fileID: 1635587822}
+  GeneratorRect: {fileID: 0}
 --- !u!114 &85222191180015746
 MonoBehaviour:
   m_ObjectHideFlags: 0
