@@ -23,7 +23,7 @@ public class Connect : MonoBehaviourPunCallbacks
     public Text TextLobbyE;
     [SerializeField] CinemachineVirtualCamera cameraOnTable;
     [Header("Версия клиента")]
-    public string gameVersion; //Номер версии этого клиента
+    public string gameVersion;
 
     private void Start()
     {

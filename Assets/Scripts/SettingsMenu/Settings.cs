@@ -87,7 +87,7 @@ public class Settings : MonoBehaviourPunCallbacks
 
     private IEnumerator CheckPlayerList()
     {
-        yield return new WaitForSeconds(20f); // проверка раз в 20 секунд на кол-во игроков
+        yield return new WaitForSeconds(20f);
         StartCoroutine(exit.ShowCanvasAndLeaveGame());
         view.RPC("LeaveGame", RpcTarget.All);
     }
