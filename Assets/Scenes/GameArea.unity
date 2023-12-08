@@ -2622,7 +2622,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh324586
+  m_Name: pb_Mesh354456
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8763,7 +8763,9 @@ MonoBehaviour:
   - {fileID: 1361869220}
   - {fileID: 228283446}
   Player: {fileID: 6132893872328913182, guid: d0e1eaa7424fff54fb862bfa780fb50a, type: 3}
+  PlayerLobby: {fileID: 0}
   Maniac: {fileID: 529482825575864600, guid: 27d5e79a76a3cfb48b60c158be1ffe13, type: 3}
+  playerReady: {fileID: 0}
 --- !u!1 &2021313258
 GameObject:
   m_ObjectHideFlags: 0
