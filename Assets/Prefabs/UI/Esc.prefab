@@ -1125,7 +1125,6 @@ GameObject:
   - component: {fileID: 128824459126191238}
   - component: {fileID: 128824459126191237}
   - component: {fileID: 128824459126191236}
-  - component: {fileID: 128824459126191235}
   m_Layer: 5
   m_Name: Settings
   m_TagString: Untagged
@@ -1196,24 +1195,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &128824459126191235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 128824459126191234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d686d7e290aaeb4e8323f1f80dff228, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ResoDd: {fileID: 128824458622140527}
-  view: {fileID: 0}
-  Maniac: {fileID: 0}
-  LoseCanvas: {fileID: 0}
-  exit: {fileID: 0}
-  fullscreenToggle: {fileID: 128824459799403261}
 --- !u!1 &128824459367844373
 GameObject:
   m_ObjectHideFlags: 0
@@ -1461,7 +1442,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 128824459126191235}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Settings, Assembly-CSharp
         m_MethodName: SetFullscreen
         m_Mode: 6
@@ -1596,7 +1577,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 128824459126191235}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Settings, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
@@ -1850,6 +1831,7 @@ GameObject:
   - component: {fileID: 128824460107479407}
   - component: {fileID: 128824460107479406}
   - component: {fileID: 128824460107479405}
+  - component: {fileID: 2558771968455899567}
   m_Layer: 5
   m_Name: Esc
   m_TagString: Untagged
@@ -1952,6 +1934,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsMenu: {fileID: 128824459126191234}
+--- !u!114 &2558771968455899567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128824460107479404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d686d7e290aaeb4e8323f1f80dff228, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResoDd: {fileID: 128824458622140527}
+  view: {fileID: 0}
+  Maniac: {fileID: 0}
+  LoseCanvas: {fileID: 0}
+  exit: {fileID: 0}
+  fullscreenToggle: {fileID: 128824459799403261}
 --- !u!1 &128824460192452640
 GameObject:
   m_ObjectHideFlags: 0
