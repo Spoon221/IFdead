@@ -8,6 +8,7 @@ public class IsMine : MonoBehaviourPunCallbacks
     public Canvas Bar;
     public Camera camera;
     public AudioListener audioListener;
+    public RectTransform GeneratorRect;
 
     private void Awake()
     {

@@ -13,10 +13,9 @@ public class GeneratorHealthSlider : MonoBehaviour
 
     private void Start()
     {
-        slider = GetComponent<Image>();
         gameObject.SetActive(false);
         generatorHealth = SingletonGeneratorHealth.GetInstance();
-        var generators = GameObject.FindGameObjectsWithTag("Generator").ToList();
+        //var generators = GameObject.FindGameObjectsWithTag("Generator").ToList();
         //foreach (var generator in generators)
         //{
         //    generator.GetComponent<Generator>().isPlayerInTriggerZone.AddListener(DisplaySlider);
