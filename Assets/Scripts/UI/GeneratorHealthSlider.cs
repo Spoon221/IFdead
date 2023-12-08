@@ -13,7 +13,6 @@ public class GeneratorHealthSlider : MonoBehaviour
 
     private void Start()
     {
-        gameObject.SetActive(false);
         generatorHealth = SingletonGeneratorHealth.GetInstance();
         //var generators = GameObject.FindGameObjectsWithTag("Generator").ToList();
         //foreach (var generator in generators)
@@ -31,7 +30,7 @@ public class GeneratorHealthSlider : MonoBehaviour
     private void Update()
     {
         slider.fillAmount = generatorHealth.GetHealth()/1000;
-        progressText.text = ((int)(generatorHealth.GetHealth()/10)).ToString();
+        progressText.text = "Œ“œ–¿¬ ¿ ƒ¿ÕÕ€’: " + ((int)(generatorHealth.GetHealth()/10)) + " %";
     }
 
     public void HideSlider()
