@@ -10,6 +10,8 @@ public class SpawnManager : MonoBehaviourPun
     public GameObject Maniac;
     [SerializeField] private PlayerReady playerReady;
 
+    private const string PlayerPositionKey = "PlayerPosition";
+
     private void Start()
     {
         if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("NextScenePlayer") && SceneManager.GetActiveScene().name == "GameArea")
@@ -30,6 +32,21 @@ public class SpawnManager : MonoBehaviourPun
         }
     }
 
+    private void SavePlayerPosition(Vector3 position)
+    {
+        PhotonNetwork.LocalPlayer.CustomProperties[PlayerPositionKey] = position;
+    }
+
+    private Vector3 GetPlayerPosition()
+    {
+        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(PlayerPositionKey, out object position))
+        {
+            return (Vector3)position;
+        }
+
+        return Vector3.zero;
+    }
+
     private void SpawnPlayerOnRoom()
     {
         var randomPosition = GetRandomSpawnPosition();
@@ -47,8 +64,13 @@ public class SpawnManager : MonoBehaviourPun
 
     private void SpawnPlayerLobby()
     {
-        var randomPosition = GetRandomSpawnPosition();
-        var spawnPlayer = PhotonNetwork.Instantiate(PlayerLobby.name, randomPosition, Quaternion.identity);
+        var spawnPosition = GetPlayerPosition();
+        if (spawnPosition == Vector3.zero)
+        {
+            spawnPosition = GetRandomSpawnPosition();
+        }
+
+        var spawnPlayer = PhotonNetwork.Instantiate(PlayerLobby.name, spawnPosition, Quaternion.identity);
         UpdatePlayerReadyCount();
     }
 

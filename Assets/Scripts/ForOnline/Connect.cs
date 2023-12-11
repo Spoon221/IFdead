@@ -9,6 +9,7 @@ using System.Collections;
 
 public class Connect : MonoBehaviourPunCallbacks
 {
+    [SerializeField] private GameObject player;
     [SerializeField] private InputField RoomName;
     [SerializeField] private ListItem ItemPrefab;
     [SerializeField] private Transform Connecting;
@@ -20,6 +21,8 @@ public class Connect : MonoBehaviourPunCallbacks
     public string gameVersion;
     private int TickRate = 64;
     private List<RoomInfo> AllRoomsInfo = new List<RoomInfo>();
+
+    private const string PlayerPositionKey = "PlayerPosition";
 
     private void Start()
     {
@@ -83,6 +86,12 @@ public class Connect : MonoBehaviourPunCallbacks
         }
     }
 
+    private void SavePlayerPosition()
+    {
+        var playerPosition = player.transform.position;
+        PhotonNetwork.LocalPlayer.CustomProperties[PlayerPositionKey] = playerPosition;
+    }
+
     private void ClearRoomList()
     {
         foreach (Transform child in Connecting)
@@ -107,28 +116,23 @@ public class Connect : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        // Обновить список игроков
         UpdatePlayerList();
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        // Обновить список игроков
         UpdatePlayerList();
     }
 
     private void UpdatePlayerList()
     {
-        // Очистить список игроков
         foreach (Transform child in Connecting)
         {
             Destroy(child.gameObject);
         }
 
-        // Получить список игроков в комнате
-        Player[] players = PhotonNetwork.PlayerList;
+        var players = PhotonNetwork.PlayerList;
 
-        // Создать элементы списка для каждого игрока
         foreach (Player player in players)
         {
             var item = Instantiate(ItemPrefab, Connecting);
@@ -138,6 +142,7 @@ public class Connect : MonoBehaviourPunCallbacks
 
     private IEnumerator LoadRoomSceneAsync()
     {
+        SavePlayerPosition();
         var asyncLoad = SceneManager.LoadSceneAsync("FindRoom 2");
         while (!asyncLoad.isDone)
         {
