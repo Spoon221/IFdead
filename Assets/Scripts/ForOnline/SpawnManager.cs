@@ -1,5 +1,6 @@
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 public class SpawnManager : MonoBehaviourPun
 {
@@ -11,7 +12,7 @@ public class SpawnManager : MonoBehaviourPun
 
     private void Start()
     {
-        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("NextScenePlayer"))
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("NextScenePlayer") && SceneManager.GetActiveScene().name == "GameArea")
         {
             var nextScenePlayer = (string)PhotonNetwork.LocalPlayer.CustomProperties["NextScenePlayer"];
             if (nextScenePlayer == "Player1")
