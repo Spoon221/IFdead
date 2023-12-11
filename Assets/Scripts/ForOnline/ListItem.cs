@@ -21,4 +21,9 @@ public class ListItem : MonoBehaviour
     {
         PhotonNetwork.JoinRoom(TextName.text);
     }
+
+    public void SetPlayerInfo(Player player)
+    {
+        TextName.text = player.NickName;
+    }
 }

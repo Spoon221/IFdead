@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Realtime;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Cinemachine;
 using UnityEngine.SceneManagement;
 using System.Collections;
@@ -13,17 +12,14 @@ public class Connect : MonoBehaviourPunCallbacks
     [SerializeField] private InputField RoomName;
     [SerializeField] private ListItem ItemPrefab;
     [SerializeField] private Transform Connecting;
-
-    List<RoomInfo> AllRoomsInfo = new List<RoomInfo>();
     public GameObject Loading;
-    public GameObject FindRoom;
     public Canvas lobby;
-    public Canvas ESC;
     public Text TextLobbyE;
-    private int TickRate = 64;
     [SerializeField] CinemachineVirtualCamera cameraOnTable;
     [Header("Версия клиента")]
     public string gameVersion;
+    private int TickRate = 64;
+    private List<RoomInfo> AllRoomsInfo = new List<RoomInfo>();
 
     private void Start()
     {
@@ -40,8 +36,8 @@ public class Connect : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        PhotonNetwork.SendRate = TickRate; //скорость отправки файлов
-        PhotonNetwork.SerializationRate = TickRate; //скорость принятия файлов
+        PhotonNetwork.SendRate = TickRate;
+        PhotonNetwork.SerializationRate = TickRate;
     }
 
     public void CreateRoomButton()
@@ -78,7 +74,6 @@ public class Connect : MonoBehaviourPunCallbacks
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         ClearRoomList();
-
         foreach (var info in roomList)
         {
             if (!info.RemovedFromList)
@@ -88,18 +83,15 @@ public class Connect : MonoBehaviourPunCallbacks
         }
     }
 
-    // Очистка списка комнат
     private void ClearRoomList()
     {
         foreach (Transform child in Connecting)
         {
             Destroy(child.gameObject);
         }
-
         AllRoomsInfo.Clear();
     }
 
-    // Создание элемента списка для комнаты
     private void CreateRoomItem(RoomInfo info)
     {
         var item = Instantiate(ItemPrefab, Connecting);
@@ -113,11 +105,44 @@ public class Connect : MonoBehaviourPunCallbacks
         Debug.Log("Создана комната с названием: " + PhotonNetwork.CurrentRoom.Name);
     }
 
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        // Обновить список игроков
+        UpdatePlayerList();
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        // Обновить список игроков
+        UpdatePlayerList();
+    }
+
+    private void UpdatePlayerList()
+    {
+        // Очистить список игроков
+        foreach (Transform child in Connecting)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Получить список игроков в комнате
+        Player[] players = PhotonNetwork.PlayerList;
+
+        // Создать элементы списка для каждого игрока
+        foreach (Player player in players)
+        {
+            var item = Instantiate(ItemPrefab, Connecting);
+            item.GetComponent<ListItem>().SetPlayerInfo(player);
+        }
+    }
+
     private IEnumerator LoadRoomSceneAsync()
     {
         var asyncLoad = SceneManager.LoadSceneAsync("FindRoom 2");
         while (!asyncLoad.isDone)
+        {
             yield return null;
+        }
         PhotonNetwork.LoadLevel("FindRoom 2");
     }
 
