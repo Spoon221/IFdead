@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using static UnityEditor.FilePathAttribute;
 
 public class Connect : MonoBehaviourPunCallbacks
 {
@@ -23,6 +24,7 @@ public class Connect : MonoBehaviourPunCallbacks
     private List<RoomInfo> AllRoomsInfo = new List<RoomInfo>();
 
     private const string PlayerPositionKey = "PlayerPosition";
+    private const string PlayerRotationKey = "PlayerRotation";
 
     private void Start()
     {
@@ -86,10 +88,16 @@ public class Connect : MonoBehaviourPunCallbacks
         }
     }
 
-    private void SavePlayerPosition()
+    public void SavePlayerPosition()
     {
         var playerPosition = player.transform.position;
         PhotonNetwork.LocalPlayer.CustomProperties[PlayerPositionKey] = playerPosition;
+    }
+
+    private void SavePlayerRotation()
+    {
+        var playerPosition = player.transform.rotation;
+        PhotonNetwork.LocalPlayer.CustomProperties[PlayerRotationKey] = playerPosition;
     }
 
     private void ClearRoomList()
@@ -143,6 +151,7 @@ public class Connect : MonoBehaviourPunCallbacks
     private IEnumerator LoadRoomSceneAsync()
     {
         SavePlayerPosition();
+        SavePlayerRotation();
         var asyncLoad = SceneManager.LoadSceneAsync("FindRoom 2");
         while (!asyncLoad.isDone)
         {
