@@ -1,6 +1,7 @@
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
+using Photon.Realtime;
 
 public class SpawnManager : MonoBehaviourPun
 {
@@ -11,6 +12,7 @@ public class SpawnManager : MonoBehaviourPun
     [SerializeField] private PlayerReady playerReady;
 
     private const string PlayerPositionKey = "PlayerPosition";
+    private const string PlayerRotationKey = "PlayerRotation";
 
     private void Start()
     {
@@ -32,21 +34,6 @@ public class SpawnManager : MonoBehaviourPun
         }
     }
 
-    private void SavePlayerPosition(Vector3 position)
-    {
-        PhotonNetwork.LocalPlayer.CustomProperties[PlayerPositionKey] = position;
-    }
-
-    private Vector3 GetPlayerPosition()
-    {
-        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(PlayerPositionKey, out object position))
-        {
-            return (Vector3)position;
-        }
-
-        return Vector3.zero;
-    }
-
     private void SpawnPlayerOnRoom()
     {
         var randomPosition = GetRandomSpawnPosition();
@@ -62,10 +49,31 @@ public class SpawnManager : MonoBehaviourPun
         PhotonNetwork.CurrentRoom.IsVisible = false;
     }
 
+    private Quaternion GetPlayerRotation()
+    {
+        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(PlayerRotationKey, out object rotation))
+        {
+            return (Quaternion)rotation;
+        }
+
+        return Quaternion.Euler(0, 0, 0);
+    }
+
+    private Vector3 GetPlayerPosition()
+    {
+        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(PlayerPositionKey, out object position))
+        {
+            return (Vector3)position;
+        }
+
+        return Vector3.zero;
+    }
+
     private void SpawnPlayerLobby()
     {
         var spawnPosition = GetPlayerPosition();
-        if (spawnPosition == Vector3.zero)
+        var spawnRotation = GetPlayerRotation();
+        if (spawnPosition == Vector3.zero && spawnRotation == Quaternion.identity)
         {
             spawnPosition = GetRandomSpawnPosition();
         }
