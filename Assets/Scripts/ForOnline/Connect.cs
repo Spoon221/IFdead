@@ -11,6 +11,7 @@ using static UnityEditor.FilePathAttribute;
 public class Connect : MonoBehaviourPunCallbacks
 {
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject playerModel;
     [SerializeField] private InputField RoomName;
     [SerializeField] private ListItem ItemPrefab;
     [SerializeField] private Transform Connecting;
@@ -92,12 +93,8 @@ public class Connect : MonoBehaviourPunCallbacks
     {
         var playerPosition = player.transform.position;
         PhotonNetwork.LocalPlayer.CustomProperties[PlayerPositionKey] = playerPosition;
-    }
-
-    private void SavePlayerRotation()
-    {
-        var playerPosition = player.transform.rotation;
-        PhotonNetwork.LocalPlayer.CustomProperties[PlayerRotationKey] = playerPosition;
+        var playerRotation = playerModel.transform.rotation;
+        PhotonNetwork.LocalPlayer.CustomProperties[PlayerRotationKey] = playerRotation;
     }
 
     private void ClearRoomList()
@@ -151,7 +148,6 @@ public class Connect : MonoBehaviourPunCallbacks
     private IEnumerator LoadRoomSceneAsync()
     {
         SavePlayerPosition();
-        SavePlayerRotation();
         var asyncLoad = SceneManager.LoadSceneAsync("FindRoom 2");
         while (!asyncLoad.isDone)
         {

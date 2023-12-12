@@ -56,7 +56,7 @@ public class SpawnManager : MonoBehaviourPun
             return (Quaternion)rotation;
         }
 
-        return Quaternion.Euler(0, 0, 0);
+        return Quaternion.identity;
     }
 
     private Vector3 GetPlayerPosition()
@@ -78,7 +78,7 @@ public class SpawnManager : MonoBehaviourPun
             spawnPosition = GetRandomSpawnPosition();
         }
 
-        var spawnPlayer = PhotonNetwork.Instantiate(PlayerLobby.name, spawnPosition, Quaternion.identity);
+        var spawnPlayer = PhotonNetwork.Instantiate(PlayerLobby.name, spawnPosition, spawnRotation);
         UpdatePlayerReadyCount();
     }
 
