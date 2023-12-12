@@ -153,7 +153,8 @@ public class Settings : MonoBehaviourPunCallbacks
     [PunRPC]
     public void LeaveGame()
     {
-        LeftGameAllInRoom = true;
+        if (SceneManager.GetActiveScene().name == "GameArea")
+            LeftGameAllInRoom = true;
         PhotonNetwork.LeaveRoom();
     }
 

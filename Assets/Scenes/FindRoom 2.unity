@@ -2114,7 +2114,7 @@ MonoBehaviour:
   startButton: {fileID: 528157769}
   exitButton: {fileID: 1556135335}
   forPlayer: {fileID: 1988392066}
-  randomNumber: 0
+  settings: {fileID: 1141299254}
 --- !u!114 &97543643
 MonoBehaviour:
   m_ObjectHideFlags: 0

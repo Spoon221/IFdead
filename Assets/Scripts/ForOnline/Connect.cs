@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using static UnityEditor.FilePathAttribute;
 
 public class Connect : MonoBehaviourPunCallbacks
 {
