@@ -14,7 +14,6 @@ public class Connect : MonoBehaviourPunCallbacks
 {
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject playerModel;
-    [SerializeField] private InputField RoomName;
     [SerializeField] private TMP_InputField RoomName;
     [SerializeField] private ListItem ItemPrefab;
     [SerializeField] private Transform Connecting;
