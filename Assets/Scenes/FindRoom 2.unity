@@ -19085,7 +19085,7 @@ GameObject:
   - component: {fileID: 1483193466}
   - component: {fileID: 1483193465}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: CanvasLobby
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27026,7 +27026,7 @@ MonoBehaviour:
   startButton: {fileID: 277547148}
   exitButton: {fileID: 1298192747}
   forPlayer: {fileID: 1988392065}
-  randomNumber: 0
+  settings: {fileID: 0}
 --- !u!4 &1974638236
 Transform:
   m_ObjectHideFlags: 0
