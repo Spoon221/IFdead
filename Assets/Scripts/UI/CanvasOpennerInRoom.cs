@@ -20,7 +20,7 @@ public class CanvasOpennerInRoom : MonoBehaviour
         {
             cameraOnTable = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
             cameraPlayer = GameObject.Find("CameraPlayer").GetComponent<Camera>();
-            gameTable = GameObject.Find("GameTable").GetComponent<Canvas>();
+            gameTable = GameObject.Find("LobbyBoard").GetComponent<Canvas>();
             if (gameTable != null)
             {
                 gameTable.renderMode = RenderMode.WorldSpace;
