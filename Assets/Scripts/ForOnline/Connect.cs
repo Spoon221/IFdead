@@ -7,10 +7,12 @@ using System.Runtime.CompilerServices;
 using Cinemachine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using ExitGames.Client.Photon;
+using TMPro;
 
 public class Connect : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private InputField RoomName;
+    [SerializeField] private TMP_InputField RoomName;
     [SerializeField] private ListItem ItemPrefab;
     [SerializeField] private Transform Connecting;
 
@@ -67,6 +69,8 @@ public class Connect : MonoBehaviourPunCallbacks
         Debug.Log("Регион подключения: " + PhotonNetwork.CloudRegion);
         PhotonNetwork.JoinLobby();
         lobby.enabled = false;
+
+        GetComponent<LobbyBoardController>().SetRegion(PhotonNetwork.CloudRegion);
     }
 
     public void QuitGame()
@@ -84,6 +88,12 @@ public class Connect : MonoBehaviourPunCallbacks
             if (!info.RemovedFromList)
             {
                 CreateRoomItem(info);
+
+                //for (int i = 0; i < 20; i++)
+                //{
+                //    CreateRoomItem(info);
+                //    //tests
+                //}
             }
         }
     }
