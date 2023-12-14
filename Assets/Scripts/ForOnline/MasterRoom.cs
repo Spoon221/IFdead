@@ -8,14 +8,14 @@ public class MasterRoom : MonoBehaviourPunCallbacks
 {
     [SerializeField] private Button startButton;
     [SerializeField] private Button exitButton;
-    [SerializeField] private SpawnManagerForPlayer forPlayer;
-
-    private Dictionary<int, int> generatedNumbers = new Dictionary<int, int>();
-    public int randomNumber;
+    [SerializeField] private SpawnManager forPlayer;
+    [SerializeField] private Settings settings;
+    //private Dictionary<int, int> generatedNumbers = new Dictionary<int, int>();
+    //public int randomNumber;
 
     public void LeaveRoom()
     {
-        PhotonNetwork.LeaveRoom();
+        settings.LeaveRoom();
     }
 
     public override void OnLeftRoom()
@@ -64,7 +64,8 @@ public class MasterRoom : MonoBehaviourPunCallbacks
         var lowestPlayerActorNumber = int.MaxValue;
         foreach (var player in PhotonNetwork.PlayerList)
         {
-            if (player.ActorNumber == lowestPlayerActorNumber || player.ActorNumber > lowestPlayerActorNumber || player.ActorNumber < lowestPlayerActorNumber)
+            if (player.ActorNumber == lowestPlayerActorNumber || player.ActorNumber > lowestPlayerActorNumber || player.ActorNumber < lowestPlayerActorNumber 
+                || player.ActorNumber >= lowestPlayerActorNumber || player.ActorNumber <= lowestPlayerActorNumber)
             {
                 lowestPlayerActorNumber = player.ActorNumber;
             }
@@ -72,18 +73,20 @@ public class MasterRoom : MonoBehaviourPunCallbacks
         return lowestPlayerActorNumber;
     }
 
-    [PunRPC]
-    private void SyncGeneratedNumbers(int playerActorNumber, int randomNumber)
-    {
-        generatedNumbers[playerActorNumber] = randomNumber;
+    //сохранение относительно новой позиции на findroom2 позиции и вращение игрока
 
-        if (generatedNumbers.Count == PhotonNetwork.PlayerList.Length)
-        {
-            var props = new ExitGames.Client.Photon.Hashtable();
-            props.Add("GeneratedNumbers", generatedNumbers);
-            PhotonNetwork.CurrentRoom.SetCustomProperties(props);
-        }
-    }
+    //[PunRPC]
+    //private void SyncGeneratedNumbers(int playerActorNumber, int randomNumber)
+    //{
+    //    generatedNumbers[playerActorNumber] = randomNumber;
+
+    //    if (generatedNumbers.Count == PhotonNetwork.PlayerList.Length)
+    //    {
+    //        var props = new ExitGames.Client.Photon.Hashtable();
+    //        props.Add("GeneratedNumbers", generatedNumbers);
+    //        PhotonNetwork.CurrentRoom.SetCustomProperties(props);
+    //    }
+    //}
 
     //public int GetUniqueRandomNumber()
     //{
