@@ -5,6 +5,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Photon.Realtime;
 
 public class Settings : MonoBehaviourPunCallbacks
 {
@@ -21,6 +22,10 @@ public class Settings : MonoBehaviourPunCallbacks
     [SerializeField] private Toggle fullscreenToggle;
     [SerializeField] private Resolution[] resolutions;
     private List<Dropdown.OptionData> odList = new List<Dropdown.OptionData>();
+
+    [SerializeField] private GameObject player;
+    private const string PlayerPositionKey = "PlayerPosition";
+    private const string PlayerRotationKey = "PlayerRotation";
 
     private void Start()
     {
@@ -150,9 +155,26 @@ public class Settings : MonoBehaviourPunCallbacks
         }
     }
 
+    public void SavePlayerPosition()
+    {
+        var playerPosition = player.transform.position;
+        PhotonNetwork.LocalPlayer.CustomProperties[PlayerPositionKey] = playerPosition;
+        //var playerRotation = playerModel.transform.rotation;
+        //PhotonNetwork.LocalPlayer.CustomProperties[PlayerRotationKey] = playerRotation;
+    }
+
     [PunRPC]
     public void LeaveGame()
     {
+        if (SceneManager.GetActiveScene().name == "FindRoom 2")
+        {
+            //view = GetComponent<PlayerMovementController>().GetComponent<PhotonView>();
+            if (photonView.IsMine)
+            {
+                player = GameObject.FindWithTag("Player");
+                SavePlayerPosition();
+            }
+        }
         if (SceneManager.GetActiveScene().name == "GameArea")
             LeftGameAllInRoom = true;
         PhotonNetwork.LeaveRoom();
