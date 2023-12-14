@@ -2110,6 +2110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 812177865}
+  playerInFirstTimeSpawned: {fileID: 812177865}
   playerModel: {fileID: 897120381}
   RoomName: {fileID: 393692789}
   ItemPrefab: {fileID: 9021020235263554272, guid: 9da25736828a08a4496320392b54c2ed, type: 3}
@@ -7158,6 +7159,10 @@ PrefabInstance:
     - target: {fileID: 6132893872328913182, guid: a376b1efdaaedf547af16580e4507167, type: 3}
       propertyPath: m_Name
       value: PlayerForLobby
+      objectReference: {fileID: 0}
+    - target: {fileID: 6132893872328913182, guid: a376b1efdaaedf547af16580e4507167, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6132893872779753883, guid: a376b1efdaaedf547af16580e4507167, type: 3}
       propertyPath: m_LocalPosition.x

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class Connect : MonoBehaviourPunCallbacks
 {
@@ -28,6 +29,17 @@ public class Connect : MonoBehaviourPunCallbacks
 
     private void Start()
     {
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey(PlayerPositionKey) && PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey(PlayerRotationKey))
+        {
+            var playerPosition = (Vector3)PhotonNetwork.LocalPlayer.CustomProperties[PlayerPositionKey];
+            var playerRotation = (Quaternion)PhotonNetwork.LocalPlayer.CustomProperties[PlayerRotationKey];
+            
+            if (playerPosition != Vector3.zero && playerRotation != Quaternion.identity)
+            {
+                SpawnPlayerLobby();
+            }
+        }
+
         TextLobbyE.enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
         PhotonNetwork.AutomaticallySyncScene = true;
@@ -86,6 +98,34 @@ public class Connect : MonoBehaviourPunCallbacks
                 CreateRoomItem(info);
             }
         }
+    }
+
+    private Quaternion GetPlayerRotation()
+    {
+        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(PlayerRotationKey, out object rotation) && rotation is Quaternion)
+        {
+            return (Quaternion)rotation;
+        }
+
+        return Quaternion.identity;
+    }
+
+    private Vector3 GetPlayerPosition()
+    {
+        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(PlayerPositionKey, out object position) && position is Vector3)
+        {
+            return (Vector3)position;
+        }
+
+        return Vector3.zero;
+    }
+
+    private void SpawnPlayerLobby()
+    {
+        var spawnPosition = GetPlayerPosition();
+        var spawnRotation = GetPlayerRotation();
+        player.transform.position = spawnPosition;
+        player.transform.rotation = spawnRotation;
     }
 
     public void SavePlayerPosition()

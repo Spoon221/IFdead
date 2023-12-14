@@ -51,7 +51,7 @@ public class SpawnManager : MonoBehaviourPun
 
     private Quaternion GetPlayerRotation()
     {
-        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(PlayerRotationKey, out object rotation))
+        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(PlayerRotationKey, out object rotation) && rotation is Quaternion)
         {
             return (Quaternion)rotation;
         }
@@ -61,7 +61,7 @@ public class SpawnManager : MonoBehaviourPun
 
     private Vector3 GetPlayerPosition()
     {
-        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(PlayerPositionKey, out object position))
+        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(PlayerPositionKey, out object position) && position is Vector3)
         {
             return (Vector3)position;
         }

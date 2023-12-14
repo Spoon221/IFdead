@@ -10,7 +10,6 @@ public class MasterRoom : MonoBehaviourPunCallbacks
     [SerializeField] private Button exitButton;
     [SerializeField] private SpawnManager forPlayer;
     [SerializeField] private Settings settings;
-    [SerializeField] private GameObject player;
     //private Dictionary<int, int> generatedNumbers = new Dictionary<int, int>();
     //public int randomNumber;
 
@@ -65,7 +64,8 @@ public class MasterRoom : MonoBehaviourPunCallbacks
         var lowestPlayerActorNumber = int.MaxValue;
         foreach (var player in PhotonNetwork.PlayerList)
         {
-            if (player.ActorNumber == lowestPlayerActorNumber || player.ActorNumber > lowestPlayerActorNumber || player.ActorNumber < lowestPlayerActorNumber)
+            if (player.ActorNumber == lowestPlayerActorNumber || player.ActorNumber > lowestPlayerActorNumber || player.ActorNumber < lowestPlayerActorNumber 
+                || player.ActorNumber >= lowestPlayerActorNumber || player.ActorNumber <= lowestPlayerActorNumber)
             {
                 lowestPlayerActorNumber = player.ActorNumber;
             }
