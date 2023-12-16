@@ -2,18 +2,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Realtime;
 using Photon.Pun;
+using static PlayerHelper;
 
 public class ListItem : MonoBehaviour
 {
     [SerializeField] private Text TextName;
     [SerializeField] private Text TextPlayerCount;
     [SerializeField] private Connect connect;
+    [SerializeField] private GameObject player;
 
     public RoomInfo RoomInfo { get; private set; }
 
     private void Start()
     {
         connect = FindObjectOfType<Connect>();
+        player = connect.gameObject;
     }
 
     public void SetInfo(RoomInfo info)
@@ -25,7 +28,7 @@ public class ListItem : MonoBehaviour
 
     public void JoinToListRoom()
     {
-        connect.SavePlayerPosition();
+        SavePlayerPosition(player, player); // подумать
         PhotonNetwork.JoinRoom(TextName.text);
     }
 

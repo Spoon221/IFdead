@@ -2,6 +2,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
 using Photon.Realtime;
+using static PlayerHelper;
 
 public class SpawnManager : MonoBehaviourPun
 {
@@ -10,9 +11,6 @@ public class SpawnManager : MonoBehaviourPun
     public GameObject PlayerLobby;
     public GameObject Maniac;
     [SerializeField] private PlayerReady playerReady;
-
-    private const string PlayerPositionKey = "PlayerPosition";
-    private const string PlayerRotationKey = "PlayerRotation";
 
     private void Start()
     {
@@ -47,26 +45,6 @@ public class SpawnManager : MonoBehaviourPun
         var spawnManiac = PhotonNetwork.Instantiate(Maniac.name, randomPosition, Quaternion.identity);
         spawnManiac.GetComponent<ManiacMovementController>().enabled = true;
         PhotonNetwork.CurrentRoom.IsVisible = false;
-    }
-
-    private Quaternion GetPlayerRotation()
-    {
-        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(PlayerRotationKey, out object rotation) && rotation is Quaternion)
-        {
-            return (Quaternion)rotation;
-        }
-
-        return Quaternion.identity;
-    }
-
-    private Vector3 GetPlayerPosition()
-    {
-        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(PlayerPositionKey, out object position) && position is Vector3)
-        {
-            return (Vector3)position;
-        }
-
-        return Vector3.zero;
     }
 
     private void SpawnPlayerLobby()

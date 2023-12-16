@@ -9,20 +9,8 @@ public class MasterRoom : MonoBehaviourPunCallbacks
     [SerializeField] private Button startButton;
     [SerializeField] private Button exitButton;
     [SerializeField] private SpawnManager forPlayer;
-    [SerializeField] private Settings settings;
     //private Dictionary<int, int> generatedNumbers = new Dictionary<int, int>();
     //public int randomNumber;
-
-    public void LeaveRoom()
-    {
-        settings.LeaveRoom();
-    }
-
-    public override void OnLeftRoom()
-    {
-        SceneManager.LoadScene(0);
-        base.OnLeftRoom();
-    }
 
     public void LoadLevel()
     {
