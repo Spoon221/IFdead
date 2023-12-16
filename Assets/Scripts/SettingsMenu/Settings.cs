@@ -168,7 +168,6 @@ public class Settings : MonoBehaviourPunCallbacks
     {
         if (SceneManager.GetActiveScene().name == "FindRoom 2")
         {
-            //view = GetComponent<PlayerMovementController>().GetComponent<PhotonView>();
             if (photonView.IsMine)
             {
                 player = GameObject.FindWithTag("Player");
