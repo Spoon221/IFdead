@@ -3,8 +3,9 @@ using Photon.Pun;
 using UnityEngine.UI;
 using Cinemachine;
 using UnityEngine.SceneManagement;
+using System;
 
-public class CanvasOpennerInRoom : MonoBehaviour
+public class OpeningCanvasRoom : MonoBehaviour
 {
     [SerializeField] private PhotonView view;
     private static bool GameIsPaused = false;
@@ -64,6 +65,15 @@ public class CanvasOpennerInRoom : MonoBehaviour
     {
         TextLobbyE.enabled = false;
         cameraOnTable.enabled = true;
+        GameIsPaused = true;
+        scriptPlayerMovementController.enabled = false;
+        scriptThirdPersonCameraController.enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void SubsequentCanvas()
+    {
+        TextLobbyE.enabled = false;
         GameIsPaused = true;
         scriptPlayerMovementController.enabled = false;
         scriptThirdPersonCameraController.enabled = false;

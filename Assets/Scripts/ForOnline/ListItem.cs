@@ -9,14 +9,12 @@ public class ListItem : MonoBehaviour
     [SerializeField] private Text TextName;
     [SerializeField] private Text TextPlayerCount;
     [SerializeField] private Connect connect;
-    [SerializeField] private GameObject player;
 
     public RoomInfo RoomInfo { get; private set; }
 
     private void Start()
     {
         connect = FindObjectOfType<Connect>();
-        player = connect.gameObject;
     }
 
     public void SetInfo(RoomInfo info)
@@ -28,7 +26,9 @@ public class ListItem : MonoBehaviour
 
     public void JoinToListRoom()
     {
-        SavePlayerPosition(player, player); // подумать
+        var player = GameObject.FindWithTag("Player");
+        var playerModel = GameObject.Find("survivorsModel");
+        SavePlayerPosition(player, playerModel);
         PhotonNetwork.JoinRoom(TextName.text);
     }
 
