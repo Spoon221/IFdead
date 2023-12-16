@@ -100,12 +100,6 @@ public class Connect : MonoBehaviourPunCallbacks
             if (!info.RemovedFromList)
             {
                 CreateRoomItem(info);
-
-                //for (int i = 0; i < 20; i++)
-                //{
-                //    CreateRoomItem(info);
-                //    //tests
-                //}
             }
         }
     }
