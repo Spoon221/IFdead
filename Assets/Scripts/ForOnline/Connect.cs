@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using Unity.VisualScripting;
-using ExitGames.Client.Photon;
 using TMPro;
+using static PlayerHelper;
 
 public class Connect : MonoBehaviourPunCallbacks
 {
     [SerializeField] private GameObject player;
+    [SerializeField] private Settings settings;
+    [SerializeField] private CanvasOpennerInRoom canvasOpennerInRoom;
     [SerializeField] private GameObject playerModel;
     [SerializeField] private TMP_InputField RoomName;
     [SerializeField] private ListItem ItemPrefab;
@@ -20,36 +21,36 @@ public class Connect : MonoBehaviourPunCallbacks
     public GameObject Loading;
     public Canvas lobby;
     public Text TextLobbyE;
-    [SerializeField] CinemachineVirtualCamera cameraOnTable;
+    [SerializeField] private CinemachineVirtualCamera cameraOnTable;
     [Header("Версия клиента")]
     public string gameVersion;
     private int TickRate = 64;
     private List<RoomInfo> AllRoomsInfo = new List<RoomInfo>();
 
-    private const string PlayerPositionKey = "PlayerPosition";
-    private const string PlayerRotationKey = "PlayerRotation";
-
     private void Start()
     {
-        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey(PlayerPositionKey) && PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey(PlayerRotationKey))
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey(PlayerPositionKey) 
+            && PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey(PlayerRotationKey))
         {
             var playerPosition = (Vector3)PhotonNetwork.LocalPlayer.CustomProperties[PlayerPositionKey];
             var playerRotation = (Quaternion)PhotonNetwork.LocalPlayer.CustomProperties[PlayerRotationKey];
             
             if (playerPosition != Vector3.zero && playerRotation != Quaternion.identity)
             {
-                SpawnPlayerLobby();
+                SpawnPlayerLobby(player, cameraOnTable, playerModel);
             }
         }
+        else
+        {
+            TextLobbyE.enabled = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Loading.SetActive(true);
+            lobby.enabled = true;
+        }
 
-        TextLobbyE.enabled = false;
-        Cursor.lockState = CursorLockMode.Locked;
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = gameVersion;
         Debug.Log("Версия клиента: " + PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion);
-        cameraOnTable.enabled = false;
-        Loading.SetActive(true);
-        lobby.enabled = true;
         PhotonNetwork.ConnectUsingSettings();
     }
 
@@ -77,7 +78,9 @@ public class Connect : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        TextLobbyE.enabled = true;
+        TextLobbyE.enabled = cameraOnTable.enabled 
+            ? false 
+            : true;
         Loading.SetActive(false);
         Debug.Log("Регион подключения: " + PhotonNetwork.CloudRegion);
         PhotonNetwork.JoinLobby();
@@ -102,42 +105,6 @@ public class Connect : MonoBehaviourPunCallbacks
                 CreateRoomItem(info);
             }
         }
-    }
-
-    private Quaternion GetPlayerRotation()
-    {
-        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(PlayerRotationKey, out object rotation) && rotation is Quaternion)
-        {
-            return (Quaternion)rotation;
-        }
-
-        return Quaternion.identity;
-    }
-
-    private Vector3 GetPlayerPosition()
-    {
-        if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue(PlayerPositionKey, out object position) && position is Vector3)
-        {
-            return (Vector3)position;
-        }
-
-        return Vector3.zero;
-    }
-
-    private void SpawnPlayerLobby()
-    {
-        var spawnPosition = GetPlayerPosition();
-        var spawnRotation = GetPlayerRotation();
-        player.transform.position = spawnPosition;
-        player.transform.rotation = spawnRotation;
-    }
-
-    public void SavePlayerPosition()
-    {
-        var playerPosition = player.transform.position;
-        PhotonNetwork.LocalPlayer.CustomProperties[PlayerPositionKey] = playerPosition;
-        var playerRotation = playerModel.transform.rotation;
-        PhotonNetwork.LocalPlayer.CustomProperties[PlayerRotationKey] = playerRotation;
     }
 
     private void ClearRoomList()
@@ -190,7 +157,7 @@ public class Connect : MonoBehaviourPunCallbacks
 
     private IEnumerator LoadRoomSceneAsync()
     {
-        SavePlayerPosition();
+        SavePlayerPosition(player, playerModel);
         var asyncLoad = SceneManager.LoadSceneAsync("FindRoom 2");
         while (!asyncLoad.isDone)
         {

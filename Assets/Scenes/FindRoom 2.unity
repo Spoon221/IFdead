@@ -16696,8 +16696,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1974638235}
-        m_TargetAssemblyTypeName: MasterRoom, Assembly-CSharp
+      - m_Target: {fileID: 1141299254}
+        m_TargetAssemblyTypeName: Settings, Assembly-CSharp
         m_MethodName: LeaveRoom
         m_Mode: 1
         m_Arguments:
@@ -27082,7 +27082,6 @@ MonoBehaviour:
   startButton: {fileID: 277547148}
   exitButton: {fileID: 1298192747}
   forPlayer: {fileID: 1988392065}
-  settings: {fileID: 1141299254}
 --- !u!4 &1974638236
 Transform:
   m_ObjectHideFlags: 0
