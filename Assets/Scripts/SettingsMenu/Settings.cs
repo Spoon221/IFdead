@@ -159,8 +159,8 @@ public class Settings : MonoBehaviourPunCallbacks
     {
         var playerPosition = player.transform.position;
         PhotonNetwork.LocalPlayer.CustomProperties[PlayerPositionKey] = playerPosition;
-        //var playerRotation = playerModel.transform.rotation;
-        //PhotonNetwork.LocalPlayer.CustomProperties[PlayerRotationKey] = playerRotation;
+        var playerRotation = player.transform.rotation;
+        PhotonNetwork.LocalPlayer.CustomProperties[PlayerRotationKey] = playerRotation;
     }
 
     [PunRPC]
@@ -168,7 +168,6 @@ public class Settings : MonoBehaviourPunCallbacks
     {
         if (SceneManager.GetActiveScene().name == "FindRoom 2")
         {
-            //view = GetComponent<PlayerMovementController>().GetComponent<PhotonView>();
             if (photonView.IsMine)
             {
                 player = GameObject.FindWithTag("Player");
