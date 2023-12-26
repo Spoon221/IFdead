@@ -23,7 +23,7 @@ public class AI_Attack : AI_Manager
     //    }
     //}
 
-    public void ÑheckingAttackCondition()
+    public void CheckingAttackCondition()
     {
         //if (view.IsMine)
         //{

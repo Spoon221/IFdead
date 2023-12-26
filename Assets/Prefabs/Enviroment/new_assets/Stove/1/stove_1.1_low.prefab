@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4943138019188924151}
   - component: {fileID: 8301917812817187154}
   - component: {fileID: 6112124708640269720}
+  - component: {fileID: 3845164819945491727}
   m_Layer: 0
   m_Name: stove_1.1_low
   m_TagString: Untagged
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3845164819945491727
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5751762453609022541}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.060000002, y: 0.060000017, z: 0.0014690887}
+  m_Center: {x: 0.000000018626451, y: -0.0000000055879354, z: -0.0000000071595454}
