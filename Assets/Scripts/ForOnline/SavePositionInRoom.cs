@@ -43,6 +43,5 @@ public static class PlayerHelper
         PhotonNetwork.LocalPlayer.CustomProperties[PlayerPositionKey] = playerPosition;
         var playerRotation = playerModel.transform.rotation;
         PhotonNetwork.LocalPlayer.CustomProperties[PlayerRotationKey] = playerRotation;
-        Debug.Log(playerRotation);
     }
 }

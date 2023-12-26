@@ -3489,6 +3489,17 @@ Transform:
   m_Father: {fileID: 135962550}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &272121142 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6132893872779753880, guid: a376b1efdaaedf547af16580e4507167, type: 3}
+  m_PrefabInstance: {fileID: 599036032}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb37671bd2955194eaf903054fb43f26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &296921898
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8635,11 +8646,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6132893871568048782, guid: a376b1efdaaedf547af16580e4507167, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.3297841
+      value: -0.32978413
       objectReference: {fileID: 0}
     - target: {fileID: 6132893871568048782, guid: a376b1efdaaedf547af16580e4507167, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.046187885
+      value: -0.04618789
       objectReference: {fileID: 0}
     - target: {fileID: 6132893871568048782, guid: a376b1efdaaedf547af16580e4507167, type: 3}
       propertyPath: m_LocalRotation.y
@@ -30915,6 +30926,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Esc
       objectReference: {fileID: 0}
+    - target: {fileID: 128824460107479405, guid: b36e7ed5f938d0841a098d5d937f1170, type: 3}
+      propertyPath: cameraController
+      value: 
+      objectReference: {fileID: 272121142}
     - target: {fileID: 2558771968455899567, guid: b36e7ed5f938d0841a098d5d937f1170, type: 3}
       propertyPath: view
       value: 
