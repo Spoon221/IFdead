@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7853534590293855909}
   - component: {fileID: 6580471044593303808}
   - component: {fileID: 8986494098708542922}
-  - component: {fileID: 416479082013487247}
+  - component: {fileID: -2665917267832026216}
   m_Layer: 0
   m_Name: stove_1.2_low
   m_TagString: Untagged
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &416479082013487247
+--- !u!65 &-2665917267832026216
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
