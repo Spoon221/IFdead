@@ -10,8 +10,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
-using Photon.Pun;
-using Photon.Realtime;
 
 public class Generator : ActivatedItem
 {
@@ -40,31 +38,25 @@ public class Generator : ActivatedItem
             playerCount++;
             other.GetComponent<IsMine>().GeneratorRect.GetComponent<GeneratorHealthSlider>().DisplaySlider();
         }
-        else
-            return;
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (photonView.IsMine)
+        OnTriggerEnterPlayer();
+        
+        Debug.Log(singltonGeneratorHealth.GetHealth());
+        if (!isRepaired)
         {
-            OnTriggerEnterPlayer();
-
-            //Debug.Log(singltonGeneratorHealth.GetHealth());
-            if (!isRepaired)
-            {
-                singltonGeneratorHealth.AddHealth(tickGeneratorRepairing * playerCount);
-            }
-            if (singltonGeneratorHealth.GetHealth() >= baseGeneratorHealth && !isRepaired)
-            {
-                //Debug.Log("loaded");
-                photonView.RPC("TaskSynchronization", RpcTarget.All);
-                photonView.RPC("ActivateItem", RpcTarget.All);
-                //ActivateItem();
-            }
+            singltonGeneratorHealth.AddHealth(tickGeneratorRepairing * playerCount);
         }
-        else
-            return;
+
+        if (singltonGeneratorHealth.GetHealth() >= baseGeneratorHealth && !isRepaired)
+        {
+            Debug.Log("loaded");
+            isRepaired = true;
+            ActivateItem();
+            CounterCompletedTasks = 1;
+        }
     }
 
     private void OnTriggerEnterPlayer()
@@ -85,8 +77,6 @@ public class Generator : ActivatedItem
             playerCount--;
             other.GetComponent<IsMine>().GeneratorRect.GetComponent<GeneratorHealthSlider>().HideSlider();
         }
-        else
-            return;
     }
 
 
@@ -96,12 +86,5 @@ public class Generator : ActivatedItem
         CounterCompletedTasks = 0;
         singltonGeneratorHealth = SingletonGeneratorHealth.GetInstance();
         tickGeneratorRepairing = baseGeneratorHealth / baseRepairTime / 1000;
-    }
-
-    [PunRPC]
-    public void TaskSynchronization()
-    {
-        isRepaired = true;
-        CounterCompletedTasks = 1;
     }
 }

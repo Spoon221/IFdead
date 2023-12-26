@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Photon.Realtime;
+using static PlayerHelper;
 
 public class Settings : MonoBehaviourPunCallbacks
 {
@@ -24,8 +25,9 @@ public class Settings : MonoBehaviourPunCallbacks
     private List<Dropdown.OptionData> odList = new List<Dropdown.OptionData>();
 
     [SerializeField] private GameObject player;
-    private const string PlayerPositionKey = "PlayerPosition";
-    private const string PlayerRotationKey = "PlayerRotation";
+    [SerializeField] private GameObject playerModel;
+    //private const string PlayerPositionKey = "PlayerPosition";
+    //private const string PlayerRotationKey = "PlayerRotation";
 
     private void Start()
     {
@@ -151,16 +153,11 @@ public class Settings : MonoBehaviourPunCallbacks
         }
         else if (SceneManager.GetActiveScene().name == "FindRoom 2")
         {
+            var player = GameObject.FindWithTag("Player");
+            var playerModel = GameObject.Find("survivorsModel").gameObject;
+            SavePlayerPosition(player, playerModel);
             PhotonNetwork.LeaveRoom();
         }
-    }
-
-    public void SavePlayerPosition()
-    {
-        var playerPosition = player.transform.position;
-        PhotonNetwork.LocalPlayer.CustomProperties[PlayerPositionKey] = playerPosition;
-        //var playerRotation = playerModel.transform.rotation;
-        //PhotonNetwork.LocalPlayer.CustomProperties[PlayerRotationKey] = playerRotation;
     }
 
     [PunRPC]
@@ -168,11 +165,10 @@ public class Settings : MonoBehaviourPunCallbacks
     {
         if (SceneManager.GetActiveScene().name == "FindRoom 2")
         {
-            //view = GetComponent<PlayerMovementController>().GetComponent<PhotonView>();
             if (photonView.IsMine)
             {
                 player = GameObject.FindWithTag("Player");
-                SavePlayerPosition();
+                //SavePlayerPosition();
             }
         }
         if (SceneManager.GetActiveScene().name == "GameArea")

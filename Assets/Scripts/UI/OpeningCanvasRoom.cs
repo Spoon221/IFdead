@@ -2,13 +2,15 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
 using Cinemachine;
+using UnityEngine.SceneManagement;
+using System;
 
-public class CanvasOpennerInRoom : MonoBehaviour
+public class OpeningCanvasRoom : MonoBehaviour
 {
     [SerializeField] private PhotonView view;
     private static bool GameIsPaused = false;
     public Text TextLobbyE;
-    [SerializeField] private CinemachineVirtualCamera cameraOnTable;
+    public CinemachineVirtualCamera cameraOnTable;
     public PlayerMovementController scriptPlayerMovementController;
     public ThirdPersonCameraController scriptThirdPersonCameraController;
     private Canvas gameTable;
@@ -21,6 +23,10 @@ public class CanvasOpennerInRoom : MonoBehaviour
             cameraOnTable = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
             cameraPlayer = GameObject.Find("CameraPlayer").GetComponent<Camera>();
             gameTable = GameObject.Find("CanvasLobby").GetComponent<Canvas>();
+            if (SceneManager.GetActiveScene().name == "FindRoom 2")
+            {
+                Pause();
+            }
             if (gameTable != null)
             {
                 gameTable.renderMode = RenderMode.WorldSpace;
@@ -36,15 +42,10 @@ public class CanvasOpennerInRoom : MonoBehaviour
             if (GameIsPaused)
             {
                 Resume();
-                Cursor.lockState = CursorLockMode.Locked;
-                TextLobbyE.enabled = true;
-                
             }
             else
             {
                 Pause();
-                Cursor.lockState = CursorLockMode.None;
-                TextLobbyE.enabled = false;
             }
         }
     }
@@ -52,16 +53,30 @@ public class CanvasOpennerInRoom : MonoBehaviour
     public void Resume()
     {
         cameraOnTable.enabled = false;
+        TextLobbyE.enabled = true;
         GameIsPaused = false;
         scriptPlayerMovementController.enabled = true;
         scriptThirdPersonCameraController.enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        
     }
 
-    void Pause()
+    public void Pause()
     {
+        TextLobbyE.enabled = false;
         cameraOnTable.enabled = true;
         GameIsPaused = true;
         scriptPlayerMovementController.enabled = false;
         scriptThirdPersonCameraController.enabled = false;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void SubsequentCanvas()
+    {
+        TextLobbyE.enabled = false;
+        GameIsPaused = true;
+        scriptPlayerMovementController.enabled = false;
+        scriptThirdPersonCameraController.enabled = false;
+        Cursor.lockState = CursorLockMode.None;
     }
 }

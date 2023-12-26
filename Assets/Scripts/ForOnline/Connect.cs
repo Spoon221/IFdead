@@ -3,40 +3,55 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Realtime;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using Cinemachine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using ExitGames.Client.Photon;
 using TMPro;
+using static PlayerHelper;
 
 public class Connect : MonoBehaviourPunCallbacks
 {
+    [SerializeField] private GameObject player;
+    [SerializeField] private Settings settings;
+    [SerializeField] private OpeningCanvasRoom room;
+    [SerializeField] private GameObject playerModel;
     [SerializeField] private TMP_InputField RoomName;
     [SerializeField] private ListItem ItemPrefab;
     [SerializeField] private Transform Connecting;
-
-    List<RoomInfo> AllRoomsInfo = new List<RoomInfo>();
     public GameObject Loading;
-    public GameObject FindRoom;
     public Canvas lobby;
-    public Canvas ESC;
-    private int TickRate = 64;
     public Text TextLobbyE;
-    [SerializeField] CinemachineVirtualCamera cameraOnTable;
+    [SerializeField] private CinemachineVirtualCamera cameraOnTable;
     [Header("Версия клиента")]
     public string gameVersion;
+    private int TickRate = 64;
+    private List<RoomInfo> AllRoomsInfo = new List<RoomInfo>();
 
     private void Start()
     {
-        TextLobbyE.enabled = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey(PlayerPositionKey) 
+            && PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey(PlayerRotationKey))
+        {
+            var playerPosition = (Vector3)PhotonNetwork.LocalPlayer.CustomProperties[PlayerPositionKey];
+            var playerRotation = (Quaternion)PhotonNetwork.LocalPlayer.CustomProperties[PlayerRotationKey];
+            
+            if (playerPosition != Vector3.zero && playerRotation != Quaternion.identity)
+            {
+                SpawnPlayerLobby(player, cameraOnTable, playerModel);
+                room.SubsequentCanvas();
+            }
+        }
+        else
+        {
+            TextLobbyE.enabled = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Loading.SetActive(true);
+            lobby.enabled = true;
+        }
+
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = gameVersion;
         Debug.Log("Версия клиента: " + PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion);
-        cameraOnTable.enabled = false;
-        Loading.SetActive(true);
-        lobby.enabled = true;
         PhotonNetwork.ConnectUsingSettings();
     }
 
@@ -64,7 +79,9 @@ public class Connect : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
-        TextLobbyE.enabled = true;
+        TextLobbyE.enabled = cameraOnTable.enabled 
+            ? false 
+            : true;
         Loading.SetActive(false);
         Debug.Log("Регион подключения: " + PhotonNetwork.CloudRegion);
         PhotonNetwork.JoinLobby();
@@ -82,34 +99,24 @@ public class Connect : MonoBehaviourPunCallbacks
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
         ClearRoomList();
-
         foreach (var info in roomList)
         {
             if (!info.RemovedFromList)
             {
                 CreateRoomItem(info);
-
-                //for (int i = 0; i < 20; i++)
-                //{
-                //    CreateRoomItem(info);
-                //    //tests
-                //}
             }
         }
     }
 
-    // Очистка списка комнат
     private void ClearRoomList()
     {
         foreach (Transform child in Connecting)
         {
             Destroy(child.gameObject);
         }
-
         AllRoomsInfo.Clear();
     }
 
-    // Создание элемента списка для комнаты
     private void CreateRoomItem(RoomInfo info)
     {
         var item = Instantiate(ItemPrefab, Connecting);
@@ -123,11 +130,40 @@ public class Connect : MonoBehaviourPunCallbacks
         Debug.Log("Создана комната с названием: " + PhotonNetwork.CurrentRoom.Name);
     }
 
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        UpdatePlayerList();
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        UpdatePlayerList();
+    }
+
+    private void UpdatePlayerList()
+    {
+        foreach (Transform child in Connecting)
+        {
+            Destroy(child.gameObject);
+        }
+
+        var players = PhotonNetwork.PlayerList;
+
+        foreach (Player player in players)
+        {
+            var item = Instantiate(ItemPrefab, Connecting);
+            item.GetComponent<ListItem>().SetPlayerInfo(player);
+        }
+    }
+
     private IEnumerator LoadRoomSceneAsync()
     {
+        SavePlayerPosition(player, playerModel);
         var asyncLoad = SceneManager.LoadSceneAsync("FindRoom 2");
         while (!asyncLoad.isDone)
+        {
             yield return null;
+        }
         PhotonNetwork.LoadLevel("FindRoom 2");
     }
 

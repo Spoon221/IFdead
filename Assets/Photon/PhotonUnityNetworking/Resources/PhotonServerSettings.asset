@@ -69,10 +69,6 @@ MonoBehaviour:
   - StartMiniGameRPC
   - CheckPlayers
   - PickUpItem
-  - OverallProgress
-  - ActivateItem
-  - TaskSynchronization
-  - SuncComplitedTask
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

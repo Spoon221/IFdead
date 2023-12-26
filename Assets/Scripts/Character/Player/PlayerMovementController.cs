@@ -6,6 +6,7 @@ using System;
 using UnityEngine.UIElements;
 using Unity.VisualScripting;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMovementController : MonoBehaviour
 {
     [Header("Movement")]
@@ -21,13 +22,13 @@ public class PlayerMovementController : MonoBehaviour
 
     public Transform orientation;
 
+    public bool canMove = true;
     private float horizontalInput;
     private float verticalInput;
 
     private Vector3 moveDirection;
 
-    private Animator animator;
-    private Rigidbody rb;
+    [SerializeField] private Animator animator;
     private CharacterController cc;
     private float verticalForce;
     private Vector3 addForce;
@@ -35,7 +36,7 @@ public class PlayerMovementController : MonoBehaviour
     private void Start()
     {
         cc = GetComponent<CharacterController>();
-        animator = GetComponentInChildren<Transform>().Find(nameModelWithAnimator).GetComponent<Animator>();
+        //animator = GetComponentInChildren<Transform>().Find(nameModelWithAnimator).GetComponent<Animator>();
     }
 
     private void Update()
@@ -44,12 +45,7 @@ public class PlayerMovementController : MonoBehaviour
         GravityHandling();
         ForceHandling();
         JumpLogic();
-
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            AddForce(new Vector3(1, 1, 1));
-        }
-
+        MovePlayer();
 
         animator.SetFloat("FrontMove", OnversionRange(new Vector2(cc.velocity.x, cc.velocity.z).magnitude, moveSpeed));
     }
@@ -58,33 +54,38 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (addForce.magnitude == 0) return;
 
-        if (addForce.x > 0)
+        switch (addForce.x)
         {
-            addForce.x -= resistanceForce;
-            if (addForce.x < 0) addForce.x = 0;
-        }
-        else if (addForce.x < 0)
-        {
-            addForce.x -= resistanceForce;
-            if (addForce.x > 0) addForce.x = 0;
-        }
-
-        if (addForce.z > 0)
-        {
-            addForce.z -= resistanceForce;
-            if (addForce.z < 0) addForce.z = 0;
-        }
-        else if (addForce.z < 0)
-        {
-            addForce.z -= resistanceForce;
-            if (addForce.z > 0) addForce.z = 0;
+            case > 0:
+            {
+                addForce.x -= resistanceForce;
+                if (addForce.x < 0) addForce.x = 0;
+                break;
+            }
+            case < 0:
+            {
+                addForce.x += resistanceForce;
+                if (addForce.x > 0) addForce.x = 0;
+                break;
+            }
         }
 
-    }
+        switch (addForce.z)
+        {
+            case > 0:
+            {
+                addForce.z -= resistanceForce;
+                if (addForce.z < 0) addForce.z = 0;
+                break;
+            }
+            case < 0:
+            {
+                addForce.z += resistanceForce;
+                if (addForce.z > 0) addForce.z = 0;
+                break;
+            }
+        }
 
-    private void FixedUpdate()
-    {
-        MovePlayer();
     }
 
     private void GravityHandling()
@@ -115,14 +116,16 @@ public class PlayerMovementController : MonoBehaviour
 
     private void MovePlayer()
     {
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        moveDirection = Vector3.zero;
+        if (canMove)
+            moveDirection = (orientation.forward * verticalInput + orientation.right * horizontalInput).normalized;
         moveDirection.y =  verticalForce;
         moveDirection += addForce;
-        cc.Move(moveSpeed * moveDirection);
+        cc.Move(moveSpeed * Time.deltaTime * moveDirection);
     }
     private void JumpLogic()
     {
-        if (cc.isGrounded && Input.GetKey(KeyCode.Space))
+        if (canMove && cc.isGrounded && Input.GetKey(KeyCode.Space))
         {
             verticalForce += jumpForce;
             animator.SetTrigger("Jumping");

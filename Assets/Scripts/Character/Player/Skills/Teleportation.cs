@@ -26,7 +26,7 @@ namespace Character.Player.Skills
         {
             if (photonView.IsMine 
                 && !isTeleporting 
-                && playerStats.CurrentMana >= manaCost 
+                // && playerStats.CurrentMana >= manaCost 
                 && Input.GetKeyDown(KeyCode.T))
             {
                 isTeleporting = true;
@@ -52,7 +52,7 @@ namespace Character.Player.Skills
         {
             return teleports
                 .OrderBy(tp => Vector3.Distance(transform.position, tp.transform.position))
-                .First(tp => Vector3.Distance(transform.position, tp.transform.position) >= minTeleportRange);
+                .First(tp => Vector3.Distance(transform.position, tp.transform.position) > minTeleportRange);
         }
     }
 }

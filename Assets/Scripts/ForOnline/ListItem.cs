@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Realtime;
 using Photon.Pun;
+using static PlayerHelper;
 
 public class ListItem : MonoBehaviour
 {
@@ -25,7 +26,9 @@ public class ListItem : MonoBehaviour
 
     public void JoinToListRoom()
     {
-        connect.SavePlayerPosition();
+        var player = GameObject.FindWithTag("Player");
+        var playerModel = GameObject.Find("survivorsModel");
+        SavePlayerPosition(player, playerModel);
         PhotonNetwork.JoinRoom(TextName.text);
     }
 

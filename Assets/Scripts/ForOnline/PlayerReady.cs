@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Photon.Pun;
@@ -71,9 +72,9 @@ public class PlayerReady : MonoBehaviourPunCallbacks
 
         // ≈сли все игроки готовы, можно запустить игру
         if (allPlayersReady && PhotonNetwork.IsMasterClient
-//#if !DEBUG
-             //&& PhotonNetwork.PlayerList.Length > 1
-//#endif
+#if !DEBUG
+             && PhotonNetwork.PlayerList.Length > 1
+#endif
             )
         {
             startButton.interactable = true;
