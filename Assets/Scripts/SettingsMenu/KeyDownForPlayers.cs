@@ -9,53 +9,54 @@ namespace KeyDownForPlayers
     public class KeyDownForPlayers : MonoBehaviour
     {
         [SerializeField] private Settings settingsMenu;
-        [SerializeField] private ThirdPersonCameraController cameraController;
+        [SerializeField] private CinemachineFreeLook cameraController;
+        [SerializeField] private ThirdPersonCameraController thirdPerson;
         [SerializeField] private PlayerMovementController playerMovementController;
         [SerializeField] private Camera cameraRender;
         [SerializeField] private ManiacMovementController maniacMovementController;
-        [SerializeField] private Camera CameraManiac;
+        [SerializeField] private FisrtPersonCameraController maniacCamera;
         [SerializeField] private Canvas canvasRender;
 
         [SerializeField] private PhotonView view;
         [SerializeField] private Text TextLobbyE;
-        [SerializeField] private CinemachineVirtualCamera cameraOnTable;
 
         private void Start()
         {
-            settingsMenu = GameObject.Find("Esc").GetComponent<Settings>();
-            canvasRender = settingsMenu.GetComponent<Canvas>();
-            canvasRender.renderMode = RenderMode.ScreenSpaceCamera;
-            canvasRender.worldCamera = cameraRender;
+            if (view.IsMine)
+            {
+                settingsMenu = GameObject.Find("Esc").GetComponent<Settings>();
+                canvasRender = settingsMenu.GetComponent<Canvas>();
+                canvasRender.renderMode = RenderMode.ScreenSpaceCamera;
+                canvasRender.worldCamera = cameraRender;
+            }
         }
 
         public void ResumePlayers()
         {
             settingsMenu.SettingsClose();
-            cameraController.cinemachineVirtualCamera.enabled = true;
-            Cursor.lockState = CursorLockMode.Locked;
+            thirdPerson.enabled = true;
             playerMovementController.enabled = true;
         }
 
         public void PausPlayers()
         {
             settingsMenu.SettingsOpen();
-            cameraController.cinemachineVirtualCamera.enabled = false;
+            thirdPerson.enabled = false;
             playerMovementController.enabled = false;
         }
 
         public void ResumeManiac()
         {
+            maniacMovementController.enabled = true;
+            maniacCamera.enabled = true;
             settingsMenu.SettingsClose();
-            playerMovementController.enabled = true;
-            CameraManiac.enabled = true;
-            Cursor.lockState = CursorLockMode.Locked;
         }
 
         public void PausManiac()
         {
+            maniacCamera.enabled = false;
+            maniacMovementController.enabled = false;
             settingsMenu.SettingsOpen();
-            CameraManiac.enabled = false;
-            playerMovementController.enabled = false;
         }
 
 

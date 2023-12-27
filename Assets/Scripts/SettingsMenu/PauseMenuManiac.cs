@@ -1,16 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class PauseMenuManiac : MonoBehaviour
 {
-    public static bool GameIsPaused = false;
+    [SerializeField] private PhotonView view;
+    private bool GameIsPaused = false;
     [SerializeField] private Camera CameraManiac;
     [SerializeField] private KeyDownForPlayers.KeyDownForPlayers key;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && view.IsMine)
         {
             if (GameIsPaused)
             {

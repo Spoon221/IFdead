@@ -4958,22 +4958,26 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 128824458201243550, guid: b36e7ed5f938d0841a098d5d937f1170, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.4949495
       objectReference: {fileID: 0}
     - target: {fileID: 128824458201243550, guid: b36e7ed5f938d0841a098d5d937f1170, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 128824458209710480, guid: b36e7ed5f938d0841a098d5d937f1170, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.4949495
       objectReference: {fileID: 0}
     - target: {fileID: 128824458209710480, guid: b36e7ed5f938d0841a098d5d937f1170, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 128824458209710480, guid: b36e7ed5f938d0841a098d5d937f1170, type: 3}
       propertyPath: m_AnchorMin.x
+      value: 0.4949495
+      objectReference: {fileID: 0}
+    - target: {fileID: 128824459126191234, guid: b36e7ed5f938d0841a098d5d937f1170, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 128824460107479393, guid: b36e7ed5f938d0841a098d5d937f1170, type: 3}
@@ -5064,25 +5068,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: Esc
       objectReference: {fileID: 0}
+    - target: {fileID: 2558771968455899567, guid: b36e7ed5f938d0841a098d5d937f1170, type: 3}
+      propertyPath: exit
+      value: 
+      objectReference: {fileID: 371818573}
+    - target: {fileID: 2558771968455899567, guid: b36e7ed5f938d0841a098d5d937f1170, type: 3}
+      propertyPath: view
+      value: 
+      objectReference: {fileID: 1433924658}
+    - target: {fileID: 2558771968455899567, guid: b36e7ed5f938d0841a098d5d937f1170, type: 3}
+      propertyPath: settings
+      value: 
+      objectReference: {fileID: 1433924659}
+    - target: {fileID: 2558771968455899567, guid: b36e7ed5f938d0841a098d5d937f1170, type: 3}
+      propertyPath: LoseCanvas
+      value: 
+      objectReference: {fileID: 547935393}
     - target: {fileID: 6892590746159894018, guid: b36e7ed5f938d0841a098d5d937f1170, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.4949495
       objectReference: {fileID: 0}
     - target: {fileID: 6892590746159894018, guid: b36e7ed5f938d0841a098d5d937f1170, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8634475298073028585, guid: b36e7ed5f938d0841a098d5d937f1170, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.4949495
       objectReference: {fileID: 0}
     - target: {fileID: 8634475298073028585, guid: b36e7ed5f938d0841a098d5d937f1170, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8634475298073028585, guid: b36e7ed5f938d0841a098d5d937f1170, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.4949495
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b36e7ed5f938d0841a098d5d937f1170, type: 3}
@@ -5118,6 +5138,11 @@ MonoBehaviour:
   sceneViewId: 3
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!1 &1433924659 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 128824459126191234, guid: b36e7ed5f938d0841a098d5d937f1170, type: 3}
+  m_PrefabInstance: {fileID: 1433924655}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1439883337
 GameObject:
   m_ObjectHideFlags: 0

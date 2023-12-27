@@ -732,9 +732,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   settingsMenu: {fileID: 0}
   cameraController: {fileID: 0}
+  thirdPerson: {fileID: 0}
   playerMovementController: {fileID: 0}
-  maniacMovementController: {fileID: 0}
-  CameraManiac: {fileID: 1270646669}
+  cameraRender: {fileID: 1270646669}
+  maniacMovementController: {fileID: 8059336578616850902}
+  maniacCamera: {fileID: 1270646670}
+  canvasRender: {fileID: 0}
+  view: {fileID: 8935490345591800789}
+  TextLobbyE: {fileID: 0}
 --- !u!114 &6272943484043995245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,7 +752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 303d2d94486364748a05093f9436ca86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settingsMenu: {fileID: 0}
+  view: {fileID: 8935490345591800789}
   CameraManiac: {fileID: 1270646669}
   key: {fileID: 3328445549209803788}
 --- !u!1 &529482825958493947

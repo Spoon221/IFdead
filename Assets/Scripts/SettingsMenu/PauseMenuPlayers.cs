@@ -1,14 +1,16 @@
+using Photon.Pun;
 using UnityEngine;
 
 public class PauseMenuPlayers : MonoBehaviour
 {
-    public static bool GameIsPaused = false;
+    [SerializeField] private PhotonView view;
+    private bool GameIsPaused = false;
     [SerializeField] private ThirdPersonCameraController cameraController;
     [SerializeField] private KeyDownForPlayers.KeyDownForPlayers key;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && view.IsMine)
         {
             if(GameIsPaused)
             {

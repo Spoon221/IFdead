@@ -1938,7 +1938,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6132893872328913182}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 321182be3fa11e14484e9442e323e276, type: 3}
   m_Name: 
@@ -2157,10 +2157,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsMenu: {fileID: 0}
-  cameraController: {fileID: 6132893872779753880}
+  cameraController: {fileID: 0}
+  thirdPerson: {fileID: 6132893872779753880}
   playerMovementController: {fileID: 6132893871799605145}
+  cameraRender: {fileID: 1635587823}
   maniacMovementController: {fileID: 0}
-  CameraManiac: {fileID: 0}
+  maniacCamera: {fileID: 0}
+  canvasRender: {fileID: 0}
+  view: {fileID: 6132893871799605146}
+  TextLobbyE: {fileID: 0}
 --- !u!114 &3412597389004747212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2173,6 +2178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5482a27d553985a4a9a33a7825b58bf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  view: {fileID: 6132893871799605146}
   cameraController: {fileID: 6132893872779753880}
   key: {fileID: 5810993034103597042}
 --- !u!1 &6132893872649457732

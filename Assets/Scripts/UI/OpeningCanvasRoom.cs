@@ -3,12 +3,11 @@ using Photon.Pun;
 using UnityEngine.UI;
 using Cinemachine;
 using UnityEngine.SceneManagement;
-using System;
 
 public class OpeningCanvasRoom : MonoBehaviour
 {
     [SerializeField] private PhotonView view;
-    private static bool GameIsPaused = false;
+    private bool GameIsPaused = false;
     public CinemachineVirtualCamera cameraOnTable;
     private Canvas gameTable;
     private Camera cameraPlayer;
@@ -55,7 +54,10 @@ public class OpeningCanvasRoom : MonoBehaviour
 
     public void SubsequentCanvas()
     {
-        GameIsPaused = true;
-        key.SubsequentCanvasItermediateScene();
+        if (view.IsMine)
+        {
+            GameIsPaused = true;
+            key.SubsequentCanvasItermediateScene();
+        }
     }
 }
