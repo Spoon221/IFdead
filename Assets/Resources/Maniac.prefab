@@ -93,7 +93,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 53.15
+  m_fontSize: 52.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -545,6 +545,8 @@ GameObject:
   - component: {fileID: 856852341058911971}
   - component: {fileID: 1817384867521719891}
   - component: {fileID: 5112664016563151366}
+  - component: {fileID: 3328445549209803788}
+  - component: {fileID: 6272943484043995245}
   m_Layer: 0
   m_Name: Maniac
   m_TagString: Maniac
@@ -716,6 +718,38 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3328445549209803788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529482825575864600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 479ee3bfb2a94fa4d8ebbb83be04c790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settingsMenu: {fileID: 0}
+  cameraController: {fileID: 0}
+  playerMovementController: {fileID: 0}
+  maniacMovementController: {fileID: 0}
+  CameraManiac: {fileID: 1270646669}
+--- !u!114 &6272943484043995245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 529482825575864600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 303d2d94486364748a05093f9436ca86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settingsMenu: {fileID: 0}
+  CameraManiac: {fileID: 1270646669}
+  key: {fileID: 3328445549209803788}
 --- !u!1 &529482825958493947
 GameObject:
   m_ObjectHideFlags: 0
@@ -1004,7 +1038,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9146413715602086848, guid: cebd83c774e0ac242a2a27c738fef157, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 116.944
+      value: 116.94409
       objectReference: {fileID: 0}
     - target: {fileID: 9146413715602086848, guid: cebd83c774e0ac242a2a27c738fef157, type: 3}
       propertyPath: m_AnchoredPosition.y

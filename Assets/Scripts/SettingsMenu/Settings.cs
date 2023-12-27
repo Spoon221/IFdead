@@ -10,6 +10,7 @@ using static PlayerHelper;
 
 public class Settings : MonoBehaviourPunCallbacks
 {
+    public GameObject settings;
     public Dropdown ResoDd;
 
     public PhotonView view;
@@ -185,5 +186,15 @@ public class Settings : MonoBehaviourPunCallbacks
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void SettingsOpen()
+    {
+        settings.SetActive(true);
+    }
+
+    public void SettingsClose()
+    {
+        settings.SetActive(false);
     }
 }

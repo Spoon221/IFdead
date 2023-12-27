@@ -284,8 +284,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1635587820}
-  m_LocalRotation: {x: 0.367139, y: 0.19267145, z: -0.07802112, w: 0.90664184}
-  m_LocalPosition: {x: 3.8910403, y: 7.7426677, z: -34.539757}
+  m_LocalRotation: {x: 0.36713898, y: 0.19267137, z: -0.07802107, w: 0.90664184}
+  m_LocalPosition: {x: -1.8574667, y: 4.9326677, z: -4.172917}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1878,6 +1878,8 @@ GameObject:
   - component: {fileID: 5236388313825635122}
   - component: {fileID: 4596311036160586101}
   - component: {fileID: 4842113300597906959}
+  - component: {fileID: 5810993034103597042}
+  - component: {fileID: 3412597389004747212}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1936,7 +1938,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6132893872328913182}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 321182be3fa11e14484e9442e323e276, type: 3}
   m_Name: 
@@ -2142,6 +2144,37 @@ MonoBehaviour:
   playerStats: {fileID: 6132893871799605149}
   manaCost: 90
   cc: {fileID: 5636307185853901271}
+--- !u!114 &5810993034103597042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6132893872328913182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 479ee3bfb2a94fa4d8ebbb83be04c790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settingsMenu: {fileID: 0}
+  cameraController: {fileID: 6132893872779753880}
+  playerMovementController: {fileID: 6132893871799605145}
+  maniacMovementController: {fileID: 0}
+  CameraManiac: {fileID: 0}
+--- !u!114 &3412597389004747212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6132893872328913182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5482a27d553985a4a9a33a7825b58bf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraController: {fileID: 6132893872779753880}
+  key: {fileID: 5810993034103597042}
 --- !u!1 &6132893872649457732
 GameObject:
   m_ObjectHideFlags: 0
@@ -2389,7 +2422,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6132893872856189291}
-  m_LocalRotation: {x: 0.31892535, y: 0.19650978, z: -0.06777516, w: 0.9247038}
+  m_LocalRotation: {x: 0.31892532, y: 0.19650975, z: -0.067775145, w: 0.9247038}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
