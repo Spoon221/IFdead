@@ -11,10 +11,11 @@ public class SpawnManager : MonoBehaviourPun
     public GameObject PlayerLobby;
     public GameObject Maniac;
     [SerializeField] private PlayerReady playerReady;
+    private string gameSceneName = "NewGameArea";
 
     private void Start()
     {
-        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("NextScenePlayer") && SceneManager.GetActiveScene().name == "GameArea")
+        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("NextScenePlayer") && SceneManager.GetActiveScene().name == gameSceneName)
         {
             var nextScenePlayer = (string)PhotonNetwork.LocalPlayer.CustomProperties["NextScenePlayer"];
             if (nextScenePlayer == "Player1")

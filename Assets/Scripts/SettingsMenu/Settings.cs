@@ -27,12 +27,15 @@ public class Settings : MonoBehaviourPunCallbacks
 
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject playerModel;
+
+    private string gameScnemeName = "NewGameArea";
+    private string secondScnemeName = "FindRoom 2";
     //private const string PlayerPositionKey = "PlayerPosition";
     //private const string PlayerRotationKey = "PlayerRotation";
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene().name == "GameArea")
+        if (SceneManager.GetActiveScene().name == gameScnemeName)
             LoseCanvas.SetActive(false);
         SetupResolutions();
         fullscreenToggle.SetIsOnWithoutNotify(Screen.fullScreen);
@@ -78,7 +81,7 @@ public class Settings : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name == "GameArea")
+        if (SceneManager.GetActiveScene().name == gameScnemeName)
         {
             Maniac = GameObject.FindWithTag("Maniac");
             if ((LeftGameAllInRoom || PhotonNetwork.PlayerList.Length == 1 || Maniac == null) && checkPlayerCoroutine == null)
@@ -132,7 +135,7 @@ public class Settings : MonoBehaviourPunCallbacks
 
     public void LeaveRoom()
     {
-        if (SceneManager.GetActiveScene().name == "GameArea")
+        if (SceneManager.GetActiveScene().name == gameScnemeName)
         {
             if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("NextScenePlayer"))
             {
@@ -152,7 +155,7 @@ public class Settings : MonoBehaviourPunCallbacks
                 view.RPC("LeaveGame", RpcTarget.All);
             }
         }
-        else if (SceneManager.GetActiveScene().name == "FindRoom 2")
+        else if (SceneManager.GetActiveScene().name == secondScnemeName)
         {
             var player = GameObject.FindWithTag("Player");
             var playerModel = GameObject.Find("survivorsModel").gameObject;
@@ -164,7 +167,7 @@ public class Settings : MonoBehaviourPunCallbacks
     [PunRPC]
     public void LeaveGame()
     {
-        if (SceneManager.GetActiveScene().name == "FindRoom 2")
+        if (SceneManager.GetActiveScene().name == secondScnemeName)
         {
             if (photonView.IsMine)
             {
@@ -172,7 +175,7 @@ public class Settings : MonoBehaviourPunCallbacks
                 //SavePlayerPosition();
             }
         }
-        if (SceneManager.GetActiveScene().name == "GameArea")
+        if (SceneManager.GetActiveScene().name == gameScnemeName)
             LeftGameAllInRoom = true;
         PhotonNetwork.LeaveRoom();
     }
