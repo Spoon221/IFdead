@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class OpeningCanvasRoom : MonoBehaviour
 {
-    [SerializeField] private PhotonView view;
-    private bool GameIsPaused = false;
+    public PhotonView view;
+    public bool GameIsPaused = false;
     public CinemachineVirtualCamera cameraOnTable;
     private Canvas gameTable;
     private Camera cameraPlayer;
@@ -22,8 +22,10 @@ public class OpeningCanvasRoom : MonoBehaviour
             gameTable = GameObject.Find("CanvasLobby").GetComponent<Canvas>();
             if (SceneManager.GetActiveScene().name == "FindRoom 2")
             {
+                
                 key.PauseItermediateScene();
                 cameraOnTable.enabled = true;
+                GameIsPaused = true;
             }
             if (gameTable != null)
             {
@@ -39,25 +41,18 @@ public class OpeningCanvasRoom : MonoBehaviour
         {
             if (GameIsPaused)
             {
+                Cursor.lockState = CursorLockMode.Locked;
                 GameIsPaused = false;
                 key.ResumeItermediateScene();
-                cameraOnTable.enabled = false;
+                cameraOnTable.enabled = true;
             }
             else
             {
+                Cursor.lockState = CursorLockMode.None;
                 GameIsPaused = true;
                 key.PauseItermediateScene();
                 cameraOnTable.enabled = true;
             }
-        }
-    }
-
-    public void SubsequentCanvas()
-    {
-        if (view.IsMine)
-        {
-            GameIsPaused = true;
-            key.SubsequentCanvasItermediateScene();
         }
     }
 }

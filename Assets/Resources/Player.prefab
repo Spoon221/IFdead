@@ -1600,7 +1600,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6132893871568048783}
-  m_LocalRotation: {x: 0.13567148, y: 0.20585985, z: -0.028831683, w: 0.9687021}
+  m_LocalRotation: {x: 0.13567151, y: 0.20585988, z: -0.028831689, w: 0.9687021}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2157,7 +2157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsMenu: {fileID: 0}
-  cameraController: {fileID: 0}
+  cameraController: {fileID: 6132893872779753881}
   thirdPerson: {fileID: 6132893872779753880}
   playerMovementController: {fileID: 6132893871799605145}
   cameraRender: {fileID: 1635587823}

@@ -17,10 +17,9 @@ GameObject:
   - component: {fileID: 3543170648718382544}
   - component: {fileID: 3118136835439663611}
   - component: {fileID: 7113173068859893059}
-  - component: {fileID: 2045179339458161802}
   m_Layer: 0
   m_Name: Maniac
-  m_TagString: Untagged
+  m_TagString: Maniac
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,7 +51,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 400445381778022800}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7fb5ea250178f7b479ff6a91090c148a, type: 3}
   m_Name: 
@@ -100,7 +99,6 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 3727081661006130313}
-  - {fileID: 1078514300386234712}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -120,7 +118,7 @@ MonoBehaviour:
   scriptManiacMovementController: {fileID: 7860547917296800083}
   Bar: {fileID: 122250323646280553}
   camera: {fileID: 1213229763391570860}
-  audioListener: {fileID: 2045179339458161802}
+  audioListener: {fileID: 441051418426758631}
   GeneratorRect: {fileID: 0}
 --- !u!114 &3727081661006130313
 MonoBehaviour:
@@ -210,14 +208,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: -0.33, y: -0.24, z: -0.39}
---- !u!81 &2045179339458161802
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 400445381778022800}
-  m_Enabled: 1
 --- !u!1 &702702245521210412
 GameObject:
   m_ObjectHideFlags: 0
@@ -1135,9 +1125,10 @@ MonoBehaviour:
   maxSensX: 700
   maxSensY: 700
   orientation: {fileID: 856888646483596042}
-  maniacModel: {fileID: 7930632503310694270}
+  maniacModel: {fileID: 1064391437101267754}
   Skill: {fileID: 6294300310481017910}
   rendererFeature: {fileID: 8196152269615680424, guid: 8891ee65b2d3b6c46bd294b3a222a9a5, type: 2}
+  skinManiac: {fileID: 4072872797539416000}
   view: {fileID: 6327283701979218304}
 --- !u!20 &1213229763391570860
 Camera:

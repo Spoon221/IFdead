@@ -187,6 +187,7 @@ public class Settings : MonoBehaviourPunCallbacks
     public void QuitGame()
     {
         Application.Quit();
+        Debug.Log("вышел");
     }
 
     public void SettingsOpen()

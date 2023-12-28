@@ -1027,6 +1027,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   view: {fileID: 6132893871799605146}
+  GameIsPaused: 0
   cameraOnTable: {fileID: 0}
   key: {fileID: 4993218587194569870}
 --- !u!143 &599036037

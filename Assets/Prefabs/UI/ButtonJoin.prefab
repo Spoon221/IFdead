@@ -231,6 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TextName: {fileID: 6504059476651791956}
   TextPlayerCount: {fileID: 6504059476169628932}
+  connect: {fileID: 0}
 --- !u!1 &6504059476651791946
 GameObject:
   m_ObjectHideFlags: 0
