@@ -830,7 +830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d7368e691d453e44a20255c8cdd8189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 0}
+  settings: {fileID: 1433924660}
   generator: {fileID: 1938722483752868415}
   WinnerCanvas: {fileID: 630234707}
 --- !u!65 &371818574
@@ -1957,7 +1957,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh138188
+  m_Name: pb_Mesh71968
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5143,6 +5143,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 128824459126191234, guid: b36e7ed5f938d0841a098d5d937f1170, type: 3}
   m_PrefabInstance: {fileID: 1433924655}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1433924660 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2558771968455899567, guid: b36e7ed5f938d0841a098d5d937f1170, type: 3}
+  m_PrefabInstance: {fileID: 1433924655}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433924656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d686d7e290aaeb4e8323f1f80dff228, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1439883337
 GameObject:
   m_ObjectHideFlags: 0
