@@ -5,7 +5,7 @@ using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ActivatedItem : MonoBehaviour
+public class ActivatedItem : MonoBehaviourPun
 {
     [field: SerializeField] public string ItemName { get; private set; }
     public bool IsActivated { get; private set; }
@@ -18,10 +18,10 @@ public class ActivatedItem : MonoBehaviour
         IsActivated = false;
     }
 
+    [PunRPC]
     public virtual void ActivateItem()
     {
         IsActivated = true;
         OnItemActivate.Invoke();
     }
-    
 }

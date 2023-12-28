@@ -9,23 +9,15 @@ using UnityEngine.UI;
 
 public class PlayerReady : MonoBehaviourPunCallbacks
 {
-    private Dictionary<Player, bool> playerReadyStatus = new();
+    public Dictionary<Player, bool> playerReadyStatus = new();
 
     [SerializeField] private Button startButton;
     [SerializeField] private Button readyButton;
-    [SerializeField] private TMP_Text countText;
-    [SerializeField] private SpawnManagerForPlayer spawnManagerForPlayer;
+    [SerializeField] public TMP_Text countText;
 
-    private void Update()
+    private void Awake()
     {
-        StartCoroutine(LateUpdateCountPlayers());
-    }
-
-    IEnumerator LateUpdateCountPlayers()
-    {
-        var readyCount = playerReadyStatus.Count;
-        countText.text = $"{readyCount}/{spawnManagerForPlayer.PlayerRoom}";
-        yield return new WaitForSeconds(1.5f);
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     // Метод для получения списка имен готовых игроков
@@ -49,7 +41,7 @@ public class PlayerReady : MonoBehaviourPunCallbacks
     {
         readyButton.interactable = false;
         var isLocalPlayerReady = !playerReadyStatus.ContainsKey(PhotonNetwork.LocalPlayer) || !playerReadyStatus[PhotonNetwork.LocalPlayer];
-        photonView.RPC("SetPlayerReady", RpcTarget.All, PhotonNetwork.LocalPlayer, isLocalPlayerReady);
+        photonView.RPC("SetPlayerReady", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer, isLocalPlayerReady);
     }
 
     // RPC-метод для установки готовности игрока
@@ -76,14 +68,19 @@ public class PlayerReady : MonoBehaviourPunCallbacks
             readyCount--;
         }
 
-        countText.text = $"{readyCount}/{spawnManagerForPlayer.PlayerRoom}";
+        countText.text = $"{readyCount}/{PhotonNetwork.PlayerList.Length}";
 
         // Если все игроки готовы, можно запустить игру
-        if (allPlayersReady && PhotonNetwork.IsMasterClient)
+        if (allPlayersReady && PhotonNetwork.IsMasterClient
+#if !DEBUG
+             && PhotonNetwork.PlayerList.Length > 1
+#endif
+            )
         {
             startButton.interactable = true;
         }
     }
+
     public override void OnJoinedRoom()
     {
         //playerReadyStatus.TryAdd(newPlayer, false);
@@ -96,6 +93,7 @@ public class PlayerReady : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
+        countText.text = $"{playerReadyStatus.Count}/{PhotonNetwork.PlayerList.Length}";
         playerReadyStatus.TryAdd(newPlayer, false);
     }
 
@@ -111,7 +109,7 @@ public class PlayerReady : MonoBehaviourPunCallbacks
             playerReadyStatus[player] = false;
         }
 
-        countText.text = $"{0}/{spawnManagerForPlayer.PlayerRoom}";
+        countText.text = $"{0}/{PhotonNetwork.PlayerList.Length}";
         readyButton.interactable = true;
         startButton.interactable = false;
 

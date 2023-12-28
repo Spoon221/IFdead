@@ -50,6 +50,26 @@ MonoBehaviour:
   - LoadGameScene
   - SetPlayerReady
   - StartGame
+  - LoadLevelRoom
+  - SyncInt
+  - FindPlayer
+  - AssignRandomNumber
+  - GetUniqueRandomNumber
+  - SetRandomNumber
+  - SyncGeneratedNumbers
+  - SyncIsManiacSpawned
+  - CloseGame
+  - LeaveGane
+  - LeaveGame
+  - OnLeftRoom
+  - UpdateText
+  - CheckPlayer
+  - Test
+  - LaunchHook
+  - StartMiniGameRPC
+  - CheckPlayers
+  - PickUpItem
+  - ActivateItem
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
