@@ -62,27 +62,28 @@ namespace KeyDownForPlayers
 
         public void ResumeItermediateScene()
         {
+            Cursor.lockState = CursorLockMode.Locked;
             TextLobbyE.enabled = true;
             playerMovementController.enabled = true;
             cameraController.enabled = true;
-            Cursor.lockState = CursorLockMode.Locked;
-
+            thirdPerson.enabled= true;
         }
 
         public void PauseItermediateScene()
         {
+            Cursor.lockState = CursorLockMode.None;
             TextLobbyE.enabled = false;
             playerMovementController.enabled = false;
             cameraController.enabled = false;
-            Cursor.lockState = CursorLockMode.None;
+            thirdPerson.enabled = false;
         }
 
         public void SubsequentCanvasItermediateScene()
         {
+            Cursor.lockState = CursorLockMode.None;
             TextLobbyE.enabled = false;
             playerMovementController.enabled = false;
             cameraController.enabled = false;
-            Cursor.lockState = CursorLockMode.None;
         }
     }
 }
