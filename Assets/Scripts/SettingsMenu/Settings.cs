@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Photon.Realtime;
 using static PlayerHelper;
+using TMPro;
 
 public class Settings : MonoBehaviourPunCallbacks
 {
@@ -19,6 +20,7 @@ public class Settings : MonoBehaviourPunCallbacks
     private Coroutine checkPlayerCoroutine;
     public GameObject LoseCanvas;
     [SerializeField] private ExitForPlayer exit;
+    [SerializeField] private GameObject textPing;
     private const float DisplayTime = 5f;
 
     [SerializeField] private Toggle fullscreenToggle;
@@ -36,7 +38,10 @@ public class Settings : MonoBehaviourPunCallbacks
     private void Start()
     {
         if (SceneManager.GetActiveScene().name == gameScnemeName)
+        {
+            //GetPing();
             LoseCanvas.SetActive(false);
+        }
         SetupResolutions();
         fullscreenToggle.SetIsOnWithoutNotify(Screen.fullScreen);
     }
@@ -94,6 +99,7 @@ public class Settings : MonoBehaviourPunCallbacks
                 checkPlayerCoroutine = null;
             }
         }
+        //SettextPing();
     }
 
     private IEnumerator CheckPlayerList()
@@ -167,14 +173,6 @@ public class Settings : MonoBehaviourPunCallbacks
     [PunRPC]
     public void LeaveGame()
     {
-        if (SceneManager.GetActiveScene().name == secondScnemeName)
-        {
-            if (photonView.IsMine)
-            {
-                player = GameObject.FindWithTag("Player");
-                //SavePlayerPosition();
-            }
-        }
         if (SceneManager.GetActiveScene().name == gameScnemeName)
             LeftGameAllInRoom = true;
         PhotonNetwork.LeaveRoom();
@@ -199,5 +197,18 @@ public class Settings : MonoBehaviourPunCallbacks
     public void SettingsClose()
     {
         settings.SetActive(false);
+    }
+
+    private IEnumerator SettextPing()
+    {
+        yield return new WaitForSeconds(15f);
+        GetPing();
+    }
+
+    public void GetPing()
+    {
+        var ping = PhotonNetwork.GetPing();
+        var TextMesh = textPing.GetComponent<TextMeshPro>();
+        TextMesh.SetText("Ping: " + ping + " ms");
     }
 }
