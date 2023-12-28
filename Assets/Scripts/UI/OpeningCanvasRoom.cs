@@ -15,23 +15,20 @@ public class OpeningCanvasRoom : MonoBehaviour
 
     void Start()
     {
-        if (view.IsMine)
+        cameraOnTable = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
+        cameraPlayer = GameObject.Find("CameraPlayer").GetComponent<Camera>();
+        gameTable = GameObject.Find("CanvasLobby").GetComponent<Canvas>();
+        if (gameTable != null)
         {
-            cameraOnTable = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
-            cameraPlayer = GameObject.Find("CameraPlayer").GetComponent<Camera>();
-            gameTable = GameObject.Find("CanvasLobby").GetComponent<Canvas>();
-            if (SceneManager.GetActiveScene().name == "FindRoom 2")
-            {
-                
-                key.PauseItermediateScene();
-                cameraOnTable.enabled = true;
-                GameIsPaused = true;
-            }
-            if (gameTable != null)
-            {
-                gameTable.renderMode = RenderMode.WorldSpace;
-                gameTable.worldCamera = cameraPlayer;
-            }
+            gameTable.renderMode = RenderMode.WorldSpace;
+            gameTable.worldCamera = cameraPlayer;
+        }
+        if (SceneManager.GetActiveScene().name == "FindRoom 2")
+        {
+            Cursor.lockState = CursorLockMode.None;
+            key.PauseItermediateScene();
+            cameraOnTable.enabled = true;
+            GameIsPaused = true;
         }
     }
 
