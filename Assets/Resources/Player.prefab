@@ -1805,7 +1805,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6132893871974498305}
-  m_LocalRotation: {x: 0.09050006, y: 0.20697746, z: -0.019232256, w: 0.9739611}
+  m_LocalRotation: {x: 0.09050005, y: 0.2069775, z: -0.01923226, w: 0.9739611}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1879,6 +1879,7 @@ GameObject:
   - component: {fileID: 5810993034103597042}
   - component: {fileID: 3412597389004747212}
   - component: {fileID: 1365612898249974719}
+  - component: {fileID: -8977487460378117293}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1943,9 +1944,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 11.3
-  jumpForce: 0.5
-  gravityForce: 1.5
-  resistanceForce: 0.01
+  jumpForce: 2
+  gravityForce: 5
+  resistanceForce: 3
   nameModelWithAnimator: survivor
   orientation: {fileID: 6132893872649457731}
   canMove: 1
@@ -2212,6 +2213,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-8977487460378117293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6132893872328913182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d739808aaa90f7f4698f8950318ad9cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6132893872649457732
 GameObject:
   m_ObjectHideFlags: 0
@@ -2806,7 +2819,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0426\u0435\u043B\u044C: \u0412\u044B\u0431\u0440\u0430\u0442\u044C\u0441\u044F
+  m_text: "\u0446\u0435\u043B\u044C: \u0412\u044B\u0431\u0440\u0430\u0442\u044C\u0441\u044F
     \u0441\u043E \u0441\u0432\u0430\u043B\u043A\u0438"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2834,7 +2847,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34.6
+  m_fontSize: 35.2
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

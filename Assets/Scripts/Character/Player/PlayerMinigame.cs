@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Character.Player.Skills;
+using Photon.Pun;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class PlayerMinigame : MonoBehaviour
+public class PlayerMinigame : MonoBehaviourPunCallbacks
 {
     private bool isCaught;
     private ManiacMinigame maniac;
@@ -17,11 +19,25 @@ public class PlayerMinigame : MonoBehaviour
     {
         keyRect = MiniGameCanvas.KeyRect;
     }
-    public void StartMiniGame(ManiacMinigame mGame)
+    public void StartMiniGameRPCSupport()
+    {
+        photonView.RPC("StartMiniGameRPC", RpcTarget.All);
+    }
+    [PunRPC]
+    public void StartMiniGameRPC()
+    {
+        if(!photonView.IsMine) return;
+        //photonView.RPC("StartMiniGame", RpcTarget.All, mGame);
+        var mGame = GameObject.FindGameObjectWithTag("Maniac").GetComponent<ManiacMinigame>();
+        StartMiniGame(mGame);
+    }
+    private void StartMiniGame(ManiacMinigame mGame)
     {
         maniac = mGame;
         isCaught = true;
         GetComponent<PlayerMovementController>().canMove = false;
+        GetComponent<PlayerSkillManager>().enabled = false;
+        GetComponent<Teleportation>().enabled = false;
         routine = StartCoroutine(QTEGame());
         GetComponentInChildren<Transform>().Find("survivor").GetComponent<Animator>().SetFloat("FrontMove", 0);
     }
@@ -31,10 +47,10 @@ public class PlayerMinigame : MonoBehaviour
         while (isCaught)
         {
             var rand = Random.Range(0, ManiacMinigame.validSequenceKeys.Length - 1);
-            //SetKeyOnScreen(ManiacMinigame.validSequenceKeys[rand]);
-            yield return new WaitUntil(() => Input.GetKeyDown(ManiacMinigame.validSequenceKeys[rand]) || Input.GetKeyDown(KeyCode.P));
+            SetKeyOnScreen(ManiacMinigame.validSequenceKeys[rand]);
+            yield return new WaitUntil(() => Input.GetKeyDown(ManiacMinigame.validSequenceKeys[rand]));
 
-            maniac.rescueProgress += 20;
+            maniac.RescueProgress += 20;
             yield return new WaitForEndOfFrame();
         }
     }
@@ -51,17 +67,23 @@ public class PlayerMinigame : MonoBehaviour
 
     internal void Release()
     {
-        StopCoroutine(routine);
+        if(routine != null )
+            StopCoroutine(routine);
         isCaught = false;
         maniac = null;
+        GetComponent<PlayerSkillManager>().enabled = true;
+        GetComponent<Teleportation>().enabled = true;
         GetComponent<PlayerMovementController>().canMove = true;
     }
 
     public void Kill()
     {
-        StopCoroutine(routine);
+        if (routine != null)
+            StopCoroutine(routine);
         isCaught = false;
         maniac = null;
+        GetComponent<PlayerSkillManager>().enabled = true;
+        GetComponent<Teleportation>().enabled = true;
         GetComponent<PlayerMovementController>().canMove = true;
         GetComponent<PlayerStats>().GetDamage(100000);
     }

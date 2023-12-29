@@ -390,7 +390,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3774956694425255303
 RectTransform:
   m_ObjectHideFlags: 0
@@ -486,8 +486,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09ec8292c09c1ba4c9c974d9837e49e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyRect: {fileID: 3774956693359254077}
-  progressBar: {fileID: 3774956694344074410}
+  _keyRect: {fileID: 3774956693359254077}
+  _progressBar: {fileID: 3774956694660348934}
 --- !u!1 &3774956694660348932
 GameObject:
   m_ObjectHideFlags: 0

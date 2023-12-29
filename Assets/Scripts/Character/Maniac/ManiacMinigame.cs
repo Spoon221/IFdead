@@ -7,14 +7,14 @@ using UnityEngine.UI;
 public class ManiacMinigame : MonoBehaviourPunCallbacks
 {
     private PlayerMinigame caughtPlayer;
-    public int rescueProgress;
+    private int _rescueProgress;
     private Image progressBar;
     private RectTransform keyRect;
     private GameObject canvas;
 
     private ManiacMovementController movementController;
 
-    public static readonly KeyCode[] validSequenceKeys = new[] {
+    public static readonly KeyCode[] validSequenceKeys = {
         KeyCode.Q,
         KeyCode.W,
         KeyCode.E,
@@ -32,6 +32,21 @@ public class ManiacMinigame : MonoBehaviourPunCallbacks
         KeyCode.B,
     };
 
+    public int RescueProgress
+    {
+        get => _rescueProgress;
+        //set => SyncVal(value);
+        set => photonView.RPC("SyncVal", RpcTarget.All, value);
+    }
+
+    public bool Mine => photonView.IsMine;
+
+    [PunRPC]
+    private void SyncVal(int newVal)
+    {
+        _rescueProgress = newVal;
+    }
+
     //private void OnTriggerEnter(Collider other)
     //{
     //    StartMiniGame(other);
@@ -47,22 +62,28 @@ public class ManiacMinigame : MonoBehaviourPunCallbacks
 
     public void StartMiniGame(Component playerCollider)
     {
-        if (!PhotonNetwork.IsMasterClient) return;
-        photonView.RPC("StartMiniGameRPC", RpcTarget.All, playerCollider);
-        //StartMiniGameRPC(playerCollider);
+        //if (!photonView.IsMine) return;
+        //photonView.RPC("StartMiniGameRPC", RpcTarget.All, playerCollider);
+        StartMiniGameRPC(playerCollider);
     }
 
     [PunRPC]
     private void StartMiniGameRPC(Component playerCollider)
     {
         if (!playerCollider.TryGetComponent(out caughtPlayer)) return;
-        caughtPlayer.StartMiniGame(this);
-        StartCoroutine(QTEGame());
-        rescueProgress = 50;
-        progressBar.fillAmount = rescueProgress / 100f;
+        if (!photonView.IsMine)
+        {
+            //caughtPlayer.StartMiniGameRPC();
+            //photonView.RPC("StartMiniGameRPC", RpcTarget.All);
+            caughtPlayer.StartMiniGameRPCSupport();
+        }
+        else
+            StartCoroutine(QTEGame());
+        RescueProgress = 50;
+        progressBar.fillAmount = RescueProgress / 100f;
         canvas.gameObject.SetActive(true);
     }
-
+    [PunRPC]
     private void ReleasePlayer()
     {
         caughtPlayer.Release();
@@ -80,7 +101,7 @@ public class ManiacMinigame : MonoBehaviourPunCallbacks
         movementController.canMove = true;
     }
 
-
+    [PunRPC]
     private void KillPlayer()
     {
         caughtPlayer.Kill();
@@ -93,11 +114,11 @@ public class ManiacMinigame : MonoBehaviourPunCallbacks
     {
         if(caughtPlayer is null) return;
 
-        if (rescueProgress < 0) rescueProgress = 0;
-        progressBar.fillAmount = rescueProgress / 100f;
+        if (RescueProgress < 0) RescueProgress = 0;
+        progressBar.fillAmount = RescueProgress / 100f;
 
-        if (rescueProgress >= 100) ReleasePlayer();
-        else if (rescueProgress <= 0) KillPlayer();
+        if (RescueProgress >= 100) photonView.RPC("ReleasePlayer", RpcTarget.All);
+        else if (RescueProgress <= 0) photonView.RPC("KillPlayer", RpcTarget.All);
     }
 
     private IEnumerator QTEGame()
@@ -106,8 +127,8 @@ public class ManiacMinigame : MonoBehaviourPunCallbacks
         {
             var rand = Random.Range(0, validSequenceKeys.Length-1);
             SetKeyOnScreen(validSequenceKeys[rand]);
-            yield return new WaitUntil(() => Input.GetKeyDown(validSequenceKeys[rand]) || Input.GetKeyDown(KeyCode.L));
-            rescueProgress -= 10;
+            yield return new WaitUntil(() => Input.GetKeyDown(validSequenceKeys[rand]));
+            RescueProgress -= 10;
             yield return new WaitForEndOfFrame();
         }
     }
