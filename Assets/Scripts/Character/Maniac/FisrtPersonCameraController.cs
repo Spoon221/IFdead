@@ -45,7 +45,8 @@ public class FisrtPersonCameraController : MonoBehaviour
         {
             skinManiac.SetActive(false);
         }
-        rendererFeature.SetActive(true);
+        if (view.IsMine)
+            rendererFeature.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         ChangeSensitivity(GameSettingSaver.settings.Sensitivity * 100);
     }
