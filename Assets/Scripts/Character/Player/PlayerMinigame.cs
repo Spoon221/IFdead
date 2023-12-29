@@ -11,13 +11,17 @@ public class PlayerMinigame : MonoBehaviour
     private bool isCaught;
     private ManiacMinigame maniac;
     private Coroutine routine;
-    public RectTransform keyRect;
+    private RectTransform keyRect;
 
-    public void StartMinigame(ManiacMinigame mGame)
+    public void Start()
+    {
+        keyRect = MiniGameCanvas.KeyRect;
+    }
+    public void StartMiniGame(ManiacMinigame mGame)
     {
         maniac = mGame;
         isCaught = true;
-        GetComponent<PlayerMovementController>().enabled = false;
+        GetComponent<PlayerMovementController>().canMove = false;
         routine = StartCoroutine(QTEGame());
         GetComponentInChildren<Transform>().Find("survivor").GetComponent<Animator>().SetFloat("FrontMove", 0);
     }
@@ -27,7 +31,7 @@ public class PlayerMinigame : MonoBehaviour
         while (isCaught)
         {
             var rand = Random.Range(0, ManiacMinigame.validSequenceKeys.Length - 1);
-            SetKeyOnScreen(ManiacMinigame.validSequenceKeys[rand]);
+            //SetKeyOnScreen(ManiacMinigame.validSequenceKeys[rand]);
             yield return new WaitUntil(() => Input.GetKeyDown(ManiacMinigame.validSequenceKeys[rand]) || Input.GetKeyDown(KeyCode.P));
 
             maniac.rescueProgress += 20;
@@ -50,6 +54,15 @@ public class PlayerMinigame : MonoBehaviour
         StopCoroutine(routine);
         isCaught = false;
         maniac = null;
-        GetComponent<PlayerMovementController>().enabled = true;
+        GetComponent<PlayerMovementController>().canMove = true;
+    }
+
+    public void Kill()
+    {
+        StopCoroutine(routine);
+        isCaught = false;
+        maniac = null;
+        GetComponent<PlayerMovementController>().canMove = true;
+        GetComponent<PlayerStats>().GetDamage(100000);
     }
 }

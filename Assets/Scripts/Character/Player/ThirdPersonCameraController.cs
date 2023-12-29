@@ -21,25 +21,10 @@ public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObserv
 
     [SerializeField]
     private ScriptableRendererFeature rendererFeature;
-
     private Slider sensitivitySlider;
-
     private Vector3 targetPosition;
     private Quaternion targetRotation;
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(playerModel.rotation);
-            stream.SendNext(playerModel.position);
-        }
-        else
-        {
-            playerModel.rotation = (Quaternion)stream.ReceiveNext();
-            playerModel.position = (Vector3)stream.ReceiveNext();
-        }
-    }
-
+    
     private void Awake()
     {
         if (!view.IsMine)
@@ -52,10 +37,10 @@ public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObserv
 
     private void Start()
     {
-        rendererFeature.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         if (view.IsMine)
         {
+            rendererFeature.SetActive(false);
             cinemachineVirtualCamera = gameObject.GetComponent<CinemachineFreeLook>();
             var parent = gameObject.transform.parent.transform;
             cinemachineVirtualCamera.Follow = parent;
@@ -95,5 +80,20 @@ public class ThirdPersonCameraController : MonoBehaviourPunCallbacks, IPunObserv
     {
         this.sensitivitySlider = sensitivitySlider;
         this.sensitivitySlider.onValueChanged.AddListener(ChangeSensitivity);
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(playerModel.rotation);
+            stream.SendNext(playerModel.position);
+        }
+        else
+        {
+            playerModel.rotation = (Quaternion)stream.ReceiveNext();
+            playerModel.position = (Vector3)stream.ReceiveNext();
+            //playerModel.SetPositionAndRotation((Vector3)stream.ReceiveNext(), (Quaternion)stream.ReceiveNext());
+        }
     }
 }

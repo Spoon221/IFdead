@@ -1,31 +1,90 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using Items;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class Generator : ActivatedItem
 {
-    private List<GameObject> lights;
+    public float baseRepairTime = 3f; // Базовое время, необходимое для починки генератора
 
-    public override void Start()
+    [FormerlySerializedAs("generatorHealth")]
+    public float baseGeneratorHealth = 1000f;
+
+    private SingletonGeneratorHealth singltonGeneratorHealth;
+
+    private int playerCount; // Количество игроков в триггере
+
+    private float tickGeneratorRepairing; // Время тика починки генератора
+    private bool isRepairing;
+    public int CounterCompletedTasks;
+
+    private bool isRepaired;
+
+    public UnityEvent isPlayerInTriggerZone = new();
+    public UnityEvent isPlayerExitTriggerZone = new();
+
+    public void OnTriggerEnter(Collider other)
     {
-        base.Start();
-        var lampposts = GameObject.FindGameObjectsWithTag("Lamppost").ToList();
-        lights = new List<GameObject>();
-        foreach (var lamppost in lampposts)
+        if (other.gameObject.CompareTag("Player"))
         {
-            foreach (var lightPoint in lamppost.gameObject.GetComponentsInChildren<Light>())
-            {
-                lightPoint.gameObject.SetActive(false);
-                lights.Add(lightPoint.gameObject);
-            }
+            playerCount++;
+            other.GetComponent<IsMine>().GeneratorRect.GetComponent<GeneratorHealthSlider>().DisplaySlider();
         }
     }
 
-    public override void ActivateItem()
+    private void OnTriggerStay(Collider other)
     {
-        base.ActivateItem();
-        foreach (var light in lights)
-            light.SetActive(true);
+        OnTriggerEnterPlayer();
+        
+        Debug.Log(singltonGeneratorHealth.GetHealth());
+        if (!isRepaired)
+        {
+            singltonGeneratorHealth.AddHealth(tickGeneratorRepairing * playerCount);
+        }
+
+        if (singltonGeneratorHealth.GetHealth() >= baseGeneratorHealth && !isRepaired)
+        {
+            Debug.Log("loaded");
+            isRepaired = true;
+            ActivateItem();
+            CounterCompletedTasks = 1;
+        }
+    }
+
+    private void OnTriggerEnterPlayer()
+    {
+        isPlayerInTriggerZone.Invoke();
+    }
+
+    private void OnTriggerExitPlayer()
+    {
+        isPlayerExitTriggerZone.Invoke();
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        OnTriggerExitPlayer();
+        if (other.gameObject.CompareTag("Player"))
+        {
+            playerCount--;
+            other.GetComponent<IsMine>().GeneratorRect.GetComponent<GeneratorHealthSlider>().HideSlider();
+        }
+    }
+
+
+    public override void Start()
+    {
+        SingletonGeneratorHealth.GetInstance().ResetHealth();
+        CounterCompletedTasks = 0;
+        singltonGeneratorHealth = SingletonGeneratorHealth.GetInstance();
+        tickGeneratorRepairing = baseGeneratorHealth / baseRepairTime / 1000;
     }
 }
