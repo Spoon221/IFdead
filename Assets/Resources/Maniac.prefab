@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 3543170648718382544}
   - component: {fileID: 3118136835439663611}
   - component: {fileID: 7113173068859893059}
+  - component: {fileID: 8701113118618607934}
+  - component: {fileID: 1837145847830285039}
   m_Layer: 0
   m_Name: Maniac
   m_TagString: Maniac
@@ -208,6 +210,34 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: -0.33, y: -0.24, z: -0.39}
+--- !u!114 &8701113118618607934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400445381778022800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41652b4f82c4683428fd84608a877439, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rescueProgress: 0
+--- !u!114 &1837145847830285039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400445381778022800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e6bad9bbe4bf5e458820fbbc4ec1cc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manaCost: 10
+  hookMiss: {fileID: 5273632132528631525, guid: 8f6a615e9c8de29479ed8f5ccb5c7c48, type: 3}
+  launchPoint: {fileID: 0}
 --- !u!1 &702702245521210412
 GameObject:
   m_ObjectHideFlags: 0
