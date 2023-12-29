@@ -45,7 +45,7 @@ public class PlayerMinigame : MonoBehaviourPunCallbacks
         {
             var rand = Random.Range(0, ManiacMinigame.validSequenceKeys.Length - 1);
             SetKeyOnScreen(ManiacMinigame.validSequenceKeys[rand]);
-            yield return new WaitUntil(() => Input.GetKeyDown(ManiacMinigame.validSequenceKeys[rand]) || Input.GetKeyDown(KeyCode.P));
+            yield return new WaitUntil(() => Input.GetKeyDown(ManiacMinigame.validSequenceKeys[rand]));
 
             maniac.RescueProgress += 20;
             yield return new WaitForEndOfFrame();

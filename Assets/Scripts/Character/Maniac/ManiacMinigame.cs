@@ -83,7 +83,7 @@ public class ManiacMinigame : MonoBehaviourPunCallbacks
         progressBar.fillAmount = RescueProgress / 100f;
         canvas.gameObject.SetActive(true);
     }
-
+    [PunRPC]
     private void ReleasePlayer()
     {
         caughtPlayer.Release();
@@ -101,7 +101,7 @@ public class ManiacMinigame : MonoBehaviourPunCallbacks
         movementController.canMove = true;
     }
 
-
+    [PunRPC]
     private void KillPlayer()
     {
         caughtPlayer.Kill();
@@ -117,8 +117,8 @@ public class ManiacMinigame : MonoBehaviourPunCallbacks
         if (RescueProgress < 0) RescueProgress = 0;
         progressBar.fillAmount = RescueProgress / 100f;
 
-        if (RescueProgress >= 100) ReleasePlayer();
-        else if (RescueProgress <= 0) KillPlayer();
+        if (RescueProgress >= 100) photonView.RPC("ReleasePlayer", RpcTarget.All);
+        else if (RescueProgress <= 0) photonView.RPC("KillPlayer", RpcTarget.All);
     }
 
     private IEnumerator QTEGame()
@@ -127,7 +127,7 @@ public class ManiacMinigame : MonoBehaviourPunCallbacks
         {
             var rand = Random.Range(0, validSequenceKeys.Length-1);
             SetKeyOnScreen(validSequenceKeys[rand]);
-            yield return new WaitUntil(() => Input.GetKeyDown(validSequenceKeys[rand]) || Input.GetKeyDown(KeyCode.L));
+            yield return new WaitUntil(() => Input.GetKeyDown(validSequenceKeys[rand]));
             RescueProgress -= 10;
             yield return new WaitForEndOfFrame();
         }
