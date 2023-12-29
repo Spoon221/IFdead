@@ -12,6 +12,7 @@ public class HookMiss : MonoBehaviour
     private bool hooked;
     private Transform hookedPlayer;
     private PlayerMovementController playerController;
+    public GameObject LeftHand;
 
     public bool Hooked => hooked;
 
@@ -19,6 +20,7 @@ public class HookMiss : MonoBehaviour
     private void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
+        LeftHand = GameObject.FindWithTag("ManiacLeftHand");
     }
 
     void Update()
@@ -47,6 +49,7 @@ public class HookMiss : MonoBehaviour
         parentManiac = hook;
         this.direction = direction;
         gameObject.SetActive(true);
+        LeftHand.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -97,5 +100,6 @@ public class HookMiss : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         gameObject.SetActive(false);
+        LeftHand.SetActive(true);
     }
 }

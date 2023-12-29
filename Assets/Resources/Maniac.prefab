@@ -1773,6 +1773,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: manjak grip
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4fcf9671bfa28ce47a37218f518ed564, type: 3}
+      propertyPath: m_TagString
+      value: ManiacLeftHand
+      objectReference: {fileID: 0}
     - target: {fileID: 3553288954100024873, guid: 4fcf9671bfa28ce47a37218f518ed564, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
