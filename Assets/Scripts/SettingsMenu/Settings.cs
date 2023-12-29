@@ -32,6 +32,7 @@ public class Settings : MonoBehaviourPunCallbacks
 
     private string gameScnemeName = "NewGameArea";
     private string secondScnemeName = "FindRoom 2";
+    private GameObject dontDestroyObject;
     //private const string PlayerPositionKey = "PlayerPosition";
     //private const string PlayerRotationKey = "PlayerRotation";
 
@@ -41,6 +42,7 @@ public class Settings : MonoBehaviourPunCallbacks
         {
             //GetPing();
             LoseCanvas.SetActive(false);
+            Destroy(dontDestroyObject = FindObjectOfType<backgroundSound>().gameObject);
         }
         SetupResolutions();
         fullscreenToggle.SetIsOnWithoutNotify(Screen.fullScreen);
@@ -52,8 +54,8 @@ public class Settings : MonoBehaviourPunCallbacks
         var resList = new List<Resolution>();
         for (var i = 0; i < Screen.resolutions.Length - 1; i++)
         {
-            if(Screen.resolutions[i].height == Screen.resolutions[i+1].height && Screen.resolutions[i].width == Screen.resolutions[i + 1].width) continue;
-                resList.Add(Screen.resolutions[i]);
+            if (Screen.resolutions[i].height == Screen.resolutions[i + 1].height && Screen.resolutions[i].width == Screen.resolutions[i + 1].width) continue;
+            resList.Add(Screen.resolutions[i]);
         }
         resList.Add(Screen.resolutions.Last());
         resList.Reverse();
@@ -71,12 +73,12 @@ public class Settings : MonoBehaviourPunCallbacks
         }
 
         ResoDd.onValueChanged.AddListener(index =>
-            {
-                ResoDd.captionText.text = ShowResolving(resolutions[index]);
-                Screen.SetResolution(resolutions[index].width, resolutions[index].height, Screen.fullScreen);
-                GameSettingSaver.settings.Resolution = resolutions[index];
-                Debug.Log("Resolution now: " + ResoDd.captionText.text + " " + resolutions[index].refreshRate + "Hz");
-            });
+        {
+            ResoDd.captionText.text = ShowResolving(resolutions[index]);
+            Screen.SetResolution(resolutions[index].width, resolutions[index].height, Screen.fullScreen);
+            GameSettingSaver.settings.Resolution = resolutions[index];
+            Debug.Log("Resolution now: " + ResoDd.captionText.text + " " + resolutions[index].refreshRate + "Hz");
+        });
         ResoDd.captionText.text = ShowResolving(GameSettingSaver.settings.Resolution);
 
     }
@@ -187,6 +189,7 @@ public class Settings : MonoBehaviourPunCallbacks
     public void QuitGame()
     {
         Application.Quit();
+        Debug.Log("вышел");
     }
 
     public void SettingsOpen()

@@ -16,6 +16,7 @@ namespace KeyDownForPlayers
         [SerializeField] private ManiacMovementController maniacMovementController;
         [SerializeField] private FisrtPersonCameraController maniacCamera;
         [SerializeField] private Canvas canvasRender;
+        //private bool gameIsPaused;
 
         [SerializeField] private PhotonView view;
         [SerializeField] private Text TextLobbyE;
@@ -65,8 +66,7 @@ namespace KeyDownForPlayers
             TextLobbyE.enabled = true;
             playerMovementController.enabled = true;
             cameraController.enabled = true;
-            Cursor.lockState = CursorLockMode.Locked;
-
+            thirdPerson.enabled= true;
         }
 
         public void PauseItermediateScene()
@@ -74,15 +74,15 @@ namespace KeyDownForPlayers
             TextLobbyE.enabled = false;
             playerMovementController.enabled = false;
             cameraController.enabled = false;
-            Cursor.lockState = CursorLockMode.None;
+            thirdPerson.enabled = false;
         }
 
         public void SubsequentCanvasItermediateScene()
         {
+            Cursor.lockState = CursorLockMode.None;
             TextLobbyE.enabled = false;
             playerMovementController.enabled = false;
             cameraController.enabled = false;
-            Cursor.lockState = CursorLockMode.None;
         }
     }
 }
