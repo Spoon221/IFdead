@@ -8,14 +8,8 @@ public class ListItem : MonoBehaviour
 {
     [SerializeField] private Text TextName;
     [SerializeField] private Text TextPlayerCount;
-    [SerializeField] private Connect connect;
 
     public RoomInfo RoomInfo { get; private set; }
-
-    private void Start()
-    {
-        connect = FindObjectOfType<Connect>();
-    }
 
     public void SetInfo(RoomInfo info)
     {

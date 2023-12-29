@@ -7,9 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Photon.Realtime;
 using static PlayerHelper;
+using TMPro;
 
 public class Settings : MonoBehaviourPunCallbacks
 {
+    public GameObject settings;
     public Dropdown ResoDd;
 
     public PhotonView view;
@@ -18,6 +20,7 @@ public class Settings : MonoBehaviourPunCallbacks
     private Coroutine checkPlayerCoroutine;
     public GameObject LoseCanvas;
     [SerializeField] private ExitForPlayer exit;
+    [SerializeField] private GameObject textPing;
     private const float DisplayTime = 5f;
 
     [SerializeField] private Toggle fullscreenToggle;
@@ -26,13 +29,21 @@ public class Settings : MonoBehaviourPunCallbacks
 
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject playerModel;
+
+    private string gameScnemeName = "NewGameArea";
+    private string secondScnemeName = "FindRoom 2";
+    private GameObject dontDestroyObject;
     //private const string PlayerPositionKey = "PlayerPosition";
     //private const string PlayerRotationKey = "PlayerRotation";
 
     private void Start()
     {
-        if (SceneManager.GetActiveScene().name == "GameArea")
+        if (SceneManager.GetActiveScene().name == gameScnemeName)
+        {
+            //GetPing();
             LoseCanvas.SetActive(false);
+            Destroy(dontDestroyObject = FindObjectOfType<backgroundSound>().gameObject);
+        }
         SetupResolutions();
         fullscreenToggle.SetIsOnWithoutNotify(Screen.fullScreen);
     }
@@ -43,8 +54,8 @@ public class Settings : MonoBehaviourPunCallbacks
         var resList = new List<Resolution>();
         for (var i = 0; i < Screen.resolutions.Length - 1; i++)
         {
-            if(Screen.resolutions[i].height == Screen.resolutions[i+1].height && Screen.resolutions[i].width == Screen.resolutions[i + 1].width) continue;
-                resList.Add(Screen.resolutions[i]);
+            if (Screen.resolutions[i].height == Screen.resolutions[i + 1].height && Screen.resolutions[i].width == Screen.resolutions[i + 1].width) continue;
+            resList.Add(Screen.resolutions[i]);
         }
         resList.Add(Screen.resolutions.Last());
         resList.Reverse();
@@ -62,12 +73,12 @@ public class Settings : MonoBehaviourPunCallbacks
         }
 
         ResoDd.onValueChanged.AddListener(index =>
-            {
-                ResoDd.captionText.text = ShowResolving(resolutions[index]);
-                Screen.SetResolution(resolutions[index].width, resolutions[index].height, Screen.fullScreen);
-                GameSettingSaver.settings.Resolution = resolutions[index];
-                Debug.Log("Resolution now: " + ResoDd.captionText.text + " " + resolutions[index].refreshRate + "Hz");
-            });
+        {
+            ResoDd.captionText.text = ShowResolving(resolutions[index]);
+            Screen.SetResolution(resolutions[index].width, resolutions[index].height, Screen.fullScreen);
+            GameSettingSaver.settings.Resolution = resolutions[index];
+            Debug.Log("Resolution now: " + ResoDd.captionText.text + " " + resolutions[index].refreshRate + "Hz");
+        });
         ResoDd.captionText.text = ShowResolving(GameSettingSaver.settings.Resolution);
 
     }
@@ -77,7 +88,7 @@ public class Settings : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name == "GameArea")
+        if (SceneManager.GetActiveScene().name == gameScnemeName)
         {
             Maniac = GameObject.FindWithTag("Maniac");
             if ((LeftGameAllInRoom || PhotonNetwork.PlayerList.Length == 1 || Maniac == null) && checkPlayerCoroutine == null)
@@ -90,6 +101,7 @@ public class Settings : MonoBehaviourPunCallbacks
                 checkPlayerCoroutine = null;
             }
         }
+        //SettextPing();
     }
 
     private IEnumerator CheckPlayerList()
@@ -131,7 +143,7 @@ public class Settings : MonoBehaviourPunCallbacks
 
     public void LeaveRoom()
     {
-        if (SceneManager.GetActiveScene().name == "GameArea")
+        if (SceneManager.GetActiveScene().name == gameScnemeName)
         {
             if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("NextScenePlayer"))
             {
@@ -151,7 +163,7 @@ public class Settings : MonoBehaviourPunCallbacks
                 view.RPC("LeaveGame", RpcTarget.All);
             }
         }
-        else if (SceneManager.GetActiveScene().name == "FindRoom 2")
+        else if (SceneManager.GetActiveScene().name == secondScnemeName)
         {
             var player = GameObject.FindWithTag("Player");
             var playerModel = GameObject.Find("survivorsModel").gameObject;
@@ -163,15 +175,7 @@ public class Settings : MonoBehaviourPunCallbacks
     [PunRPC]
     public void LeaveGame()
     {
-        if (SceneManager.GetActiveScene().name == "FindRoom 2")
-        {
-            if (photonView.IsMine)
-            {
-                player = GameObject.FindWithTag("Player");
-                //SavePlayerPosition();
-            }
-        }
-        if (SceneManager.GetActiveScene().name == "GameArea")
+        if (SceneManager.GetActiveScene().name == gameScnemeName)
             LeftGameAllInRoom = true;
         PhotonNetwork.LeaveRoom();
     }
@@ -185,5 +189,29 @@ public class Settings : MonoBehaviourPunCallbacks
     public void QuitGame()
     {
         Application.Quit();
+        Debug.Log("вышел");
+    }
+
+    public void SettingsOpen()
+    {
+        settings.SetActive(true);
+    }
+
+    public void SettingsClose()
+    {
+        settings.SetActive(false);
+    }
+
+    private IEnumerator SettextPing()
+    {
+        yield return new WaitForSeconds(15f);
+        GetPing();
+    }
+
+    public void GetPing()
+    {
+        var ping = PhotonNetwork.GetPing();
+        var TextMesh = textPing.GetComponent<TextMeshPro>();
+        TextMesh.SetText("Ping: " + ping + " ms");
     }
 }

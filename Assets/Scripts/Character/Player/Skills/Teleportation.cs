@@ -16,6 +16,8 @@ namespace Character.Player.Skills
         [SerializeField] private PlayerStats playerStats;
         [SerializeField] private int manaCost = 90;
         [SerializeField] private CharacterController cc;
+        [SerializeField] private AudioSource audio;
+        [SerializeField] private AudioClip audioClip;
 
         private void Start()
         {
@@ -26,11 +28,12 @@ namespace Character.Player.Skills
         {
             if (photonView.IsMine 
                 && !isTeleporting 
-                // && playerStats.CurrentMana >= manaCost 
+                && playerStats.CurrentMana >= manaCost 
                 && Input.GetKeyDown(KeyCode.T))
             {
                 isTeleporting = true;
                 target = GetTargetTeleport();
+                PlayAudio();
             }
 
             if (!isTeleporting) return;
@@ -46,6 +49,15 @@ namespace Character.Player.Skills
                 playerStats.SpendMana(manaCost);
                 cc.enabled = true;
             }
+        }
+
+        private void PlayAudio()
+        {
+            audio.pitch = 1.6f;
+            audio.volume = 1f;
+            audio.PlayOneShot(audioClip);
+            audio.volume = 0.8f;
+            audio.pitch = 1f;
         }
 
         private GameObject GetTargetTeleport()

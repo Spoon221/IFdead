@@ -613,7 +613,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6132893871568048783}
-  m_LocalRotation: {x: 0.034817096, y: -0.9586251, z: 0.13426016, w: 0.24859595}
+  m_LocalRotation: {x: 0.034817092, y: -0.958625, z: 0.13426015, w: 0.24859598}
   m_LocalPosition: {x: 0.000006198883, y: 0, z: 0.0000023841858}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -818,7 +818,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6132893871974498305}
-  m_LocalRotation: {x: 0.023224838, y: -0.9638294, z: 0.08955862, w: 0.24994561}
+  m_LocalRotation: {x: 0.023224834, y: -0.9638294, z: 0.0895586, w: 0.24994561}
   m_LocalPosition: {x: 0.00000333786, y: 0, z: 0.0000014305115}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -887,7 +887,8 @@ GameObject:
   - component: {fileID: 85222191180015746}
   - component: {fileID: 1170356773866940580}
   - component: {fileID: 599036037}
-  - component: {fileID: 1276690592427617684}
+  - component: {fileID: 1795094151803245880}
+  - component: {fileID: 4993218587194569870}
   m_Layer: 6
   m_Name: PlayerForLobby
   m_TagString: Player
@@ -927,9 +928,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 321182be3fa11e14484e9442e323e276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 14
-  jumpForce: 2
-  gravityForce: 5
+  moveSpeed: 11.3
+  jumpForce: 0.5
+  gravityForce: 1.5
   resistanceForce: 3
   nameModelWithAnimator: survivor
   orientation: {fileID: 6132893872649457731}
@@ -955,7 +956,6 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 85222191180015746}
-  - {fileID: 1276690592427617684}
   - {fileID: 6132893872779753880}
   - {fileID: 5476482560786975693}
   sceneViewId: 0
@@ -1025,10 +1025,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   view: {fileID: 6132893871799605146}
-  TextLobbyE: {fileID: 367789903285217498}
+  GameIsPaused: 0
   cameraOnTable: {fileID: 0}
-  scriptPlayerMovementController: {fileID: 6132893871799605145}
-  scriptThirdPersonCameraController: {fileID: 6132893872779753880}
+  key: {fileID: 4993218587194569870}
 --- !u!143 &599036037
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1047,7 +1046,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: -0.27, z: -0.03}
---- !u!114 &1276690592427617684
+--- !u!114 &1795094151803245880
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1056,30 +1055,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 6132893872328913182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
+  m_Script: {fileID: 11500000, guid: 5482a27d553985a4a9a33a7825b58bf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PositionModel:
-    SynchronizeEnabled: 1
-    TeleportEnabled: 1
-    TeleportIfDistanceGreaterThan: 0
-    InterpolateOption: 2
-    InterpolateMoveTowardsSpeed: 1
-    InterpolateLerpSpeed: 1
-    ExtrapolateOption: 0
-    ExtrapolateSpeed: 1
-    ExtrapolateIncludingRoundTripTime: 1
-    ExtrapolateNumberOfStoredPositions: 1
-  m_RotationModel:
-    SynchronizeEnabled: 1
-    InterpolateOption: 1
-    InterpolateRotateTowardsSpeed: 180
-    InterpolateLerpSpeed: 5
-  m_ScaleModel:
-    SynchronizeEnabled: 0
-    InterpolateOption: 0
-    InterpolateMoveTowardsSpeed: 1
-    InterpolateLerpSpeed: 0
+  view: {fileID: 6132893871799605146}
+  cameraController: {fileID: 6132893872779753880}
+  key: {fileID: 4993218587194569870}
+--- !u!114 &4993218587194569870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6132893872328913182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 479ee3bfb2a94fa4d8ebbb83be04c790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settingsMenu: {fileID: 0}
+  cameraController: {fileID: 6132893872779753881}
+  thirdPerson: {fileID: 6132893872779753880}
+  playerMovementController: {fileID: 6132893871799605145}
+  cameraRender: {fileID: 1635587823}
+  maniacMovementController: {fileID: 0}
+  maniacCamera: {fileID: 0}
+  canvasRender: {fileID: 0}
+  view: {fileID: 6132893871799605146}
+  TextLobbyE: {fileID: 367789903285217498}
 --- !u!1 &6132893872649457732
 GameObject:
   m_ObjectHideFlags: 0

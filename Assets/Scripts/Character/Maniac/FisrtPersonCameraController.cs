@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
-public class FisrtPersonCameraController : MonoBehaviour, IPunObservable
+public class FisrtPersonCameraController : MonoBehaviour
 {
     public float maxSensX;
     public float maxSensY;
@@ -21,26 +21,30 @@ public class FisrtPersonCameraController : MonoBehaviour, IPunObservable
     [SerializeField]
     private ScriptableRendererFeature rendererFeature;
 
+    [SerializeField] private GameObject skinManiac;
+
     public PhotonView view;
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(maniacModel.rotation);
-            stream.SendNext(Skill.rotation);
-            stream.SendNext(Skill.position);
-        }
-        else
-        {
-            maniacModel.rotation = (Quaternion) stream.ReceiveNext();
-            Skill.rotation = (Quaternion) stream.ReceiveNext();
-            Skill.position = (Vector3)stream.ReceiveNext();
-        }
-    }
+    //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    //{
+    //    if (stream.IsWriting)
+    //    {
+    //        stream.SendNext(Skill.rotation);
+    //        stream.SendNext(Skill.position);
+    //    }
+    //    else
+    //    {
+    //        Skill.rotation = (Quaternion) stream.ReceiveNext();
+    //        Skill.position = (Vector3)stream.ReceiveNext();
+    //    }
+    //}
 
     void Start()
     {
+        if (view.IsMine)
+        {
+            skinManiac.SetActive(false);
+        }
         rendererFeature.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         ChangeSensitivity(GameSettingSaver.settings.Sensitivity * 100);
