@@ -88,19 +88,19 @@ public class Settings : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name == gameScnemeName)
-        {
-            Maniac = GameObject.FindWithTag("Maniac");
-            if ((LeftGameAllInRoom || PhotonNetwork.PlayerList.Length == 1 || Maniac == null) && checkPlayerCoroutine == null)
-            {
-                checkPlayerCoroutine = StartCoroutine(CheckPlayerList());
-            }
-            else if (!LeftGameAllInRoom && PhotonNetwork.PlayerList.Length > 1 && Maniac != null && checkPlayerCoroutine != null)
-            {
-                StopCoroutine(checkPlayerCoroutine);
-                checkPlayerCoroutine = null;
-            }
-        }
+        //if (SceneManager.GetActiveScene().name == gameScnemeName)
+        //{
+        //    Maniac = GameObject.FindWithTag("Maniac");
+        //    if ((LeftGameAllInRoom || PhotonNetwork.PlayerList.Length == 1 || Maniac == null) && checkPlayerCoroutine == null)
+        //    {
+        //        checkPlayerCoroutine = StartCoroutine(CheckPlayerList());
+        //    }
+        //    else if (!LeftGameAllInRoom && PhotonNetwork.PlayerList.Length > 1 && Maniac != null && checkPlayerCoroutine != null)
+        //    {
+        //        StopCoroutine(checkPlayerCoroutine);
+        //        checkPlayerCoroutine = null;
+        //    }
+        //}
         //SettextPing();
     }
 
