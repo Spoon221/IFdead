@@ -1879,6 +1879,7 @@ GameObject:
   - component: {fileID: 5810993034103597042}
   - component: {fileID: 3412597389004747212}
   - component: {fileID: 1365612898249974719}
+  - component: {fileID: -8977487460378117293}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1943,9 +1944,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 11.3
-  jumpForce: 0.5
-  gravityForce: 1.5
-  resistanceForce: 0.01
+  jumpForce: 2
+  gravityForce: 5
+  resistanceForce: 3
   nameModelWithAnimator: survivor
   orientation: {fileID: 6132893872649457731}
   canMove: 1
@@ -2212,6 +2213,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-8977487460378117293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6132893872328913182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d739808aaa90f7f4698f8950318ad9cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6132893872649457732
 GameObject:
   m_ObjectHideFlags: 0
