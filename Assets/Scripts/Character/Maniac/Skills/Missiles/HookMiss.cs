@@ -51,6 +51,7 @@ public class HookMiss : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
+        
         if (Hooked) return;
         if (collider.gameObject.layer != 6)
         {
@@ -76,6 +77,7 @@ public class HookMiss : MonoBehaviour
             hookedPlayer.GetComponent<PlayerMovementController>().AddForce(dir * 7);
             yield return new WaitForFixedUpdate();
         }
+
         parentManiac.GetComponent<ManiacMinigame>().StartMiniGame(hookedPlayer);
 
     }
