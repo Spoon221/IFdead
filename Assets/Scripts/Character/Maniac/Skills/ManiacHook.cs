@@ -9,7 +9,7 @@ public class ManiacHook : MonoBehaviourPun
     private ManiacStats maniacStats;
     [SerializeField] private HookMiss hookMiss;
     [SerializeField] private Transform launchPoint;
-    public readonly GameObject missPrefab;
+    public GameObject missPrefab;
 
 
     public HookMiss Miss => hookMiss;
@@ -18,14 +18,14 @@ public class ManiacHook : MonoBehaviourPun
     {
         maniacStats = GetComponent<ManiacStats>();
         hookMiss = Instantiate(missPrefab).GetComponent<HookMiss>();
-        launchPoint ??= transform;
+        launchPoint = GetComponentInChildren<Camera>().transform;
     }
 
     void Update()
     {
         if (photonView.IsMine)
         {
-            if (Input.GetButtonDown("Fire2") && maniacStats.CurrentMana >= manaCost && !hookMiss.Hooked)
+            if (Input.GetButtonDown("Fire2") && !hookMiss.Hooked)
             {
                 photonView.RPC("LaunchHook", RpcTarget.AllBuffered);
                 //LaunchHook();

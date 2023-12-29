@@ -236,8 +236,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaCost: 10
-  hookMiss: {fileID: 5273632132528631525, guid: 8f6a615e9c8de29479ed8f5ccb5c7c48, type: 3}
+  hookMiss: {fileID: 0}
   launchPoint: {fileID: 0}
+  missPrefab: {fileID: 5273632132528631531, guid: 8f6a615e9c8de29479ed8f5ccb5c7c48, type: 3}
 --- !u!1 &702702245521210412
 GameObject:
   m_ObjectHideFlags: 0
