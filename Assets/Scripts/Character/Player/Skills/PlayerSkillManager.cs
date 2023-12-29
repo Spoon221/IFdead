@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerSkillManager : MonoBehaviourPun
 {
+    [SerializeField] private AudioSource audio;
+    [SerializeField] private AudioClip audioClip;
     public GameObject smokeCloudSkill;
     public bool isSmokeReady;
     private float smokeManaCost;
@@ -37,5 +39,6 @@ public class PlayerSkillManager : MonoBehaviourPun
         Invoke(nameof(MakeSmokeCloudSkillready), cooldownTime);
         smokeCloudSkill.GetComponent<SmokeCloudSkill>().SpawnSmoke(transform.position);
         playerStats.SpendMana(smokeManaCost);
+        audio.PlayOneShot(audioClip);
     }
 }
