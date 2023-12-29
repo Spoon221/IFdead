@@ -73,7 +73,7 @@ public class SpawnManager : MonoBehaviourPun
 
     private void RemoveSpawnPoint(Vector3 spawnPosition)
     {
-        for (int i = 0; i < Spawns.Length; i++)
+        for (var i = 0; i < Spawns.Length; i++)
         {
             if (Spawns[i].transform.position == spawnPosition)
             {
