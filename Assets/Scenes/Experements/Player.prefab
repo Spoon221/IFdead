@@ -537,6 +537,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 982d4430d7aa1944ca65c7bf613c57f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audio: {fileID: 0}
+  audioClip: {fileID: 0}
   smokeCloudSkill: {fileID: 1463433743043836997, guid: f1f51754bc75d3e42b0b7d1b2eecf197, type: 3}
   isSmokeReady: 0
 --- !u!114 &2975010118752484430
@@ -581,6 +583,7 @@ MonoBehaviour:
   Bar: {fileID: 8959121508912252287}
   camera: {fileID: 8959121507126820155}
   audioListener: {fileID: 8959121507126820154}
+  GeneratorRect: {fileID: 0}
 --- !u!114 &9042089691396293462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1181,6 +1184,43 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
+--- !u!1 &5245231333401052707
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8044112523070598375, guid: ffc6c8f3de466e64b918c16073fe648b, type: 3}
+  m_PrefabInstance: {fileID: 2839699486186056388}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5245231333401052704}
+  - component: {fileID: 2283661710156964006}
+  m_Layer: 0
+  m_Name: 'PlayerStartText (Missing Prefab with guid: ffc6c8f3de466e64b918c16073fe648b)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5245231333401052704
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8044112523070598372, guid: ffc6c8f3de466e64b918c16073fe648b, type: 3}
+  m_PrefabInstance: {fileID: 2839699486186056388}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5245231333401052707}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8959121508912252284}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6837770958626817719
 GameObject:
   m_ObjectHideFlags: 0
@@ -1992,16 +2032,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 9025400196374840864, guid: ffc6c8f3de466e64b918c16073fe648b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ffc6c8f3de466e64b918c16073fe648b, type: 3}
---- !u!224 &5245231333401052704 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8044112523070598372, guid: ffc6c8f3de466e64b918c16073fe648b, type: 3}
-  m_PrefabInstance: {fileID: 2839699486186056388}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5245231333401052707 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8044112523070598375, guid: ffc6c8f3de466e64b918c16073fe648b, type: 3}
-  m_PrefabInstance: {fileID: 2839699486186056388}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2283661710156964006
 MonoBehaviour:
   m_ObjectHideFlags: 0

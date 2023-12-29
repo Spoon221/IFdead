@@ -71,6 +71,9 @@ MonoBehaviour:
   - PickUpItem
   - ActivateItem
   - SyncVal
+  - KillPlayer
+  - ReleasePlayer
+  - Stun
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
