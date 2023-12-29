@@ -105,7 +105,7 @@ public class MasterRoom : MonoBehaviourPunCallbacks
             var startMatch = (bool)propertiesThatChanged["StartMatch"];
             if (startMatch)
             {
-                PhotonNetwork.LoadLevel("GameArea");
+                PhotonNetwork.LoadLevel("NewGameArea");
             }
         }
     }

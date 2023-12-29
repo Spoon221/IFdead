@@ -26,7 +26,7 @@ namespace Character.Player.Skills
         {
             if (photonView.IsMine 
                 && !isTeleporting 
-                // && playerStats.CurrentMana >= manaCost 
+                && playerStats.CurrentMana >= manaCost 
                 && Input.GetKeyDown(KeyCode.T))
             {
                 isTeleporting = true;

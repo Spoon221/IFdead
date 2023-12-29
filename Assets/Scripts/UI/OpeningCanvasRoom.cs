@@ -3,35 +3,32 @@ using Photon.Pun;
 using UnityEngine.UI;
 using Cinemachine;
 using UnityEngine.SceneManagement;
-using System;
 
 public class OpeningCanvasRoom : MonoBehaviour
 {
-    [SerializeField] private PhotonView view;
-    private static bool GameIsPaused = false;
-    public Text TextLobbyE;
+    public PhotonView view;
+    public bool GameIsPaused = false;
     public CinemachineVirtualCamera cameraOnTable;
-    public PlayerMovementController scriptPlayerMovementController;
-    public ThirdPersonCameraController scriptThirdPersonCameraController;
     private Canvas gameTable;
     private Camera cameraPlayer;
+    [SerializeField] private KeyDownForPlayers.KeyDownForPlayers key;
 
     void Start()
     {
-        if (view.IsMine)
+        cameraOnTable = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
+        cameraPlayer = GameObject.Find("CameraPlayer").GetComponent<Camera>();
+        gameTable = GameObject.Find("CanvasLobby").GetComponent<Canvas>();
+        if (gameTable != null)
         {
-            cameraOnTable = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
-            cameraPlayer = GameObject.Find("CameraPlayer").GetComponent<Camera>();
-            gameTable = GameObject.Find("CanvasLobby").GetComponent<Canvas>();
-            if (SceneManager.GetActiveScene().name == "FindRoom 2")
-            {
-                Pause();
-            }
-            if (gameTable != null)
-            {
-                gameTable.renderMode = RenderMode.WorldSpace;
-                gameTable.worldCamera = cameraPlayer;
-            }
+            gameTable.renderMode = RenderMode.WorldSpace;
+            gameTable.worldCamera = cameraPlayer;
+        }
+        if (SceneManager.GetActiveScene().name == "FindRoom 2")
+        {
+            Cursor.lockState = CursorLockMode.None;
+            key.PauseItermediateScene();
+            cameraOnTable.enabled = true;
+            GameIsPaused = true;
         }
     }
 
@@ -41,42 +38,18 @@ public class OpeningCanvasRoom : MonoBehaviour
         {
             if (GameIsPaused)
             {
-                Resume();
+                Cursor.lockState = CursorLockMode.Locked;
+                GameIsPaused = false;
+                key.ResumeItermediateScene();
+                cameraOnTable.enabled = true;
             }
             else
             {
-                Pause();
+                Cursor.lockState = CursorLockMode.None;
+                GameIsPaused = true;
+                key.PauseItermediateScene();
+                cameraOnTable.enabled = true;
             }
         }
-    }
-
-    public void Resume()
-    {
-        cameraOnTable.enabled = false;
-        TextLobbyE.enabled = true;
-        GameIsPaused = false;
-        scriptPlayerMovementController.enabled = true;
-        scriptThirdPersonCameraController.enabled = true;
-        Cursor.lockState = CursorLockMode.Locked;
-        
-    }
-
-    public void Pause()
-    {
-        TextLobbyE.enabled = false;
-        cameraOnTable.enabled = true;
-        GameIsPaused = true;
-        scriptPlayerMovementController.enabled = false;
-        scriptThirdPersonCameraController.enabled = false;
-        Cursor.lockState = CursorLockMode.None;
-    }
-
-    public void SubsequentCanvas()
-    {
-        TextLobbyE.enabled = false;
-        GameIsPaused = true;
-        scriptPlayerMovementController.enabled = false;
-        scriptThirdPersonCameraController.enabled = false;
-        Cursor.lockState = CursorLockMode.None;
     }
 }

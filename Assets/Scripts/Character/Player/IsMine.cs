@@ -14,11 +14,16 @@ public class IsMine : MonoBehaviourPunCallbacks
     {
         if (!photonView.IsMine)
         {
-            audioListener.enabled = false;
-            camera.enabled = false;
-            Bar.enabled = false;
-            scriptPlayerMovementController.enabled = false;
-            scriptManiacMovementController.enabled = false;
+            OffScripts();
         }
+    }
+
+    private void OffScripts()
+    {
+        audioListener.enabled = false;
+        camera.enabled = false;
+        Bar.enabled = false;
+        scriptPlayerMovementController.enabled = false;
+        scriptManiacMovementController.enabled = false;
     }
 }

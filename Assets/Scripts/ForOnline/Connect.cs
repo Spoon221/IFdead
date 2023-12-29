@@ -13,7 +13,7 @@ public class Connect : MonoBehaviourPunCallbacks
 {
     [SerializeField] private GameObject player;
     [SerializeField] private Settings settings;
-    [SerializeField] private OpeningCanvasRoom room;
+    [SerializeField] private KeyDownForPlayers.KeyDownForPlayers key;
     [SerializeField] private GameObject playerModel;
     [SerializeField] private TMP_InputField RoomName;
     [SerializeField] private ListItem ItemPrefab;
@@ -38,7 +38,7 @@ public class Connect : MonoBehaviourPunCallbacks
             if (playerPosition != Vector3.zero && playerRotation != Quaternion.identity)
             {
                 SpawnPlayerLobby(player, cameraOnTable, playerModel);
-                room.SubsequentCanvas();
+                key.SubsequentCanvasItermediateScene();
             }
         }
         else
