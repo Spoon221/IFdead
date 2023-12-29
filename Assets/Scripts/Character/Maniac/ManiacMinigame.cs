@@ -47,9 +47,9 @@ public class ManiacMinigame : MonoBehaviourPunCallbacks
 
     public void StartMiniGame(Component playerCollider)
     {
-        //if(!PhotonNetwork.IsMasterClient) return;
-        //photonView.RPC("StartMiniGameRPC", RpcTarget.All, playerCollider);
-        StartMiniGameRPC(playerCollider);
+        if (!PhotonNetwork.IsMasterClient) return;
+        photonView.RPC("StartMiniGameRPC", RpcTarget.All, playerCollider);
+        //StartMiniGameRPC(playerCollider);
     }
 
     [PunRPC]

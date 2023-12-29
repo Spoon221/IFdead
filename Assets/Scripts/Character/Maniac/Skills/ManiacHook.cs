@@ -21,15 +21,14 @@ public class ManiacHook : MonoBehaviourPun
         launchPoint ??= transform;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (photonView.IsMine)
         {
             if (Input.GetButtonDown("Fire2") && maniacStats.CurrentMana >= manaCost && !hookMiss.Hooked)
             {
-                //photonView.RPC("LaunchHook", RpcTarget.AllBuffered);
-                LaunchHook();
+                photonView.RPC("LaunchHook", RpcTarget.AllBuffered);
+                //LaunchHook();
             }
         }
     }

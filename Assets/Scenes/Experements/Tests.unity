@@ -2736,39 +2736,6 @@ Transform:
   m_Father: {fileID: 1959258720}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 89.995}
---- !u!1 &1489631929 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 529482825575864600, guid: 27d5e79a76a3cfb48b60c158be1ffe13, type: 3}
-  m_PrefabInstance: {fileID: 1500639074}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1489631939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1489631929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e6bad9bbe4bf5e458820fbbc4ec1cc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  manaCost: 0
-  hookMiss: {fileID: 298219544}
-  launchPoint: {fileID: 1913610282}
---- !u!114 &1489631940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1489631929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41652b4f82c4683428fd84608a877439, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rescueProgress: 0
 --- !u!1001 &1500639074
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2776,17 +2743,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 90419406, guid: 27d5e79a76a3cfb48b60c158be1ffe13, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -19.899902
-      objectReference: {fileID: 0}
+    - target: {fileID: 1489631939, guid: 27d5e79a76a3cfb48b60c158be1ffe13, type: 3}
+      propertyPath: hookMiss
+      value: 
+      objectReference: {fileID: 298219544}
     - target: {fileID: 529482825575864600, guid: 27d5e79a76a3cfb48b60c158be1ffe13, type: 3}
       propertyPath: m_Name
       value: Maniac
-      objectReference: {fileID: 0}
-    - target: {fileID: 529482825575864600, guid: 27d5e79a76a3cfb48b60c158be1ffe13, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 529482825575864603, guid: 27d5e79a76a3cfb48b60c158be1ffe13, type: 3}
       propertyPath: m_RootOrder
@@ -2832,17 +2795,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1085475388915998646, guid: 27d5e79a76a3cfb48b60c158be1ffe13, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8935490345591800789, guid: 27d5e79a76a3cfb48b60c158be1ffe13, type: 3}
       propertyPath: sceneViewId
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9146413717133144154, guid: 27d5e79a76a3cfb48b60c158be1ffe13, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 116.94409
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27d5e79a76a3cfb48b60c158be1ffe13, type: 3}
@@ -3390,11 +3345,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
---- !u!4 &1913610282 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1270646667, guid: 27d5e79a76a3cfb48b60c158be1ffe13, type: 3}
-  m_PrefabInstance: {fileID: 1500639074}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1959258719
 GameObject:
   m_ObjectHideFlags: 0
