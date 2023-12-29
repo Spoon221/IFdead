@@ -46,7 +46,7 @@ public class PlayerMovementController : MonoBehaviour
         ForceHandling();
         JumpLogic();
         MovePlayer();
-
+        if(!canMove) return;
         animator.SetFloat("FrontMove", OnversionRange(new Vector2(cc.velocity.x, cc.velocity.z).magnitude, moveSpeed));
     }
 

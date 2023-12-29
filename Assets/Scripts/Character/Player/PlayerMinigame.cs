@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Character.Player.Skills;
 using Photon.Pun;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -35,6 +36,8 @@ public class PlayerMinigame : MonoBehaviourPunCallbacks
         maniac = mGame;
         isCaught = true;
         GetComponent<PlayerMovementController>().canMove = false;
+        GetComponent<PlayerSkillManager>().enabled = false;
+        GetComponent<Teleportation>().enabled = false;
         routine = StartCoroutine(QTEGame());
         GetComponentInChildren<Transform>().Find("survivor").GetComponent<Animator>().SetFloat("FrontMove", 0);
     }
@@ -68,6 +71,8 @@ public class PlayerMinigame : MonoBehaviourPunCallbacks
             StopCoroutine(routine);
         isCaught = false;
         maniac = null;
+        GetComponent<PlayerSkillManager>().enabled = true;
+        GetComponent<Teleportation>().enabled = true;
         GetComponent<PlayerMovementController>().canMove = true;
     }
 
@@ -77,6 +82,8 @@ public class PlayerMinigame : MonoBehaviourPunCallbacks
             StopCoroutine(routine);
         isCaught = false;
         maniac = null;
+        GetComponent<PlayerSkillManager>().enabled = true;
+        GetComponent<Teleportation>().enabled = true;
         GetComponent<PlayerMovementController>().canMove = true;
         GetComponent<PlayerStats>().GetDamage(100000);
     }
