@@ -3,7 +3,12 @@ guid: 00d9c2cee9673a740b09836991423593
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TT_checker_1024x1024_UV_GRID
+    second: {fileID: 2100000, guid: 5469ae256e7f32442867e8cfe1743f46, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
