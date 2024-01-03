@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SmokeCloudText : MonoBehaviour
 {
     private PlayerStats playerStats;
     private PlayerSkillManager skill;
-    
+    public Image image;
+
     void Start()
     {
         playerStats = transform.GetComponentInParent<PlayerStats>();
@@ -17,9 +17,16 @@ public class SmokeCloudText : MonoBehaviour
     private void UpdateVisibility(float currentMana)
     {
         if (currentMana >= 50 && skill.isSmokeReady)
-            gameObject.SetActive(true);
+        {
+            var color = image.color;
+            color.a = 1f;
+            image.color = color;
+        }
         else
-            gameObject.SetActive(false);
+        {
+            var color = image.color;
+            color.a = 0.5f;
+            image.color = color;
+        }
     }
-    
 }

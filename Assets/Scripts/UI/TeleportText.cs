@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI
 {
@@ -7,7 +8,8 @@ namespace UI
         public int manaCost = 90;
         private PlayerStats playerStats;
         private PlayerSkillManager skill;
-    
+        public Image image;
+
         void Start()
         {
             playerStats = transform.GetComponentInParent<PlayerStats>();
@@ -17,7 +19,18 @@ namespace UI
 
         private void UpdateVisibility(float currentMana)
         {
-            gameObject.SetActive(currentMana >= manaCost);
+            if (currentMana >= manaCost)
+            {
+                var color = image.color;
+                color.a = 1f;
+                image.color = color;
+            }
+            else
+            {
+                var color = image.color;
+                color.a = 0.5f;
+                image.color = color;
+            }
         }
     }
 }
