@@ -79,7 +79,6 @@ public class Generator : ActivatedItem
         }
     }
 
-
     public override void Start()
     {
         SingletonGeneratorHealth.GetInstance().ResetHealth();

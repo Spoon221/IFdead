@@ -12,8 +12,8 @@ public class LevelGoals : MonoBehaviour
     private int numberOfKeysToFind;
 
     private List<GameObject> generators;
-    private bool generatorRepaired;
-    private string generatorDisplayTest = "Загрузка данных не сделана";
+    private string generatorDisplayTest = "Загрузите чертеж изготовления микросхемы";
+    public TextMeshProUGUI text;
 
     void Start()
     {
@@ -36,7 +36,7 @@ public class LevelGoals : MonoBehaviour
     {
         generators = GameObject.FindGameObjectsWithTag("Generator").ToList();
         foreach (var generator in generators)
-            generator.GetComponent<ActivatedItem>().OnItemActivate.AddListener(UpdateGeneratorText);
+            generator.GetComponent<Generator>().OnItemActivate.AddListener(UpdateGeneratorText);
     }
 
     private void UpdateNumberOfKeys()
@@ -47,13 +47,21 @@ public class LevelGoals : MonoBehaviour
 
     private void UpdateGeneratorText()
     {
-        generatorDisplayTest = "Загрузка данных завершена";
+        generatorDisplayTest = $"<color=#797373>Загрузка чертежа изготовления микросхемы</color> <color=#F8CE4D>завершена</color>";
         UpdateText();
     }
 
     private void UpdateText()
     {
-        var keyText = $"ключей найдено: {currentNumberOfKeys}/{numberOfKeysToFind}";
-        gameObject.GetComponent<TMP_Text>().text = $"{keyText}\n{generatorDisplayTest}";
+        if (currentNumberOfKeys == numberOfKeysToFind)
+        {
+            var keyText = $"<color=#797373>Соберите ключ:</color> <color=#F8CE4D>{currentNumberOfKeys}/{numberOfKeysToFind}</color>";
+            text.text = $"{generatorDisplayTest}\n{keyText}";
+        }
+        else
+        {
+            var keyText = $"Соберите ключ: <color=#F8CE4D>{currentNumberOfKeys}/{numberOfKeysToFind}</color>";
+            text.text = $"{keyText}\n{generatorDisplayTest}";
+        }
     }
 }
