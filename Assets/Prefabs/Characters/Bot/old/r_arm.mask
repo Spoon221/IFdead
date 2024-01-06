@@ -1,0 +1,171 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: r_arm
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Armature.001
+    m_Weight: 0
+  - m_Path: Armature.001/IK.Antenna.001
+    m_Weight: 0
+  - m_Path: Armature.001/IK.Antenna.001/Antenna.003
+    m_Weight: 0
+  - m_Path: Armature.001/IK.Antenna.001/Antenna.003/Antenna.003_end
+    m_Weight: 0
+  - m_Path: Armature.001/IK.Antenna.001/IK.Antenna.002
+    m_Weight: 0
+  - m_Path: Armature.001/IK.Antenna.001/IK.Antenna.002/IK.Antenna.002_end
+    m_Weight: 0
+  - m_Path: Armature.001/IK.Arm.001.L
+    m_Weight: 0
+  - m_Path: Armature.001/IK.Arm.001.L/Arm.001.L
+    m_Weight: 0
+  - m_Path: Armature.001/IK.Arm.001.L/Arm.001.L/Arm.001.L_end
+    m_Weight: 0
+  - m_Path: Armature.001/IK.Arm.001.L/IK.Arm.002.L
+    m_Weight: 0
+  - m_Path: Armature.001/IK.Arm.001.L/IK.Arm.002.L/IK.Arm.002.L_end
+    m_Weight: 0
+  - m_Path: Armature.001/IK.Arm.001.R
+    m_Weight: 1
+  - m_Path: Armature.001/IK.Arm.001.R/Arm.001.R
+    m_Weight: 1
+  - m_Path: Armature.001/IK.Arm.001.R/Arm.001.R/Arm.001.R_end
+    m_Weight: 1
+  - m_Path: Armature.001/IK.Arm.001.R/IK.Arm.002.R
+    m_Weight: 1
+  - m_Path: Armature.001/IK.Arm.001.R/IK.Arm.002.R/IK.Arm.002.R_end
+    m_Weight: 1
+  - m_Path: Armature.001/IK.Neck.001
+    m_Weight: 0
+  - m_Path: Armature.001/IK.Neck.001/Head.001
+    m_Weight: 0
+  - m_Path: Armature.001/IK.Neck.001/Head.001/Head.001_end
+    m_Weight: 0
+  - m_Path: Armature.001/IK.Neck.001/IK.Neck.002
+    m_Weight: 0
+  - m_Path: Armature.001/IK.Neck.001/IK.Neck.002/IK.Neck.002_end
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Antenna.001
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Antenna.001/Antenna.002
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Antenna.001/Antenna.002/Antenna.002_end
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Bone.004
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Bone.004/Bone.006
+    m_Weight: 1
+  - m_Path: Armature.001/RootBone.001/Body.001/Bone.004/Bone.006/Arm.002.R
+    m_Weight: 1
+  - m_Path: Armature.001/RootBone.001/Body.001/Bone.004/Bone.006/Arm.002.R/Arm.002.R_end
+    m_Weight: 1
+  - m_Path: Armature.001/RootBone.001/Body.001/Bone.005
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Bone.005/Bone.009
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Bone.005/Bone.009/Arm.002.L
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Bone.005/Bone.009/Arm.002.L/Arm.002.L_end
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.L
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.L/Leg.001.L
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.L/Leg.001.L/Leg.002.L
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.L/Leg.001.L/Leg.002.L/Leg.003.L
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.L/Leg.001.L/Leg.002.L/Leg.003.L/Foot.001.L
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.L/Leg.001.L/Leg.002.L/Leg.003.L/Foot.001.L/Foot.002.L
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.L/Leg.001.L/Leg.002.L/Leg.003.L/Foot.001.L/Foot.002.L/Foot.002.L_end
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.L/Leg.001.L/Leg.002.L/Spring.003.L
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.L/Leg.001.L/Leg.002.L/Spring.003.L/Spring.003.L_end
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.L/Leg.001.L/Leg.002.L/Spring.004.L
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.L/Leg.001.L/Leg.002.L/Spring.004.L/Spring.004.L_end
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.L/Leg.001.L/Spring.001.L
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.L/Leg.001.L/Spring.001.L/Spring.001.L_end
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.L/Leg.001.L/Spring.002.L
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.L/Leg.001.L/Spring.002.L/Spring.002.L_end
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.R
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.R/Leg.001.R
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.R/Leg.001.R/Leg.002.R
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.R/Leg.001.R/Leg.002.R/Leg.003.R
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.R/Leg.001.R/Leg.002.R/Leg.003.R/Foot.001.R
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.R/Leg.001.R/Leg.002.R/Leg.003.R/Foot.001.R/Foot.002.R
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.R/Leg.001.R/Leg.002.R/Leg.003.R/Foot.001.R/Foot.002.R/Foot.002.R_end
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.R/Leg.001.R/Leg.002.R/Spring.003.R
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.R/Leg.001.R/Leg.002.R/Spring.003.R/Spring.003.R_end
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.R/Leg.001.R/Leg.002.R/Spring.004.R
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.R/Leg.001.R/Leg.002.R/Spring.004.R/Spring.004.R_end
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.R/Leg.001.R/Spring.001.R
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.R/Leg.001.R/Spring.001.R/Spring.001.R_end
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.R/Leg.001.R/Spring.002.R
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Leg.000.R/Leg.001.R/Spring.002.R/Spring.002.R_end
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Neck.001
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Neck.001/Neck.002
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Neck.001/Neck.002/Neck.003
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/Body.001/Neck.001/Neck.002/Neck.003/Neck.003_end
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/IK.Leg.001.L
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/IK.Leg.001.L/Foot.003.L
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/IK.Leg.001.L/Foot.003.L/Foot.003.L_end
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/IK.Leg.001.L/IK.Leg.002.L
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/IK.Leg.001.L/IK.Leg.002.L/IK.Leg.002.L_end
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/IK.Leg.001.R
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/IK.Leg.001.R/Foot.003.R
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/IK.Leg.001.R/Foot.003.R/Foot.003.R_end
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/IK.Leg.001.R/IK.Leg.002.R
+    m_Weight: 0
+  - m_Path: Armature.001/RootBone.001/IK.Leg.001.R/IK.Leg.002.R/IK.Leg.002.R_end
+    m_Weight: 0
+  - m_Path: model
+    m_Weight: 0
