@@ -1,12 +1,13 @@
 using System.Collections;
+using Photon.Pun;
 using UnityEngine;
 
-public class HookMiss : MonoBehaviour
+public class HookMiss : MonoBehaviourPun
 {
     public float speed;
     public float maxDistance;
     private LineRenderer lineRenderer;
-    private ManiacHook parentManiac;
+    public ManiacHook parentManiac;
     private Vector3 direction;
 
     private bool hooked;
@@ -19,8 +20,10 @@ public class HookMiss : MonoBehaviour
 
     private void Start()
     {
+        transform.parent = null;
         lineRenderer = GetComponent<LineRenderer>();
         LeftHand = GameObject.FindWithTag("ManiacLeftHand");
+        gameObject.SetActive(false);
     }
 
     void Update()
@@ -38,38 +41,72 @@ public class HookMiss : MonoBehaviour
 
         if (Vector3.Distance(parentManiac.transform.position, transform.position) > maxDistance)
         {
-            direction = Vector3.zero;
-            StartCoroutine(ReturnBack());
+            photonView.RPC("ReturnBackRPC", RpcTarget.All);
         }
     }
 
-    public void Launch(ManiacHook hook, Vector3 direction)
+    public void Launch(Vector3 direction)
     {
-        transform.position = hook.transform.position;
-        parentManiac = hook;
+        transform.position = parentManiac.transform.position;
         this.direction = direction;
         gameObject.SetActive(true);
         LeftHand.SetActive(false);
     }
 
+    //private void OnTriggerEnter(Collider collider)
+    //{
+    //    if(parentManiac.gameObject.GetPhotonView().IsMine)
+    //        photonView.RPC("GetColliderRPC", RpcTarget.All, collider.transform.position);
+    //}
+
+    //[PunRPC]
+    //private void GetColliderRPC(Vector3 pos)
+    //{
+    //    Physics.SphereCast(pos, GetComponent<SphereCollider>().radius + 0.1f, Vector3.zero, out var hit);
+
+    //    var hitCollider = hit.collider;
+    //    CalculateMoves(hitCollider);
+    //}
+
     private void OnTriggerEnter(Collider collider)
     {
-        
+        if (!parentManiac.gameObject.GetPhotonView().IsMine) return;
         if (Hooked) return;
         if (collider.gameObject.layer != 6)
         {
-            direction = Vector3.zero;
-            StartCoroutine(ReturnBack());
+            photonView.RPC("ReturnBackRPC", RpcTarget.All);
+            //ReturnBackRPC();
             return;
         }
 
         if (!collider.TryGetComponent(out playerController)) return;
         StopAllCoroutines();
-        hookedPlayer = collider.transform;
+        
+        photonView.RPC("SetHookedPlayer", RpcTarget.All, collider.gameObject.GetPhotonView().ViewID);
         hooked = true;
         GetComponent<Rigidbody>().velocity = Vector3.zero;
+        photonView.RPC("AttractRPC", RpcTarget.MasterClient);
+    }
+
+    [PunRPC]
+    private void AttractRPC()
+    {
         StartCoroutine(AttractPlayer());
     }
+
+    [PunRPC]
+    private void SetHookedPlayer(int viewID)
+    {
+        hookedPlayer = PhotonNetwork.GetPhotonView(viewID).transform;
+    }
+
+    [PunRPC]
+    private void ReturnBackRPC()
+    {
+        direction = Vector3.zero;
+        StartCoroutine(ReturnBack());
+    }
+
 
     private IEnumerator AttractPlayer()
     {
@@ -90,6 +127,7 @@ public class HookMiss : MonoBehaviour
         hookedPlayer = null;
         hooked = false;
         direction = Vector3.zero;
+        gameObject.SetActive(true);
         StartCoroutine(ReturnBack());
     }
 

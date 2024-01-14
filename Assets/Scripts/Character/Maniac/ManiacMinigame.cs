@@ -62,34 +62,39 @@ public class ManiacMinigame : MonoBehaviourPunCallbacks
 
     public void StartMiniGame(Component playerCollider)
     {
-        //if (!photonView.IsMine) return;
-        //photonView.RPC("StartMiniGameRPC", RpcTarget.All, playerCollider);
-        StartMiniGameRPC(playerCollider);
+        var viewID = playerCollider.gameObject.GetPhotonView().ViewID;
+        photonView.RPC("StartMiniGameRPC", RpcTarget.All, viewID);
+        //StartMiniGameRPC(playerCollider);
     }
 
     [PunRPC]
-    private void StartMiniGameRPC(Component playerCollider)
+    private void StartMiniGameRPC(int viewID)
     {
-        if (!playerCollider.TryGetComponent(out caughtPlayer)) return;
-        if (!photonView.IsMine)
-        {
-            //caughtPlayer.StartMiniGameRPC();
-            //photonView.RPC("StartMiniGameRPC", RpcTarget.All);
-            caughtPlayer.StartMiniGameRPCSupport();
-        }
-        else
-            StartCoroutine(QTEGame());
         RescueProgress = 50;
+
+        var playerGM = PhotonNetwork.GetPhotonView(viewID).gameObject;
+
+        if (!playerGM.TryGetComponent(out caughtPlayer)) return;
+        if (!photonView.IsMine) return;
+        StartCoroutine(QTEGame());
+        movementController.canMove = false;
+        caughtPlayer.StartMiniGameRPCSupport();
+
         progressBar.fillAmount = RescueProgress / 100f;
         canvas.gameObject.SetActive(true);
     }
     [PunRPC]
     private void ReleasePlayer()
     {
+        //if (!photonView.IsMine) return;
+        Debug.Log("Got rel");
+        movementController.canMove = true;
+        StopAllCoroutines();
         caughtPlayer.Release();
-        canvas.gameObject.SetActive(false);
+        canvas.SetActive(false);
         caughtPlayer = null;
         progressBar.fillAmount = 50;
+        RescueProgress = 50;
         GetComponent<ManiacHook>().Miss.UnHook();
         StartCoroutine(Stun());
     }
@@ -104,21 +109,35 @@ public class ManiacMinigame : MonoBehaviourPunCallbacks
     [PunRPC]
     private void KillPlayer()
     {
+        //if (!photonView.IsMine) return;
+        Debug.Log("Got kill");
+        movementController.canMove = true;
+        StopAllCoroutines();
         caughtPlayer.Kill();
-        canvas.gameObject.SetActive(false);
+        canvas.SetActive(false);
         caughtPlayer = null;
+        RescueProgress = 50;
         progressBar.fillAmount = 50;
         GetComponent<ManiacHook>().Miss.UnHook();
     }
     private void FixedUpdate()
     {
-        if(caughtPlayer is null) return;
+        if (caughtPlayer == null) return;
 
         if (RescueProgress < 0) RescueProgress = 0;
         progressBar.fillAmount = RescueProgress / 100f;
 
-        if (RescueProgress >= 100) photonView.RPC("ReleasePlayer", RpcTarget.All);
-        else if (RescueProgress <= 0) photonView.RPC("KillPlayer", RpcTarget.All);
+        if (RescueProgress >= 100)
+        {
+            photonView.RPC("ReleasePlayer", RpcTarget.All);
+            Debug.Log("Call rel");
+        }
+        else if (RescueProgress <= 0)
+        {
+
+            photonView.RPC("KillPlayer", RpcTarget.All);
+            Debug.Log("Call kill");
+        }
     }
 
     private IEnumerator QTEGame()
