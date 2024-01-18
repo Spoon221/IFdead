@@ -13,10 +13,12 @@ public class PlayerMinigame : MonoBehaviourPunCallbacks
     private bool isCaught;
     private ManiacMinigame maniac;
     private Coroutine routine;
+    private GameObject canvas;
     private RectTransform keyRect;
 
     public void Start()
     {
+        canvas = MiniGameCanvas.Canvas;
         keyRect = MiniGameCanvas.KeyRect;
     }
     public void StartMiniGameRPCSupport()
@@ -35,6 +37,7 @@ public class PlayerMinigame : MonoBehaviourPunCallbacks
     {
         maniac = mGame;
         isCaught = true;
+        canvas.gameObject.SetActive(true);
         GetComponent<PlayerMovementController>().canMove = false;
         GetComponent<PlayerSkillManager>().enabled = false;
         GetComponent<Teleportation>().enabled = false;
@@ -67,24 +70,28 @@ public class PlayerMinigame : MonoBehaviourPunCallbacks
 
     internal void Release()
     {
-        if(routine != null )
+        if (!photonView.IsMine) return;
+        if (routine != null )
             StopCoroutine(routine);
         isCaught = false;
         maniac = null;
         GetComponent<PlayerSkillManager>().enabled = true;
         GetComponent<Teleportation>().enabled = true;
         GetComponent<PlayerMovementController>().canMove = true;
+        canvas.gameObject.SetActive(false);
     }
 
     public void Kill()
     {
+        if (!photonView.IsMine) return;
         if (routine != null)
             StopCoroutine(routine);
         isCaught = false;
         maniac = null;
-        GetComponent<PlayerSkillManager>().enabled = true;
-        GetComponent<Teleportation>().enabled = true;
-        GetComponent<PlayerMovementController>().canMove = true;
+        //GetComponent<PlayerSkillManager>().enabled = true;
+        //GetComponent<Teleportation>().enabled = true;
+        //GetComponent<PlayerMovementController>().canMove = true;
         GetComponent<PlayerStats>().GetDamage(100000);
+        canvas.gameObject.SetActive(false);
     }
 }

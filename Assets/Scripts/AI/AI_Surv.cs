@@ -9,18 +9,13 @@ public class AI_Surv : MonoBehaviour
 {
     private NavMeshAgent agent;
 
-    public Transform[] generators;
-    public Transform[] exits;
-
-
-    public Transform TestPoint;
-    public Transform TestPoint2;
-
     public Transform maniac;
 
     private int pathRadius = 25;
 
     public LayerMask layerMask;
+    private Transform[] generators => AI_GAME.generators;
+    private Transform[] exits => AI_GAME.exits;
 
     private bool _isRunning;
 
@@ -123,7 +118,8 @@ public class AI_Surv : MonoBehaviour
         Ray ray = new(transform.position + new Vector3(0,2,0), maniac.position - new Vector3(0, 1, 0) - transform.position);
         Debug.DrawRay(transform.position + new Vector3(0, 2, 0), maniac.position - new Vector3(0, 1, 0) - transform.position);
         Physics.Raycast(ray, out var hit,layerMask);
-        return hit.collider.tag == "Maniac";
+        if (hit.collider == null) return false;
+        return hit.collider?.tag == "Maniac";
     }
 
 
@@ -138,7 +134,7 @@ public class AI_Surv : MonoBehaviour
     public void WalkToAny_Generator()
     {
         agent.stoppingDistance = 2;
-        var i = Random.Range(0,generators.Length-1);
+        var i = Random.Range(0,generators.Length);
         agent.SetDestination(generators[i].position);
         agent.isStopped = false;
     }

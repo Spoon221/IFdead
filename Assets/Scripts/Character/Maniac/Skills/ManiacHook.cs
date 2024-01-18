@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class ManiacHook : MonoBehaviourPun
 {
-    public float manaCost;
     [SerializeField] private HookMiss hookMiss;
     [SerializeField] private Transform launchPoint;
-    public GameObject missPrefab;
+
+    public float cooldown = 2;
+    private float nextUseTime;
 
 
     public HookMiss Miss => hookMiss;
@@ -16,7 +17,7 @@ public class ManiacHook : MonoBehaviourPun
     void Start()
     {
         //maniacStats = GetComponent<ManiacStats>();
-        hookMiss = Instantiate(missPrefab).GetComponent<HookMiss>();
+        hookMiss.parentManiac = this;
         launchPoint = GetComponentInChildren<Camera>().transform;
     }
 
@@ -24,11 +25,14 @@ public class ManiacHook : MonoBehaviourPun
     {
         if (photonView.IsMine)
         {
-            if (Input.GetButtonDown("Fire1") && !hookMiss.Hooked)
-            {
-                photonView.RPC("LaunchHook", RpcTarget.AllBuffered, launchPoint.forward);
-                //LaunchHook();
-            }
+            if(Time.time > nextUseTime)
+                if (Input.GetButtonDown("Fire1") && !hookMiss.Hooked)
+                {
+                    photonView.RPC("LaunchHook", RpcTarget.AllBuffered, launchPoint.forward);
+                    nextUseTime = Time.time + cooldown;
+                    //LaunchHook();
+                }
+
         }
     }
 
@@ -36,6 +40,6 @@ public class ManiacHook : MonoBehaviourPun
     private void LaunchHook(Vector3 dir)
     {
         //maniacStats.SpendMana(manaCost);
-        Miss.Launch(this, dir);
+        Miss.Launch(dir);
     }
 }

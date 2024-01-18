@@ -17,6 +17,8 @@ TagManager:
   - TeleportOutput
   - Teleport
   - GeneratorHealthSlider
+  - ManiacLeftHand
+  - Survival
   layers:
   - Default
   - TransparentFX
